@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:c="http://www.springframework.org/schema/c"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   					   http://www.springframework.org/schema/beans/spring-beans.xsd
+	   					   http://www.springframework.org/schema/context
+	   					   http://www.springframework.org/schema/context/spring-context.xsd
+	   					   http://www.springframework.org/schema/mvc
+	   					   http://www.springframework.org/schema/mvc/spring-mvc.xsd
+					       http://www.springframework.org/schema/tx
+					       https://www.springframework.org/schema/tx/spring-tx.xsd">		
+		<!--  DB Connection -->
+		<!--  DataSource -->
+		<bean id="dataSource"
+			  class="org.springframework.jndi.JndiObjectFactoryBean">
+				<property name="jndiName" value="java:comp/env/jdbc/Oracle11g" />	  
+		</bean>
+		
+		<!-- Mybatis Setting -->
+		<!-- 
+			SqlSessionFactory는 데이터베이스와의 연결과 SQL의 실행에 대한 모든 것을 가진 가장 중요한
+			객체이다.
+			SqlSessionFactory를 생성해주어야 하는데 SqlSessionFactoryBean이라는 클래스이다.
+		 -->
+		 <bean id="sqlSessionFactory"
+		 	   class="org.mybatis.spring.SqlSessionFactoryBean">
+		 		<property name="dataSource" ref="dataSource" />
+		 		<property name="configLocation" value="classpath:config/mybatis-config.xml"/>
+		 		<property name="mapperLocations" value="classpath:query/*.xml" />	   
+		 </bean>
+		 
+		 <bean id="sqlSession"
+		 	   class="org.mybatis.spring.SqlSessionTemplate"
+		 	   destroy-method="clearCache">
+		 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />	   
+		 </bean>
+		 
+		 <!-- aPlatformTransactionManager is still required -->
+		 <bean id="transactionManager"
+		 	   class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		 		<property name="dataSource" ref="dataSource" />
+		 </bean>
+		 
+		 <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		 		<property name="basePackage"> <value>java142.todak.**.dao</value></property>
+		 </bean>
+		 
+		 <!-- 세션처리 
+		 <mvc:interceptors>
+		    <bean class="java142.todak.common.LoginSessionInterceptor" /> 
+		    <mvc:interceptor>                                                                          
+		        <mvc:mapping path="/**/*.td" />                                                   
+		        <mvc:exclude-mapping path="/index.td" />
+		        <bean class="java142.todak.common.LoginSessionInterceptor" />    
+		    </mvc:interceptor>
+		</mvc:interceptors>
+		-->
+</beans>
