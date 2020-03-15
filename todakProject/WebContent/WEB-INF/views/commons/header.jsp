@@ -17,6 +17,10 @@
 					$.get("/etc/setMainSession.td", { main: $(".main").prop("value") })
 				});
 				
+// 				$(""){
+// 					superSidebar-selector
+// 				}
+				
 			});
 
 		</script>
