@@ -1,8 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page import="java142.todak.sponsor.vo.CharityVO" %>
+<%@ page import="java142.todak.etc.vo.PagingVO" %>
 <%@ include file="/WEB-INF/views/commons/bindSession.jsp" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -20,10 +21,24 @@
 		<%
 	}
 %>
+<%
+	int pageSize = 10;
+	int groupSize = 5;
+	
+	int curPage = 1;
+	int totalCount = 0;
+	
+	PagingVO pvo = (PagingVO)request.getAttribute("pvo");
+	if(pvo != null)
+	{
+		curPage = pvo.getCurPage();
+		pageSize = pvo.getPageSize();
+	}
+%>
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-		<title>ºñ¿µ¸®´ÜÃ¼ Á¶È¸</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>ë¹„ì˜ë¦¬ë‹¨ì²´ ì¡°íšŒ</title>
 		<script type="text/javascript"
 				src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 		<!-- 
@@ -31,22 +46,50 @@
 				src="/include/js/jquery-1.11.0.min.js" ></script> -->
 		<script type="text/javascript">
 			$(function(){
-				/* ±Û¾²±â ¹öÆ° Å¬¸¯ ½Ã Ã³¸® ÀÌº¥Æ® */
+				$("#pageSize").val(<%=pageSize%>).prop("selected", true);
+				/* ê¸€ì“°ê¸° ë²„íŠ¼ í´ë¦­ ì‹œ ì²˜ë¦¬ ì´ë²¤íŠ¸ */
 				$("#registerForm").click(function(){
 					location.href = "/sponsor/moveIUCharity.td";
 				});
 				
-				/* Á¦¸ñ Å¬¸¯½Ã »ó¼¼ ÆäÀÌÁö ÀÌµ¿À» À§ÇÑ Ã³¸® ÀÌº¥Æ® */
+				/* ì œëª© í´ë¦­ì‹œ ìƒì„¸ í˜ì´ì§€ ì´ë™ì„ ìœ„í•œ ì²˜ë¦¬ ì´ë²¤íŠ¸ */
 				$(".goDetail").click(function(){
 					var sc_num = $(this).parents("tr").attr("data-num");
 					$("#sc_num").val(sc_num);
-					// »ó¼¼ ÆäÀÌÁö·Î ÀÌµ¿ÇÏ±â À§ÇØ form Ãß°¡ (id : detailForm)
+					// ìƒì„¸ í˜ì´ì§€ë¡œ ì´ë™í•˜ê¸° ìœ„í•´ form ì¶”ê°€ (id : detailForm)
 					$("#detailForm").prop({
 						"method" : "post",
 						"action" : "/sponsor/selectCharity.td"
 					}).submit();
 				});
+
+				/* í•œí˜ì´ì§€ì— ê¸€ì‚¬ì´ì¦ˆ ì •í•˜ëŠ” ì´ë²¤íŠ¸ */
+				$("#pageSize").change(function(){
+					var formName = '#f_search';
+					var obj = this;
+					var url = "/sponsor/selectCharity.td?selectFunc=''&message=''";
+					submitMethod(formName, obj, url);
+				});
+				
+				/* í‚¤ì›Œë“œ ê²€ìƒ‰ ì´ë²¤íŠ¸ */
+				$("#searchData").click(function(){
+					var formName = '#f_search';
+					var obj = this;
+					var url = "/sponsor/selectCharity.td?selectFunc=''&message=''";
+					submitMethod(formName, obj, url);
+				});
+				
 			});
+			
+			function submitMethod(formName, obj, url){
+				var sm_num = $(obj).parents("tr").attr("data-num");
+				$("#sm_num").val(sm_num);
+				// ìƒì„¸ í˜ì´ì§€ë¡œ ì´ë™í•˜ê¸° ìœ„í•´ form ì¶”ê°€ (id : detailForm)
+				$(formName).prop({
+					"method" : "post",
+					"action" : url
+				}).submit();
+			}
 		</script>
 	</head>
 	<body>
@@ -59,51 +102,50 @@
          </aside>
          
 		<% System.out.println(sManager.getUserID(session.getId())); %>
-		<div id="context-container">
-			<div id="boardTit"><h3>´ÜÃ¼¸ñ·Ï</h3></div>
+		<div class="context-container">
+			<div id="boardTit"><h3>ë‹¨ì²´ëª©ë¡</h3></div>
 			<form name="detailForm" id="detailForm">
 				<input type="hidden" name="sc_num" id="sc_num">
 				<input type="hidden" name="selectFunc" id="selectFunc" value="search">
 				<input type="hidden" name="message" id="message" value="">
 			</form>
-			<%-- =========== °Ë»ö±â´É ½ÃÀÛ (ÀÌ ºÎºĞ ÀüÃ¼ Ãß°¡) =========== --%>
+			<%-- =========== ê²€ìƒ‰ê¸°ëŠ¥ ì‹œì‘ (ì´ ë¶€ë¶„ ì „ì²´ ì¶”ê°€) =========== --%>
 			<div id="boardSearch">
 				<form id="f_search" name="f_search">
-					<table summary="°Ë»ö">
+					<table summary="ê²€ìƒ‰">
 						<colgroup>
 							<col width="70%"></col>
 							<col width="30%"></col>
 						</colgroup>
 						<tr>
 							<td id="btd1">
-								<label>°Ë»öÁ¶°Ç</label>
+								<label>ê²€ìƒ‰ì¡°ê±´</label>
 								<select id="search" name="search">
-									<option value="all">ÀüÃ¼</option>
-									<option value="sc_bizfield">»ç¾÷ºĞ¾ß</option>
-									<option value="sc_bizcontents">»ç¾÷³»¿ë</option>
-									<option value="sc_name">´ÜÃ¼¸í</option>
+									<option value="all">ì „ì²´</option>
+									<option value="sc_bizfield">ì‚¬ì—…ë¶„ì•¼</option>
+									<option value="sc_bizcontents">ì‚¬ì—…ë‚´ìš©</option>
+									<option value="sc_name">ë‹¨ì²´ëª…</option>
 								</select>
-								<input type="text" name="keyword" id="keyword" value="°Ë»ö¾î¸¦ÀÔ·ÂÇÏ¼¼¿ä" />
-								<input type="button" value="°Ë»ö" id="searchData" />
+								<input type="text" name="keyword" id="keyword" placeholder="ê²€ìƒ‰ì–´ë¥¼ì…ë ¥í•˜ì„¸ìš”" />
+								<input type="button" value="ê²€ìƒ‰" id="searchData" />
 							</td>
-							<td id="btd2">ÇÑÆäÀÌÁö¿¡
+							<td id="btd2">í•œí˜ì´ì§€ì—
 								<select id="pageSize" name="pageSize">
-									<option value="5">5ÁÙ</option>
-									<option value="10">10ÁÙ</option>
-									<option value="20">20ÁÙ</option>
-									<option value="30">30ÁÙ</option>
-									<option value="50">50ÁÙ</option>
-									<option value="100">100ÁÙ</option>
+									<option value="10">10ì¤„</option>
+									<option value="20">20ì¤„</option>
+									<option value="30">30ì¤„</option>
+									<option value="50">50ì¤„</option>
+									<option value="100">100ì¤„</option>
 								</select>
 							</td>
 						</tr>
 					</table>
 				</form>
 			</div>
-			<%-- ================== °Ë»ö±â´É Á¾·á ================== --%>
-			<%-- =================== ¸®½ºÆ® ½ÃÀÛ =================== --%>
+			<%-- ================== ê²€ìƒ‰ê¸°ëŠ¥ ì¢…ë£Œ ================== --%>
+			<%-- =================== ë¦¬ìŠ¤íŠ¸ ì‹œì‘ =================== --%>
 			<div id="charityList">
-				<table summary="ºñ¿µ¸®´ÜÃ¼ ¸®½ºÆ®">
+				<table summary="ë¹„ì˜ë¦¬ë‹¨ì²´ ë¦¬ìŠ¤íŠ¸">
 					<colgroup>
 						<col width = "10%" />
 						<col width = "10%" />
@@ -113,11 +155,11 @@
 					</colgroup>
 					<thead>
 						<tr>
-							<th>´ÜÃ¼¹øÈ£</th>
-							<th>´ÜÃ¼¸í</th>
-							<th class="borcle">»ç¾÷ºĞ¾ß</th>
-							<th>»ç¾÷³»¿ë</th>
-							<th>´ÜÃ¼µî·ÏÀÏ</th>
+							<th>ë‹¨ì²´ë²ˆí˜¸</th>
+							<th>ë‹¨ì²´ëª…</th>
+							<th class="borcle">ì‚¬ì—…ë¶„ì•¼</th>
+							<th>ì‚¬ì—…ë‚´ìš©</th>
+							<th>ë‹¨ì²´ë“±ë¡ì¼</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -127,8 +169,9 @@
 								Iterator<CharityVO> iter = charityList.iterator();
 								while(iter.hasNext()){
 									CharityVO scvo = (CharityVO)iter.next();
+									totalCount = (int)scvo.getTotalCount();
 						%>
-						<!-- µ¥ÀÌÅÍ Ãâ·Â -->
+						<!-- ë°ì´í„° ì¶œë ¥ -->
 									<tr align="center" data-num="<%= scvo.getSc_num() %>">
 										<td><%= scvo.getSc_num() %></td>
 										<td><span class="goDetail"><%= scvo.getSc_name() %></span></td>
@@ -141,7 +184,7 @@
 							}else{
 						%>
 								<tr>
-									<td colspan="5" align="center">µî·ÏµÈ °Ô½Ã¹°ÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.</td>
+									<td colspan="5" align="center">ë“±ë¡ëœ ê²Œì‹œë¬¼ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.</td>
 								</tr>
 						<%
 							}
@@ -149,14 +192,21 @@
 					</tbody>
 				</table>
 			</div>
-			<%-- =================== ¸®½ºÆ® Á¾·á =================== --%>
+			<%-- =================== ë¦¬ìŠ¤íŠ¸ ì¢…ë£Œ =================== --%>
 			
-			<%-- ================ ±Û¾²±â ¹öÆ° Ãâ·Â ½ÃÀÛ ================ --%>
+			<%-- ================ ê¸€ì“°ê¸° ë²„íŠ¼ ì¶œë ¥ ì‹œì‘ ================ --%>
 			<div id="charityBtn">
-				<input type="button" value="´ÜÃ¼µî·Ï" id="registerForm">
+				<input type="button" value="ë‹¨ì²´ë“±ë¡" id="registerForm">
 			</div>
-			<%-- ================ ±Û¾²±â ¹öÆ° Ãâ·Â Á¾·á ================ --%>
-			
+			<%-- ================ ê¸€ì“°ê¸° ë²„íŠ¼ ì¶œë ¥ ì¢…ë£Œ ================ --%>
+				<jsp:include page="/WEB-INF/views/commons/paging.jsp" flush="true">
+					<jsp:param name="url" value="/sponsor/selectCharity.td"/>
+					<jsp:param name="str" value=""/>
+					<jsp:param name="pageSize" value="<%=pageSize%>"/>
+					<jsp:param name="groupSize" value="<%=groupSize%>"/>
+					<jsp:param name="curPage" value="<%=curPage%>"/>
+					<jsp:param name="totalCount" value="<%=totalCount%>"/>
+				</jsp:include>
 		</div>
 	</body>
 </html>

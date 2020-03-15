@@ -3,8 +3,11 @@ package java142.todak.etc.utils;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionBindingListener;
 import javax.servlet.http.HttpSessionBindingEvent;
+
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Enumeration;
+import java.util.List;
 
 public class LoginSession implements HttpSessionBindingListener{
 	
@@ -12,6 +15,8 @@ public class LoginSession implements HttpSessionBindingListener{
 	
 	// 사용자 id를 저장해 둘 Hashtable
 	private static Hashtable hashManager = new Hashtable();
+	
+	
 	
 	// 생성자
 	private LoginSession(){
@@ -36,7 +41,7 @@ public class LoginSession implements HttpSessionBindingListener{
 	// 세션아이디를 받아서 해당 세션이 로그인 상태이면 true를, 아니면 false를 리턴.
 	public boolean isLogin(String sessionID){
 		
-		boolean isLogin = false;
+		boolean isLogin = false; 
 		
 		Enumeration e = hashManager.keys();
 		String key = "";
@@ -81,7 +86,15 @@ public class LoginSession implements HttpSessionBindingListener{
 	//   ==> 세션을 통해 Hashtable에 접근할 수 있게함.
 	public void setSession(HttpSession hSession, String userNum)
 	{
-		hashManager.put(hSession.getId(), userNum);
+//		System.out.println("hSession.getId() >>> " + hSession.getId());
+//		System.out.println("userNum >>> " + userNum);
+//		System.out.println("this.getInstance() >>> " + this.getInstance());
+		List<String> container = new ArrayList<String>();
+		container.add(0, "");
+		container.add(1, "");
+		System.out.println(" size >>> " + container.size());
+		container.set(0, userNum);
+		hashManager.put(hSession.getId(), container);
 		hSession.setAttribute("login", this.getInstance());
 	}
 	
@@ -101,12 +114,30 @@ public class LoginSession implements HttpSessionBindingListener{
 	// 세션 ID로 현재 로그인한 ID를 구분해 냄
 	public String getUserID(String sessionID)
 	{
-		return (String)hashManager.get(sessionID);
+		List<String> container = (List<String>)hashManager.get(sessionID);
+		return container.get(0);
 	}
 	
 	// 현재 접속자 수
 	public int getUserCount()
 	{
 		return hashManager.size();
+	}
+
+	// set main menu
+	public void setMain(String main, String sessionID)
+	{
+		List<String> container = (List<String>)hashManager.get(sessionID);
+		container.set(1, main);
+
+//		List<String> container2 = (List<String>)hashManager.get(sessionID);
+//		System.out.println(" main IN setMain >>> " + container2.get(1));
+	}
+
+	// get main menu
+	public String getMain(String sessionID)
+	{
+		List<String> container = (List<String>)hashManager.get(sessionID);
+		return container.get(1);
 	}
 }

@@ -3,8 +3,13 @@ package java142.todak.sponsor.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
+
 import java142.todak.common.ChaebunUtils;
 import java142.todak.etc.controller.EtcController;
+import java142.todak.etc.vo.PagingVO;
+import java142.todak.etc.vo.QueryStringVO;
 import java142.todak.sponsor.service.SponsorService;
 import java142.todak.sponsor.vo.CharityVO;
 import java142.todak.sponsor.vo.MemberAccountVO;
@@ -35,10 +40,11 @@ public class SponsorController {
 	
 	@RequestMapping(value="moveIUCharity")
 	public String moveIUCharity(@ModelAttribute CharityVO scvo,
-						 Model model){
+								@ModelAttribute PagingVO pvo,
+								Model model){
 		List<CharityVO> charityList = null;
 		if(!scvo.getSc_num().equals("")){
-			charityList = sponsorService.selectCharity(scvo);
+			charityList = sponsorService.selectCharity(scvo, pvo);
 		}else{
 			charityList = new ArrayList<CharityVO>();
 		}
@@ -50,14 +56,15 @@ public class SponsorController {
 	public String moveIUCharity(@ModelAttribute MemberVO smvo,
 								@ModelAttribute MemberCardVO smcvo,
 								@ModelAttribute MemberAccountVO smavo,
+							    @ModelAttribute PagingVO pvo,
 						 		Model model){
 		List<MemberVO> memberList = null;
 		List<MemberCardVO> cardList = null;
 		List<MemberAccountVO> accountList = null;
 		if(!smvo.getSm_num().equals("")){
-			memberList = sponsorService.selectMember(smvo);
-			cardList = sponsorService.selectMemberCard(smcvo);
-			accountList = sponsorService.selectMemberAccount(smavo);
+			memberList = sponsorService.selectMember(smvo, pvo);
+			cardList = sponsorService.selectMemberCard(smcvo, pvo);
+			accountList = sponsorService.selectMemberAccount(smavo, pvo);
 		}else{
 			memberList = new ArrayList<MemberVO>();
 			cardList = new ArrayList<MemberCardVO>();
@@ -66,6 +73,7 @@ public class SponsorController {
 		model.addAttribute("memberList", memberList);
 		model.addAttribute("cardList", cardList);
 		model.addAttribute("accountList", accountList);
+		model.addAttribute("pvo", pvo);
 		return "sponsor/iuMember";
 	}
 	
@@ -75,29 +83,26 @@ public class SponsorController {
 						   	   @ModelAttribute MemberCardVO smcvo,
 							   @ModelAttribute MemberAccountVO smavo,
 							   @ModelAttribute SponsorshipVO ssvo,
-							   Model model, 
-	 						   @RequestParam("message") String message,
-	 						   @RequestParam("selectFunc") String selectFunc){
+							   @ModelAttribute PagingVO pvo,
+							   @ModelAttribute QueryStringVO qsvo,
+							   Model model){
 		logger.info("(log) SponsorController.selectMember entered");
 		String url = "sponsor/selectMember";
 		String sm_num = smvo.getSm_num();
 		smcvo.setSm_num(sm_num);
 		smavo.setSm_num(sm_num);
 		ssvo.setSm_num(sm_num);
-		logger.info(" message >>> " + message);
-		logger.info(" sm_num >>> " + smvo.getSm_num());
-		logger.info(" smc_num >>> " + smcvo.getSmc_num());
-		logger.info(" sma_num >>> " + smavo.getSma_num());
-		logger.info(" ss_num >>> " + ssvo.getSs_num());
-		List<MemberVO> memberList = sponsorService.selectMember(smvo);
-		List<MemberCardVO> cardList = sponsorService.selectMemberCard(smcvo);
-		List<MemberAccountVO> accountList = sponsorService.selectMemberAccount(smavo);
+
+		List<MemberVO> memberList = sponsorService.selectMember(smvo, pvo);
+		List<MemberCardVO> cardList = sponsorService.selectMemberCard(smcvo, pvo);
+		List<MemberAccountVO> accountList = sponsorService.selectMemberAccount(smavo, pvo);
 //		List<SponsorshipVO> sponsorshipList = sponsorService.selectSponsorship(smvo);
 		model.addAttribute("memberList", memberList);
 		model.addAttribute("cardList", cardList);
 		model.addAttribute("accountList", accountList);
 //		model.addAttribute("sponsorshipList", sponsorshipList);
-		model.addAttribute("message", message);
+		model.addAttribute("pvo", pvo);
+		model.addAttribute("message", qsvo.getMessage());
 		logger.info("memberList >>> " + memberList.size());
 		logger.info("cardList >>> " + cardList.size());
 		logger.info("accountList >>> " + accountList.size());
@@ -195,17 +200,18 @@ public class SponsorController {
 	}
 //--------------------------------------------------------------------------------------------------------------------------------------------------	
 	@RequestMapping(value="selectCharity")
-	public String selectCharity(@ModelAttribute CharityVO scvo,
-	 							Model model, 
-	 							@RequestParam("message") String message,
-	 							@RequestParam("selectFunc") String selectFunc){
+	public String selectCharity(@ModelAttribute CharityVO scvo, 
+							    @ModelAttribute PagingVO pvo,
+							    @ModelAttribute QueryStringVO qsvo,
+	 							Model model){
 		logger.info("(log) SponsorController.selectCharity entered");
 		String url = "sponsor/selectCharity";
-		logger.info(" message >>> " + message);
+		logger.info(" message >>> " + qsvo.getMessage());
 		logger.info(" sc_num >>> " + scvo.getSc_num());
-		List<CharityVO> charityList = sponsorService.selectCharity(scvo);
+		List<CharityVO> charityList = sponsorService.selectCharity(scvo, pvo);
 		model.addAttribute("charityList", charityList);
-		model.addAttribute("message", message);
+		model.addAttribute("message", qsvo.getMessage());
+		model.addAttribute("pvo", pvo);
 		logger.info("charityList >>> " + charityList.size());
 		
 		if(!scvo.getSc_num().equals("")){
@@ -280,26 +286,28 @@ public class SponsorController {
 	@RequestMapping(value="selectSponsorship")
 	public String selectSponsorship(@ModelAttribute MemberVO smvo,
 									@ModelAttribute CharityVO scvo,
-									Model model, 
-		 							@RequestParam("message") String message,
-		 							@RequestParam("selectFunc") String selectFunc){
+									Model model,
+								   @ModelAttribute QueryStringVO qsvo){
 		logger.info("(log) SponsorController.selectSponsorship entered");
 		String url = "sponsor/selectSponsorship";
-		logger.info(" message >>> " + message);
+		logger.info(" message >>> " + qsvo.getMessage());
 		logger.info(" sm_num >>> " + smvo.getSm_num());
 		logger.info(" sc_num >>> " + scvo.getSc_num());
+		
 		List<SponsorshipVO> sponsorshipList = sponsorService.selectSponsorship(smvo, scvo);
 		model.addAttribute("sponsorshipList", sponsorshipList);
-		model.addAttribute("message", message);
+		model.addAttribute("message", qsvo.getMessage());
 		logger.info("sponsorshipList >>> " + sponsorshipList.size());
-		SponsorshipVO ssvo = sponsorshipList.get(0);
-		logger.info(" >>> " + ssvo.getSs_num());
-		logger.info(" >>> " + ssvo.getSc_num());
-		logger.info(" >>> " + ssvo.getSm_num());
-		logger.info(" >>> " + ssvo.getSs_amount());
-		logger.info(" >>> " + ssvo.getSs_message());
-		logger.info(" >>> " + ssvo.getSs_receiptYN());
-		logger.info(" >>> " + ssvo.getSs_sponsoreddate());
+		for (int i=0; i<sponsorshipList.size(); i++){
+			SponsorshipVO ssvo = sponsorshipList.get(i);
+			logger.info(" >>> " + ssvo.getSs_num());
+			logger.info(" >>> " + ssvo.getSc_num());
+			logger.info(" >>> " + ssvo.getSm_num());
+			logger.info(" >>> " + ssvo.getSs_amount());
+			logger.info(" >>> " + ssvo.getSs_message());
+			logger.info(" >>> " + ssvo.getSs_receiptYN());
+			logger.info(" >>> " + ssvo.getSs_sponsoreddate());
+		}
 		
 		logger.info("(log) SponsorController.selectSponsorship left");
 		return url;

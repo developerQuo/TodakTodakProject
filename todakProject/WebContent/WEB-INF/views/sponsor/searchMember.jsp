@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="java142.todak.sponsor.vo.MemberVO" %>
 <%@ page import="java142.todak.sponsor.vo.MemberCardVO" %>
@@ -8,8 +8,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-		<title>ÈÄ¿øÀÎ</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>í›„ì›ì¸</title>
 		<script type="text/javascript"
 				src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 		<script type="text/javascript">
@@ -20,7 +20,7 @@
 				});
 				$("#D").click(function(){
 					//alert("delete");
-					var bool = confirm('Á¤¸» »èÁ¦ÇÏ½Ã°Ú½À´Ï±î?');
+					var bool = confirm('ì •ë§ ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?');
 					if (bool){
 						$("#form").prop("action", "/sponsor/deleteMember.td").submit();
 					}
@@ -59,67 +59,67 @@
 			%>
 			<form id="form">
 				<table align="center" border="1">
-					<tr><td colspan="3" align="center">ÈÄ¿øÀÎÁ¤º¸</td></tr>
+					<tr><td colspan="3" align="center">í›„ì›ì¸ì •ë³´</td></tr>
 					<tr>
-						<td align="center" width="140" align="center">ÀÌ¸§</td>
+						<td align="center" width="140" align="center">ì´ë¦„</td>
 						<td colspan="2" width="250">
 							<%= smvo.getSm_name() %>
 						</td>
 					</tr>
 					<tr>
-						<td align="center">ÈÞ´ëÆù¹øÈ£</td>
+						<td align="center">íœ´ëŒ€í°ë²ˆí˜¸</td>
 						<td colspan="2"><%= smvo.getSm_hp() %></td>
 					</tr>
 					<tr>
-						<td align="center">ÀÌ¸ÞÀÏ</td>
+						<td align="center">ì´ë©”ì¼</td>
 						<td colspan="2"><%= smvo.getSm_email() %></td>
 					</tr>
 					<tr>
-						<td align="center">Á¤±âÈÄ¿ø¿©ºÎ</td>
+						<td align="center">ì •ê¸°í›„ì›ì—¬ë¶€</td>
 						<td colspan="2">
 							<%= smvo.getSm_regularYN() %>
 						</td>
 					</tr>
 					<tr>
-						<td align="center">ÈÄ¿ø¼ö´Ü</td>
+						<td align="center">í›„ì›ìˆ˜ë‹¨</td>
 						<td colspan="2"><%= smvo.getSm_means() %></td>
 					</tr>
 					<tr>
-						<td align="center">¼±ÅÃ¾à°üµ¿ÀÇ¿©ºÎ</td>
+						<td align="center">ì„ íƒì•½ê´€ë™ì˜ì—¬ë¶€</td>
 						<td colspan="2"><%= smvo.getSm_optionalterms() %></td>
 					</tr>
-					<tr><td colspan="3" align="center">Ä«µåÁ¤º¸</td></tr>
+					<tr><td colspan="3" align="center">ì¹´ë“œì •ë³´</td></tr>
 					<tr>
-						<td align="center">Ä«µå»ç</td>
+						<td align="center">ì¹´ë“œì‚¬</td>
 						<td colspan="2"><%= smcvo.getSmc_cardcorp() %></td>
 					</tr>
 					<tr>
-						<td align="center">Ä«µå¹øÈ£</td>
+						<td align="center">ì¹´ë“œë²ˆí˜¸</td>
 						<td colspan="2"><%= smcvo.getSmc_cardnum() %></td>
 					</tr>
 					<tr>
-						<td align="center">Ä«µå¸íÀÇÀÚ</td>
+						<td align="center">ì¹´ë“œëª…ì˜ìž</td>
 						<td colspan="2"><%= smcvo.getSmc_cardowner() %></td>
 					</tr>
 					<tr>
-						<td align="center">Ä«µå¸¸·á³¯Â¥</td>
+						<td align="center">ì¹´ë“œë§Œë£Œë‚ ì§œ</td>
 						<td><%= smc_cardexpired %></td>
 					</tr>
 					<tr>
 						<td align="center">cvc</td>
 						<td colspan="2"><%= smcvo.getSmc_cardcvc() %></td>
 					</tr>
-					<tr><td colspan="3" align="center">°èÁÂÁ¤º¸</td></tr>
+					<tr><td colspan="3" align="center">ê³„ì¢Œì •ë³´</td></tr>
 					<tr>
-						<td align="center">ÀºÇà</td>
-						<td colspan="2">±¹¹ÎÀºÇà</td>
+						<td align="center">ì€í–‰</td>
+						<td colspan="2">êµ­ë¯¼ì€í–‰</td>
 					</tr>
 					<tr>
-						<td align="center">°èÁÂ¹øÈ£</td>
+						<td align="center">ê³„ì¢Œë²ˆí˜¸</td>
 						<td colspan="2"><%= smavo.getSma_accountnum() %></td>
 					</tr>
 					<tr>
-						<td align="center">¿¹±ÝÁÖ¸í</td>
+						<td align="center">ì˜ˆê¸ˆì£¼ëª…</td>
 						<td colspan="2"><%= smavo.getSma_depositor() %></td>
 					</tr>
 					<tr>
@@ -127,8 +127,8 @@
 							<input type="hidden" name="sm_num" id="sm_num" value="<%= smvo.getSm_num() %>">
 							<input type="hidden" name="smc_num" id="smc_num" value="<%= smcvo.getSmc_num() %>">
 							<input type="hidden" name="sma_num" id="sma_num" value="<%= smavo.getSma_num() %>">
-							<input type="button" value="¼öÁ¤" id="U">
-							<input type="button" value="»èÁ¦" id="D">
+							<input type="button" value="ìˆ˜ì •" id="U">
+							<input type="button" value="ì‚­ì œ" id="D">
 						</td>
 					</tr>
 				</table>

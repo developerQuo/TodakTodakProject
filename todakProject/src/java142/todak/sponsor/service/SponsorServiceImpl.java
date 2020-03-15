@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 
+import java142.todak.etc.vo.PagingVO;
 import java142.todak.sponsor.dao.SponsorDao;
 import java142.todak.sponsor.vo.CharityVO;
 import java142.todak.sponsor.vo.MemberAccountVO;
@@ -28,15 +29,10 @@ public class SponsorServiceImpl implements SponsorService {
 	private PlatformTransactionManager transactionManager;
 	
 	@Override
-	public List<MemberVO>selectMember(MemberVO smvo){
-		return sponsorDao.selectMember(smvo);
+	public List<MemberVO>selectMember(MemberVO smvo, PagingVO pvo){
+		return sponsorDao.selectMember(smvo, pvo);
 	}
 	
-//	@Override
-//	public int insertMember(final MemberVO smvo, final MemberCardVO smcvo, final MemberAccountVO smavo){
-//		return sponsorDao.insertMember(smvo, smcvo, smavo);
-//	}
-
 	@Override
 	public int insertMember(final MemberVO smvo, final MemberCardVO smcvo, final MemberAccountVO smavo){
 		TransactionTemplate transactionTemplate = new TransactionTemplate(transactionManager);
@@ -92,8 +88,8 @@ public class SponsorServiceImpl implements SponsorService {
 
 	
 	@Override
-	public List<MemberCardVO>selectMemberCard(MemberCardVO smcvo){
-		return sponsorDao.selectMemberCard(smcvo);
+	public List<MemberCardVO>selectMemberCard(MemberCardVO smcvo, PagingVO pvo){
+		return sponsorDao.selectMemberCard(smcvo, pvo);
 	}
 	
 	@Override
@@ -103,8 +99,8 @@ public class SponsorServiceImpl implements SponsorService {
 
 	
 	@Override
-	public List<MemberAccountVO>selectMemberAccount(MemberAccountVO smavo){
-		return sponsorDao.selectMemberAccount(smavo);
+	public List<MemberAccountVO>selectMemberAccount(MemberAccountVO smavo, PagingVO pvo){
+		return sponsorDao.selectMemberAccount(smavo, pvo);
 	}
 	
 	@Override
@@ -114,9 +110,9 @@ public class SponsorServiceImpl implements SponsorService {
 
 	
 	@Override
-	public List<CharityVO> selectCharity(CharityVO scvo) {
+	public List<CharityVO> selectCharity(CharityVO scvo, PagingVO pvo) {
 		// TODO Auto-generated method stub
-		return sponsorDao.selectCharity(scvo);
+		return sponsorDao.selectCharity(scvo, pvo);
 	}
 	
 	@Override

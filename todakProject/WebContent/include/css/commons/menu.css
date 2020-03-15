@@ -20,7 +20,8 @@ li {
 }
 
 .sidebar {
-	display: none;
+  	position: fixed;
+	display: grid;
 	border: gray 2px solid;
 	width: 15%;
 	height: 100%;

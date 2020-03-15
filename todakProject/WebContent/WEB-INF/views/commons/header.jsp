@@ -1,62 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<script src="https://kit.fontawesome.com/a076d05399.js"></script>
-		<link rel="stylesheet" href="../../../include/css/commons/menu.css">
-		<!-- 
-		<script type="text/javascript"
-				src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-		<script type="text/javascript" 
-				src="/include/js/jquery-1.11.0.min.js" ></script> -->
+		<link rel="stylesheet" href="/include/css/commons/menu.css">
+		<script type="text/javascript" src="/include/js/commons/menu.js"></script>
 		<script type="text/javascript">
+
 			$(function(){
-				// ¸ŞÀÎ¸Ş´º Å¬¸¯½Ã
+				// ë©”ì¸ë©”ë‰´ í´ë¦­ì‹œ
 				$(".header-main-menu").click(function(){
-					var sbList = [];
-					var main = $(this).find('input').val();
-					var sidebar_width = 15;
-					var container_width = 84;
-					var display = 'grid';
-					
-					if (main == "1") sbList = [['»ç¿ø µî·Ï/Á¶È¸', '/human/selectMember.td', 'far fa-address-card'], 
-					                           ['¹ß·É µî·Ï/Á¶È¸', '/human/selectPersonAppt.td', 'fas fa-suitcase']];
-					else if (main == "2") sbList = [['°áÀç¼­·ù ÀÛ¼º', '/ework/mainPage.td', 'fas fa-edit'], 
-					                                ['ÀÓ½ÃÀúÀåÇÔ', '/eworkForm/selectAuthBox.td', 'far fa-save'], 
-					                                ['°áÀç', '/ework/selectAuth.td', 'fas fa-pen-fancy'], 
-					                                ['¼­¸í ¹× µµÀå', '/ework/selectSignStamp.td', 'fas fa-stamp']];
-					else if (main == "3") sbList = [['¸ğ±İ¾×', '/sponsor/selectSponsorship.td', 'fas fa-won-sign'],
-					                                ['ÈÄ¿øÀÎ', '/sponsor/selectMember.td', 'fas fa-user'], 
-					                                ['ºñ¿µ¸®´ÜÃ¼', '/sponsor/selectCharity.td', 'fas fa-users']];
-					else if (main == "4") sbList = [['°øÁö»çÇ×', '/board/selectNotice.td', 'fas fa-bullhorn'], 
-					                                ['°ÇÀÇ»çÇ×', '/board/selectSuggestion.td', 'far fa-comments']];
-					else {
-						sbList = [];
-						sidebar_width = 0;
-						container_width = 100;
-						display = 'none';
-					}
-					$(".sidebar").css("display", display).css("width", sidebar_width+'%');
-					$(".context-container").css("width", container_width+'%');
-					sideBar(sbList);
+					setMenu(this);
+// 	 				alert(" main AT main clicked >>> " + $(".main").prop("value"));
+					$.get("/etc/setMainSession.td", { main: $(".main").prop("value") })
 				});
 				
 			});
-			
-			// »çÀÌµå¸Ş´º »ı¼º
-			function sideBar(sbList){
-				$(".sidebar-menu-content").html("");
-				var sidebar = "<ul>";
-				for (var i=0; i<sbList.length; i++){
-					sidebar += "<li class='sidebar-menu'><a href="+sbList[i][1]+"?message=&selectFunc=><i class='"+sbList[i][2]+"'>&nbsp;"+sbList[i][0]+"</i></a></li>";
-				}
-				sidebar += "</ul>";
-				//alert(sidebar);
-				$(".sidebar-menu-content").html(sidebar);
-			}
-			
+
 		</script>
 	</head>
 	<body>
@@ -72,39 +34,38 @@
 					<!-- header-main-menu -->
 					<li><a href="#">
 						<i class="header-main-menu">
-							<i class="far fa-calendar">&nbsp;<span>ÀÏÁ¤Ç¥</span></i>
+							<i class="far fa-calendar">&nbsp;<span>ì¼ì •í‘œ</span></i>
 							<input type="hidden" value="0"/>
 						</i>
 					</a></li>
 					
 					<li><a href="#">
 						<i class="header-main-menu">
-							<i class="far fa-user">&nbsp;<span>ÀÎ»ç°ü¸®</span></i>
+							<i class="far fa-user">&nbsp;<span>ì¸ì‚¬ê´€ë¦¬</span></i>
 							<input type="hidden" value="1"/></i>
 					</a></li>
 		
 					<li><a href="#">
 						<i class="header-main-menu">
-							<i class="far fa-edit">&nbsp;<span>ÀüÀÚ°áÀç</span></i>
+							<i class="far fa-edit">&nbsp;<span>ì „ìê²°ì¬</span></i>
 							<input type="hidden" value="2"/></i>
 					</a></li>
 		
 					<li><a href="#">
 						<i class="header-main-menu">
-							<i class="far fa-heart">&nbsp;<span>ÈÄ¿ø°ü¸®</span></i>
+							<i class="far fa-heart">&nbsp;<span>í›„ì›ê´€ë¦¬</span></i>
 							<input type="hidden" value="3"/></i>
 					</a></li>
 					
 					<li><a href="#">
 						<i class="header-main-menu">
-							<i class="fas fa-chalkboard">&nbsp;<span>°Ô½ÃÆÇ</span></i>
+							<i class="fas fa-chalkboard">&nbsp;<span>ê²Œì‹œíŒ</span></i>
 							<input type="hidden" value="4"/></i>
 					</a></li>
 					
 				</ul>
-				
 			</div>
-			
 		</div>
+		<input class="main" type="hidden" value="0" />
 	</body>
 </html>

@@ -1,9 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page import="java142.todak.sponsor.vo.MemberVO" %>
 <%@ page import="java142.todak.sponsor.vo.SponsorshipVO" %>
+<%@ page import="java142.todak.etc.vo.PagingVO" %>
 <%@ include file="/WEB-INF/views/commons/bindSession.jsp" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -21,10 +22,25 @@
 		<%
 	}
 %>
+
+<%
+	int pageSize = 10;
+	int groupSize = 5;
+	
+	int curPage = 1;
+	int totalCount = 0;
+	
+	PagingVO pvo = (PagingVO)request.getAttribute("pvo");
+	if(pvo != null)
+	{
+		curPage = pvo.getCurPage();
+		pageSize = pvo.getPageSize();
+	}
+%>
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-		<title>ºñ¿µ¸®ÈÄ¿øÀÎ Á¶È¸</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>ë¹„ì˜ë¦¬í›„ì›ì¸ ì¡°íšŒ</title>
 		<script type="text/javascript"
 				src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 		<!-- 
@@ -32,22 +48,47 @@
 				src="/include/js/jquery-1.11.0.min.js" ></script> -->
 		<script type="text/javascript">
 			$(function(){
-				/* ±Û¾²±â ¹öÆ° Å¬¸¯ ½Ã Ã³¸® ÀÌº¥Æ® */
+				$("#pageSize").val(<%=pageSize%>).prop("selected", true);
+				/* ê¸€ì“°ê¸° ë²„íŠ¼ í´ë¦­ ì‹œ ì²˜ë¦¬ ì´ë²¤íŠ¸ */
 				$("#registerForm").click(function(){
 					location.href = "/sponsor/moveIUMember.td";
 				});
 				
-				/* Á¦¸ñ Å¬¸¯½Ã »ó¼¼ ÆäÀÌÁö ÀÌµ¿À» À§ÇÑ Ã³¸® ÀÌº¥Æ® */
+				/* ì œëª© í´ë¦­ì‹œ ìƒì„¸ í˜ì´ì§€ ì´ë™ì„ ìœ„í•œ ì²˜ë¦¬ ì´ë²¤íŠ¸ */
 				$(".goDetail").click(function(){
-					var sm_num = $(this).parents("tr").attr("data-num");
-					$("#sm_num").val(sm_num);
-					// »ó¼¼ ÆäÀÌÁö·Î ÀÌµ¿ÇÏ±â À§ÇØ form Ãß°¡ (id : detailForm)
-					$("#detailForm").prop({
-						"method" : "post",
-						"action" : "/sponsor/selectMember.td"
-					}).submit();
+					var formName = '#detailForm';
+					var obj = this;
+					var url = "/sponsor/selectMember.td";
+					submitMethod(formName, obj, url);
 				});
+
+				/* í•œí˜ì´ì§€ì— ê¸€ì‚¬ì´ì¦ˆ ì •í•˜ëŠ” ì´ë²¤íŠ¸ */
+				$("#pageSize").change(function(){
+					var formName = '#f_search';
+					var obj = this;
+					var url = "/sponsor/selectMember.td?selectFunc=''&message=''";
+					submitMethod(formName, obj, url);
+				});
+				
+				/* í‚¤ì›Œë“œ ê²€ìƒ‰ ì´ë²¤íŠ¸ */
+				$("#searchData").click(function(){
+					var formName = '#f_search';
+					var obj = this;
+					var url = "/sponsor/selectMember.td?selectFunc=''&message=''";
+					submitMethod(formName, obj, url);
+				});
+				
 			});
+			
+			function submitMethod(formName, obj, url){
+				var sm_num = $(obj).parents("tr").attr("data-num");
+				$("#sm_num").val(sm_num);
+				// ìƒì„¸ í˜ì´ì§€ë¡œ ì´ë™í•˜ê¸° ìœ„í•´ form ì¶”ê°€ (id : detailForm)
+				$(formName).prop({
+					"method" : "post",
+					"action" : url
+				}).submit();
+			}
 		</script>
 	</head>
 	<body>
@@ -62,50 +103,49 @@
 	
 			<% System.out.println(sManager.getUserID(session.getId())); %>
 			<div class="context-container">
-				<div id="boardTit"><h3>ÈÄ¿øÀÎ¸ñ·Ï</h3></div>
+				<div id="boardTit"><h3>í›„ì›ì¸ëª©ë¡</h3></div>
 				<form name="detailForm" id="detailForm">
 					<input type="hidden" name="sm_num" id="sm_num">
 					<input type="hidden" name="selectFunc" id="selectFunc" value="search">
 					<input type="hidden" name="message" id="message" value="">
 				</form>
-				<%-- =========== °Ë»ö±â´É ½ÃÀÛ (ÀÌ ºÎºĞ ÀüÃ¼ Ãß°¡) =========== --%>
+				<%-- =========== ê²€ìƒ‰ê¸°ëŠ¥ ì‹œì‘ (ì´ ë¶€ë¶„ ì „ì²´ ì¶”ê°€) =========== --%>
 				<div id="boardSearch">
 					<form id="f_search" name="f_search">
-						<table summary="°Ë»ö">
+						<table summary="ê²€ìƒ‰">
 							<colgroup>
 								<col width="70%"></col>
 								<col width="30%"></col>
 							</colgroup>
 							<tr>
 								<td id="btd1">
-									<label>°Ë»öÁ¶°Ç</label>
+									<label>ê²€ìƒ‰ì¡°ê±´</label>
 									<select id="search" name="search">
-										<option value="all">ÀüÃ¼</option>
-										<option value="sm_num">ÈÄ¿øÀÎ¹øÈ£</option>
-										<option value="sm_name">ÈÄ¿øÀÎÀÌ¸§</option>
-										<option value="sm_insertdate">°¡ÀÔÀÏ</option>
+										<option value="all">ì „ì²´</option>
+										<option value="sm_num">í›„ì›ì¸ë²ˆí˜¸</option>
+										<option value="sm_name">í›„ì›ì¸ì´ë¦„</option>
+										<option value="sm_insertdate">ê°€ì…ì¼</option>
 									</select>
-									<input type="text" name="keyword" id="keyword" value="°Ë»ö¾î¸¦ÀÔ·ÂÇÏ¼¼¿ä" />
-									<input type="button" value="°Ë»ö" id="searchData" />
+									<input type="text" name="keyword" id="keyword" placeholder="ê²€ìƒ‰ì–´ë¥¼ì…ë ¥í•˜ì„¸ìš”" />
+									<input type="button" value="ê²€ìƒ‰" id="searchData" />
 								</td>
-								<td id="btd2">ÇÑÆäÀÌÁö¿¡
+								<td id="btd2">í•œí˜ì´ì§€ì—
 									<select id="pageSize" name="pageSize">
-										<option value="5">5ÁÙ</option>
-										<option value="10">10ÁÙ</option>
-										<option value="20">20ÁÙ</option>
-										<option value="30">30ÁÙ</option>
-										<option value="50">50ÁÙ</option>
-										<option value="100">100ÁÙ</option>
+										<option value="10">10ì¤„</option>
+										<option value="20">20ì¤„</option>
+										<option value="30">30ì¤„</option>
+										<option value="50">50ì¤„</option>
+										<option value="100">100ì¤„</option>
 									</select>
 								</td>
 							</tr>
 						</table>
 					</form>
 				</div>
-				<%-- ================== °Ë»ö±â´É Á¾·á ================== --%>
-				<%-- =================== ¸®½ºÆ® ½ÃÀÛ =================== --%>
+				<%-- ================== ê²€ìƒ‰ê¸°ëŠ¥ ì¢…ë£Œ ================== --%>
+				<%-- =================== ë¦¬ìŠ¤íŠ¸ ì‹œì‘ =================== --%>
 				<div id="memberList">
-					<table summary="ÈÄ¿øÀÎ¸®½ºÆ®">
+					<table summary="í›„ì›ì¸ë¦¬ìŠ¤íŠ¸">
 						<colgroup>
 							<col width = "10%" />
 							<col width = "10%" />
@@ -117,13 +157,13 @@
 						</colgroup>
 						<thead>
 							<tr>
-								<th>ÈÄ¿øÀÎ¹øÈ£</th>
-								<th>ÈÄ¿øÀÎ¸í</th>
+								<th>í›„ì›ì¸ë²ˆí˜¸</th>
+								<th>í›„ì›ì¸ì´ë¦„</th>
 								<%-- 
-								<th>ÃÖ±ÙÈÄ¿øÀÏ</th>
-								<th>ÃÑ ÈÄ¿ø±İ¾×</th> 
+								<th>ìµœê·¼í›„ì›ì¼</th>
+								<th>ì´ í›„ì›ê¸ˆì•¡</th> 
 								--%>
-								<th>°¡ÀÔÀÏ</th>
+								<th>ê°€ì…ì¼</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -136,8 +176,9 @@
 									Iterator<MemberVO> iter = memberList.iterator();
 									while(iter.hasNext()){
 										MemberVO smvo = iter.next();
+										totalCount = (int)smvo.getTotalCount();
 							%>
-							<!-- µ¥ÀÌÅÍ Ãâ·Â -->
+							<!-- ë°ì´í„° ì¶œë ¥ -->
 										<tr align="center" data-num="<%= smvo.getSm_num() %>">
 											<td><%= smvo.getSm_num() %></td>
 											<td><span class="goDetail"><%= smvo.getSm_name() %></span></td>
@@ -152,7 +193,7 @@
 								}else{
 							%>
 									<tr>
-										<td colspan="5" align="center">µî·ÏµÈ °Ô½Ã¹°ÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.</td>
+										<td colspan="5" align="center">ë“±ë¡ëœ ê²Œì‹œë¬¼ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.</td>
 									</tr>
 							<%
 								}
@@ -160,14 +201,21 @@
 						</tbody>
 					</table>
 				</div>
-				<%-- =================== ¸®½ºÆ® Á¾·á =================== --%>
+				<%-- =================== ë¦¬ìŠ¤íŠ¸ ì¢…ë£Œ =================== --%>
 				
-				<%-- ================ ±Û¾²±â ¹öÆ° Ãâ·Â ½ÃÀÛ ================ --%>
+				<%-- ================ ê¸€ì“°ê¸° ë²„íŠ¼ ì¶œë ¥ ì‹œì‘ ================ --%>
 				<div id="memberBtn">
-					<input type="button" value="ÈÄ¿øÀÎµî·Ï" id="registerForm">
+					<input type="button" value="í›„ì›ì¸ë“±ë¡" id="registerForm">
 				</div>
-				<%-- ================ ±Û¾²±â ¹öÆ° Ãâ·Â Á¾·á ================ --%>
-				
+				<%-- ================ ê¸€ì“°ê¸° ë²„íŠ¼ ì¶œë ¥ ì¢…ë£Œ ================ --%>
+				<jsp:include page="/WEB-INF/views/commons/paging.jsp" flush="true">
+					<jsp:param name="url" value="/sponsor/selectMember.td"/>
+					<jsp:param name="str" value=""/>
+					<jsp:param name="pageSize" value="<%=pageSize%>"/>
+					<jsp:param name="groupSize" value="<%=groupSize%>"/>
+					<jsp:param name="curPage" value="<%=curPage%>"/>
+					<jsp:param name="totalCount" value="<%=totalCount%>"/>
+				</jsp:include>
 			</div>
 		</section>
 	</body>

@@ -1,13 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="java142.todak.sponsor.vo.CharityVO" %>
 <%@ include file="/WEB-INF/views/commons/bindSession.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-		<title>ºñ¿µ¸®´ÜÃ¼</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>ë¹„ì˜ë¦¬ë‹¨ì²´</title>
 		<script type="text/javascript"
 				src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 		<script type="text/javascript">
@@ -18,7 +18,7 @@
 				});
 				$("#D").click(function(){
 					//alert("delete");
-					var bool = confirm('Á¤¸» »èÁ¦ÇÏ½Ã°Ú½À´Ï±î?');
+					var bool = confirm('ì •ë§ ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?');
 					if (bool){
 						$("#form").prop("action", "/sponsor/deleteCharity.td").submit();
 					}
@@ -45,74 +45,74 @@
 			%>
 			<form id="form">
 				<table align="center" border="1">
-					<tr><td colspan="3" align="center">´ÜÃ¼Á¤º¸</td></tr>
+					<tr><td colspan="3" align="center">ë‹¨ì²´ì •ë³´</td></tr>
 					<tr>
-						<td align="center" width="140" align="center">´ÜÃ¼¸í</td>
+						<td align="center" width="140" align="center">ë‹¨ì²´ëª…</td>
 						<td colspan="2" width="250">
 							<%= scvo.getSc_name() %>
 						</td>
 					</tr>
 					<tr>
-						<td align="center">´ëÇ¥ÀÚ</td>
+						<td align="center">ëŒ€í‘œìž</td>
 						<td colspan="2">
 							<%= scvo.getSc_ceo()%>
 						</td>
 					</tr>
 					<tr>
-						<td align="center">ÈÞ´ëÆù¹øÈ£</td>
+						<td align="center">íœ´ëŒ€í°ë²ˆí˜¸</td>
 						<td colspan="2"><%= scvo.getSc_hp() %></td>
 					</tr>
 					<tr>
-						<td align="center">ÀÌ¸ÞÀÏ</td>
+						<td align="center">ì´ë©”ì¼</td>
 						<td colspan="2"><%= scvo.getSc_email() %></td>
 					</tr>
 					<tr>
-						<td align="center">¼ÒÀçÁö</td>
+						<td align="center">ì†Œìž¬ì§€</td>
 						<td colspan="2">
 							<%= scvo.getSc_addr() %>>
 						</td>
 					</tr>
 					<tr>
-						<td align="center">´ÜÃ¼ µî·Ï¹øÈ£</td>
+						<td align="center">ë‹¨ì²´ ë“±ë¡ë²ˆí˜¸</td>
 						<td colspan="2"><%= scvo.getSc_registration() %></td>
 					</tr>
 					<tr>
-						<td align="center">´ÜÃ¼ µî·ÏÀÏ</td>
+						<td align="center">ë‹¨ì²´ ë“±ë¡ì¼</td>
 						<td><%= new StringBuffer(scvo.getSc_registrationdate()).insert(6, "-").insert(4, "-").toString() %></td>
 					</tr>
 					<tr>
-						<td align="center">»ç¾÷ºÐ¾ß</td>
+						<td align="center">ì‚¬ì—…ë¶„ì•¼</td>
 						<td><%= scvo.getSc_bizfield() %></td>
 					</tr>
 					<tr>
-						<td align="center">»ç¾÷³»¿ë</td>
+						<td align="center">ì‚¬ì—…ë‚´ìš©</td>
 						<td colspan="2" rows="4" cols="60"><%= scvo.getSc_bizcontents() %></td>
 					</tr>
 					<tr>
-						<td align="center">¸ñÇ¥¸ð±Ý¾×</td>
+						<td align="center">ëª©í‘œëª¨ê¸ˆì•¡</td>
 						<td colspan="2"><%= scvo.getSc_targetamount() %></td>
 					</tr>
 					<tr>
-						<td align="center">¸ð±Ý±â°£</td>
+						<td align="center">ëª¨ê¸ˆê¸°ê°„</td>
 						<td><%= new StringBuffer(scvo.getSc_amountingstart()).insert(6, "-").insert(4, "-").toString() %> - <%= new StringBuffer(scvo.getSc_amountingend()).insert(6, "-").insert(4, "-").toString() %></td>
 					</tr>
 					<tr>
-						<td align="center">ÀºÇà</td>
-						<td colspan="2">±¹¹ÎÀºÇà</td>
+						<td align="center">ì€í–‰</td>
+						<td colspan="2">êµ­ë¯¼ì€í–‰</td>
 					</tr>
 					<tr>
-						<td align="center">°èÁÂ¹øÈ£</td>
+						<td align="center">ê³„ì¢Œë²ˆí˜¸</td>
 						<td colspan="2"><%= scvo.getSc_accountnum() %></td>
 					</tr>
 					<tr>
-						<td align="center">¿¹±ÝÁÖ¸í</td>
+						<td align="center">ì˜ˆê¸ˆì£¼ëª…</td>
 						<td colspan="2"><%= scvo.getSc_depositor() %></td>
 					</tr>
 					<tr>
 						<td colspan="5" align="center">
 							<input type="hidden" name="sc_num" id="sc_num" value="<%= scvo.getSc_num() %>">
-							<input type="button" value="¼öÁ¤" id="U">
-							<input type="button" value="»èÁ¦" id="D">
+							<input type="button" value="ìˆ˜ì •" id="U">
+							<input type="button" value="ì‚­ì œ" id="D">
 						</td>
 					</tr>
 				</table>

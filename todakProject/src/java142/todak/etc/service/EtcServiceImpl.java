@@ -17,8 +17,22 @@ public class EtcServiceImpl implements EtcService {
 	private EtcDao etcDao;
 	
 	@Override
-	public List<MemberVO> login(MemberVO mvo){
-		return etcDao.login(mvo);
+	public List<MemberVO> login(MemberVO hmvo){
+		return etcDao.login(hmvo);
+	}
+
+	@Override
+	public List<MemberVO> idEmailAuth(MemberVO hmvo){
+		return etcDao.idEmailAuth(hmvo);
 	}
 	
+	@Override
+	public List<MemberVO> pwEmailAuth(MemberVO hmvo){
+		return etcDao.pwEmailAuth(hmvo);
+	}
+	
+	@Override
+	public boolean setNewPw(MemberVO hmvo){
+		return etcDao.setNewPw(hmvo);
+	}
 }

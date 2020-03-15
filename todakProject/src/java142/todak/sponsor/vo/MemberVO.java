@@ -11,6 +11,8 @@ public class MemberVO {
     private String sm_deleteYN = "";
     private String sm_insertdate = "";
     private String sm_updatedate = "";
+	private int pageNo = 0;
+	private int totalCount = 0;
 	public String getSm_num() {
 		return sm_num;
 	}
@@ -70,5 +72,17 @@ public class MemberVO {
 	}
 	public void setSm_updatedate(String sm_updatedate) {
 		this.sm_updatedate = sm_updatedate;
+	}
+	public int getPageNo() {
+		return pageNo;
+	}
+	public void setPageNo(int pageNo) {
+		this.pageNo = pageNo;
+	}
+	public int getTotalCount() {
+		return totalCount;
+	}
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
 	}
 }

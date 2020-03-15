@@ -10,4 +10,34 @@
 		AND		h.hm_pw = #{hm_pw}
 		AND     h.hm_deleteYN = 'Y'
 	</select>
+
+
+	<!-- id 찾기  -->
+	<select id="idEmailAuth" parameterType="hmvo" resultType="hmvo">
+		SELECT
+		        h.hm_email,
+		        h.hm_id
+		FROM    human_member h
+		WHERE   h.hm_empnum = #{hm_empnum}
+		AND     h.hm_deleteYN = 'Y'
+	</select>
+	
+	<!-- pw 찾기  -->
+	<select id="pwEmailAuth" parameterType="hmvo" resultType="hmvo">
+		SELECT
+				h.hm_empnum,
+		        h.hm_id
+		FROM    human_member h
+		WHERE   h.hm_empnum = #{hm_empnum}
+		AND		h.hm_email = #{hm_email}
+		AND     h.hm_deleteYN = 'Y'
+	</select>
+	
+	<!-- 새 비밀번호  저장 -->
+	<update id="setNewPw" parameterType="hmvo">
+		UPDATE human_member h
+		SET   h.hm_pw = #{hm_pw},
+			  h.hm_updatedate = TO_char(SYSDATE, 'YYYYMMDD')
+		WHERE h.hm_empnum = #{hm_empnum}
+	</update>
 </mapper>

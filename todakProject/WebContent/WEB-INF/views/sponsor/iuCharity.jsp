@@ -1,45 +1,45 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="java142.todak.sponsor.vo.CharityVO" %>
 <%@ include file="/WEB-INF/views/commons/bindSession.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-		<title>ºñ¿µ¸®´ÜÃ¼</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>ë¹„ì˜ë¦¬ë‹¨ì²´</title>
 		<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 		<script>
-			//º» ¿¹Á¦¿¡¼­´Â µµ·Î¸í ÁÖ¼Ò Ç¥±â ¹æ½Ä¿¡ ´ëÇÑ ¹ý·É¿¡ µû¶ó, ³»·Á¿À´Â µ¥ÀÌÅÍ¸¦ Á¶ÇÕÇÏ¿© ¿Ã¹Ù¸¥ ÁÖ¼Ò¸¦ ±¸¼ºÇÏ´Â ¹æ¹ýÀ» ¼³¸íÇÕ´Ï´Ù.
+			//ë³¸ ì˜ˆì œì—ì„œëŠ” ë„ë¡œëª… ì£¼ì†Œ í‘œê¸° ë°©ì‹ì— ëŒ€í•œ ë²•ë ¹ì— ë”°ë¼, ë‚´ë ¤ì˜¤ëŠ” ë°ì´í„°ë¥¼ ì¡°í•©í•˜ì—¬ ì˜¬ë°”ë¥¸ ì£¼ì†Œë¥¼ êµ¬ì„±í•˜ëŠ” ë°©ë²•ì„ ì„¤ëª…í•©ë‹ˆë‹¤.
 			function sample4_execDaumPostcode() {
 				new daum.Postcode({
 					oncomplete: function(data) {
-						// ÆË¾÷¿¡¼­ °Ë»ö°á°ú Ç×¸ñÀ» Å¬¸¯ÇßÀ»¶§ ½ÇÇàÇÒ ÄÚµå¸¦ ÀÛ¼ºÇÏ´Â ºÎºÐ.
+						// íŒì—…ì—ì„œ ê²€ìƒ‰ê²°ê³¼ í•­ëª©ì„ í´ë¦­í–ˆì„ë•Œ ì‹¤í–‰í•  ì½”ë“œë¥¼ ìž‘ì„±í•˜ëŠ” ë¶€ë¶„.
 
-						// µµ·Î¸í ÁÖ¼ÒÀÇ ³ëÃâ ±ÔÄ¢¿¡ µû¶ó ÁÖ¼Ò¸¦ Á¶ÇÕÇÑ´Ù.
-						// ³»·Á¿À´Â º¯¼ö°¡ °ªÀÌ ¾ø´Â °æ¿ì¿£ °ø¹é('')°ªÀ» °¡Áö¹Ç·Î, ÀÌ¸¦ Âü°íÇÏ¿© ºÐ±â ÇÑ´Ù.
-						var fullRoadAddr = data.roadAddress; // µµ·Î¸í ÁÖ¼Ò º¯¼ö
-						var extraRoadAddr = ''; // µµ·Î¸í Á¶ÇÕÇü ÁÖ¼Ò º¯¼ö
+						// ë„ë¡œëª… ì£¼ì†Œì˜ ë…¸ì¶œ ê·œì¹™ì— ë”°ë¼ ì£¼ì†Œë¥¼ ì¡°í•©í•œë‹¤.
+						// ë‚´ë ¤ì˜¤ëŠ” ë³€ìˆ˜ê°€ ê°’ì´ ì—†ëŠ” ê²½ìš°ì—” ê³µë°±('')ê°’ì„ ê°€ì§€ë¯€ë¡œ, ì´ë¥¼ ì°¸ê³ í•˜ì—¬ ë¶„ê¸° í•œë‹¤.
+						var fullRoadAddr = data.roadAddress; // ë„ë¡œëª… ì£¼ì†Œ ë³€ìˆ˜
+						var extraRoadAddr = ''; // ë„ë¡œëª… ì¡°í•©í˜• ì£¼ì†Œ ë³€ìˆ˜
 
-						// ¹ýÁ¤µ¿¸íÀÌ ÀÖÀ» °æ¿ì Ãß°¡ÇÑ´Ù. (¹ýÁ¤¸®´Â Á¦¿Ü)
-						// ¹ýÁ¤µ¿ÀÇ °æ¿ì ¸¶Áö¸· ¹®ÀÚ°¡ "µ¿/·Î/°¡"·Î ³¡³­´Ù.
-						if(data.bname !== '' && /[µ¿|·Î|°¡]$/g.test(data.bname)){
+						// ë²•ì •ë™ëª…ì´ ìžˆì„ ê²½ìš° ì¶”ê°€í•œë‹¤. (ë²•ì •ë¦¬ëŠ” ì œì™¸)
+						// ë²•ì •ë™ì˜ ê²½ìš° ë§ˆì§€ë§‰ ë¬¸ìžê°€ "ë™/ë¡œ/ê°€"ë¡œ ëë‚œë‹¤.
+						if(data.bname !== '' && /[ë™|ë¡œ|ê°€]$/g.test(data.bname)){
 							extraRoadAddr += data.bname;
 						}
-						// °Ç¹°¸íÀÌ ÀÖ°í, °øµ¿ÁÖÅÃÀÏ °æ¿ì Ãß°¡ÇÑ´Ù.
+						// ê±´ë¬¼ëª…ì´ ìžˆê³ , ê³µë™ì£¼íƒì¼ ê²½ìš° ì¶”ê°€í•œë‹¤.
 						if(data.buildingName !== '' && data.apartment === 'Y'){
 						   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
 						}
-						// µµ·Î¸í, Áö¹ø Á¶ÇÕÇü ÁÖ¼Ò°¡ ÀÖÀ» °æ¿ì, °ýÈ£±îÁö Ãß°¡ÇÑ ÃÖÁ¾ ¹®ÀÚ¿­À» ¸¸µç´Ù.
+						// ë„ë¡œëª…, ì§€ë²ˆ ì¡°í•©í˜• ì£¼ì†Œê°€ ìžˆì„ ê²½ìš°, ê´„í˜¸ê¹Œì§€ ì¶”ê°€í•œ ìµœì¢… ë¬¸ìžì—´ì„ ë§Œë“ ë‹¤.
 						if(extraRoadAddr !== ''){
 							extraRoadAddr = ' (' + extraRoadAddr + ')';
 						}
-						// µµ·Î¸í, Áö¹ø ÁÖ¼ÒÀÇ À¯¹«¿¡ µû¶ó ÇØ´ç Á¶ÇÕÇü ÁÖ¼Ò¸¦ Ãß°¡ÇÑ´Ù.
+						// ë„ë¡œëª…, ì§€ë²ˆ ì£¼ì†Œì˜ ìœ ë¬´ì— ë”°ë¼ í•´ë‹¹ ì¡°í•©í˜• ì£¼ì†Œë¥¼ ì¶”ê°€í•œë‹¤.
 						if(fullRoadAddr !== ''){
 							fullRoadAddr += extraRoadAddr;
 						}
 
-						// ÁÖ¼Ò Á¤º¸¸¦ ÇØ´ç ÇÊµå¿¡ ³Ö´Â´Ù.
+						// ì£¼ì†Œ ì •ë³´ë¥¼ í•´ë‹¹ í•„ë“œì— ë„£ëŠ”ë‹¤.
 						document.getElementById('sc_addr').value = fullRoadAddr;
 					}
 				}).open();
@@ -160,7 +160,7 @@
 					amountingend = new StringBuffer(scvo.getSc_amountingend()).insert(6, "-").insert(4, "-").toString();
 			%>
 				<script type="text/javascript">
-					// ¾÷µ¥ÀÌÆ®ÀÎ °æ¿ì
+					// ì—…ë°ì´íŠ¸ì¸ ê²½ìš°
 					$(document).ready(function(){
 						//alert("update");
 						$("#registerForm").prop("action", "/sponsor/updateCharity.td");
@@ -170,7 +170,7 @@
 				}else{
 			%>
 				<script type="text/javascript">
-					// ÀÎ¼­Æ®ÀÎ °æ¿ì
+					// ì¸ì„œíŠ¸ì¸ ê²½ìš°
 					$(document).ready(function(){
 						//alert("insert");
 						$("#registerForm").prop("action", "/sponsor/insertCharity.td");
@@ -181,29 +181,29 @@
 			%>
 			<form id="registerForm">
 				<table align="center" border="1">
-					<tr><td colspan="3" align="center">´ÜÃ¼Á¤º¸</td></tr>
+					<tr><td colspan="3" align="center">ë‹¨ì²´ì •ë³´</td></tr>
 					<tr>
-						<td align="center" width="140" align="center">´ÜÃ¼¸í</td>
+						<td align="center" width="140" align="center">ë‹¨ì²´ëª…</td>
 						<td colspan="2" width="250">
 							<input type="text" name="sc_name" id="sc_name" value=<%= scvo.getSc_name() %>>
 						</td>
 					</tr>
 					<tr>
-						<td align="center">´ëÇ¥ÀÚ</td>
+						<td align="center">ëŒ€í‘œìž</td>
 						<td colspan="2">
 							<input type="text" name="sc_ceo" id="sc_ceo" value=<%= scvo.getSc_ceo()%>>
 						</td>
 					</tr>
 					<tr>
-						<td align="center">ÈÞ´ëÆù¹øÈ£</td>
-						<td colspan="2"><input type="text" name="sc_hp" id="sc_hp" value=<%= scvo.getSc_hp() %>>&nbsp;&nbsp;* '-'±¸ºÐÀÚ ¾øÀÌ ¼ýÀÚ 11ÀÚ¸®</td>
+						<td align="center">íœ´ëŒ€í°ë²ˆí˜¸</td>
+						<td colspan="2"><input type="text" name="sc_hp" id="sc_hp" value=<%= scvo.getSc_hp() %>>&nbsp;&nbsp;* '-'êµ¬ë¶„ìž ì—†ì´ ìˆ«ìž 11ìžë¦¬</td>
 					</tr>
 					<tr>
-						<td align="center">ÀÌ¸ÞÀÏ</td>
+						<td align="center">ì´ë©”ì¼</td>
 						<td colspan="2"><input type="text" name="emailId" id="emailId" value=<%= emailId %>> @
 							<input type="text" name="emailDomain" id="emailDomain" size="10" value=<%= emailDomain %>>
 							<select name="emailDomainSlctr" id="emailDomainSlctr">
-								<option value="bySelf">Á÷Á¢ÀÔ·Â</option>
+								<option value="bySelf">ì§ì ‘ìž…ë ¥</option>
 								<option value="naver.com">naver.com</option>
 								<option value="gmail.com">gmail.com</option>
 								<option value="hanmail.net">hanmail.net</option>
@@ -211,71 +211,71 @@
 						</td>
 					</tr>
 					<tr>
-						<td align="center">¼ÒÀçÁö</td>
+						<td align="center">ì†Œìž¬ì§€</td>
 						<td colspan="2">
 							<input type="text" name="sc_addr" id="sc_addr" size="50" value=<%= scvo.getSc_addr() %>>
-							<input type="button" onclick="sample4_execDaumPostcode()" value="ÁÖ¼Ò Ã£±â">
+							<input type="button" onclick="sample4_execDaumPostcode()" value="ì£¼ì†Œ ì°¾ê¸°">
 						</td>
 					</tr>
 					<tr>
-						<td align="center">´ÜÃ¼ µî·Ï¹øÈ£</td>
-						<td colspan="2"><input type="text" name="sc_registration" id="sc_registration" value=<%= scvo.getSc_registration() %>>&nbsp;&nbsp;* '-'±¸ºÐÀÚ ¾øÀÌ ¼ýÀÚ 10ÀÚ¸®</td>
+						<td align="center">ë‹¨ì²´ ë“±ë¡ë²ˆí˜¸</td>
+						<td colspan="2"><input type="text" name="sc_registration" id="sc_registration" value=<%= scvo.getSc_registration() %>>&nbsp;&nbsp;* '-'êµ¬ë¶„ìž ì—†ì´ ìˆ«ìž 10ìžë¦¬</td>
 					</tr>
 					<tr>
-						<td align="center">´ÜÃ¼ µî·ÏÀÏ</td>
+						<td align="center">ë‹¨ì²´ ë“±ë¡ì¼</td>
 						<td><input type="text" name="sc_registrationdate" id="sc_registrationdate" size="12"  value=<%= registrationdate %>></td>
 					</tr>
 					<tr>
-						<td align="center">»ç¾÷ºÐ¾ß</td>
+						<td align="center">ì‚¬ì—…ë¶„ì•¼</td>
 						<td>
 							<select name="sc_bizfield" id="sc_bizfield" value=<%= scvo.getSc_bizfield() %>>
-								<option value="41">¹®È­°ü±¤</option>
-								<option value="42">ÀÎ±Ç¿îµ¿</option>
-								<option value="43">Ãë¾à°èÃþÁö¿ø</option>
-								<option value="44">½Ã¹ÎÀÇ½Ä°³¼±</option>
-								<option value="45">È¯°æº¸Àü</option>
-								<option value="46">±âÅ¸°øÀÍ»ç¾÷</option>
+								<option value="41">ë¬¸í™”ê´€ê´‘</option>
+								<option value="42">ì¸ê¶Œìš´ë™</option>
+								<option value="43">ì·¨ì•½ê³„ì¸µì§€ì›</option>
+								<option value="44">ì‹œë¯¼ì˜ì‹ê°œì„ </option>
+								<option value="45">í™˜ê²½ë³´ì „</option>
+								<option value="46">ê¸°íƒ€ê³µìµì‚¬ì—…</option>
 							</select>
 						</td>
 					</tr>
 					<tr>
-						<td align="center">»ç¾÷³»¿ë</td>
+						<td align="center">ì‚¬ì—…ë‚´ìš©</td>
 						<td colspan="2">
 							<textarea name="sc_bizcontents" id="sc_bizcontents" rows="4" cols="60"><%= scvo.getSc_bizcontents() %></textarea>
 						</td>
 					</tr>
 					<tr>
-						<td align="center">¸ñÇ¥¸ð±Ý¾×</td>
-						<td colspan="2"><input type="text" name="sc_targetamount" id="sc_targetamount" value=<%= scvo.getSc_targetamount() %>>¿ø</td>
+						<td align="center">ëª©í‘œëª¨ê¸ˆì•¡</td>
+						<td colspan="2"><input type="text" name="sc_targetamount" id="sc_targetamount" value=<%= scvo.getSc_targetamount() %>>ì›</td>
 					</tr>
 					<tr>
-						<td align="center">¸ð±Ý±â°£</td>
+						<td align="center">ëª¨ê¸ˆê¸°ê°„</td>
 						<td><input type="text" name="sc_amountingstart" id="sc_amountingstart" size="12"  value=<%= amountingstart %>> - 
 							<input type="text" name="sc_amountingend" id="sc_amountingend" size="12"  value=<%= amountingend %>></td>
 					</tr>
 					<tr>
-						<td align="center">ÀºÇà</td>
+						<td align="center">ì€í–‰</td>
 						<td colspan="2">
 							<select name="sc_bank" id="sc_bank">
-								<option value="38">±¹¹ÎÀºÇà</option>
+								<option value="38">êµ­ë¯¼ì€í–‰</option>
 							</select>
 						</td>
 					</tr>
 					<tr>
-						<td align="center">°èÁÂ¹øÈ£</td>
-						<td colspan="2"><input type="text" name="sc_accountnum" id="sc_accountnum" value=<%= scvo.getSc_accountnum() %>>&nbsp;&nbsp;* '-'±¸ºÐÀÚ ¾øÀÌ ¼ýÀÚ 14ÀÚ¸®</td>
+						<td align="center">ê³„ì¢Œë²ˆí˜¸</td>
+						<td colspan="2"><input type="text" name="sc_accountnum" id="sc_accountnum" value=<%= scvo.getSc_accountnum() %>>&nbsp;&nbsp;* '-'êµ¬ë¶„ìž ì—†ì´ ìˆ«ìž 14ìžë¦¬</td>
 					</tr>
 					<tr>
-						<td align="center">¿¹±ÝÁÖ¸í</td>
+						<td align="center">ì˜ˆê¸ˆì£¼ëª…</td>
 						<td colspan="2"><input type="text" name="sc_depositor" id="sc_depositor" value=<%= scvo.getSc_depositor() %>></td>
 					</tr>
 					<tr>
 						<td colspan="5" align="center">
 							<input type="hidden" id="sc_num" name="sc_num" value=<%= scvo.getSc_num() %>>
 							<input type="hidden" id="sc_email" name="sc_email">
-							<input type="button" value="È®ÀÎ" id="confirm">
+							<input type="button" value="í™•ì¸" id="confirm">
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="reset" value="ÃÊ±âÈ­">
+							<input type="reset" value="ì´ˆê¸°í™”">
 						</td>
 					</tr>
 				</table>

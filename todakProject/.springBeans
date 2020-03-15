@@ -10,6 +10,7 @@
 		<config>WebContent/WEB-INF/framework/todak-servlet.xml</config>
 	</configs>
 	<autoconfigs>
+		<config>WebContent/WEB-INF/framework/servlet-context.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>

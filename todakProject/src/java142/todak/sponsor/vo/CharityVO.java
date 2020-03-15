@@ -20,7 +20,21 @@ public class CharityVO {
 	private String sc_deleteYN = "";
 	private String sc_insertdate = "";
 	private String sc_updatedate = "";
+	private int pageNo = 0;
+	private int totalCount = 0;
 	
+	public int getPageNo() {
+		return pageNo;
+	}
+	public void setPageNo(int pageNo) {
+		this.pageNo = pageNo;
+	}
+	public int getTotalCount() {
+		return totalCount;
+	}
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
+	}
 	public String getSc_num() {
 		return sc_num;
 	}

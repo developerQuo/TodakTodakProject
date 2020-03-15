@@ -14,6 +14,7 @@ import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
+import java142.todak.etc.vo.PagingVO;
 import java142.todak.sponsor.vo.CharityVO;
 import java142.todak.sponsor.vo.MemberAccountVO;
 import java142.todak.sponsor.vo.MemberCardVO;
@@ -29,8 +30,8 @@ public class SponsorDaoImpl implements SponsorDao {
 	private SqlSession session;
 	
 	@Override
-	public List<MemberVO>selectMember(MemberVO smvo){
-		return session.selectList("selectMember", smvo);
+	public List<MemberVO>selectMember(MemberVO smvo, PagingVO pvo){
+		return session.selectList("selectMember");
 	}
 	
 	@Override
@@ -55,8 +56,8 @@ public class SponsorDaoImpl implements SponsorDao {
 
 	
 	@Override
-	public List<MemberCardVO>selectMemberCard(MemberCardVO smcvo){
-		return session.selectList("selectMemberCard", smcvo);
+	public List<MemberCardVO>selectMemberCard(MemberCardVO smcvo, PagingVO pvo){
+		return session.selectList("selectMemberCard");
 	}
 	
 	@Override
@@ -81,8 +82,8 @@ public class SponsorDaoImpl implements SponsorDao {
 
 	
 	@Override
-	public List<MemberAccountVO>selectMemberAccount(MemberAccountVO smavo){
-		return session.selectList("selectMemberAccount", smavo);
+	public List<MemberAccountVO>selectMemberAccount(MemberAccountVO smavo, PagingVO pvo){
+		return session.selectList("selectMemberAccount");
 	}
 	
 	@Override
@@ -107,9 +108,9 @@ public class SponsorDaoImpl implements SponsorDao {
 
 	
 	@Override
-	public List<CharityVO> selectCharity(CharityVO scvo) {
+	public List<CharityVO> selectCharity(CharityVO scvo, PagingVO pvo) {
 		// TODO Auto-generated method stub
-		return session.selectList("selectCharity", scvo);
+		return session.selectList("selectCharity");
 	}
 	
 	@Override

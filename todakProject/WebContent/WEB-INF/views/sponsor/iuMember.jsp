@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="java142.todak.sponsor.vo.MemberVO" %>
 <%@ page import="java142.todak.sponsor.vo.MemberCardVO" %>
@@ -8,8 +8,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-		<title>ÈÄ¿øÀÎ</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>í›„ì›ì¸</title>
 		</script>
 		<script type="text/javascript"
 				src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -84,9 +84,9 @@
 					emailDomain = smvo.getSm_email().substring(index+1);
 			%>
 				<script type="text/javascript">
-					// ¾÷µ¥ÀÌÆ®ÀÎ °æ¿ì
+					// ì—…ë°ì´íŠ¸ì¸ ê²½ìš°
 					$(document).ready(function(){
-						alert("update");
+// 						alert("update");
 						$("#registerForm").prop("action", "/sponsor/updateMember.td");
 					});
 				</script>
@@ -94,9 +94,9 @@
 				}else{
 			%>
 				<script type="text/javascript">
-					// ÀÎ¼­Æ®ÀÎ °æ¿ì
+					// ì¸ì„œíŠ¸ì¸ ê²½ìš°
 					$(document).ready(function(){
-						alert("insert");
+// 						alert("insert");
 						$("#registerForm").prop("action", "/sponsor/insertMember.td");
 					});
 				</script>
@@ -105,23 +105,23 @@
 			%>
 			<form id="registerForm">
 				<table align="center" border="1">
-					<tr><td colspan="3" align="center">ÈÄ¿øÀÎÁ¤º¸</td></tr>
+					<tr><td colspan="3" align="center">í›„ì›ì¸ì •ë³´</td></tr>
 					<tr>
-						<td align="center" width="140" align="center">ÀÌ¸§</td>
+						<td align="center" width="140" align="center">ì´ë¦„</td>
 						<td colspan="2" width="250">
 							<input type="text" name="sm_name" id="sm_name" value=<%= smvo.getSm_name() %>>
 						</td>
 					</tr>
 					<tr>
-						<td align="center">ÈÞ´ëÆù¹øÈ£</td>
-						<td colspan="2"><input type="text" name="sm_hp" id="sm_hp" value=<%= smvo.getSm_hp() %>>&nbsp;&nbsp;* '-'±¸ºÐÀÚ ¾øÀÌ ¼ýÀÚ 11ÀÚ¸®</td>
+						<td align="center">íœ´ëŒ€í°ë²ˆí˜¸</td>
+						<td colspan="2"><input type="text" name="sm_hp" id="sm_hp" value=<%= smvo.getSm_hp() %>>&nbsp;&nbsp;* '-'êµ¬ë¶„ìž ì—†ì´ ìˆ«ìž 11ìžë¦¬</td>
 					</tr>
 					<tr>
-						<td align="center">ÀÌ¸ÞÀÏ</td>
+						<td align="center">ì´ë©”ì¼</td>
 						<td colspan="2"><input type="text" name="emailId" id="emailId" value=<%= emailId %>> @
 							<input type="text" name="emailDomain" id="emailDomain" size="10" value=<%= emailDomain %>>
 							<select name="emailDomainSlctr" id="emailDomainSlctr">
-								<option value="bySelf">Á÷Á¢ÀÔ·Â</option>
+								<option value="bySelf">ì§ì ‘ìž…ë ¥</option>
 								<option value="naver.com">naver.com</option>
 								<option value="gmail.com">gmail.com</option>
 								<option value="hanmail.net">hanmail.net</option>
@@ -129,85 +129,85 @@
 						</td>
 					</tr>
 					<tr>
-						<td align="center">Á¤±âÈÄ¿ø¿©ºÎ</td>
+						<td align="center">ì •ê¸°í›„ì›ì—¬ë¶€</td>
 						<td colspan="2">
 							<select name="sm_regularYN" id="sm_regularYN" value=<%= smvo.getSm_regularYN() %>>
-								<option value="Y">¼ö¶ô</option>
-								<option value="N">°ÅºÎ</option>
+								<option value="Y">ìˆ˜ë½</option>
+								<option value="N">ê±°ë¶€</option>
 							</select>
 						</td>
 					</tr>
 					<tr>
-						<td align="center">ÈÄ¿ø¼ö´Ü</td>
+						<td align="center">í›„ì›ìˆ˜ë‹¨</td>
 						<td>
 							<select name="sm_means" id="sm_means" value=<%= smvo.getSm_means() %>>
-								<option value="39">Ä«µå</option>
-								<option value="40">°èÁÂ</option>
+								<option value="39">ì¹´ë“œ</option>
+								<option value="40">ê³„ì¢Œ</option>
 							</select>
 						</td>
 					</tr>
 					<tr>
-						<td align="center">¼±ÅÃ¾à°üµ¿ÀÇ¿©ºÎ</td>
+						<td align="center">ì„ íƒì•½ê´€ë™ì˜ì—¬ë¶€</td>
 						<td>
 							<select name="sm_optionalterms" id="sm_optionalterms" value=<%= smvo.getSm_optionalterms() %>>
-								<option value="Y">¼ö¶ô</option>
-								<option value="N">°ÅºÎ</option>
+								<option value="Y">ìˆ˜ë½</option>
+								<option value="N">ê±°ë¶€</option>
 							</select>
 						</td>
 					</tr>
-					<tr><td colspan="3" align="center">Ä«µåÁ¤º¸</td></tr>
+					<tr><td colspan="3" align="center">ì¹´ë“œì •ë³´</td></tr>
 					<tr>
-						<td align="center">Ä«µå»ç</td>
+						<td align="center">ì¹´ë“œì‚¬</td>
 						<td colspan="2">
 							<select name="smc_cardcorp" id="smc_cardcorp" value=<%= smcvo.getSmc_cardcorp() %>>
-								<option value="33">ºñ¾¾Ä«µå</option>
-								<option value="34">»ï¼ºÄ«µå</option>
-								<option value="35">Çö´ëÄ«µå</option>
-								<option value="36">±¹¹ÎÄ«µå</option>
-								<option value="37">¿ì¸®Ä«µå</option>
+								<option value="33">ë¹„ì”¨ì¹´ë“œ</option>
+								<option value="34">ì‚¼ì„±ì¹´ë“œ</option>
+								<option value="35">í˜„ëŒ€ì¹´ë“œ</option>
+								<option value="36">êµ­ë¯¼ì¹´ë“œ</option>
+								<option value="37">ìš°ë¦¬ì¹´ë“œ</option>
 							</select>
 						</td>
 					</tr>
 					<tr>
-						<td align="center">Ä«µå¹øÈ£</td>
+						<td align="center">ì¹´ë“œë²ˆí˜¸</td>
 						<td colspan="2"><input type="text" name="smc_cardnum" id="smc_cardnum" value=<%= smcvo.getSmc_cardnum() %>></td>
 					</tr>
 					<tr>
-						<td align="center">Ä«µå¸íÀÇÀÚ</td>
+						<td align="center">ì¹´ë“œëª…ì˜ìž</td>
 						<td colspan="2"><input type="text" name="smc_cardowner" id="smc_cardowner" value=<%= smcvo.getSmc_cardowner() %>></td>
 					</tr>
 					<tr>
-						<td align="center">Ä«µå¸¸·á³¯Â¥</td>
+						<td align="center">ì¹´ë“œë§Œë£Œë‚ ì§œ</td>
 						<td colspan="2"><input type="text" name="smc_cardexpired" id="smc_cardexpired" value=<%= smcvo.getSmc_cardexpired() %>>&nbsp;&nbsp;* MMYYYY</td>
 					</tr>
 					<tr>
 						<td align="center">cvc</td>
-						<td colspan="2"><input type="text" name="smc_cardcvc" id="smc_cardcvc" value=<%= smcvo.getSmc_cardcvc() %>>&nbsp;&nbsp;* Ä«µå cvc ¼ýÀÚ 3ÀÚ¸®</td>
+						<td colspan="2"><input type="text" name="smc_cardcvc" id="smc_cardcvc" value=<%= smcvo.getSmc_cardcvc() %>>&nbsp;&nbsp;* ì¹´ë“œ cvc ìˆ«ìž 3ìžë¦¬</td>
 					</tr>
-					<tr><td colspan="3" align="center">°èÁÂÁ¤º¸</td></tr>
+					<tr><td colspan="3" align="center">ê³„ì¢Œì •ë³´</td></tr>
 					<tr>
-						<td align="center">ÀºÇà</td>
+						<td align="center">ì€í–‰</td>
 						<td colspan="2">
 							<select name="sma_bank" id="sma_bank">
-								<option value="38">±¹¹ÎÀºÇà</option>
+								<option value="38">êµ­ë¯¼ì€í–‰</option>
 							</select>
 						</td>
 					</tr>
 					<tr>
-						<td align="center">°èÁÂ¹øÈ£</td>
-						<td colspan="2"><input type="text" name="sma_accountnum" id="sma_accountnum" value=<%= smavo.getSma_accountnum() %>>&nbsp;&nbsp;* '-'±¸ºÐÀÚ ¾øÀÌ ¼ýÀÚ 14ÀÚ¸®</td>
+						<td align="center">ê³„ì¢Œë²ˆí˜¸</td>
+						<td colspan="2"><input type="text" name="sma_accountnum" id="sma_accountnum" value=<%= smavo.getSma_accountnum() %>>&nbsp;&nbsp;* '-'êµ¬ë¶„ìž ì—†ì´ ìˆ«ìž 14ìžë¦¬</td>
 					</tr>
 					<tr>
-						<td align="center">¿¹±ÝÁÖ¸í</td>
+						<td align="center">ì˜ˆê¸ˆì£¼ëª…</td>
 						<td colspan="2"><input type="text" name="sma_depositor" id="sma_depositor" value=<%= smavo.getSma_depositor() %>></td>
 					</tr>
 					<tr>
 						<td colspan="5" align="center">
 							<input type="hidden" id="sm_num" name="sm_num" value=<%= smvo.getSm_num() %>>
 							<input type="hidden" id="sm_email" name="sm_email">
-							<input type="button" value="È®ÀÎ" id="confirm">
+							<input type="button" value="í™•ì¸" id="confirm">
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="reset" value="ÃÊ±âÈ­">
+							<input type="reset" value="ì´ˆê¸°í™”">
 						</td>
 					</tr>
 				</table>
