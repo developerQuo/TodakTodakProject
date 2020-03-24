@@ -43,6 +43,7 @@
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		
 		<link rel="stylesheet" href="/include/css/commons/apprSignup.css">
+		<link rel="stylesheet" type="text/css" href="/include/css/default.css"/>
 
 		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
@@ -221,8 +222,8 @@
 					<input type="hidden" name="hm_picture" id="hm_picture" value="<%=avo.getHmp_picture() %>">
 					<input type="hidden" name="hmp_empnum" id="hmp_empnum" value="<%=avo.getHmp_empnum() %>">
 					<input type="hidden" name="flag" id="flag">
-					<input type="button" value="수락" name="accept" id="accept">
-					<input type="button" value="거부" name="negative" id="negative">
+					<input type="button" value="수락" class="button" name="accept" id="accept" style="width:70px;">
+					<input type="button" value="거부" class="button" name="negative" id="negative" style="width:70px;">
 		</fieldset>
 		 </form>
 	</body>

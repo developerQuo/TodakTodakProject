@@ -43,3 +43,27 @@ input[id="signUP"] { position:absolute; bottom:8px; left:50%; transform:translat
 .select_css { min-width:174px; max-width:300px; height:28px; }
 /*.preview { width:250px; height:250px; background-color:rgba(0,0,0,0.6); }*/
 
+
+
+
+
+
+
+.button:hover {
+	background-color: #f8585b;
+	<!--transition:.3s;-->
+}
+
+.button, .ui-datepicker-trigger {
+	font-family: 'Noto Sans KR', sans-serif;
+	background-color: rgb(29,79,137);
+	border: none;
+	color:#fff;
+	padding: 6px 8px 6px 8px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 12px;
+	margin: 2px;
+	cursor: pointer;
+}

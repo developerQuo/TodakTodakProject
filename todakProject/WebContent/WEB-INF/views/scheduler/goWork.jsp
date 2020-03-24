@@ -8,6 +8,9 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>출퇴근시간창</title>
+		
+		<link rel="stylesheet" type="text/css" href="/include/css/default.css"/>
+		
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script type="text/javascript">
 			$(function(){
@@ -32,11 +35,11 @@
 		</script>
 	</head>
 	<body>
-         <div class="container">
-         
+         <div>
+         	<br><br>
 			<form>
-				<div align="center">
-					<table>
+				<div class="gowork_size" align="center">
+					<table class="gowork">
 						<colgroup>
 							<col width="10%"/>
 							<col width="15%"/>
@@ -115,7 +118,7 @@
 									<td  align ="center" ><%= hc_extraworking %></td>
 								</tr>
 									
-								<tr><td colspan="6" align="center"><%=message %></td></tr>
+								<tr><td colspan="7" align="center"><%=message %></td></tr>
 
 <%
 		}
@@ -125,10 +128,12 @@
 						</tbody>
 	
 					</table>
-						<tr align = "center">
-								<td colspan="6" align="center">
-								<input align = "middle"  type="button" id="closeGoWork" name="closeGoWork" value="확인"></td>
-					  </tr>
+						<div class="gowork_align">
+
+									<input align="middle"  type="button" class="button" 
+										   id="closeGoWork" name="closeGoWork" value="확인" style="width:70px;">
+
+					  	</div>
 				</div>
 			</form>
          

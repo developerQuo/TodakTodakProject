@@ -10,7 +10,7 @@
 	<html>
 	<head>
 		<meta charset="UTF-8">
-		<title>건의사항 글쓰기</title>
+		<title>건의사항 작성</title>
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script type="text/javascript" src="../include/js/common.js"></script>
 		<script type="text/javascript" src="../webedit/dist/js/service/HuskyEZCreator.js" charset="utf-8"></script>
@@ -108,13 +108,15 @@
             <%@ include file="/WEB-INF/views/commons/sidebar.jsp" %>
          </aside>
          
-         <div class="container">
+         <div class="context-container">
 	         	
 	<%
 				 String hm_empnum = sManager.getUserID(session.getId());
 	
 	%>
-			<div id="boardTit" align = "center"><h3>글쓰기</h3></div>
+			<h3><b>글쓰기</b></h3>
+			<hr>
+			<br><br>
 			<div align = "center">
 				<form id="su_writeForm" name="su_writeForm" enctype="multipart/form-data" type="post">
 					<table id="boardWrite" >

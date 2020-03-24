@@ -4,6 +4,16 @@ html {
 	height:900px;
 }*/
 
+.login {
+	font-family: 'Noto Sans KR', sans-serif;
+	width : 500px;
+	height : 400px;
+	margin:10% auto;
+	border : 1px solid #003A70;
+	padding : 30px 0 0 0;
+	background-color : white;
+}
+
 body {
 	/*background-image:url("../image/abc.jpg");
 	background-repeat : no-repeat;
@@ -20,20 +30,6 @@ body {
 	border : 1px solid red;*/
 	margin:3px;
 	margin:0 auto;
-}
-
-.button {
-	font-family: 'Noto Sans KR', sans-serif;
-	background-color: rgb(29,79,137);
-	border: none;
-	color:#fff;
-	padding: 5px 8px 5px 8px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 12px;
-	margin: 2px;
-	cursor: pointer;
 }
 
 .button:hover {
@@ -57,10 +53,10 @@ select {
 	padding:2px;
 	/*text-align: center;*/
 	margin:1px;
-	height:28px;
+	height:32px;
 }
 
-.button, .ui-datepicker-trigger {
+.button, .ui-datepicker-trigger, .update_btn, .reset_btn {
 	font-family: 'Noto Sans KR', sans-serif;
 	background-color: rgb(29,79,137);
 	border: none;
@@ -194,16 +190,6 @@ input[type=file] {
 	border-top:1px solid #ddd;
 }
 
-.login {
-	font-family: 'Noto Sans KR', sans-serif;
-	width : 500px;
-	height : 400px;
-	margin:10% auto;
-	border : 1px solid #003A70;
-	padding : 30px 0 0 0;
-	background-color : white;
-}
-
 .authtable_size {
 	min-height:410px;
 	width:80%;
@@ -211,14 +197,23 @@ input[type=file] {
 	
 }
 
+.authdetail_align {
+		width:85%;
+	margin:0 auto;
+	font-size:15px;
+}
+
 .authdetail_div {
 	border:1px solid #eeeeee;
-	width:65%;
+	width:85%;
+	margin:0 auto;
+	padding:15px;
+	background-color:#fafafa;
 }
 
 .auth_detail td {
 	padding:10px;
-	font-weight:lighter;
+
 }
 
 
@@ -238,53 +233,134 @@ input[type=file] {
 }
 
 .info_table td {
-	padding: 5px;
+	padding: 10px;
 }
 
-<!-- ============================== -->
 
-.login {
-   font-family: 'Noto Sans KR', sans-serif;
-   width : 500px;
-   height : 400px;
-   margin:10% auto;
-   border : 1px solid #dddddd;
-   padding : 30px 0 0 0;
-   background-color : white;
-}
 
-.sponsorship-info-wrap {
-	padding:5px;
-	
-}
-.sponsorship-business{
-	width:50%;
+
+
+.noticesearch_div {
+	width:80%;
+	min-height:600px;
 	margin:0 auto;
-	border-top : 2px solid #dddddd;
-	border-bottom : 2px solid #dddddd;
-
 }
 
-.sponsorship-business td{
-	padding:5px;
-	
-}	
-.sponsorship-info {
-	width:50%;
+.noticesearch_align {
+	width:65%;
 	margin:0 auto;
-	border-top : 2px solid #dddddd;
-	border-bottom : 2px solid #dddddd;
-
 }
 
-.sponsorship-info td {
-	padding:5px;
+.notice_search {
+	width:80%;
+	border-top:3px solid #eeeeee;
+	border-bottom:3px solid #eeeeee;
+}
+
+.notice_search td {
+	border-bottom:3px solid #eeeeee;
+	padding:10px;
+}
+
+
+
+
+
+.suggestionsearch_div {
+	width:85%;
+	min-height:600px;
+	margin:0 auto;
+}
+
+.suggestionsearch_align {
+	width:75%;
+	margin:0 auto;
+}
+
+.suggestion_search {
+	width:75%;
+	border-top:3px solid #eeeeee;
+	border-bottom:3px solid #eeeeee;
+}
+
+.suggestion_search td {
+	border-bottom:3px solid #eeeeee;
+	padding:10px;
+}
+
+
+
+
+
+.reply {
+	width:85%;	
+	margin:0 auto;
+}
+
+.reply_table {
+	width:80%;
+	border-top:3px solid #eeeeee;
+	border-bottom:3px solid #eeeeee;
+}
+
+.reply_table td {
+	padding:15px;
+}
+
+.comment_item {
+	padding:10px;
+	border-top:1px solid #eeeeee;
+}
+
+
+
+
+
+.gowork {
+	padding:0 15px 0 15px;
+	width:90%;
+	height:auto;
+	border-top:3px solid #ddd;
+	border-bottom:3px solid #ddd;
+	margin:0 auto;
+}
+
+.gowork_size {
+	height:200px;
+	width:90%;
+	margin:0 auto;
+}
+
+.gowork th {
+	padding:9px;
 	text-align:center;
-	border-top : none;
-	border-bottom :  none;
-	
 }
 
-.dateCriteriaForm {
-	size : 20px;
+.gowork tbody td {
+	width:900px;
+	padding:8px;
+}
+
+.gowork_align {
+	padding:10px;
+	width:80%;
+	margin:0 auto;
+}
+
+.gowork_align td {
+	padding:5px;
+}
+
+
+
+
+
+.checklist_table {
+	padding:0 15px 0 15px;
+	width:80%;
+	/*width:900px;*/
+	height:auto;
+	border-top:3px solid #ddd;
+	border-bottom:3px solid #ddd;
+	margin:0 auto;
 }

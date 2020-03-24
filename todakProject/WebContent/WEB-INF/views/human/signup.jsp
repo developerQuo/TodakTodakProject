@@ -9,6 +9,7 @@
 <title>사원등록</title>
 <script type="text/javascript"
 				src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+				
 	<link rel="stylesheet" href="/include/css/commons/insertMember.css">
 				
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -143,6 +144,24 @@
 	        ,dayNamesMin: ['일','월','화','수','목','금','토']
 	        ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일']
 	    });
+		
+		 $('#hmp_picture').change(function() {
+				console.log("파일이름 textbox에 넣어주기");
+				
+				var file_dir = $('#hmp_picture').val();
+				console.log("file_dir >>> : " + file_dir);
+				
+				var start = file_dir.lastIndexOf("\\")+1;
+				console.log("start >>> : " + start);
+				var end = file_dir.length;
+				console.log("end >>> : " + end);
+				var file_name = file_dir.substring(start, end);
+				console.log("file_name >>> : " + file_name);
+				
+				$('#file_name').attr("value",file_name);
+				
+			}); 
+		 
 	});
 	function sample4_execDaumPostcode() {
 	    new daum.Postcode({
@@ -243,7 +262,7 @@
 			<div>
 				<strong>아이디</strong>
 				<input type="text" name="hmp_id" id="hmp_id">
-				<input type="button" id="cIdCheck" value="ID확인">
+				<input type="button" class="button" id="cIdCheck" value="ID확인">
 			</div>
 			<div>
 				<strong>비밀번호</strong>
@@ -252,7 +271,7 @@
 			<div>
 				<strong>비밀번호확인</strong>
 				<input type="password" name="pwC" id="pwC">
-				<input type="button" name="PwCheck" id="PwCheck" value="PW확인">
+				<input type="button" class="button" name="PwCheck" id="PwCheck" value="PW확인">
 			</div>
 			<div>
 				<strong>생년원일</strong>
@@ -278,7 +297,7 @@
 								<option value="hanmail.com">hanmail.com</option> 
 								<option value="1">직접입력</option> 
 							</select>
-								<input type="button" name="emailCk" id="emailCk" value="emai확인">
+								<input type="button" class="button" name="emailCk" id="emailCk" value="email확인">
 			</div>
 			<div id = "authentication">
 				<strong>이메일 인증 코드</strong>
@@ -287,12 +306,14 @@
 			<div class="picbox">
 				<strong>사진</strong>
 				<!-- <div class="preview">사진 미리보기</div> -->
-				<input type="file" name="hmp_picture" id="hmp_picture">
+				<input type="text" id="file_name" class="file_textbox" readonly>
+				<input type="button" value="찾아보기" class="button" onclick="document.all.hmp_picture.click();">
+				<input type="file" name="hmp_picture" id="hmp_picture" style="display:none;">
 			</div>
 			<div>
 				<strong>우편번호</strong>
 				<input type="text" id="hmp_postcode" name="hmp_postcode" placeholder="우편번호">
-				<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+				<input type="button" class="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
 			</div>
 			<div>
 				<strong>도로명주소</strong>
@@ -352,7 +373,7 @@
 				<input type="hidden" name="emailCode" id="emailCode">
 				<input type="hidden" value="N" name="checkID" id="checkID">
 				<input type="hidden" value="N" name="checkPW" id="checkPW">
-				<input type="button" value="입력" name="signUP" id="signUP">
+				<input type="button" class="button" value="입력" name="signUP" id="signUP" style="width:80px;">
 		</fieldset>
 	 </form>
 	</body>

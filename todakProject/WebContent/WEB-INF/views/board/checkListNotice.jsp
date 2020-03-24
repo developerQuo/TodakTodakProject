@@ -14,6 +14,9 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>CheckListNotice</title>
+		
+		<link href="/include/css/default.css" rel="stylesheet">
+		
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script type="text/javascript">
 			$(function(){
@@ -27,11 +30,11 @@
 		</script>
 	</head>
 	<body>
-         <div class="container">
-         
+         <div style="width:520px;min-height:200px;">
+         	<br>
 			<form>
 				<div align="center">
-					<table>
+					<table class="checklist_table">
 						<colgroup>
 							<col width="10%"/>
 							<col width="25%"/>
@@ -40,7 +43,7 @@
 						</colgroup>
 						<thead>
 							<tr>
-								<th>no.</th>
+								<th>번호</th>
 								<th>성명</th>
 								<th>부서</th>
 								<th>확인날짜</th>
@@ -82,15 +85,19 @@
 					
 					}
 		%>
-											<div align = "center">
-							<tr align = "center">
-								<td><input align = "middle"  type="button" id="closeList" name="closeList" value="확인"></td>
-							</tr>
-						</div>
 						
 						</tbody>
 	
 					</table>
+					
+					<br>
+					<div align = "center">
+						<input align="middle" type="button" class="button" 
+							   id="closeList" name="closeList" value="확인" 
+							   style="width:60px;">
+					</div>
+					
+					
 				</div>
 			</form>
          

@@ -81,7 +81,7 @@ var editEvent = function (event, element, view) {
         event.username = editUser.val();
         
         $("#calendar").fullCalendar('updateEvent', event);
-     	alert("업데이트 진입하냐? ");
+     	console.log("업데이트 진입하냐? ");
         // 일정 업데이트
         $.ajax({
             type: "POST",
@@ -101,8 +101,8 @@ var editEvent = function (event, element, view) {
                 alert('수정되었습니다.')
             }, 
             error : function(response){
-            	alert(response);
-            	alert("[Update] Ajax 연결 실패 !!!!! ");
+            	console.log(response);
+            	console.log("[Update] Ajax 연결 실패 ");
             }
         });
 
@@ -127,7 +127,7 @@ var editEvent = function (event, element, view) {
                 alert('삭제되었습니다.');
             },
             error : function(response){
-            	alert('[DELETE] Ajax 연결실패 !!!!! ');
+            	console.log('[DELETE] Ajax 연결실패');
             }
         });
     });

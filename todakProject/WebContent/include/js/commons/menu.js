@@ -60,7 +60,7 @@ function superSideBar(sideBarName){
 	if (sideBarName == "사원 등록/조회") 
 		superSbList = [['사원현황', '/human/select.td'], 
 	         	       ['부서 인사정보 조회', '#'], 
-	         	       ['회원등록 승인', '#']];
+	         	       ['사원등록 승인', '#']];
 	else if (sideBarName == "발령 등록/조회") 
 		superSbList = [['인사발령 등록', '#'], 
                        ['부서 인사발령 조회', '#']];

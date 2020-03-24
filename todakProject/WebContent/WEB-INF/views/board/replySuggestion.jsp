@@ -80,9 +80,9 @@
             var conArea = $(this).parents("li").children().eq(1);
             conArea.html("");
             
-            var data="<textarea name='content' id='content'>"+conText+"</textarea>";
-            data+="<input type='button' class='update_btn' value='수정완료'>";
-            data+="<input type='button' class='reset_btn' value='수정취소'>";
+            var data="<textarea name='content' id='content' cols=60' rows='3'>"+conText+"</textarea>";
+            data+="<input type='button' class='update_btn' value='수정완료' style='float:right;'>";
+            data+="<input type='button' class='reset_btn' value='수정취소' style='float:right;'>";
             conArea.html(data);
             
          });
@@ -192,12 +192,12 @@
    
          //수정하기 버튼
          var up_input = $("<input>");
-         up_input.attr({"type" : "button", "value" : "수정하기"});
+         up_input.attr({"type" : "button", "value" : "수정하기", "class" : "button", "style" : "float:right;"});
          up_input.addClass("update_form");
          
          //삭제하기 버튼
          var del_input = $("<input>");
-         del_input.attr({"type" : "button", "value": "삭제하기"});
+         del_input.attr({"type" : "button", "value": "삭제하기", "class" : "button", "style" : "float:right;"});
          del_input.addClass("delete_btn");
          
          //내용
@@ -223,17 +223,36 @@
    <body>   
       <div id="replyContainer" align="center">
          <h1></h1>
-         <div id="comment_form" align="center">
+         <div class="reply" id="comment_form" align="center">
             <div>
-                  <label for="bsr_content">댓글내용</label>
-                  <td height="20" width="800"><textarea name="bsr_content" id="bsr_content"></textarea></td>
-                  <input type="button" id="replyInsert" value="저장하기" />
-            
+            	<table class="reply_table">
+            		<colgroup>
+						<col width="30%"/>
+						<col width="40%"/>
+						<col width="30%"/>
+					</colgroup>
+            		<tr>
+            			<td align="center">
+                  			<label for="bsr_content">댓글내용</label>
+                  		</td>
+                  		<td align="center">
+                 	 		<textarea name="bsr_content" id="bsr_content" cols="60" rows="3"></textarea>
+                 	 	</td>
+                 	 	<td align="center">
+                  			<input type="button" class="button" id="replyInsert" 
+                  				   value="저장하기" style="width:70px;height:70px;"/>
+                  		</td>
+                  	</tr>
+            	</table>
+            	<br><br>
             </div>
-   		      	<div align="center">
-            		<ul id="comment_list"></ul>
+   		      	<div class="reply" align="center">
+            		<ul class="reply" id="comment_list"></ul>
          		</div>
          </div>
+         
+         <br><br>
+         
       </div>
    </body>
 </html>

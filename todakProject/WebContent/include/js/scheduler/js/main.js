@@ -3,13 +3,13 @@ var activeInactiveWeekends = true;
 var editUser = $('#edit-username');
 
 function holidayCount(){
-	//alert("홀리쉣");
+	//console.log("holidayCount()");
 	$.ajax({
 	      type: "POST",
 	      url: "/scheduler/selectHolidayCount.td",
 	      data: {},
 	      success: function (data) {
-	    	console.log("끼야아아아아아 "+" "+JSON.stringify(data));
+	    	console.log("--- "+" "+JSON.stringify(data));
 	    	var empnum = data.empnum;
 	    	var useResult = data.useResult;
 	    	var regResult = data.regResult;
@@ -49,7 +49,7 @@ function getDisplayEventDate(event) {
     var endTimeEventInfo = moment(event.end).format('HH:mm');
     displayEventDate = startTimeEventInfo + " - " + endTimeEventInfo;
   } else {
-	console.log("else 진입?");
+	console.log("else 진입");
     displayEventDate = "하루종일";
   }
 
@@ -221,7 +221,7 @@ var calendar = $('#calendar').fullCalendar({
 //	  var username = $('#edit-username');
 //	  var realuser = username.val();
 //	  console.log("realuser : >>>>>>>>>>>>>>> " + JSON.stringify(realuser));
-	 console.log("이놈의 번호는? "+" "+eventData.username);
+	 console.log("사원번호 :"+" "+eventData.username);
 	    $.ajax({
 	      type: "POST",
 	      url: "/scheduler/selectSchedule.td",
@@ -239,15 +239,15 @@ var calendar = $('#calendar').fullCalendar({
 	        	  if(array.end != array.start){
 	        		  console.log("array.end != array.start >>> : " + array.end != array.start);
 	        		 array.end = moment(array.end).add(1,'days').format('YYYY-MM-DD');
-	        		 console.log("result 트루이고 다음 if도 트루 !! >> " +array.start+"~"+ array.end)
+	        		 console.log("result 트루이고 다음 if도 트루 >> " +array.start+"~"+ array.end)
 		          }else{
-		        	  console.log("여기에 진입하냐 제발요 !!!!");
+		        	  console.log("if(array.end != array.start)-else 진입 ");
 		        	// 이틀 이상 AllDay 일정인 경우 달력에 표기시 하루를 더해야 정상 출력
 		        	array.end = moment(array.end).add(1,'days').format('YYYY-MM-DD');
 		          }   	  
 	          }
 	          else{
-	        	  console.log("처음 if의 else절 진입!!!!!!!!!!!!!");
+	        	  console.log("if (result)-else 진입 ");
 	        	  array.end = moment(array.end).format('YYYY-MM-DD HH:mm');
 	          }
 	          return array;
@@ -294,7 +294,7 @@ var calendar = $('#calendar').fullCalendar({
         //....
       },
       success: function (response) {
-        alert('수정: ' + newDates.startDate + ' ~ ' + newDates.endDate);
+    	  console.log('수정: ' + newDates.startDate + ' ~ ' + newDates.endDate);
       }
     });
 
@@ -346,8 +346,8 @@ var calendar = $('#calendar').fullCalendar({
         
       },
       error : function(response){
-    	  alert("[드래그앤드롭] >>> : " + JSON.stringify(response));
-    	  alert("[드래그앤드롭] Ajax 연결실패 !!");
+    	  console.log("[드래그앤드롭] >>> : " + JSON.stringify(response));
+    	  console.log("[드래그앤드롭] Ajax 연결실패 ");
       }
     });
 

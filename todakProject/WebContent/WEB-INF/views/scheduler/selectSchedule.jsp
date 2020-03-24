@@ -96,7 +96,7 @@
 	            	 style="border-radius:70%"/>
 	            <br><br>
 	            <%@ include file="/WEB-INF/views/scheduler/commute.jsp"%> <!-- jsp에 있는 bindSession 주석 처리 했음 -->
-	            <button type="button" id="ReferenceButton" onclick="moveReference()" class="button" style="width:107px;">내 정보</button>
+	            <button type="button" id="ReferenceButton" onclick="moveReference()" class="button" style="width:152px;height:30px;">내 정보</button>
             
          	</div>
          	

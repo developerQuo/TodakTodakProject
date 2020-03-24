@@ -268,7 +268,7 @@
 			};
 		</script>
 		<link rel="stylesheet" href="/include/css/default.css"> 
-		<title>Insert title here</title>
+		<title>모금액 조회</title>
 	</head>
 	<body>
          <header class="header"> 
@@ -387,6 +387,7 @@
 		        </fieldset>
 		        </div>
 			</div>
+			<br>
 		</div>
 	</body>
 </html>

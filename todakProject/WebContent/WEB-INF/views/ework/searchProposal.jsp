@@ -171,6 +171,7 @@
 	String second_name = "";
 	String third_name = "";
 	String substitute_name = "";
+
 	
 	if(obj != null && obj2!=null) {
 		System.out.println("if(obj != null && obj2!=null) 진입 >>> ");
@@ -251,6 +252,7 @@
 			System.out.println("list_subname >>> : " + list_subname);
 			
 			for(int i=0; i<list_names.size(); i++) {
+
 				MemberVO mvo_name = list_names.get(i);
 				System.out.println("mvo_name >>> : " + mvo_name);
 				System.out.println("mvo_name.getHm_empnum() >>> : " + mvo_name.getHm_empnum());
@@ -258,6 +260,7 @@
 				System.out.println("draft.getEai_recentnum() >>> : " + draft.getEai_recentnum());
 				
 				if(mvo_name!=null) {
+
 					System.out.println("if(mvo_name!=null) 진입 >>> ");	
 					
 					if(draft!=null) {
@@ -339,11 +342,12 @@
 		<div class="context-container">
 			<br>
 				<!-- ============================================================================================== -->
-		
+				<div class="authdetail_align">
 				<% 
 					if(draft!=null && first==null && substitute==null && second==null && third==null) {
 						
 						//if(draft.getEai_recentnum().equals(user_id)) {
+
 				%>
 						 <%=draft_name %>(<script>document.write(position("<%=draft.getEai_position() %>"));</script>) 
 						 				  <b><script>document.write(authorization("<%=draft.getEai_auth() %>"));</script></b> 
@@ -351,6 +355,7 @@
 						//}
 						
 					} else if(draft!=null && first!=null && substitute==null && second==null && third==null) {
+
 						//if(draft.getEai_recentnum().equals(user_id) || first.getEai_recentnum().equals(user_id)) {
 				%>
 						 <%=draft_name %>(<script>document.write(position("<%=draft.getEai_position() %>"));</script>) 
@@ -386,6 +391,7 @@
 				<%
 						//}
 					} else if(draft!=null && first!=null && substitute!=null && second!=null && third==null) {
+
 						//if(draft.getEai_recentnum().equals(user_id) || first.getEai_recentnum().equals(user_id) ||
 										//second.getEai_recentnum().equals(user_id) || third.getEai_recentnum().equals(user_id)) {
 				%>
@@ -400,6 +406,7 @@
 				<%
 						//}
 					} else if(draft!=null && first!=null && second!=null && third!=null && substitute!=null) {
+
 						//if(draft.getEai_recentnum().equals(user_id) || first.getEai_recentnum().equals(user_id) ||
 										//second.getEai_recentnum().equals(user_id) || third.getEai_recentnum().equals(user_id) ||
 																					//substitute.getEai_recentnum().equals(user_id)) {
@@ -418,9 +425,10 @@
 						//}
 					}
 				%>
-		
+				</div>
 				<!-- ============================================================================================== -->
-		
+		<br><br>
+		<div class="authdetail_div" id="detail_div">
 			<br><br>
 			<table align="center">
 				<colgroup>
@@ -444,7 +452,9 @@
 							<tr height="90px" align="center">
 					<%
 						if(draft!=null) {
+
 							System.out.println("if(draft!=null) 진입 >>> ");
+
 							if((draft.getEai_filedir() == null))	{
 								System.out.println("if((draft.getEai_filedir() == null) || (first == null)) 진입 >>> ");
 					%>
@@ -510,6 +520,7 @@
 							
 	
 						if(third!=null) {
+
 							System.out.println(" if(third!=null) 진입 >>> ");
 							
 							if((third.getEai_filedir() == null))	{
@@ -559,6 +570,7 @@
 						}
 					
 					//	if(substitute == null) {
+
 							if(second != null && second_name != "") {			
 				
 					%>
@@ -596,7 +608,6 @@
 			<br><br>
 			<center>
 			<form id="search_form" name="search_form" method="POST">
-				<div class="authdetail_div" id="detail_div">
 					<table class="auth_detail" id="detail_proposal" cellpadding="10">
 						<colgroup>
 							<col width="100px"/>
@@ -687,25 +698,29 @@
 								style="width: 100%; height: 400px; padding: 0; margin: 0;"></textarea> -->
 							</td>
 						</tr>
+					</table>
+					
+					<input type="hidden" id="hm_empnum" name="hm_empnum" value="<%=user_id%>">
+					
+					</form>
+				</center>
+		</div>
+		<br>
 				<%
 					if(ea_presentnum.equals(user_id)) {
 						System.out.println("if(ea_presentnum.equals(user_id)) 진입 >>> ");
 				%>
-						<tr id="buttons" align="right">
-							<td colspan="2">
-								<input type="button" id="return_button" class="button" style="width:50px;" value=" 반려 ">&nbsp;
-								<input type="button" id="sub_button" class="button" style="width:50px;" value=" 대결 ">&nbsp;
-								<input type="button" id="approval_button" class="button" style="width:50px;" value=" 승인 ">
-								<input type="hidden" id="hm_empnum" name="hm_empnum" value="<%=user_id%>">
-							</td>
-						</tr>
+						<div class="authdetail_align" id="buttons" align="right">
+
+							<input type="button" id="return_button" class="button" style="width:50px;" value=" 반려 ">&nbsp;
+							<input type="button" id="sub_button" class="button" style="width:50px;" value=" 대결 ">&nbsp;
+							<input type="button" id="approval_button" class="button" style="width:50px;" value=" 승인 ">
+
+						</div>
 				<%		
 					}
 				%>		
-					</table>
-					</div>
-				</form>
-				</center>
+				<br><br>
 				
 		<%
 			} else {

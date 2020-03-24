@@ -29,8 +29,11 @@
 
 <html>
 	<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>공지사항 확인하기</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>공지사항 확인하기</title>
+		
+		<link rel="stylesheet" type="text/css" href="/include/css/default.css"/>
+		
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 		<script type="text/javascript">
 			$(function(){
@@ -40,9 +43,9 @@
 					.submit();
 					
 				});
-
+	
 			});
-		
+			
 		</script>
 	</head>
 <%
@@ -55,7 +58,7 @@
 		
 %>
 	<body>
-         <div class="container">
+         <div style="width:400px;height:150px;padding:60px 0 0 0;">
          	
 			<form id="CheckNoticeForm" name="CheckNoticeForm" enctype="application/x-www-form-urlencoded" method="POST">
 				<input type="hidden" id="bn_num" name="bn_num" value="<%=bn_num %>">
@@ -63,12 +66,17 @@
 				<input type="hidden" id="hm_name" name="hm_name" value="<%=mvo.getHm_name() %>">
 				<input type="hidden" id="hm_deptnum" name="hm_deptnum" value="<%=mvo.getHm_deptnum() %>">
 				<div align = "center">
-					<table align = "center">
+					<table align="center">
 						<tr>
-							<td align = "center">해당 공지사항을 확인했습니까?</td>
+							<td align="center">해당 공지사항을 확인했습니까?</td>
 						</tr>
 						<tr>
-							<td><input align="middle"  type="button" id="n_check" name="n_check" value="확인"></td>
+							<td>
+								<div align="center" style="padding:15px;">
+									<input type="button" class="button"
+										   id="n_check" name="n_check" value="확인">
+								</div>
+							</td>
 						</tr>
 					</table>
 				</div>

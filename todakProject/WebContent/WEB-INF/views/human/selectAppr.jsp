@@ -28,6 +28,9 @@
 		}
 	%>
 	<title>회원가입 승인 목록</title>
+	
+	<link rel="stylesheet" type="text/css" href="/include/css/default.css"/>
+	
 	<script type="text/javascript"
 				src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script type="text/javascript">
@@ -38,7 +41,7 @@
 			$(".goDetail").click(function(){
 				var empnum=$(this).parents("tr").attr("data");
 				$("#hmp_empnum").val(empnum);
-				window.open("","pop","width=980, height=680");
+				window.open("","pop","width=980, height=600");
 				$("#detailForm").attr({
 					"method":"POST",
 					"target":"pop",
@@ -62,91 +65,98 @@
 	</script>
 	</head>
 	<body>
-	<header class="header"> 
-            <%@ include file="/WEB-INF/views/commons/header.jsp" %>
-         </header>
+		<header class="header"> 
+    	       <%@ include file="/WEB-INF/views/commons/header.jsp" %>
+   		</header>
 
          <aside class="sidebar">
             <%@ include file="/WEB-INF/views/commons/sidebar.jsp" %>
          </aside>
          
-     <div class="container">  
-	<div id="apprList">
-		<form name="detailForm" id="detailForm">
-			<input type="hidden" name="hmp_empnum" id="hmp_empnum">
-		</form>
-		<table summary="가입 승인 목록">
-			<table border="1" align="center">
-			
-			<thead>	
-				<tr>
-					<th>등록번호</th>
-					<th>성명</th>
-					<th>등록일</th>
-					<th>경력여부</th>	
-				</tr>
-<%
-
-			if(aList.size()>0)
-			{
-				for(int i=0;i<aList.size();i++){
-					avo=(ApprVO)aList.get(i);
-%>
-				<tr data='<%=avo.getHmp_empnum() %>'>
-					
-					<td><span class="goDetail"><%=avo.getHmp_empnum() %></span></td>
-					<td><%=avo.getHmp_name() %></td>
-					<td><%=avo.getHmp_insertdate() %></td>
-					<td><%=avo.getHmp_workexperience() %></td>
-		
-				</tr>			
-<%
-			
-			
-				}
-			}
-			if(aList.size()==0){
-%>									
+     	<div class="context-container"> 
+     	
+     		<h3><b>회원등록 승인</b></h3>
+     		<hr><br><br>
+     	
+     		<div class="table_align" id="StatusSearch" name="StatusSearch">
+				<form id="PageSearch" name="PageSearch">
+					<input type="hidden" id="page" name="page" value="1"/>
+				
+					<table summary="검색">
 					<tr>
-						<td colspan="5">조회된 정보가 없습니다.</td>
+						<td id="std1">
+							<select id="pageCtrl" name="pageCtrl">
+								<option value="5">5줄</option>
+								<option value="1">10줄</option>
+								<option value="20">20줄</option>
+								<option value="30">30줄</option>
+								<option value="50">50줄</option>
+							</select>
+						</td>	
 					</tr>
-<%					
-			}
-%>			
+					</table>
+				</form>
 			</div>
-			</thead>
-			</table>
-		</table>	
-			<div id="StatusSearch" name="StatusSearch">
-			<form id="PageSearch" name="PageSearch">
-				<input type="hidden" id="page" name="page" value="1"/>
+     	
+		 	<div id="apprList">
+				<form name="detailForm" id="detailForm">
+					<input type="hidden" name="hmp_empnum" id="hmp_empnum">
+				</form>
+				<div class="table_size">
+					<table class="table" align="center" summary="가입 승인 목록">
+					
+					<thead>	
+						<tr>
+							<th>등록번호</th>
+							<th>성명</th>
+							<th>등록일</th>
+							<th>경력여부</th>	
+						</tr>
+					</thead>
+		<%
+		
+					if(aList.size()>0)
+					{
+						for(int i=0;i<aList.size();i++){
+							avo=(ApprVO)aList.get(i);
+		%>
+						<tr align="center" data='<%=avo.getHmp_empnum() %>'>
+							
+							<td><span class="goDetail"><%=avo.getHmp_empnum() %></span></td>
+							<td><%=avo.getHmp_name() %></td>
+							<td><%=avo.getHmp_insertdate() %></td>
+							<td><%=avo.getHmp_workexperience() %></td>
+				
+						</tr>			
+		<%
+					
+					
+						}
+					}
+					if(aList.size()==0){
+		%>									
+							<tr>
+								<td colspan="5">조회된 정보가 없습니다.</td>
+							</tr>
+		<%					
+					}
+		%>			
+					</table>
+				</div>	
+			</div>
+	 	
+			<div class="paging">
+				<jsp:include page="paging.jsp" flush="true">
+					<jsp:param name="url" value="/human/selectAppr.td"/>
+					<jsp:param name="str" value=""/>
+					<jsp:param name="pageSize" value="<%=pageSize%>"/>
+					<jsp:param name="groupSize" value="<%=groupSize%>"/>
+					<jsp:param name="curPage" value="<%=curPage%>"/>
+					<jsp:param name="totalCount" value="<%=totalCount%>"/>
+				
+				</jsp:include>
+			</div>
 			
-				<table summary="검색">
-				<tr>
-					<td id="std1">
-						<select id="pageCtrl" name="pageCtrl">
-							<option value="5">5줄</option>
-							<option value="1">10줄</option>
-							<option value="20">20줄</option>
-							<option value="30">30줄</option>
-							<option value="50">50줄</option>
-						</select>
-					</td>	
-				</tr>
-				</table>
-			</form>
-		</div>
- 	
-		
-		<jsp:include page="paging.jsp" flush="true">
-			<jsp:param name="url" value="/human/selectAppr.td"/>
-			<jsp:param name="str" value=""/>
-			<jsp:param name="pageSize" value="<%=pageSize%>"/>
-			<jsp:param name="groupSize" value="<%=groupSize%>"/>
-			<jsp:param name="curPage" value="<%=curPage%>"/>
-			<jsp:param name="totalCount" value="<%=totalCount%>"/>
-		
-		</jsp:include>
 		</div>
 	</body>
 	

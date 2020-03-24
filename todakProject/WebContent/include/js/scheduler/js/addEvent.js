@@ -61,7 +61,7 @@ var newEvent = function (start, end, eventType) {
         }
 
         var realEndDay;
-        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! + " + editAllDay.is(':checked'));
+        console.log("--- + " + editAllDay.is(':checked'));
         if (editAllDay.is(':checked')) {
             eventData.start = moment(eventData.start).format('YYYY-MM-DD');
             //render시 날짜표기 수정
@@ -71,7 +71,7 @@ var newEvent = function (start, end, eventType) {
 
             eventData.allDay = true;
         }else{
-        	console.log("!!!!!!!!!!! else !!!!!!!!!!!!!!!!! + " + editAllDay.is(':checked'));
+        	console.log("if - else + " + editAllDay.is(':checked'));
         	 realEndDay = moment(eventData.end).format('YYYY-MM-DD HH:mm'); 
         }
         
@@ -97,13 +97,13 @@ var newEvent = function (start, end, eventType) {
             	sw_repetitiontype: eventData.allDay
             },
             success: function (response) {          
-            	alert("Ajax 연결 성공!!!");
+            	console.log("Ajax 연결 성공");
                 //DB연동시 중복이벤트 방지를 위한
                 $('#calendar').fullCalendar('removeEvents');
                 $('#calendar').fullCalendar('refetchEvents');
             },
             error : function(response){
-            	alert("[INSERT] Ajax 연결 실패 !!!!!");
+            	console.log("[INSERT] Ajax 연결 실패");
             }
         });
     });

@@ -357,7 +357,7 @@
 		<div class="context-container">
 			<br>
 				<!-- ============================================================================================== -->
-		
+				<div class="authdetail_align">
 				<% 
 					if(draft!=null && first==null && substitute==null && second==null && third==null) {
 						
@@ -425,9 +425,10 @@
 						//}
 					}
 				%>
-		
+				</div>
 				<!-- ============================================================================================== -->
-		
+			<br><br>
+			<div class="authdetail_div" id="detail_div">
 			<br><br>
 			<table align="center">
 				<colgroup>
@@ -437,10 +438,10 @@
 					<td>
 						<table id="signstamp_table" border="1" align="right">
 							<colgroup>
-								<col width="100px"/>
-								<col width="100px"/>
-								<col width="100px"/>
-								<col width="100px"/>
+								<col width="90px"/>
+								<col width="90px"/>
+								<col width="90px"/>
+								<col width="90px"/>
 							</colgroup>
 							<tr align="center">
 								<td>기안</td>
@@ -448,7 +449,7 @@
 								<td>2차</td>
 								<td>3차</td>
 							</tr>
-							<tr height="100px" align="center">
+							<tr height="90px" align="center">
 					<%
 						if(draft!=null) {
 
@@ -464,7 +465,7 @@
 							} else {
 					%>
 								<td>
-									<img alt="이미지 없음" src="../<%=draft.getEai_filedir() %>">
+									<img alt="이미지 없음" src="../<%=draft.getEai_filedir() %>" style="width:70px;height:70px;">
 								</td>
 					<%
 							}
@@ -488,7 +489,7 @@
 							} else {
 					%>
 								<td>
-									<img alt="이미지 없음" src="../<%=first.getEai_filedir() %>">
+									<img alt="이미지 없음" src="../<%=first.getEai_filedir() %>" style="width:70px;height:70px;">
 								</td>
 					<%
 							}
@@ -511,7 +512,7 @@
 								} else {
 					%>
 									<td>
-										<img alt="이미지 없음" src="../<%=second.getEai_filedir() %>">
+										<img alt="이미지 없음" src="../<%=second.getEai_filedir() %>" style="width:70px;height:70px;">
 									</td>
 					<%
 								}
@@ -542,7 +543,7 @@
 							} else {
 					%>
 								<td>
-									<img alt="이미지 없음" src="../<%=third.getEai_filedir() %>">
+									<img alt="이미지 없음" src="../<%=third.getEai_filedir() %>" style="width:70px;height:70px;">
 								</td>
 					<%
 							}
@@ -631,8 +632,7 @@
 			<br><br>
 			<center>
 			<form id="search_form" name="search_form" method="POST">
-				<div id="detail_div">
-					<table id="detail_proposal" cellpadding="10">
+					<table class="auth_detail" id="detail_proposal" cellpadding="10">
 						<colgroup>
 							<col width="200px"/>
 							<col width="500px"/>
@@ -715,34 +715,36 @@
 							<td>
 								<%=file_name%>&nbsp;&nbsp;&nbsp;
 								<input type="button" id="download_button" name="download_button"
-									   value=" 파일 다운로드 ">
+									   class="button" value=" 파일 다운로드 ">
 								<input type="hidden" id="file" name="file" value="<%=file_name%>">
 							</td>
 						</tr>
+					</table>
+					
+					<input type="hidden" id="hm_empnum" name="hm_empnum" value="<%=user_id%>">
+					
+					</form>
+				</center>
+				</div>	
+				<br>
+					
 				<%
 					if(ea_presentnum.equals(user_id)) {
 						System.out.println("if(ea_presentnum.equals(user_id)) 진입 >>> ");
 				%>
-						<tr id="buttons" align="right">
-							<td colspan="2">
+						<div class="authdetail_align" id="buttons" align="right">
 								<input type="button" id="return_button" class="button" style="width:50px;" value=" 반려 ">&nbsp;
 								<input type="button" id="arbitrary_button" class="button" style="width:50px;" value=" 전결 ">&nbsp;
 								<input type="button" id="approval_button" class="button" style="width:50px;" value=" 승인 ">
-								<input type="hidden" id="hm_empnum" name="hm_empnum" value="<%=user_id%>">
-							</td>
-						</tr>
+						</div>
 				<%		
 					}
 				%>	
-					</table>
-					</div>
-				</form>
-				</center>
-				
 				<br><br>
+				<!-- 
 				<div id="movelist_tag" align="right">
 					<a id ="move_list" href="">결재 문서함으로 이동</a>
-				</div>
+				</div> -->
 		<%
 			} else {
 		%>

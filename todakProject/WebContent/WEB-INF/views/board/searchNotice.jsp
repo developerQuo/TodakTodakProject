@@ -13,27 +13,19 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>공지사항 상세보기 페이지</title>
+		<title>공지사항 상세보기</title>
+		
+		<link rel="stylesheet" type="text/css" href="/include/css/default.css"/>
+		
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script	type="text/javascript">
-		$(function(){
-			
-	 		$("#selectNotice").click(function(){
-	 			var n_hm_empnum = $("#n_hm_empnum").val();
-	 			$("#hm_empnum").val(n_hm_empnum);
-	 			
-	 			$("#searchNotice").attr({
-	 				"method" : "post",
-	 	 			"action" : "../board/selectNotice.td"
-	 				
-	 			});
-	
-	 			$("#searchNotice").submit();
-	 		});
+		$(document).ready(function(){
 			$("#fileDown").click(function(){
+	            console.log("(log)파일 다운로드");
+	            
 	            var bn_file = $("#bn_file").val();               
 	            $("#bn_file").val(bn_file);
-	            alert("bn_file >>> : " + bn_file);
+	            console.log("bn_file >>> : " + bn_file);
 	            $("#searchNotice")
 	            .attr("action","../board/downloadNotice.td")
 	            .submit();
@@ -52,7 +44,6 @@
 	 		$("#deleteNotice").click(function(){
 	 			var bn_num = $("#bn_num").val();
 	 			$("#bn_num").val(bn_num);
-	            alert("bn_num >>> : " + bn_num);
 	 			$("#searchNotice")
 	 			.attr("action","../board/deleteNotice.td")
 	            .submit();
@@ -66,27 +57,36 @@
 	 			$("#hm_empnum").val(n_hm_empnum);
 
 				window.open("", "pop", "width=480, height=280");
-				$("#searchNotice").attr({"action" : "../board/moveCheckNotice.td",
-										 "target" : "pop",
-										 "method":"post"});
+				$("#searchNotice").attr("action", "../board/moveCheckNotice.td");
+				$("#searchNotice").attr("target","pop");
 				$("#searchNotice").submit();
-				
-				location.reload();
 	         });
 			
 			$("#checkList").click(function(){
+
 	 			var n_hm_empnum = $("#n_hm_empnum").val();
 	 			$("#hm_empnum").val(n_hm_empnum);
 
 				window.open("", "pop", "width=600, height=280");
-				$("#searchNotice").attr({"action" : "../board/checkList.td", "method" : "post", "target":"pop" });
+				$("#searchNotice").attr("action", "../board/checkList.td");
 				$("#searchNotice").attr("target","pop");
 				$("#searchNotice").submit();
-				
-				location.reload();
-				
 	         });
 	 		
+	 		$("#selectNotice").click(function(){
+	 			var n_hm_empnum = $("#n_hm_empnum").val();
+	 			$("#hm_empnum").val(n_hm_empnum);
+	 			
+	 			$("#searchNotice").attr({
+	 				"method" : "post",
+	 	 			"action" : "../board/selectNotice.td"
+	 				
+	 			});
+	
+	 			$("#searchNotice").submit();
+	 		});
+	 		
+
 	    });
 		</script>		
 	</head>
@@ -99,7 +99,9 @@
             <%@ include file="/WEB-INF/views/commons/sidebar.jsp" %>
          </aside>
          
-         <div class="container">
+         <div class="context-container">
+	  		<h3><b>공지사항</b></h3>
+	  		<hr><br><br>
 	         
 	<%
 			//n_hm_empnum는 현재 글을 보고 있는 사람의 empnum!
@@ -121,8 +123,8 @@
 				<input type="hidden" id="bn_num" name="bn_num" value="<%=nvo.getBn_num() %>">
 				<input type="hidden" id="hm_empnum" name="hm_empnum" value="<%=i_hm_empnum %>">
 				<input type="hidden" id="n_hm_empnum" name="n_hm_empnum" value="<%=n_hm_empnum %>">
-				<div align="center" id="searchNotice">
-					<table>
+				<div class="noticesearch_div" align="center" id="searchNotice">
+					<table class="notice_search">
 						<colgroup>
 							<col width="25%" />
 							<col width="25%" />
@@ -131,18 +133,22 @@
 						</colgroup>
 						<tbody>
 						<tr>
-							<td class="ac">작성자</td>
-							<td><%=nvo.getHm_name() %></td>
-							<td class="ac">작성일</td>
-							<td><%=nvo.getBn_insertdate().substring(0,10) %></td>
+							<td class="ac" style="border-right:2px solid #eeeeee;" align="center"><b>작성자</b></td>
+							<td style="border-right:2px solid #eeeeee;"><%=nvo.getHm_name() %></td>
+							<td class="ac" style="border-right:2px solid #eeeeee;" align="center"><b>작성일</b></td>
+							<td><%=nvo.getBn_insertdate() %></td>
 						</tr>
 						<tr>
-							<td class="ac">제목</td>
+							<td class="ac" style="border-right:2px solid #eeeeee;" align="center"><b>제목</b></td>
 							<td colspan="3"><%=nvo.getBn_title() %></td>
 						</tr>
 						<tr class="ctr">
-							<td class="ac">내용</td>
-							<td colspan="3"><%=nvo.getBn_content() %></td>
+							<td class="ac" style="border-right:2px solid #eeeeee;" align="center"><b>내용</b></td>
+							<td colspan="3">
+								<div style="min-height:300px;">
+									<%=nvo.getBn_content() %>
+								</div>
+							</td>
 						</tr>
 	<%
 					String bn_image = nvo.getBn_image();
@@ -150,7 +156,7 @@
 	%>
 	
 					<tr class="ctr">
-						<td class="ac">첨부사진</td>
+						<td class="ac" style="border-right:2px solid #eeeeee;" align="center"><b>첨부사진</b></td>
 						<td colspan="3"><img src="../<%=nvo.getBn_image() %>" border=0></td>					
 					</tr>
 	<%
@@ -161,10 +167,11 @@
 					if(bn_file != null && bn_file.length() != 0){
 	%>
 						<tr class="ctr">
-							<td class="ac">다운로드파일</td>
+							<td class="ac" style="border-right:2px solid #eeeeee;" align="center"><b>다운로드파일</b></td>
 							
-							<td><%=bn_file %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" id="fileDown" name="fileDown" value="파일 다운로드">
-							
+							<td colspan="3">
+								<%=bn_file %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="button" class="button" id="fileDown" name="fileDown" value="파일 다운로드">
 							</td>
 						</tr>
 	<%
@@ -172,28 +179,30 @@
 	%>
 					</tbody>
 					</table>
-					</div>
+				</div>
 	<%
 			if(i_hm_empnum.equals(n_hm_empnum)|| n_hm_empnum.equals("H000000000000")){
 	
 	%>
 	
-					<div align="center">
-						<input align="left" type="button" value="확인자리스트" class="but" id="checkList" name="checkList"/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<input align="right" type="button" value="수정" class="but" id="updateNotice" name="updateNotice"/>
-						<input align="right" type="button" value="삭제" class="but" id="deleteNotice" name="deleteNotice"/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<input align="right" type="button" value="목록" class="but" id="selectNotice" name="selectNotice"/>
+					<br>
+					<div class="noticesearch_align" align="right">
+						<input align="left" type="button" value="확인자리스트" class="button" id="checkList" name="checkList"/>
+						&nbsp;&nbsp;
+						<input align="right" type="button" value="수정" class="button" id="updateNotice" name="updateNotice" style="width:60px;"/>
+						&nbsp;&nbsp;
+						<input align="right" type="button" value="삭제" class="button" id="deleteNotice" name="deleteNotice" style="width:60px;"/>
+						&nbsp;&nbsp;
+						<input align="right" type="button" value="목록" class="button" id="selectNotice" name="selectNotice" style="width:60px;"/>
 					</div>
 	<%
 			}else{
 	%>
-	
-					<div align="right">
-						<input type="button" value="확인" id="checkNotice" name="checkNotice" />
+					<br>
+					<div class="noticesearch_align" align="right">
+						<input type="button" value="확인" class="button" id="checkNotice" name="checkNotice" style="width:60px;"/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<input type="button" value="목록" class="but" id="selectNotice" name="selectNotice"/>
+						<input type="button" value="목록" class="button" id="selectNotice" name="selectNotice" style="width:60px;"/>
 					</div>
 	<%
 			}

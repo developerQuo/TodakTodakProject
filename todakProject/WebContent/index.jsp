@@ -39,7 +39,7 @@
 			
 				document.loginForm.method="GET";
 				var url= "/etc/moveSignup.td";   
-	            window.open(url,"","width=900,height=700,left=600");	
+	            window.open(url,"","width=900, height=590, left=600");	
 				}			
 			function idPwAction(selector){
 				var winWidth = 700;

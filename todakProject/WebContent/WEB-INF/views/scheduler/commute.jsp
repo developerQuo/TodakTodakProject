@@ -71,8 +71,8 @@
 			<input type="hidden" id="hm_empnum" name="hm_empnum" value="">
 				<table align="center">
 					<tr>
-						<td><input type="button" id="goWork" name="goWork" value="출근" class="button"></td>
-						<td><input type="button" id="goHome" name="goHome" value="퇴근" class="button"></td>
+						<td><input type="button" id="goWork" name="goWork" value="출근" class="button" style="width:74px;height:30px;"></td>
+						<td><input type="button" id="goHome" name="goHome" value="퇴근" class="button" style="width:74px;height:30px;"></td>
 					</tr>
 				</table>
 			</form>
