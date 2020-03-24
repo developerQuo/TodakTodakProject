@@ -22,8 +22,6 @@
 		    background-size : cover; 
 		}
 		
-		img { display: block; margin: 0px auto; }
-		
 	</style>
 	<head>
 		<meta charset="UTF-8">
@@ -46,7 +44,7 @@
 			function idPwAction(selector){
 				var winWidth = 700;
 			    var winHeight = 600;
-			    var popupOption= "width="+winWidth+", height="+winHeight;    //팝업창 옵션(optoin)
+			    var popupOption= "width="+winWidth+", height="+winHeight;  //팝업창 옵션(optoin)
 			    
 				if (selector == '0') idPopupOpen(popupOption);
 				if (selector == '1') pwPopupOpen(popupOption);
@@ -80,8 +78,8 @@
 			<form name="loginForm" id="loginForm">
 	<!-- <p><h2 align="center">TODAK TODAK</h2></p>  -->						
 				<table class="login_table" align="center">
-					<tr style="padding-top:5px">
-							<img src="resources/RELOGO2.png" alt="logo" width="200" >
+					<tr >
+							<img src="resources/RELOGO2.png" alt="logo" width="200"  style="display: block; margin: 0px auto;">
 					</tr>
 					<br>
 					<tr>
