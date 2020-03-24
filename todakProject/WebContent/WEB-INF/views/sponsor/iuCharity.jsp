@@ -18,10 +18,12 @@
 				new daum.Postcode({
 					oncomplete: function(data) {
 						// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
 						// 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
 						// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
 						var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
 						var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+
 						// 법정동명이 있을 경우 추가한다. (법정리는 제외)
 						// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
 						if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
@@ -39,6 +41,7 @@
 						if(fullRoadAddr !== ''){
 							fullRoadAddr += extraRoadAddr;
 						}
+
 						// 주소 정보를 해당 필드에 넣는다.
 						document.getElementById('sc_addr').value = fullRoadAddr;
 					}
@@ -64,10 +67,12 @@
 					sc_registrationdate = sc_registrationdate.replace(/\-/g,'');
 					$("#sc_registrationdate").prop("value", sc_registrationdate);
 					
+
 					var sc_amountingstart = $("#sc_amountingstart").prop("value");
 					sc_amountingstart = sc_amountingstart.replace(/\-/g,'');
 					$("#sc_amountingstart").prop("value", sc_amountingstart);
 					
+
 					var sc_amountingend = $("#sc_amountingend").prop("value");
 					sc_amountingend = sc_amountingend.replace(/\-/g,'');
 					$("#sc_amountingend").prop("value", sc_amountingend);
@@ -75,6 +80,7 @@
 					executeFunc(enctype);
 					
 				});
+
 				$("#emailDomainSlctr").change(function(){
 					var domain = $("#emailDomainSlctr").val();
 					if (domain == 'bySelf'){
@@ -119,12 +125,14 @@
 				    buttonImageOnly: false,
 					buttonText: "날짜 선택"
 				});
+
 				$("#sc_amountingstart").datepicker({
 					showOn: "button",
 			        //buttonImage: "images/calendar.gif",
 				    buttonImageOnly: false,
 					buttonText: "날짜 선택"
 				});
+
 				$("#sc_amountingend").datepicker({
 					showOn: "button",
 			        //buttonImage: "images/calendar.gif",

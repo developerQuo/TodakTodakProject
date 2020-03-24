@@ -226,7 +226,7 @@ body {
 .fc-unthemed td,
 .fc-unthemed th,
 .fc-unthemed thead {
-  border-color: #eeeeee;
+  border-color: #dddddd;
 }
 
 .fc-ltr .fc-h-event .fc-end-resizer,

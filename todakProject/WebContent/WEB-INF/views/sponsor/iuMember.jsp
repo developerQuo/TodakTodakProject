@@ -31,6 +31,7 @@
 					executeFunc(enctype);
 					
 				});
+
 				$("#emailDomainSlctr").change(function(){
 					var domain = $("#emailDomainSlctr").val();
 					if (domain == 'bySelf'){

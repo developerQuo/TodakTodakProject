@@ -184,9 +184,9 @@ Licensed under the MIT license.
                 grid: {
                     show: true,
                     aboveData: false,
-                    color: "#545454", // primary color used for outline and labels
-                    backgroundColor: null, // null for transparent, else color
-                    borderColor: null, // set if different from the grid color
+                    color: "#eeeeee", // primary color used for outline and labels
+                    backgroundColor: "#eeeeee", // null for transparent, else color
+                    borderColor: "#fff", // set if different from the grid color
                     tickColor: null, // color for the ticks, e.g. "rgba(0,0,0,0.15)"
                     margin: 0, // distance from the canvas edge to the grid
                     labelMargin: 5, // in pixels
@@ -194,11 +194,11 @@ Licensed under the MIT license.
                     borderWidth: 1, // in pixels
                     minBorderMargin: null, // in pixels, null means taken from points radius
                     markings: null, // array of ranges or fn: axes -> array of ranges
-                    markingsColor: "#f4f4f4",
+                    markingsColor: "#024e82",
                     markingsLineWidth: 2,
                     // interactive stuff
                     clickable: false,
-                    hoverable: false,
+                    hoverable: "#fff",
                     autoHighlight: true, // highlight in case mouse is near
                     mouseActiveRadius: 15 // how far the mouse can be away to activate an item
                 },

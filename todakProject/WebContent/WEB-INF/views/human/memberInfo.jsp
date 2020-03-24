@@ -34,7 +34,7 @@
 			<table class="info_table" align="center" width="800" border="1" cellspacing="0">
 					<tr align="center" height = "5">
 						<td colspan = "3"rowspan="4"></td>
-						<td colspan="5" style="background-color:#eeeeee;color:white;"><b>사&nbsp;&nbsp;&nbsp;원&nbsp;&nbsp;&nbsp;정&nbsp;&nbsp;&nbsp;보</b></td>
+						<td colspan="5" style="background-color:#dddddd;color:white;"><b>사&nbsp;&nbsp;&nbsp;원&nbsp;&nbsp;&nbsp;정&nbsp;&nbsp;&nbsp;보</b></td>
 					</tr>
 					<tr align="center" height = "5">
 						<td rowspan="2">성 명</td>

@@ -17,7 +17,7 @@
 	
 		
  		body{ 
-		    background-image: url(resources/loginBackground2.png);
+		    background-image: url(/resources/loginBackground2.png);
 		    background-repeat: no-repeat;
 		    background-size : cover; 
 		}
@@ -79,7 +79,7 @@
 	<!-- <p><h2 align="center">TODAK TODAK</h2></p>  -->						
 				<table class="login_table" align="center">
 					<tr >
-							<img src="resources/RELOGO2.png" alt="logo" width="200"  style="display: block; margin: 0px auto;">
+							<img src="/resources/RELOGO2.png" alt="logo" width="200"  style="display: block; margin: 0px auto;">
 					</tr>
 					<br>
 					<tr>

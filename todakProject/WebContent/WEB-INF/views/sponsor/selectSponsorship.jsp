@@ -199,7 +199,7 @@
 								barWidth: 0.6,
 								align: "center", 
 								fill: true, 
-								fillColor: "rgba(122, 155, 122, 0.8)",
+								fillColor: "#ed6b5e",
 								lineWidth: 0
 							}
 						},
@@ -208,7 +208,8 @@
 						},
 						pan: {
 							interactive: true,
-							enableTouch: true
+							enableTouch: true,
+							fillColor: "#dddddd"
 						}
 				 	 };
 				return options;
@@ -266,9 +267,7 @@
 				return now_amountS;
 			};
 		</script>
-		<%--
-		<link rel="stylesheet" href="/include/css/sponsor/sponsorship.css">
-		 --%>
+		<link rel="stylesheet" href="/include/css/default.css"> 
 		<title>Insert title here</title>
 	</head>
 	<body>
@@ -302,37 +301,53 @@
 		
 <%-- 		<% System.out.println(sManager.getUserID(session.getId())); %> --%>
 		<div class="context-container">
-		
-			<h1 align="center"><%=name%> 모금액 조회</h1>
+			<h1 align="center" style="color: #ed6b5e; font-weight:bold;"><%=name%></h1>
+			<h2 align="center"> 모금액 조회</h2>
+			
+			 <br>
 			<%
 				if (isCharity){
 					String targetAmount = Calculator.calDigitNum(ssvo.getSc_targetamount());
 			%>
 				<div class="sponsorship-info-wrap" align="center";>
-					<table>
+					<table class="sponsorship-business">
+					<colgroup>
+						<col width="50%"/>
+						<col width="50%"/>
+					</colgroup>
 						<tr>
-							<td style="text-align:center">사업분야</td>
-							<td><%= ssvo.getSc_bizfield() %></td>
+							<td style="text-align:center; font-weight: bold; border-bottom : 1px solid #dddddd;" >사업분야</td>
+							<td style="border-bottom : 1px solid #dddddd ;"><%= ssvo.getSc_bizfield() %></td>
 						</tr>
 						<tr>
-							<td style="text-align:center">사업내용</td>
+							<td style="text-align:center; font-weight: bold; border-bottom : 1px solid #dddddd;">사업내용</td>
 							<td><%= ssvo.getSc_bizcontents() %></td>
 						</tr>
 					</table>
-				
-					<table id="sponsorship-info">
+				 <br>
+					<table id="sponsorship-info" class="sponsorship-info">
+					<colgroup>
+						<col width="18%"/>
+						<col width="4%"/>
+						<col width="18%"/>
+						<col width="20%"/>
+						<col width="20%"/>
+						<col width="20%"/>
+
+					</colgroup>
+					
 						<tr>
-							<td colspan="3">목표기간</td>
-							<td>목표금액</td>
-							<td>누적후원금액</td>
-							<td>목표달성</td>
+							<td style="text-align:center; font-weight: bold; border-right : 1px solid #dddddd;" colspan="3">목표기간</td>
+							<td style="text-align:center; font-weight: bold;  border-right : 1px solid #dddddd;">목표금액</td>
+							<td style="text-align:center; font-weight: bold;  border-right : 1px solid #dddddd;">누적후원금액</td>
+							<td style="text-align:center; font-weight: bold;">목표달성</td>
 						</tr>
 						<tr>
 							<td><%= new StringBuffer(ssvo.getSc_amountingstart()).insert(6, "-").insert(4, "-").toString() %></td>
 							<td> ~ </td>
-							<td><%= new StringBuffer(ssvo.getSc_amountingend()).insert(6, "-").insert(4, "-").toString() %></td>
-							<td><%= targetAmount %> 원</td>
-							<td id="now_amount">0</td>
+							<td style="border-right : 1px solid #dddddd;"><%= new StringBuffer(ssvo.getSc_amountingend()).insert(6, "-").insert(4, "-").toString() %></td>
+							<td style="border-right : 1px solid #dddddd;"><%= targetAmount %> 원</td>
+							<td id="now_amount" style="border-right : 1px solid #dddddd;">0</td>
 							<td id="now_percent">데이터가 없습니다.</td>
 						</tr>
 					</table>
@@ -355,21 +370,22 @@
 			<%
 				}
 			%>
-			
+			<br>
 			<div class="graph-component" align="center";>
 			
 				<!-- graph -->
 				<div id="placeholder" style="width:800px;height:400px;">
 				
 				</div>
-				
+				<br>
+				<div class="dateCriteriaForm">
 				<fieldset id="dateCriteria">
-		            <legend> 연, 월, 일 표기 </legend>
+		            <legend> 연 · 월 · 일 표기 </legend>
 		            <input type="radio" name="dateCriteria" value="year" /> 연  &nbsp;&nbsp;
 		            <input type="radio" name="dateCriteria" value="month" checked="checked"/> 월 &nbsp;&nbsp;
 		            <input type="radio" name="dateCriteria" value="day" /> 일  &nbsp;&nbsp;
 		        </fieldset>
-		        
+		        </div>
 			</div>
 		</div>
 	</body>

@@ -8,7 +8,6 @@ a {
 	text-decoration:none;
 	color:blue;
 }
-
 i { font-style: normal; }
 li {
 	text-align: left;
@@ -133,8 +132,9 @@ li {
 
 
 /* 울트라사이드바 메뉴 */
+
 .ultraSidebar {
-	margin-top:20px;
+	margin-top:40px;
   	position: sticky;
 	display: none;
 	width: 100%;

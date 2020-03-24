@@ -11,7 +11,7 @@
 #smart_editor2 .se2_tool .se2_l_font_size li{width:302px;margin:0;padding:0;color:#333;cursor:pointer}
 #smart_editor2 .se2_l_font_size .hover,#smart_editor2 .se2_l_font_size .active{background:#ebebeb}
 #smart_editor2 .se2_l_font_size button{width:300px;height:auto;margin:0;padding:2px 0 1px 0px;*padding:4px 0 1px 0px;background:none;text-align:left}
-#smart_editor2 .se2_l_font_size button span{display:block;visibility:visible;overflow:visible;position:relative;top:auto;left:auto;width:auto;height:auto;margin:0 0 0 4px;padding:0;line-height:normal;color:#373737;letter-spacing:0px}
+#smart_editor2 .se2_l_font_size button span{display:block;visibility:visible;overflow:visible;position:relative;top:auto;left:auto;width:auto;height:auto;margin:0 0 0 4px;padding:0;line-height:normal;color:#dddddd;letter-spacing:0px}
 #smart_editor2 .se2_l_font_size button span span{display:inline;margin:0 0 0 5px;padding:0}
 #smart_editor2 .se2_l_font_size span em{visibility:visible;overflow:auto;position:static;width:auto;height:auto;color:#888}
 /* TEXT_TOOLBAR : FONTCOLOR */
@@ -48,7 +48,7 @@
 #smart_editor2 .se2_l_line_height li{width:107px;margin:0;padding:0;border-top:0;border-bottom:0;color:#333;cursor:pointer}
 #smart_editor2 .se2_l_line_height .hover{background:#ebebeb}
 #smart_editor2 .se2_l_line_height button{width:105px;height:19px;margin:0;padding:3px 0 2px 0px;background:none;text-align:left}
-#smart_editor2 .se2_l_line_height button span{visibility:visible;overflow:visible;position:relative;width:auto;height:auto;margin:0;padding:0 0 0 15px;font-size:12px;line-height:normal;color:#373737}
+#smart_editor2 .se2_l_line_height button span{visibility:visible;overflow:visible;position:relative;width:auto;height:auto;margin:0;padding:0 0 0 15px;font-size:12px;line-height:normal;color:#dddddd}
 #smart_editor2 .se2_l_line_height li button.active span{background:url("../../img/icon_set.gif?141007") 5px -30px no-repeat}
 #smart_editor2 .se2_l_line_height_user{clear:both;width:83px;margin:5px 0 0 12px;padding:10px 0 0 0;_padding:11px 0 0 0;background:url("../../img/bg_line1.gif") repeat-x}
 #smart_editor2 .se2_l_line_height_user h3{margin:0 0 4px 0;_margin:0 0 2px -1px;padding:0;line-height:14px;color:#000;letter-spacing:-1px}
