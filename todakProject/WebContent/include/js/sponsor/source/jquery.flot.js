@@ -184,9 +184,9 @@ Licensed under the MIT license.
                 grid: {
                     show: true,
                     aboveData: false,
-                    color: "#eeeeee", // primary color used for outline and labels
+                    color: "#4d4d4d", // primary color used for outline and labels
                     backgroundColor: "#eeeeee", // null for transparent, else color
-                    borderColor: "#fff", // set if different from the grid color
+                    borderColor: "white", // set if different from the grid color
                     tickColor: null, // color for the ticks, e.g. "rgba(0,0,0,0.15)"
                     margin: 0, // distance from the canvas edge to the grid
                     labelMargin: 5, // in pixels

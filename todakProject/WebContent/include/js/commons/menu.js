@@ -187,7 +187,7 @@ function listing(data){
 	// 기존 사이드바 넓이 늘리기
 	$(".sidebar").css("display", "table").css("width", '30%');
 	// 새로운 사이드바 영역확보하기
-	$(".sidebar-wrap").css("display", "table-cell").css("width", '46%').css("padding-top", '3%').css("vertical-align", 'top');
+	$(".sidebar-wrap").css("display", "table-cell").css("width", '46%').css("vertical-align", 'top');
 	$(".ultraSidebar").css("display", "table-cell").css("border-left", "white 2px solid");
 	// context-container 넓이 줄이기
 	$(".context-container").css("width", '69%');
