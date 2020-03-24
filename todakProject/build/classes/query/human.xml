@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="java142.todak.human.dao.HumanDao">
+
+	<select id="chaebunMemberAppr"  resultType="apprVO">
+				SELECT LPAD(NVL(MAX(SUBSTR(hmp_empnum, -2)),0)+1,'4',0) hmp_empnum 
+				FROM HUMAN_MEMBERAPPROVAL
+	</select>
+	<select id="chaebunMember"  resultType="String">
+				SELECT LPAD(NVL(MAX(SUBSTR(hm_empnum, -2)),0)+1,'4',0) hm_empnum 
+				FROM HUMAN_MEMBER
+	</select>
+	<select id="chaebunApptRecord"  resultType="String">
+				SELECT LPAD(NVL(MAX(SUBSTR(HPA_TABLENUM, -2)),0)+1,'4',0) HPA_TABLENUM 
+				FROM HUMAN_PERSONAPPT
+	</select>
+	<insert id="insertMemberAppr" parameterType="apprVO">
+			INSERT INTO HUMAN_MEMBERAPPROVAL(
+				hmp_empnum,
+				hmp_name,
+				hmp_birth,
+				hmp_residentnum,
+				hmp_hpnum,
+				hmp_email,
+				hmp_picture,
+				hmp_postcode,
+				hmp_addr,
+				hmp_bank,
+				hmp_depositors,
+				hmp_accountnum,
+				hmp_education,
+				hmp_educontents,
+				hmp_workexperience,
+				hmp_workcontents,
+				hmp_insertdate,
+				hmp_approvalYN,
+				hmp_id,
+				hmp_pw
+			)VALUES(
+				#{hmp_empnum},
+				#{hmp_name},
+				#{hmp_birth},
+				#{hmp_residentnum},
+				#{hmp_hpnum},
+				#{hmp_email},
+				#{hmp_picture},
+				#{hmp_postcode},
+				#{hmp_addr},
+				#{hmp_bank},
+				#{hmp_depositors},
+				#{hmp_accountnum},
+				#{hmp_education},
+				#{hmp_educontents},
+				#{hmp_workexperience},
+				#{hmp_workcontents},
+				SYSDATE,
+				'W',
+				#{hmp_id},
+				#{hmp_pw}
+				
+			)
+	</insert>
+	<insert id="insertMember" parameterType="mvo">
+			INSERT INTO HUMAN_MEMBER(
+				hm_empnum,
+				hm_deptnum,
+				hm_teamnum,
+				hm_id,
+				hm_pw,
+				hm_name,
+				hm_birth,
+				hm_residentnum,
+				hm_hp,
+				hm_extensionnum,
+				hm_email,
+				hm_addr,
+				hm_postcode,
+				hm_hiredate,
+				hm_picture,
+				hm_bank,
+				hm_depositors,
+				hm_accountnum,
+				hm_education,
+				hm_educontents,
+				hm_workexperience,
+				hm_workcontents,
+				hm_position,
+				hm_duty,
+				hm_employmenttype,
+				hm_deleteYN,
+				hm_insertdate,
+				hm_updatedate
+			)VALUES(
+				#{hm_empnum},
+				#{hm_deptnum},
+				#{hm_teamnum},
+				#{hm_id},
+				#{hm_pw},
+				#{hm_name},
+				#{hm_birth},
+				#{hm_residentnum},
+				#{hm_hp},
+				#{hm_extensionnum},
+				#{hm_email},
+				#{hm_addr},
+				#{hm_postcode},
+				#{hm_hiredate},
+				#{hm_picture},
+				#{hm_bank},
+				#{hm_depositors},
+				#{hm_accountnum},
+				#{hm_education},
+				#{hm_educontents},
+				#{hm_workexperience},
+				#{hm_workcontents},
+				#{hm_position},
+				#{hm_duty},
+				#{hm_employmenttype},
+				'Y',
+				SYSDATE,
+				SYSDATE
+			)
+	</insert>
+	<update id="refusedMemberAppr" parameterType="apprVO">
+				UPDATE 
+				HUMAN_MEMBERAPPROVAL 
+					SET
+				       hmp_approvalYN='N'
+				    WHERE hmp_empnum = #{hmp_empnum}
+	</update> 
+	<update id="accepteddMemberAppr" parameterType="apprVO">
+				UPDATE 
+				HUMAN_MEMBERAPPROVAL 
+					SET
+				       hmp_approvalYN='Y'
+				    WHERE hmp_empnum = #{hmp_empnum}
+	</update> 	
+	<update id="changeCommuteUpdate" parameterType="commVO">
+				UPDATE 
+				HUMAN_COMMUTE 
+					SET
+				       hc_tanda=#{hc_tanda}
+				    WHERE hc_comnum = #{hc_comnum}
+	</update> 	
+	<update id="vacationUpdate" parameterType="commVO">
+				UPDATE 	HUMAN_COMMUTE 
+				SET		hc_lasthour = #{hc_lasthour}
+			       		,hc_extraworking = #{hc_extraworking}
+			       		,hc_weekhour = #{hc_weekhour}
+			    WHERE 	hc_comnum = #{hc_comnum}
+	</update> 	
+	<update id="halfUpdate" parameterType="commVO">
+				UPDATE 	HUMAN_COMMUTE 
+				SET		hc_lasthour = #{hc_lasthour}
+			       		,hc_extraworking = #{hc_extraworking}
+			       		,hc_weekhour = #{hc_weekhour}
+			    WHERE 	hc_comnum = #{hc_comnum}
+	</update> 	
+	<select id="selectMember" parameterType="mvo" resultType="mvo">
+		SELECT
+			*
+		FROM(
+				SELECT
+				AA.*,
+				CEIL(ROW_NUMBER() OVER(ORDER BY ROWNUM)/#{pageSize}) PAGENO,
+				COUNT(ROWNUM) OVER() AS totalCount 
+		FROM(
+				SELECT		
+				ROWNUM,
+				A.hm_empnum,
+				D.cd_name AS hm_deptnum,
+				E.cd_name AS hm_teamnum,
+				A.hm_id,
+				A.hm_pw,
+				A.hm_name,
+				A.hm_birth,
+				A.hm_residentnum,
+				A.hm_hp,
+				A.hm_extensionnum,
+				A.hm_email,
+				A.hm_addr,
+				A.hm_postcode,
+				A.hm_hiredate,
+				A.hm_resigndate,
+				A.hm_picture,
+				A.hm_bank,
+				A.hm_depositors,
+				A.hm_accountnum,
+				A.hm_education,
+				A.hm_educontents,
+				A.hm_workexperience,
+				A.hm_workcontents,
+				C.cd_name AS hm_position,
+				B.cd_name AS hm_duty,
+				F.cd_name AS hm_employmenttype,
+				A.hm_deleteYN,
+				A.hm_insertdate,
+				A.hm_updatedate
+			    FROM 
+			    HUMAN_MEMBER A, CODE B, CODE C, CODE D, CODE E, CODE F
+			    WHERE A.hm_duty=B.cd_code	
+				AND A.hm_position=C.cd_code
+				AND SUBSTR(A.hm_deptnum,1,2)=D.cd_code  
+				AND A.hm_teamnum=E.cd_code
+				AND A.hm_employmenttype=F.cd_code
+				AND A.hm_deptnum!='98'
+					<trim prefix="AND" prefixOverrides="AND">		 
+
+							<if test="search=='hm_name'">
+								<![CDATA[hm_name LIKE '%'||#{keyword}||'%']]>
+							</if>
+							<if test="search=='hm_deptnum'">
+								<![CDATA[AND D.cd_name LIKE '%'||#{keyword}||'%']]>
+							</if>
+							<if test="search=='hm_position'">
+								<![CDATA[AND C.cd_name LIKE '%'||#{keyword}||'%']]>
+							</if>
+							<if test="search=='hm_deleteYN'">
+								<![CDATA[AND hm_deleteYN LIKE '%'||#{keyword}||'%']]>
+							</if>
+							<if test="search=='hm_employmenttype'">
+								<![CDATA[AND hm_employmenttype LIKE '%'||#{keyword}||'%']]>
+							</if>					
+					</trim>
+	   		)AA
+	   	)
+	   	WHERE
+	    PAGENO = #{curPage}	   
+	</select>
+	<select id="selectPersonAppt" parameterType="mvo" resultType="mvo">
+		SELECT
+			*
+		FROM(
+				SELECT
+				AA.*,
+				CEIL(ROW_NUMBER() OVER(ORDER BY ROWNUM)/#{pageSize}) PAGENO,
+				COUNT(ROWNUM) OVER() AS totalCount 
+		FROM(
+				SELECT		
+				ROWNUM,
+				A.hm_empnum,
+				E.cd_name AS hm_deptnum,
+				D.cd_name AS hm_teamnum,
+				A.hm_name,
+				A.hm_birth,
+				A.hm_hp,
+				A.hm_extensionnum,
+				A.hm_email,
+				A.hm_hiredate,
+				A.hm_picture,
+				C.cd_name AS hm_position,
+				B.cd_name AS hm_duty,
+				A.hm_employmenttype
+			    FROM 
+			    HUMAN_MEMBER A, CODE B, CODE C,CODE D,CODE E
+			    WHERE A.hm_duty=B.cd_code	
+				AND A.hm_position=C.cd_code 
+				AND A.hm_teamnum=D.cd_code
+				AND SUBSTR(A.hm_deptnum,1,2)=E.cd_code  
+				AND A.hm_deptnum!='98'
+				AND A.hm_deleteyn='Y'
+					<trim prefix="AND" prefixOverrides="AND">
+						 
+							<if test="search=='hm_name'">
+								<![CDATA[hm_name LIKE '%'||#{keyword}||'%']]>
+							</if>
+							<if test="search=='hm_deptnum'">
+								<![CDATA[AND hm_deptnum LIKE '%'||#{keyword}||'%']]>
+							</if>
+							<if test="search=='hm_position'">
+								<![CDATA[AND hm_position LIKE '%'||#{keyword}||'%']]>
+							</if>
+							<if test="search=='hm_employmenttype'">
+								<![CDATA[AND hm_employmenttype LIKE '%'||#{keyword}||'%']]>
+							</if>					
+					</trim>
+			
+	   		)AA 
+	   	)
+	   	WHERE
+	    PAGENO = #{curPage}
+	   
+	   
+	</select>
+	<select id="selectTotal"  resultType="statusVO">
+			SELECT 
+			  TO_CHAR(SUM(DECODE(hm_deleteyn,'Y',1,0))) AS hs_total,
+  			  TO_CHAR(SUM(DECODE(hm_employmenttype,'24',1,0)))AS hs_regular,
+  			  TO_CHAR(SUM(DECODE(hm_employmenttype,'25',1,0)))AS hs_constract
+   
+ 			FROM HUMAN_MEMBER
+			WHERE HM_DELETEYN='Y'
+ 			AND hm_deptnum!='98'
+	</select>
+	
+	<select id="memberInfo" parameterType="mvo" resultType="mvo">
+		SELECT		
+				A.hm_empnum,
+				D.cd_name AS hm_deptnum,
+				E.cd_name AS hm_teamnum,
+				A.hm_id,
+				A.hm_pw,
+				A.hm_name,
+				A.hm_birth,
+				A.hm_residentnum,
+				A.hm_hp,
+				A.hm_extensionnum,
+				A.hm_email,
+				A.hm_addr,
+				A.hm_postcode,
+				A.hm_hiredate,
+				A.hm_resigndate,
+				A.hm_picture,
+				A.hm_bank,
+				A.hm_depositors,
+				A.hm_accountnum,
+				A.hm_education,
+				A.hm_educontents,
+				A.hm_workexperience,
+				A.hm_workcontents,
+				C.cd_name AS hm_position,
+				B.cd_name AS hm_duty,
+				A.hm_employmenttype
+		FROM
+			HUMAN_MEMBER A, CODE B, CODE C, CODE D, CODE E
+		WHERE
+			A.hm_empnum=#{hm_empnum}	
+		AND A.hm_duty=B.cd_code	
+		AND A.hm_position=C.cd_code
+		AND	SUBSTR(A.hm_deptnum,1,2)=D.cd_code
+		AND A.hm_teamnum=E.cd_code
+	</select>
+	
+	<select id="selectPosition" parameterType="mvo" resultType="mvo">
+		SELECT
+			A.hm_empnum,
+			A.hm_duty,
+			A.hm_deptnum
+		FROM	
+			HUMAN_MEMBER A
+		WHERE
+			A.hm_empnum=#{hm_empnum}	
+	</select>
+	<select id="selectDeptMem" parameterType="mvo" resultType="mvo">
+	SELECT
+			*
+		FROM(
+				SELECT
+				AA.*,
+				CEIL(ROW_NUMBER() OVER(ORDER BY ROWNUM)/#{pageSize}) PAGENO,
+				COUNT(ROWNUM) OVER() AS totalCount 
+		FROM(		
+				SELECT		
+					ROWNUM,
+					A.hm_empnum,
+					A.hm_deptnum,
+					A.hm_teamnum,
+					A.hm_name,
+					A.hm_birth,
+					A.hm_extensionnum,
+					A.hm_email,
+					A.hm_hp,
+					A.hm_hiredate,
+					C.cd_name AS hm_position,
+					B.cd_name AS hm_duty,
+					A.hm_employmenttype
+			FROM
+				HUMAN_MEMBER A, CODE B, CODE C
+			WHERE HM_DELETEYN='Y'
+			AND hm_deptnum LIKE '%'||#{hm_deptnum}||'%'
+			AND A.hm_duty=B.cd_code
+			AND A.hm_position=C.cd_code
+			<trim prefix="AND" prefixOverrides="AND">
+						 
+							<if test="search=='hm_name'">
+								<![CDATA[hm_name LIKE '%'||#{keyword}||'%']]>
+							</if>
+							<if test="search=='hm_position'">
+								<![CDATA[AND hm_position LIKE '%'||#{keyword}||'%']]>
+							</if>
+							<if test="search=='hm_deleteYN'">
+								<![CDATA[AND hm_deleteYN LIKE '%'||#{keyword}||'%']]>
+							</if>
+							<if test="search=='hm_employmenttype'">
+								<![CDATA[AND hm_employmenttype LIKE '%'||#{keyword}||'%']]>
+							</if>					
+					</trim>
+			
+			)AA 
+	   	)
+	   		WHERE
+	   		PAGENO = #{curPage}
+	</select>
+	<select id="selectAllMem" parameterType="mvo" resultType="mvo">
+	SELECT
+			*
+		FROM(
+				SELECT
+				AA.*,
+				CEIL(ROW_NUMBER() OVER(ORDER BY ROWNUM)/#{pageSize}) PAGENO,
+				COUNT(ROWNUM) OVER() AS totalCount 
+		FROM(		
+			SELECT		
+				ROWNUM,
+				A.hm_empnum,
+				A.hm_deptnum,
+				A.hm_teamnum,
+				A.hm_name,
+				A.hm_birth,
+				A.hm_extensionnum,
+				A.hm_email,
+				A.hm_hiredate,
+				A.hm_hp,
+				C.cd_name AS hm_position,
+				B.cd_name AS hm_duty,
+				A.hm_deleteYN,
+				A.hm_employmenttype
+		FROM
+			HUMAN_MEMBER A, CODE B, CODE C
+		WHERE A.hm_duty=B.cd_code
+        AND A.hm_position=C.cd_code
+        		<trim prefix="AND" prefixOverrides="AND">
+						 
+							<if test="search=='hm_name'">
+								<![CDATA[hm_name LIKE '%'||#{keyword}||'%']]>
+							</if>
+							<if test="search=='hm_position'">
+								<![CDATA[AND hm_position LIKE '%'||#{keyword}||'%']]>
+							</if>
+							<if test="search=='hm_deleteYN'">
+								<![CDATA[AND hm_deleteYN LIKE '%'||#{keyword}||'%']]>
+							</if>
+							<if test="search=='hm_employmenttype'">
+								<![CDATA[AND hm_employmenttype LIKE '%'||#{keyword}||'%']]>
+							</if>					
+					</trim>
+			
+			)AA 
+	   	)
+	   		WHERE
+	   		PAGENO = #{curPage}
+	</select>
+	
+	<select id="selectAppr" parameterType="apprVO" resultType="apprVO">
+	SELECT
+		*
+			FROM(
+					SELECT
+					AA.*,
+					CEIL(ROW_NUMBER() OVER(ORDER BY ROWNUM)/#{pageSize}) PAGENO,
+					COUNT(ROWNUM) OVER() AS totalCount 
+			FROM(		
+				SELECT	
+					ROWNUM,
+					A.hmp_empnum,
+					A.hmp_name,
+					A.hmp_birth,
+					A.hmp_residentnum,
+					A.hmp_picture,
+					A.hmp_postcode,
+					A.hmp_addr,
+					B.cd_name AS hmp_bank,
+					A.hmp_depositors,
+					A.hmp_accountnum,
+					C.cd_name AS hmp_education,
+					A.hmp_educontents,
+					D.cd_name AS hmp_workexperience,
+					A.hmp_workcontents,
+					A.hmp_insertdate,
+					A.hmp_approvalYN,
+					A.hmp_id,
+					A.hmp_pw
+				FROM HUMAN_MEMBERAPPROVAL A, CODE B, CODE C, CODE D
+				WHERE A.hmp_bank=B.cd_code
+				AND A.hmp_education=C.cd_code
+				AND A.hmp_workexperience=D.cd_code
+				AND A.hmp_approvalYN='W'
+				
+			)AA 
+	   	)
+	   		WHERE
+	   		PAGENO = #{curPage}		
+	</select>
+	<select id="selectApprMem" parameterType="apprVO" resultType="apprVO">
+			SELECT	
+				A.hmp_empnum,
+				A.hmp_name,
+				A.hmp_birth,
+				A.hmp_hpnum,
+				A.hmp_email,
+				A.hmp_residentnum,
+				A.hmp_picture,
+				A.hmp_postcode,
+				A.hmp_addr,
+				B.cd_name AS hmp_bank,
+				A.hmp_depositors,
+				A.hmp_accountnum,
+				C.cd_name AS hmp_education,
+				A.hmp_educontents,
+				D.cd_name AS hmp_workexperience,
+				A.hmp_workcontents,
+				A.hmp_insertdate,
+				A.hmp_approvalYN,
+				A.hmp_id,
+				A.hmp_pw
+			FROM HUMAN_MEMBERAPPROVAL A, CODE B, CODE C, CODE D
+			WHERE A.hmp_empnum=#{hmp_empnum}
+			AND A.hmp_bank=B.cd_code
+			AND A.hmp_education=C.cd_code
+			AND A.hmp_workexperience=D.cd_code
+			ORDER BY A.hmp_empnum
+	</select>
+	<update id="updateMember" parameterType="mvo">
+			UPDATE HUMAN_MEMBER
+			SET
+				hm_deptnum=#{hm_deptnum},
+				hm_teamnum=#{hm_teamnum},
+				hm_position=#{hm_position},
+				hm_duty=#{hm_duty}
+			WHERE
+				hm_empnum=#{hm_empnum}
+	</update>
+		<update id="updateResignation" parameterType="mvo">
+			UPDATE HUMAN_MEMBER
+			SET
+				hm_deleteyn='N'			
+			WHERE
+				hm_empnum=#{hm_empnum}
+	</update>
+	<insert id="insertApptRecord" parameterType="apptVO">
+			INSERT INTO HUMAN_PERSONAPPT(
+				hpa_tablenum,
+				hpa_empnum,
+				hpa_name,
+				hpa_appointmentdate,
+				hpa_appointment,
+				hpa_bposition,
+				hpa_bduty,
+				hpa_bdept,
+				hpa_bteam,
+				hpa_aposition,
+				hpa_aduty,
+				hpa_adept,
+				hpa_ateam,
+				hpa_contents,
+				hpa_insertdate,
+				hpa_deleteyn
+			)VALUES(
+				#{hpa_tablenum},
+				#{hpa_empnum},
+				#{hpa_name},
+				#{hpa_appointmentdate},
+				#{hpa_appointment},
+				#{hpa_bposition},
+				#{hpa_bduty},
+				#{hpa_bdept},
+				#{hpa_bteam},
+				#{hpa_aposition},
+				#{hpa_aduty},
+				#{hpa_adept},
+				#{hpa_ateam},
+				#{hpa_contents},
+				SYSDATE,
+				'Y'				
+			)
+	</insert>
+	<select id="apptRecordSelect" parameterType="apptVO" resultType="apptVO">
+		SELECT
+			*
+			FROM(
+					SELECT
+					AA.*,
+					CEIL(ROW_NUMBER() OVER(ORDER BY ROWNUM)/#{pageSize}) PAGENO,
+					COUNT(hpa_tablenum) OVER() AS totalCount 
+				FROM(
+					SELECT 
+						ROWNUM,
+		                A.hpa_tablenum,
+						A.hpa_empnum,
+						A.hpa_name,
+						A.hpa_appointmentdate,
+						B.cd_name AS hpa_appointment,
+						C.cd_name AS hpa_bposition,
+						D.cd_name AS hpa_bduty,
+						E.cd_name AS hpa_bdept,
+						F.cd_name AS hpa_bteam,
+						G.cd_name AS hpa_aposition,
+						H.cd_name AS hpa_aduty,
+		                I.cd_name AS hpa_adept,
+						J.cd_name AS hpa_ateam,
+						A.hpa_contents,
+						A.hpa_insertdate,
+						A.hpa_deleteyn
+					
+		            FROM HUMAN_PERSONAPPT A,CODE B, CODE C,CODE D, CODE E, CODE F, CODE G, CODE H, CODE I, CODE J
+		            WHERE A.HPA_EMPNUM=#{hpa_empnum}
+		            
+		            AND A.hpa_appointment=B.cd_code
+		            AND A.hpa_bposition=C.cd_code
+		            AND A.hpa_bduty=D.cd_code
+		            AND A.hpa_bdept=E.cd_code
+		            AND A.hpa_bteam=F.cd_code
+		            AND A.hpa_aposition=G.cd_code
+		            AND A.hpa_aduty=H.cd_code
+		            AND A.hpa_adept=I.cd_code
+		            AND A.hpa_ateam=J.cd_code		 
+					)AA
+				)
+			WHERE
+	    	PAGENO = #{curPage}		
+	</select>
+	<select id="apptRecordAll" parameterType="apptVO" resultType="apptVO">
+		SELECT
+			*
+			FROM(
+					SELECT
+					AA.*,
+					CEIL(ROW_NUMBER() OVER(ORDER BY ROWNUM)/#{pageSize}) PAGENO,
+					COUNT(hpa_tablenum) OVER() AS totalCount 
+				FROM(
+					SELECT 
+						ROWNUM,
+		                A.hpa_tablenum,
+						A.hpa_empnum,
+						A.hpa_name,
+						A.hpa_appointmentdate,
+						B.cd_name AS hpa_appointment,
+						C.cd_name AS hpa_bposition,
+						D.cd_name AS hpa_bduty,
+						E.cd_name AS hpa_bdept,
+						F.cd_name AS hpa_bteam,
+						G.cd_name AS hpa_aposition,
+						H.cd_name AS hpa_aduty,
+		                I.cd_name AS hpa_adept,
+						J.cd_name AS hpa_ateam,
+						A.hpa_contents,
+						A.hpa_insertdate,
+						A.hpa_deleteyn
+					
+		            FROM HUMAN_PERSONAPPT A,CODE B, CODE C,CODE D, CODE E, CODE F, CODE G, CODE H, CODE I, CODE J
+		            WHERE A.hpa_appointment=B.cd_code
+		            <trim prefix="AND" prefixOverrides="AND">
+						 
+							<if test="search=='hpa_name'">
+								<![CDATA[hpa_name LIKE '%'||#{keyword}||'%']]>
+							</if>
+							<if test="search=='hpa_empnum'">
+								<![CDATA[AND hpa_empnum LIKE '%'||#{keyword}||'%']]>
+							</if>
+					</trim>
+		            AND A.hpa_bposition=C.cd_code
+		            AND A.hpa_bduty=D.cd_code
+		            AND A.hpa_bdept=E.cd_code
+		            AND A.hpa_bteam=F.cd_code
+		            AND A.hpa_aposition=G.cd_code
+		            AND A.hpa_aduty=H.cd_code
+		            AND A.hpa_adept=I.cd_code
+		            AND A.hpa_ateam=J.cd_code		 
+		            
+					)AA
+				)
+			WHERE
+	    	PAGENO = #{curPage}		
+	</select>
+	<select id="selectCommute" parameterType="commVO" resultType="commVO">
+	SELECT
+			*
+		FROM(
+				SELECT
+				AA.*,
+				CEIL(ROW_NUMBER() OVER(ORDER BY ROWNUM)/#{pageSize}) PAGENO,
+				COUNT(ROWNUM) OVER() AS totalCount 
+			FROM(	
+				select
+					ROWNUM,
+					B.hc_comnum,
+					B.hm_empnum,
+					TO_DATE(NVL(B.hc_date,0),'YYYY-MM-DD') AS hc_date,
+					TO_DATE(NVL(B.hc_workin,0),'HH24MI') AS hc_workin,
+					TO_DATE(NVL(B.hc_workout,0),'HH24MI') AS hc_workout,
+					NVL(B.hc_dayhour,0) AS hc_dayhour,
+					NVL(B.hc_weekhour,0) AS hc_weekhour,
+					NVL(B.hc_lasthour,0) AS hc_lasthour,
+					NVL(B.hc_extraworking,0) AS hc_extraworking,
+					A.cd_name AS hc_tanda
+					
+				FROM HUMAN_COMMUTE B, CODE A 
+				WHERE B.hm_empnum=#{hm_empnum}
+				AND B.hc_tanda=A.cd_code	
+				<if test="startdate!=null and startdate!='null' ">
+					<if test="startdate==enddate">
+						AND B.hc_date=#{startdate}
+					</if>
+					
+					<if test="startdate!=enddate">
+						<![CDATA[AND B.hc_date <= #{enddate}]]>
+						<![CDATA[AND B.hc_date >= #{startdate}]]>
+					</if>
+				</if>
+				ORDER BY A.cd_name, B.hc_comnum DESC
+				)AA
+	   	)
+	   	WHERE
+	    PAGENO = #{curPage}
+	   		
+	</select>
+	
+	
+	  <!-- 가장 최근날의 정보를 불러오는 쿼리 -->
+   <select id="selectLastHour"  parameterType="commVO" resultType="commVO" >
+      	SELECT   NVL(hc_totalhour, 0)   	hc_totalhour
+		        ,NVL(hc_lasthour, 0)   		hc_lasthour
+		        ,NVL(hc_extraworking, 0)  	hc_extraworking
+		FROM (	  SELECT *
+			      FROM  human_commute
+			      WHERE hm_empnum = #{hm_empnum}
+			      and 	hc_date != to_char(sysdate  ,'yyyymmdd')
+			      and   hc_lasthour is not null
+			      order by hc_date desc)
+		WHERE  ROWNUM = 1
+   </select>
+   
+   
+     <!-- 추가근무 시간을 입력하는 쿼리 -->
+    <update id="insertExtrawork" parameterType="commVO">
+   
+      update human_commute A
+       set     A.hc_lasthour = #{hc_lasthour}
+              ,A.hc_extraworking = #{hc_extraworking}
+              ,A.hc_totalhour = #{hc_totalhour}
+       where  A.hm_empnum = #{hm_empnum}
+       and    A.hc_comnum = #{hc_comnum}
+   </update>
+   <select id="idCheck" parameterType="mvo" resultType="String">
+   		select 
+   			 COUNT(hm_id)
+  	    FROM HUMAN_MEMBER
+   		WHERE HM_ID=#{hm_id}
+   </select>
+   
+   <!-- 로그인 후 첫 페이지에서 쓰이는 쿼리 -->
+   <select id="selectUserInfo" parameterType="mvo" resultType="mvo">
+		SELECT
+		        A.HM_NAME       HM_NAME,
+		        A.HM_PICTURE    HM_PICTURE
+		FROM    HUMAN_MEMBER A
+		WHERE   A.HM_EMPNUM = #{hm_empnum}
+		AND     A.HM_DELETEYN = 'Y'   
+   </select>
+   
+</mapper>

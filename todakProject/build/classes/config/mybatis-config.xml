@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+							   "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="java142.todak.human.vo.MemberVO" alias="hmvo" />
+		<typeAlias type="java142.todak.sponsor.vo.MemberVO" alias="smvo" />
+		<typeAlias type="java142.todak.sponsor.vo.MemberCardVO" alias="smcvo" />
+		<typeAlias type="java142.todak.sponsor.vo.MemberAccountVO" alias="smavo" />
+		<typeAlias type="java142.todak.sponsor.vo.CharityVO" alias="scvo" />
+		<typeAlias type="java142.todak.sponsor.vo.SponsorshipVO" alias="ssvo" />
+		
+		<!--  찬영이꺼 -->
+		<typeAlias type="java142.todak.scheduler.vo.SchedulerVO" alias="schmvo" />
+		<typeAlias type="java142.todak.human.vo.HumanHdateVO" alias="hhvo" />
+		<typeAlias type="java142.todak.human.vo.HumanHolidayVO" alias="hrvo" />
+		
+		
+		<!-- 담비꺼~~~~  -->
+		<typeAlias type="java142.todak.board.vo.NoticeVO" alias="nvo"/>
+		<typeAlias type="java142.todak.board.vo.NoCheckVO" alias="ncvo"/>
+		<typeAlias type="java142.todak.human.vo.MemberVO" alias="mvo" />
+		<typeAlias type="java142.todak.board.vo.SuggestionVO" alias="svo" />
+		<typeAlias type="java142.todak.board.vo.SuReplyVO" alias="srvo" />
+		<typeAlias type="java142.todak.board.vo.SuLikeVO" alias="slvo" />
+		<typeAlias type="java142.todak.scheduler.vo.CommuteVO" alias="cvo"/>
+		
+		<!-- 나용이꺼! -->
+		<typeAlias type="java142.todak.ework.vo.ProposalVO" alias="pvo"/>
+		<typeAlias type="java142.todak.ework.vo.ApprovalVO" alias="avo"/>
+		<typeAlias type="java142.todak.ework.vo.LineVO" alias="lvo"/>
+		<typeAlias type="java142.todak.ework.vo.AuthVO" alias="auvo"/>
+		<typeAlias type="java142.todak.ework.vo.AuthPersonVO" alias="apvo"/>
+		<typeAlias type="java142.todak.ework.vo.SignStampVO" alias="esvo"/>
+		<typeAlias type="java142.todak.ework.vo.AuthBoxVO" alias="abvo"/>
+		<typeAlias type="java142.todak.ework.vo.HolidayVO" alias="hvo"/>
+		<typeAlias type="java142.todak.ework.vo.SelectAuthBoxVO" alias="sabvo"/>
+		<typeAlias type="java142.todak.ework.vo.EanumVO" alias="envo"/>
+		<typeAlias type="java142.todak.ework.vo.LineHistoryVO" alias="lhvo"/>
+		
+		<!--천동환 -->
+		<typeAlias type="java142.todak.human.vo.ApprVO" alias="apprVO"/>
+	
+		<typeAlias type="java142.todak.human.vo.ApptVO" alias="apptVO" />
+		<typeAlias type="java142.todak.human.vo.CommVO" alias="commVO" />
+		<typeAlias type="java142.todak.human.vo.StatusVO" alias="statusVO" />
+		
+	</typeAliases>
+</configuration>

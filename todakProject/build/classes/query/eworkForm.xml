@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="java142.todak.ework.dao.EworkFormDao">
+	<resultMap type="pvo" id="insertProposalVO">
+		<result property="ep_num" column="EP_NUM"/>
+		<result property="ea_num" column="EA_NUM"/>
+		<result property="ep_title" column="EP_TITLE"/>
+		<result property="hm_empnum" column="HM_EMPNUM"/>
+		<result property="ep_writer" column="EP_WRITER"/>
+		<result property="hm_position" column="HM_POSITION"/>
+		<result property="ep_startdate" column="EP_STARTDATE"/>
+		<result property="ep_enddate" column="EP_ENDDATE"/>
+		<result property="ep_group" column="EP_GROUP"/>
+		<result property="ep_content" column="EP_CONTENT"/>
+	</resultMap>
+
+	<resultMap type="avo" id="insertApprovalVO">
+		<result property="eap_num" column="EAP_NUM"/>
+		<result property="ea_num" column="EA_NUM"/>
+		<result property="ef_num" column="EF_NUM"/>
+		<result property="eap_title" column="EAP_TITLE"/>
+		<result property="hm_empnum" column="HM_EMPNUM"/>
+		<result property="eap_writer" column="EAP_WRITER"/>
+		<result property="hm_position" column="HM_POSITION"/>
+		<result property="eap_startdate" column="EAP_STARTDATE"/>
+		<result property="eap_enddate" column="EAP_ENDDATE"/>
+		<result property="eap_group" column="EAP_GROUP"/>
+		<result property="eap_filedir" column="EAP_FILEDIR"/>
+	</resultMap>
+	
+	<resultMap type="hmvo" id="selectUserVO">
+		<result property="hm_empnum" column="HM_EMPNUM"/>
+	</resultMap>
+	
+	<resultMap type="hmvo" id="selectTeamMemberVO">
+		<result property="hm_deptnum" column="HM_DEPTNUM"/>
+	</resultMap>
+
+	<resultMap type="lvo" id="insertLineVO">
+		<result property="el_num" column="EL_NUM"/>
+		<result property="el_line" column="EL_LINE"/>
+	</resultMap>
+
+	<resultMap type="auvo" id="insertAuthVO">
+		<result property="ea_num" column="EA_NUM"/>
+		<result property="hm_empnum" column="HM_EMPNUM"/>
+		<result property="ea_position" column="EA_POSITION"/>
+		<result property="ea_presentnum" column="EA_PRESENTNUM"/>
+	</resultMap>
+	
+	<resultMap type="lvo" id="updateLineVO">
+		<result property="ea_num" column="EA_NUM"/>
+		<result property="el_num" column="EL_NUM"/>
+	</resultMap>
+	
+	<resultMap type="apvo" id="insertAuthPersonVO">
+		<result property="eai_num" column="EAI_NUM"/>
+		<result property="ea_num" column="EA_NUM"/>
+		<result property="eai_recentnum" column="EAI_RECENTNUM"/>
+		<result property="eai_position" column="EAI_POSITION"/>
+		<result property="eai_auth" column="EAI_AUTH"/>
+		<result property="eai_filedir" column="EAI_FILEDIR"/>
+		<result property="eai_substituteYN" column="EAI_SUBSTITUTEYN"/>
+		<result property="eai_substitutenum" column="EAI_SUBSTITUTENUM"/>
+		<result property="eai_sequence" column="EAI_SEQUENCE"/>
+	</resultMap>
+	
+	<resultMap type="esvo" id="selectSignStampVO">
+		<result property="hm_empnum" column="HM_EMPNUM"/>
+	</resultMap>
+	
+	<resultMap type="apvo" id="chaebunAuthPersonVO">
+		<result property="eai_num" column="EAI_NUM"/>
+	</resultMap>
+	
+	<resultMap type="abvo" id="inserAuthBoxVO">
+		<result property="eab_num" column="EAB_NUM"/>
+		<result property="ea_num" column="EA_NUM"/>
+		<result property="eab_writer" column="EAB_WRITER"/>
+		<result property="eab_title" column="EAB_TITLE"/>
+		<result property="eab_startdate" column="EAB_STARTDATE"/>
+		<result property="eab_enddate" column="EAB_ENDDATE"/>
+		<result property="eab_group" column="EAB_GROUP"/>
+	</resultMap>
+	
+	<resultMap type="hvo" id="insertHolidayVO">
+		<result property="eh_num" column="EH_NUM"/>
+		<result property="ea_num" column="EA_NUM"/>
+		<result property="eh_title" column="EH_TITLE"/>
+		<result property="hm_empnum" column="HM_EMPNUM"/>
+		<result property="eh_writer" column="EH_WRITER"/>
+		<result property="hm_position" column="HM_POSITION"/>
+		<result property="eh_startdate" column="EH_STARTDATE"/>
+		<result property="eh_enddate" column="EH_ENDDATE"/>
+		<result property="eh_group" column="EH_GROUP"/>
+		<result property="eh_sort" column="EH_SORT"/>
+		<result property="eh_reason" column="EH_REASON"/>
+		<result property="eh_startperiod" column="EH_STARTPERIOD"/>
+		<result property="eh_endperiod" column="EH_ENDPERIOD"/>
+		<result property="eh_emergency" column="EH_EMERGENCY"/>
+	</resultMap>
+
+	<!-- 기안서 폼 채번 -->
+	<select id="chaebunProposal" resultType="pvo">
+		SELECT
+		        LPAD(NVL(MAX(SUBSTR(E.EP_NUM,-4)),0)+1,'4','0')    EP_NUM
+		FROM    EWORK_PROPOSAL E  
+	</select>
+	<!-- 기안서 저장 -->
+	<insert id="insertProposal" parameterType="pvo">
+		INSERT INTO EWORK_PROPOSAL(
+		    EP_NUM, 
+		    EA_NUM,	
+		    EP_TITLE,
+		    HM_EMPNUM,	 
+		    EP_WRITER,
+		    HM_POSITION,
+		    EP_STARTDATE,
+		    EP_ENDDATE,	
+		    EP_GROUP,
+		    EP_CONTENT,	
+		    EP_INSERTDATE,
+		    EP_UPDATEDATE,
+		    EP_DELETEYN	
+		) VALUES(
+		    #{ep_num, jdbcType=VARCHAR},
+		    #{ea_num, jdbcType=VARCHAR},
+		    #{ep_title, jdbcType=VARCHAR},
+		    #{hm_empnum, jdbcType=VARCHAR},
+		    #{ep_writer, jdbcType=VARCHAR},
+		    #{hm_position, jdbcType=VARCHAR},
+		    #{ep_startdate, jdbcType=VARCHAR},
+		    #{ep_enddate, jdbcType=VARCHAR},
+		    #{ep_group, jdbcType=VARCHAR},
+		    #{ep_content, jdbcType=VARCHAR},
+		    TO_CHAR(SYSDATE, 'YYYYMMDD'),
+		    TO_CHAR(SYSDATE, 'YYYYMMDD'),
+		    'Y'
+		) 
+	</insert>
+	<!-- 품의서 폼 채번 -->
+	<select id="chaebunApproval" resultType="avo">
+		SELECT
+		        LPAD(NVL(MAX(SUBSTR(E.EAP_NUM,-4)),0)+1,'4','0')    EAP_NUM
+		FROM    EWORK_APPROVAL E
+	</select>
+	
+	<!-- 품의서 저장 -->
+	<insert id="insertApproval" parameterType="avo">
+		INSERT INTO EWORK_APPROVAL(
+		    EAP_NUM,
+		    EA_NUM,	 
+		    EF_NUM,	
+		    EAP_TITLE, 
+		    HM_EMPNUM, 
+		    EAP_WRITER, 
+		    HM_POSITION, 
+		    EAP_STARTDATE, 
+		    EAP_ENDDATE, 
+		    EAP_GROUP, 
+		    EAP_FILEDIR, 
+		    EAP_INSERTDATE, 
+		    EAP_UPDATEDATE, 
+		    EAP_DELETEYN 
+		) VALUES(
+		    #{eap_num, jdbcType=VARCHAR},
+		    #{ea_num, jdbcType=VARCHAR},
+		    #{ef_num, jdbcType=VARCHAR},
+		    #{eap_title, jdbcType=VARCHAR},
+		    #{hm_empnum, jdbcType=VARCHAR},
+		    #{eap_writer, jdbcType=VARCHAR},
+		    #{hm_position, jdbcType=VARCHAR},
+		    #{eap_startdate, jdbcType=VARCHAR},
+		    #{eap_enddate, jdbcType=VARCHAR},
+		    #{eap_group, jdbcType=VARCHAR},
+		    #{eap_filedir, jdbcType=VARCHAR},
+		    TO_CHAR(SYSDATE, 'YYYYMMDD'),
+		    TO_CHAR(SYSDATE, 'YYYYMMDD'),
+		    'Y'
+		) 
+	</insert>
+	
+	<!-- 휴가신청서 채번 -->
+	<select id="chaebunHoliday" resultType="hvo">
+		SELECT  /*+ INDEX_DESC(SYS_C0011922)*/
+		        LPAD(NVL(MAX(SUBSTR(A.EH_NUM,-4)),0)+1,'4','0')    EH_NUM
+		FROM    EWORK_HOLIDAY  A 
+	</select>
+	
+	<!-- 휴가신청서 INSERT -->
+	<insert id="insertHoliday" parameterType="hvo">
+		INSERT INTO EWORK_HOLIDAY(
+		    EH_NUM,	 --	휴가신청서번호
+		    EA_NUM,	 --	결재번호
+		    EH_TITLE,	 --	제목
+		    HM_EMPNUM,	 --	사원번호
+		    EH_WRITER,	 --	작성자
+		    HM_POSITION,	 --	직급
+		    EH_STARTDATE,	--	결재시작날짜
+		    EH_ENDDATE,	--	결재마감날짜
+		    EH_GROUP,	 --	분류
+		    EH_SORT,	 --	휴가종류
+		    EH_REASON,	 --	휴가사유
+		    EH_STARTPERIOD,	 --	휴가시작일
+		    EH_ENDPERIOD,	 --	휴가종료일
+		    EH_EMERGENCY,	 --	비상연락처
+		    EH_INSERTDATE,	 --	생성일
+		    EH_UPDATEDATE,	 --	수정일
+		    EH_DELETEYN		 --	삭제여부
+		) VALUES(
+		    #{eh_num, jdbcType=VARCHAR},
+		    #{ea_num, jdbcType=VARCHAR},
+		    #{eh_title, jdbcType=VARCHAR},
+		    #{hm_empnum, jdbcType=VARCHAR},
+		    #{eh_writer, jdbcType=VARCHAR},
+		    #{hm_position, jdbcType=VARCHAR},
+		    #{eh_startdate, jdbcType=VARCHAR},
+		    #{eh_enddate, jdbcType=VARCHAR},
+		    #{eh_group, jdbcType=VARCHAR},
+		    #{eh_sort, jdbcType=VARCHAR},
+		    #{eh_reason, jdbcType=VARCHAR},
+		    #{eh_startperiod, jdbcType=VARCHAR},
+		    #{eh_endperiod, jdbcType=VARCHAR},
+		    #{eh_emergency, jdbcType=VARCHAR},
+		    TO_CHAR(SYSDATE, 'YYYYMMDD'),
+		    TO_CHAR(SYSDATE, 'YYYYMMDD'),
+		    'Y'
+		)
+	</insert>
+	
+	<!-- 세션에 있는 회원번호로 이름 부서번호 직급 직책 가져오기 -->
+	<select id="selectPerson" parameterType="hmvo" resultType="hmvo">
+		SELECT
+				H.HM_EMPNUM		HM_EMPNUM,
+		        H.HM_NAME       HM_NAME,
+		        H.HM_DEPTNUM    HM_DEPTNUM, 
+		        H.HM_POSITION   HM_POSITION,
+		        H.HM_DUTY       HM_DUTY
+		FROM    HUMAN_MEMBER H
+		WHERE   H.HM_EMPNUM = #{hm_empnum, jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 팀원들 회원번호 가져오기 -->
+	<select id="selectTeamMember" resultType="hmvo">
+		SELECT  H.HM_EMPNUM     HM_EMPNUM,
+		        H.HM_NAME       HM_NAME,
+		        H.HM_POSITION   HM_POSITION,
+		        H.HM_DUTY       HM_DUTY -- 직책
+		FROM    HUMAN_MEMBER H
+		WHERE   H.HM_DEPTNUM=#{hm_deptnum, jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 결재라인테이블 채번 -->
+	<select id="chaebunLine" resultType="lvo">
+		SELECT  /*+ INDEX_DESC(SYS_C0011925)*/
+		        LPAD(NVL(MAX(SUBSTR(E.EL_NUM,-4)),0)+1,'4','0')    EL_NUM
+		FROM    EWORK_LINE  E 
+	</select>
+	
+	<!-- 결재라인 만들어졌을 때 -->
+	<insert id="insertLine" parameterType="lvo">
+		INSERT INTO EWORK_LINE(
+		    EL_NUM,	
+		    EA_NUM,
+		    EL_LINE,
+		    EL_INSERTDATE,
+		    EL_UPDATEDATE
+		) VALUES(
+		    #{el_num, jdbcType=VARCHAR},
+		    NULL,
+		    #{el_line, jdbcType=VARCHAR},
+		    TO_CHAR(SYSDATE, 'YYYYMMDD'),
+		    TO_CHAR(SYSDATE, 'YYYYMMDD')
+		)
+	</insert>
+	
+	<!-- 결재테이블 채번 -->
+	<select id="chaebunAuth" resultType="auvo">
+		SELECT  /*+ INDEX_DESC(SYS_C0011924)*/
+		        LPAD(NVL(MAX(SUBSTR(A.EA_NUM,-4)),0)+1,'4','0')    EA_NUM
+		FROM    EWORK_AUTH  A 
+	</select>
+
+	<!-- 결재 테이블 INSERT -->
+	<insert id="insertAuth" parameterType="auvo">
+		INSERT INTO EWORK_AUTH(
+		    EA_NUM,
+		    HM_EMPNUM,
+		    EA_POSITION,
+		    EA_PRESENTNUM,
+		    EA_INSERTDATE,
+		    EA_UPDATEDATE,
+		    EA_DELETEYN	
+		) VALUES(
+		    #{ea_num, jdbcType=VARCHAR},
+		    #{hm_empnum, jdbcType=VARCHAR},
+		    #{ea_position, jdbcType=VARCHAR},
+		    #{ea_presentnum, jdbcType=VARCHAR}, 
+		    TO_CHAR(SYSDATE, 'YYYYMMDD'),
+		    TO_CHAR(SYSDATE, 'YYYYMMDD'),
+		    'Y'
+		)
+	</insert>
+	
+	<!-- 결재라인 테이블 UPDATE -->
+	<update id="updateLine" parameterType="lvo">
+		UPDATE EWORK_LINE
+		SET
+		        EA_NUM = #{ea_num, jdbcType=VARCHAR},
+		        EL_UPDATEDATE = TO_CHAR(SYSDATE, 'YYYYMMDD')
+		WHERE   EL_NUM =  #{el_num, jdbcType=VARCHAR}
+	</update>
+	
+	<!-- 결재자 정보 테이블 INSERT -->
+	<insert id="insertAuthPerson" parameterType="apvo">
+		INSERT INTO EWORK_AUTHPERSON(
+		    EAI_NUM,
+		    EA_NUM,
+		    EAI_RECENTNUM,
+		    EAI_POSITION,
+		    EAI_AUTH, 
+		    EAI_FILEDIR, 
+		    EAI_SUBSTITUTEYN,
+		    EAI_SUBSTITUTENUM,
+		    EAI_SEQUENCE
+		)
+		VALUES(
+		    #{eai_num, jdbcType=VARCHAR},
+		    #{ea_num, jdbcType=VARCHAR},
+		    #{eai_recentnum, jdbcType=VARCHAR}, 
+		    #{eai_position, jdbcType=VARCHAR},
+		    #{eai_auth, jdbcType=VARCHAR}, 
+		    #{eai_filedir, jdbcType=VARCHAR},
+		    #{eai_substituteYN, jdbcType=VARCHAR},
+		    #{eai_substitutenum, jdbcType=VARCHAR},
+		    #{eai_sequence, jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<!-- 도장서명 테이블 채번 -->
+	<select id="chaebunSignStamp" resultType="esvo">
+		SELECT  /*+ INDEX_DESC(SYS_C0011927)*/
+		        LPAD(NVL(MAX(SUBSTR(S.ES_NUM,-4)),0)+1,'4','0')    ES_NUM
+		FROM    EWORK_SIGNSTAMP  S 
+	</select>
+
+	<!-- 도장서명 조회 -->
+	<select id="selectSignStamp" resultType="esvo">
+		SELECT
+		        S.ES_FILEDIR    ES_FILEDIR
+		FROM    EWORK_SIGNSTAMP S
+		WHERE   S.HM_EMPNUM = #{hm_empnum, jdbcType=VARCHAR}
+	</select>
+
+	<!-- 결재자정보 테이블 채번 -->
+	<select id="chaebunAuthPerson" resultType="apvo">
+		SELECT  /*+ INDEX_DESC(SYS_C0011944)*/
+		        LPAD(NVL(MAX(SUBSTR(A.EAI_NUM,-4)),0)+1,'4','0')    EAI_NUM
+		FROM    EWORK_AUTHPERSON  A 
+	</select>
+	
+	<!-- 결재서류함 채번 -->
+	<select id="chaebunAuthBox" resultType="abvo">
+		SELECT  /*+ INDEX_DESC(EAB_NUM_PK)*/
+		        LPAD(NVL(MAX(SUBSTR(A.EAB_NUM,-4)),0)+1,'4','0')    EAB_NUM
+		FROM    EWORK_AUTHBOX  A 
+	</select>
+	
+	<!-- 결재서류함 테이블 INSERT -->
+	<insert id="insertAuthBox" parameterType="abvo">
+		INSERT INTO EWORK_AUTHBOX(
+		    EAB_NUM,  
+		    EA_NUM,	
+		    EAB_WRITER, 
+		    EAB_TITLE, 
+		    EAB_STARTDATE, 
+		    EAB_ENDDATE,   
+		    EAB_GROUP,      
+		    EAB_INSERTDATE,
+		    EAB_UPDATEDATE,
+		    EAB_DELETEYN   
+		) VALUES(
+		    #{eab_num, jdbcType=VARCHAR},
+		    #{ea_num, jdbcType=VARCHAR},
+		    #{eab_writer, jdbcType=VARCHAR},
+		    #{eab_title, jdbcType=VARCHAR},
+		    #{eab_startdate, jdbcType=VARCHAR},
+		    #{eab_enddate, jdbcType=VARCHAR},
+		    #{eab_group, jdbcType=VARCHAR},
+		    TO_CHAR(SYSDATE, 'YYYYMMDD'),
+		    TO_CHAR(SYSDATE, 'YYYYMMDD'),
+		    'Y'
+		)
+	</insert>
+</mapper>

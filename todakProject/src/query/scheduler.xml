@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="java142.todak.scheduler.dao.SchedulerDao">
+
+	<select id="selectSchedulerWorkSchedule" parameterType="schmvo" resultType="schmvo">
+		SELECT 
+			  sw_num,
+			  hm_empnum,
+			  sw_type,
+              sw_title,
+			  sw_content,
+			  sw_startdate,
+			  sw_enddate,
+			  sw_repetitiontype,
+			  sw_backgroundcolor,
+			  sw_textcolor,
+			  sw_insertdate,
+			  sw_updatedate, 
+			  sw_deleteyn
+			             FROM scheduler_workschedule
+			             WHERE hm_empnum = #{hm_empnum}
+			             AND sw_deleteyn = 'Y'
+			             
+			            
+	</select>
+
+<!--  채번 쿼리  -->
+  <select id="chaebunSchedulerWorkSchedule" parameterType="schmvo" resultType="schmvo">
+SELECT 
+               NVL(LPAD(TO_CHAR(MAX(TO_NUMBER(SUBSTR(sw.sw_num, -4))) + 1), 4, '0'), '0001') AS sw_num
+      FROM     scheduler_workschedule sw
+   </select>
+	  
+	<insert id="insertSchedulerWorkSchedule" parameterType="smvo">
+		INSERT INTO scheduler_workschedule(
+								sw_num,
+								hm_empnum,
+								sw_type,
+								sw_title,
+								sw_content,
+								sw_startdate,
+								sw_enddate,
+								sw_repetitiontype,
+								sw_backgroundcolor,
+								sw_textcolor,
+								sw_insertdate,
+								sw_updatedate,
+								sw_deleteyn
+								)
+						VALUES(
+								#{sw_num},
+								#{hm_empnum},
+								#{sw_type},
+								#{sw_title},
+								#{sw_content},
+								#{sw_startdate},
+								#{sw_enddate},
+								#{sw_repetitiontype},
+								#{sw_backgroundcolor},
+								#{sw_textcolor},
+								TO_CHAR(SYSDATE,'YYYYMMDD'),
+								TO_CHAR(SYSDATE,'YYYYMMDD'),
+								'Y'
+								)
+				
+	</insert>
+	<update id="updateSchedulerWorkSchedule" parameterType="schmvo">
+		UPDATE scheduler_workschedule SET
+								sw_title = #{sw_title},
+								sw_type = #{sw_type},
+								sw_content = #{sw_content},
+								sw_startdate = #{sw_startdate},
+								sw_enddate = #{sw_enddate},
+								sw_repetitiontype = #{sw_repetitiontype},
+								sw_backgroundcolor = #{sw_backgroundcolor}
+								WHERE sw_num = #{sw_num}
+					
+	</update>
+	
+	<update id="deleteSchedulerWorkSchedule" parameterType="schmvo">
+		UPDATE scheduler_workschedule SET
+							sw_deleteyn = 'N',
+							sw_updatedate = TO_CHAR(SYSDATE,'YYYYMMDD')
+				  WHERE sw_num = #{sw_num}
+				  AND   sw_deleteyn = 'Y'
+	</update>
+</mapper>

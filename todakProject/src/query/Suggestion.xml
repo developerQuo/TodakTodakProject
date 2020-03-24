@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="java142.todak.board.dao.BoardDao">
+
+	<select id="selectSuggestion" resultType="svo">
+	
+		SELECT  *
+		FROM(
+				SELECT
+				AA.*,
+				CEIL(ROW_NUMBER() OVER(ORDER BY ROWNUM)/#{pageSize}) PAGENO,
+				COUNT(bs_num) OVER() AS totalCount 
+				FROM(
+						SELECT 	ROWNUM
+							     , X.*
+						FROM (   select DISTINCT 	A.bs_num				bs_num,
+													A.hm_empnum				hm_empnum,
+													A.bs_title				bs_title,
+													TO_DATE(A.bs_insertdate, 'YYYY-MM-DD') AS  bs_insertdate,
+										 nvl((select count(B.bsr_num)  
+					                   			 from 		BOARD_SUREPLY B 
+					                    		 GROUP 		BY bs_num
+					                    		 HAVING  	B.bs_num =  A.bs_num ),0) AS bsr_num,
+					                     nvl((select count(C.bsl_likeYN)  
+							                    from BOARD_SULIKE C
+							                    GROUP BY bs_num
+							                    HAVING  C.bs_num =  A.bs_num ),0) AS bsl_likeYN,
+					                     nvl((select count(C.bsl_dislikeYN)  
+							                    from BOARD_SULIKE C
+							                    GROUP BY bs_num
+							                    HAVING  C.bs_num =  A.bs_num ),0) AS bsl_dislikeYN
+                  
+									from	BOARD_SUGGESTION A, BOARD_SUREPLY B,BOARD_SULIKE C
+									where	bs_deleteYN = 'Y'
+							    <if test = "findIndex != null and findIndex != '' ">
+						            <trim prefix="AND" prefixOverrides="AND">
+						                <if test="findIndex=='bs_title'">
+						                   <![CDATA[AND A.bs_title LIKE '%'||#{keyword}||'%']]>            
+						                 </if>
+						                 <if test="findIndex=='bs_content'">
+						                    <![CDATA[AND A.bs_content LIKE '%'||#{keyword}||'%']]>   
+						                 </if>
+						                 	<if test="findIndex=='hm_empnum'">
+										    <![CDATA[AND A.hm_empnum LIKE '%'||#{keyword}||'%']]>   
+										 </if>
+						             </trim>
+						         </if>
+						order by bs_num DESC  ) X
+					
+							)AA
+					)
+		WHERE		PAGENO = #{curPage}
+	</select>
+	
+	<select id="searchSuggestion" resultType="svo">
+		select	A.bs_num			bs_num,
+				A.hm_empnum			hm_empnum,
+				A.bs_title			bs_title,
+				A.bs_content		bs_content,
+				A.bs_image			bs_image,
+				TO_DATE(A.bs_insertdate, 'YYYY-MM-DD')  bs_insertdate
+		from	BOARD_SUGGESTION A
+		where	A.bs_deleteYN = 'Y'
+		and 	A.bs_num = #{bs_num}
+	</select>
+	
+	
+   <select id="chaebunSuggestion" resultType="svo">
+      SELECT LPAD(NVL(MAX(SUBSTR(bs_num, -4)),0) + 1,'4',0) bs_num FROM board_suggestion
+   </select>
+	
+	<insert id="insertSuggestion" parameterType="svo" >
+		insert into BOARD_SUGGESTION(
+									bs_num,
+									hm_empnum,
+									bs_title,
+									bs_content,
+									bs_image,
+									bs_insertdate,
+									bs_updatedate,
+									bs_deleteYN	
+		
+		)values(
+									#{bs_num},
+									#{hm_empnum},
+									#{bs_title},
+									#{bs_content},
+									#{bs_image},
+									to_char(sysdate,'YYYYMMDD'),
+									to_char(sysdate,'YYYYMMDD'),
+									'Y'
+																		
+		)
+	</insert>
+	
+	<!-- 건의사항 수정 -->
+	<update id="updateSuggestion" parameterType="svo">
+		update 	BOARD_SUGGESTION
+		set 	bs_title = #{bs_title}
+				,bs_content = #{bs_content}
+				,bs_updatedate = to_char(sysdate,'YYYYMMDD')
+		<if test = "bs_image !=''">
+				,bs_image = #{bs_image}
+		</if>
+				
+		where	bs_deleteYN = 'Y'
+		and		bs_num = #{bs_num}
+	</update>
+	
+	<!-- 건의사항 삭제 -->
+	<update id="deleteSuggestion" parameterType="svo">
+		update 	BOARD_SUGGESTION
+		set 	bs_deleteYN = 'N'
+		where	bs_deleteYN = 'Y'
+		and		bs_num = #{bs_num}
+	</update>
+	
+	<!-- 건의사항 댓글 전체조회 -->
+	<select id="selectSuReply" parameterType="srvo" resultType="srvo">
+		select	A.bsr_num			bsr_num,
+				A.hm_empnum			hm_empnum,
+				A.bsr_content		bsr_content,
+				TO_DATE(A.bsr_insertdate, 'YYYY-MM-DD')  bsr_insertdate
+		from	BOARD_SUREPLY A
+		where	bs_num = #{bs_num}
+		and		bsr_deleteyn = 'Y'
+		order by bsr_num DESC
+	</select>
+
+
+	<select id="chaebunSuReply" resultType="srvo">
+		SELECT LPAD(NVL(MAX(SUBSTR(bsr_num, -6)),0) + 1,'6',0) bsr_num FROM BOARD_SUREPLY
+	</select>
+	
+	<!-- 건의사항 댓글 작성 -->
+	<insert id="insertSuReply" parameterType="srvo">
+	insert into BOARD_SUREPLY(
+			
+									bsr_num,
+									bs_num,
+									hm_empnum,
+									bsr_content,
+									bsr_deleteyn,
+									bsr_insertdate,
+									bsr_updatedate
+			
+								
+	)values(
+									#{bsr_num},
+									#{bs_num},
+									#{hm_empnum},
+									#{bsr_content},
+									'Y',
+									to_char(sysdate,'YYYYMMDD'),
+									to_char(sysdate,'YYYYMMDD')
+		
+	)
+	
+	</insert>
+	
+	<!-- 건의사항 댓글 수정하기 -->
+	<update id="updateSuReply" parameterType="srvo">
+		update 	BOARD_SUREPLY
+		set		bsr_content = #{bsr_content}
+				,bsr_updatedate = to_char(sysdate,'YYYYMMDD')		
+		where	bsr_deleteyn = 'Y'
+		and		bsr_num = #{bsr_num}
+		and		(hm_empnum = #{hm_empnum} or  'H000000000000' =  #{hm_empnum})
+	
+	</update>
+	
+	<!-- 건의사항 댓글 삭제하기 -->
+	<update id="deleteSuReply" parameterType="srvo">
+		update 	BOARD_SUREPLY
+		set 	bsr_deleteyn = 'N'
+		where	bsr_deleteyn = 'Y'
+		and		bsr_num = #{bsr_num}
+		and		(hm_empnum = #{hm_empnum} or  'H000000000000' =  #{hm_empnum})
+	</update>
+	
+	<!-- ========================건의사항 좋아요=========================== -->
+	<!-- 건의사항 좋아요 수 구하기 -->
+	<select id="countSuLike" resultType="slvo" >
+		SELECT 	COUNT(bsl_likeYN) bsl_likeYN
+		FROM 	BOARD_SULIKE
+		where 	bsl_likeYN = 'Y'
+		AND		bs_num = #{bs_num}
+	</select>
+	
+	<!-- 건의사항 좋아요 유무 확인하기 -->
+	<select id="beforeSuLike" resultType="slvo" >
+		SELECT 	COUNT(bsl_likeYN) bsl_likeYN
+		FROM 	BOARD_SULIKE
+		where 	bsl_likeYN = 'Y'
+		AND		bs_num = #{bs_num}
+		AND		hm_empnum = #{hm_empnum}
+	</select>
+	
+	<!-- 건의사항 좋아요 채번 -->
+	<select id="chaebunSuLike" resultType="slvo">
+		SELECT LPAD(NVL(MAX(SUBSTR(bsl_num, -4)),0) + 1,'4',0) bsl_num FROM BOARD_SULIKE
+	</select>
+	
+	<!-- 건의사항 좋아요 버튼 누르기 -->
+	<insert id="checkSuLike" parameterType="slvo">
+		
+			insert into BOARD_SULIKE(
+										bsl_num,
+										bs_num,
+										hm_empnum,
+										bsl_likeYN		
+			)select
+								#{bsl_num},
+								#{bs_num},
+								#{hm_empnum},
+								'Y'
+			from dual
+			where not exists (
+	                      select 	bsl_num,
+									bs_num,
+									hm_empnum,
+									bsl_likeYN,
+									bsl_dislikeYN	
+	                      from		BOARD_SULIKE
+	                      where		1 = 1
+	                      and 		bs_num = #{bs_num}
+	                      and   	hm_empnum = #{hm_empnum}
+			)
+					
+	</insert>
+	
+	
+	<!-- 건의사항 좋아요 취소하기 -->
+	<delete id="unCheckSuLike" parameterType="slvo">
+			delete from BOARD_SULIKE
+            where	bs_num = #{bs_num}
+            and   	hm_empnum = #{hm_empnum}
+            and		bsl_likeYN = 'Y'
+	</delete>
+	
+	
+	
+	<!-- 건의사항 비추천 수 구하기 -->
+	<select id="countSuDislike" resultType="slvo" >
+		SELECT 	COUNT(bsl_dislikeYN) bsl_dislikeYN
+		FROM 	BOARD_SULIKE
+		where 	bsl_dislikeYN = 'Y'
+		AND		bs_num = #{bs_num}
+	</select>
+	
+	<!-- 건의사항 비추천 유무 확인하기 -->
+	<select id="beforeSuDislike" resultType="slvo" >
+		SELECT 	COUNT(bsl_dislikeYN) bsl_dislikeYN
+		FROM 	BOARD_SULIKE
+		where 	bsl_dislikeYN = 'Y'
+		AND		bs_num = #{bs_num}
+		AND		hm_empnum = #{hm_empnum}
+	</select>
+
+	<!-- 건의사항 비추천 버튼 누르기 -->
+	<insert id="checkSuDislike" parameterType="slvo">
+		
+			insert into BOARD_SULIKE(
+										bsl_num,
+										bs_num,
+										hm_empnum,
+										bsl_dislikeYN		
+			)select
+								#{bsl_num},
+								#{bs_num},
+								#{hm_empnum},
+								'Y'
+			from dual
+			where not exists (
+	                      select 	bsl_num,
+									bs_num,
+									hm_empnum,
+									bsl_dislikeYN,
+									bsl_likeYN	
+	                      from		BOARD_SULIKE
+	                      where		1 = 1
+	                      and 		bs_num = #{bs_num}
+	                      and   	hm_empnum = #{hm_empnum}
+			)
+					
+	</insert>
+	
+	<!-- 건의사항 비추천 취소하기 -->
+	<delete id="unCheckSuDislike" parameterType="slvo">
+			delete from BOARD_SULIKE
+            where	bs_num = #{bs_num}
+            and   	hm_empnum = #{hm_empnum}
+            and		bsl_dislikeYN = 'Y'
+	</delete>
+</mapper>

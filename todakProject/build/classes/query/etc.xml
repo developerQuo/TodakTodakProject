@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0// EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="java142.todak.etc.dao.EtcDao">
+	<!-- 로그인 기존 db 검색 -->
+	<select id="login" parameterType="hmvo" resultType="hmvo">
+		SELECT
+		        h.hm_empnum
+		FROM    human_member h
+		WHERE   h.hm_id = #{hm_id}
+		AND		h.hm_pw = #{hm_pw}
+		AND     h.hm_deleteYN = 'Y'
+	</select>
+
+
+	<!-- id 찾기  -->
+	<select id="idEmailAuth" parameterType="hmvo" resultType="hmvo">
+		SELECT
+		        h.hm_email,
+		        h.hm_id
+		FROM    human_member h
+		WHERE   h.hm_empnum = #{hm_empnum}
+		AND     h.hm_deleteYN = 'Y'
+	</select>
+	
+	<!-- pw 찾기  -->
+	<select id="pwEmailAuth" parameterType="hmvo" resultType="hmvo">
+		SELECT
+				h.hm_empnum,
+		        h.hm_id
+		FROM    human_member h
+		WHERE   h.hm_empnum = #{hm_empnum}
+		AND		h.hm_email = #{hm_email}
+		AND     h.hm_deleteYN = 'Y'
+	</select>
+	
+	<!-- 새 비밀번호  저장 -->
+	<update id="setNewPw" parameterType="hmvo">
+		UPDATE human_member h
+		SET   h.hm_pw = #{hm_pw},
+			  h.hm_updatedate = TO_char(SYSDATE, 'YYYYMMDD')
+		WHERE h.hm_empnum = #{hm_empnum}
+	</update>
+</mapper>

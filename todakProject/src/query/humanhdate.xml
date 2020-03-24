@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="java142.todak.human.dao.HumanHdateDao">
+
+	<select id="selectHumanHoliday" parameterType="hhvo" resultType="hrvo">
+	SELECT 
+	     A.HM_EMPNUM AS hmEmpnum
+	    ,NVL(SUM(A.DAYCOUNT),0) AS regResult
+	    ,NVL(SUM(A.USERESULT),0) AS useResult
+	    ,15-NVL(SUM(A.DAYCOUNT),0) AS hoResult
+	FROM(
+	    SELECT
+	           HH.HM_EMPNUM
+	           , (TO_DATE(SUBSTR(REPLACE(HH.SW_ENDDATE,'-',''),1,8),'YYYYMMDD') - TO_DATE(SUBSTR(REPLACE(HH.SW_STARTDATE,'-',''),1,8),'YYYYMMDD')+1) DAYCOUNT
+	           ,USEH.USERESULT
+	    FROM SCHEDULER_WORKSCHEDULE HH 
+	        , ( SELECT SW_NUM
+	                ,HM_EMPNUM
+	                , (TO_DATE(SUBSTR(REPLACE(SW_ENDDATE,'-',''),1,8),'YYYYMMDD') - TO_DATE(SUBSTR(REPLACE(SW_STARTDATE,'-',''),1,8),'YYYYMMDD')+1) USERESULT
+	            FROM SCHEDULER_WORKSCHEDULE
+	            WHERE SUBSTR(SW_STARTDATE,1,4) = TO_CHAR(SYSDATE,'YYYY') 
+	                AND SUBSTR(SW_ENDDATE,1,4)= TO_CHAR(SYSDATE,'YYYY') 
+	                <![CDATA[
+	                AND SUBSTR(REPLACE(SW_ENDDATE,'-',''),1,8)<= TO_CHAR(SYSDATE,'YYYYMMDD') 
+	                ]]> 
+	                AND SW_DELETEYN = 'Y'
+                	AND SW_TYPE IN ('47','48','49','50','51')
+	        ) USEH
+	    WHERE
+	        HH.SW_NUM = USEH.SW_NUM(+)
+	    AND HH.HM_EMPNUM = #{hm_empnum}
+	   	AND HH.SW_TYPE IN ('47','48','49','50','51')
+    	AND HH.SW_DELETEYN = 'Y'
+	    AND SUBSTR(HH.SW_STARTDATE,1,4) = TO_CHAR(SYSDATE,'YYYY') 
+	    AND SUBSTR(HH.SW_ENDDATE,1,4)=TO_CHAR(SYSDATE,'YYYY')) A
+	GROUP BY A.HM_EMPNUM
+	</select>
+	
+	<!-- 채번하기 -->
+	<select id="chaebunHumanhdate" parameterType="hhvo" resultType="hhvo">
+	SELECT 
+               NVL(LPAD(TO_CHAR(MAX(TO_NUMBER(SUBSTR(hhd.hhd_tablenum, -4))) + 1), 4, '0'), '0001') AS hhd_tablenum
+      FROM     human_hdate hhd
+      </select>
+      
+     <insert id="insertHumanhdate" parameterType="hhvo">
+     	INSERT INTO human_hdate (
+     					hhd_tablenum
+					   ,hm_empnum
+					   ,hhd_holidaycode
+					   ,hhd_sholidaycode
+					   ,hhd_eholidaycode
+					   ,hhd_insertdate
+					   ,hhd_updatedate
+					   ,hhd_deleteyn
+     							)
+     			VALUES(
+     					#{hhd_tablenum}
+     				   ,#{hm_empnum}
+     				   ,#{hhd_holidaycode}
+     				   ,#{hhd_sholidaycode}
+     				   ,#{hhd_eholidaycode}
+     				   ,TO_CHAR(SYSDATE,'YYYYMMDD')
+     				   ,TO_CHAR(SYSDATE,'YYYYMMDD')
+     				   ,'Y'
+     				  )
+     </insert>
+     
+</mapper>

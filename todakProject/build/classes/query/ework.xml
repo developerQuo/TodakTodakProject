@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="java142.todak.ework.dao.EworkDao">
+	<resultMap type="sabvo" id="selectAuthBoxVO">
+		<result property="eab_writer" column="EAB_WRITER"/>
+		<result property="eab_title" column="EAB_WRITER"/>
+		<result property="eab_startdate" column="EAB_WRITER"/>
+		<result property="eab_enddate" column="EAB_WRITER"/>
+		<result property="eab_group" column="EAB_WRITER"/>
+	</resultMap>
+	
+	<resultMap type="apvo" id="searchAuthPersonVO">
+		<result property="ea_num" column="ea_num"/>
+	</resultMap>
+	
+	<resultMap type="pvo" id="searchProposalVO">
+		<result property="ea_num" column="ea_num"/>
+	</resultMap>
+	
+	<resultMap type="hvo" id="searchHolidayVO">
+		<result property="ea_num" column="ea_num"/>
+	</resultMap>
+	
+	<resultMap type="auvo" id="updateAuthVO">
+		<result property="ea_presentnum" column="EA_PRESENTNUM"/>
+		<result property="ea_position" column="EA_POSITION"/>
+		<result property="ea_num" column="EA_NUM"/>
+	</resultMap>
+	
+	<resultMap type="lvo" id="searchLineVO">
+		<result property="ea_num" column="EA_NUM"/>
+	</resultMap>
+	
+	<resultMap type="apvo" id="plusSequenceVO">
+		<result property="ea_num" column="EA_NUM"/>
+	</resultMap>
+	
+	<resultMap type="esvo" id="insertSignStampVO">
+		<result property="es_num" column="ES_NUM"/>
+		<result property="hm_empnum" column="HM_EMPNUM"/>
+		<result property="es_filedir" column="ES_FILEDIR"/>
+	</resultMap>
+	
+	<resultMap type="esvo" id="updateSignStampVO">
+		<result property="es_filedir" column="ES_FILEDIR"/>
+		<result property="hm_empnum" column="HM_EMPNUM"/>
+	</resultMap>
+	
+	<!-- ======================================================================== -->
+	
+	<select id="selectAuthBox" parameterType="sabvo" resultType="sabvo">
+		SELECT
+		        B.EAB_NUM               EAB_NUM,   -- 결재서류함 번호
+		        B.EA_NUM                EA_NUM,	-- 결재번호
+		        B.EAB_WRITER            EAB_WRITER,   -- 작성자
+		        B.EAB_TITLE             EAB_TITLE,   -- 제목
+		        B.EAB_STARTDATE         EAB_STARTDATE,    -- 결재 시작일
+		        B.EAB_ENDDATE           EAB_ENDDATE,    -- 결재 마감일
+		        L.EL_LINE               EL_LINE,  -- 결재라인
+		        A.EA_PRESENTNUM         EA_PRESENTNUM, -- 현결재자
+		        I.EAI_SUBSTITUTENUM     EAI_SUBSTITUTENUM, -- 대결자사원번호
+		        B.EAB_GROUP             EAB_GROUP,    -- 분류
+		        B.EAB_INSERTDATE        EAB_INSERTDATE,    -- 생성일
+		        B.EAB_UPDATEDATE        EAB_UPDATEDATE,    -- 수정일
+		        B.EAB_DELETEYN          EAB_DELETEYN     -- 삭제 여부
+		FROM    EWORK_AUTHBOX B,
+		        EWORK_AUTH A,
+		        EWORK_LINE L,
+		        (SELECT  
+		                C.EA_NUM            EA_NUM,	 --	결재번호
+		                C.EAI_SUBSTITUTENUM	EAI_SUBSTITUTENUM  --	대결자사원번호
+		                --C.EAI_SEQUENCE -- 서명위치
+		         FROM    EWORK_AUTHPERSON C 
+		         WHERE   (C.EA_NUM, TO_NUMBER(SUBSTR(C.EAI_NUM, 2))) IN (SELECT 
+		                                                                            E.EA_NUM            EA_NUM, 
+		                                                                            MAX(TO_NUMBER(SUBSTR(E.EAI_NUM, 2))) EAI_NUM
+		                                                                 FROM       EWORK_AUTHPERSON E 
+		                                                                 GROUP BY E.EA_NUM)) I
+		<where>
+			<if test="eab_writer!=null and eab_writer!=''">
+				B.EAB_WRITER LIKE '%' || #{eab_writer, jdbcType=VARCHAR} || '%'
+			</if>
+			<if test="eab_title!=null and eab_title!=''">
+				AND B.EAB_TITLE LIKE '%' || #{eab_title, jdbcType=VARCHAR} || '%'
+			</if>
+			<if test="eab_startdate!=null and eab_startdate!=''">
+				AND B.EAB_STARTDATE &gt;= #{eab_startdate, jdbcType=VARCHAR}
+			</if>
+			<if test="eab_enddate!=null and eab_enddate!=''">
+				AND B.EAB_ENDDATE &lt;= #{eab_enddate, jdbcType=VARCHAR}
+			</if>
+			<if test="eab_group!=null and eab_group!=''">
+				AND B.EAB_GROUP LIKE '%' || #{eab_group, jdbcType=VARCHAR} || '%'
+			</if>
+			AND     B.EA_NUM=A.EA_NUM
+			AND     A.EA_NUM=L.EA_NUM 
+			AND     L.EA_NUM=I.EA_NUM 
+		</where>
+		ORDER BY B.EAB_STARTDATE DESC
+	</select>
+	
+	<!-- 결재자정보 테이블 상세조회 -->
+	<select id="searchAuthPerson" parameterType="sabvo" resultType="apvo">
+		SELECT
+		        A.EAI_NUM	        EAI_NUM,
+		        A.EA_NUM	        EA_NUM,
+		        A.EAI_RECENTNUM	    EAI_RECENTNUM,
+		        A.EAI_POSITION	    EAI_POSITION,
+		        A.EAI_AUTH	        EAI_AUTH,
+		        A.EAI_FILEDIR	    EAI_FILEDIR,
+		        A.EAI_SUBSTITUTEYN	EAI_SUBSTITUTEYN,
+		        A.EAI_SUBSTITUTENUM EAI_SUBSTITUTENUM,
+		        A.EAI_SEQUENCE	    EAI_SEQUENCE	
+		FROM    EWORK_AUTHPERSON    A
+		WHERE   A.EA_NUM = #{ea_num, jdbcType=VARCHAR} 
+		ORDER BY A.EAI_SEQUENCE 
+	</select>
+	
+	<!-- 기안서 상세조회 -->
+	<select id="searchProposal" parameterType="sabvo" resultType="pvo">
+		SELECT
+		        P.EP_NUM	    EP_NUM,
+		        P.EA_NUM	    EA_NUM,
+		        P.EP_TITLE	    EP_TITLE,
+		        P.HM_EMPNUM 	HM_EMPNUM,
+		        P.EP_WRITER	    EP_WRITER,
+		        P.HM_POSITION	HM_POSITION,
+		        P.EP_STARTDATE	EP_STARTDATE,
+		        P.EP_ENDDATE	EP_ENDDATE,
+		        P.EP_GROUP	    EP_GROUP,
+		        P.EP_CONTENT	EP_CONTENT,
+		        P.EP_INSERTDATE	EP_INSERTDATE,
+		        P.EP_UPDATEDATE	EP_UPDATEDATE,
+		        P.EP_DELETEYN	EP_DELETEYN	
+		FROM    EWORK_PROPOSAL  P
+		WHERE   P.EA_NUM = #{ea_num, jdbcType=VARCHAR}
+		AND     P.EP_DELETEYN = 'Y' 
+	</select>
+	
+	<!-- 휴가신청서 상세조회 -->
+	<select id="searchHoliday" parameterType="sabvo" resultType="hvo">
+		SELECT 
+		        H.EH_NUM	        EH_NUM,
+		        H.EA_NUM	        EA_NUM,
+		        H.EH_TITLE  	    EH_TITLE,
+		        H.HM_EMPNUM 	    HM_EMPNUM,
+		        H.EH_WRITER	        EH_WRITER,
+		        H.HM_POSITION	    HM_POSITION,
+		        H.EH_STARTDATE	    EH_STARTDATE,
+		        H.EH_ENDDATE	    EH_ENDDATE,
+		        H.EH_GROUP	        EH_GROUP,
+		        H.EH_SORT	        EH_SORT,
+		        H.EH_REASON	        EH_REASON,
+		        H.EH_STARTPERIOD	EH_STARTPERIOD,
+		        H.EH_ENDPERIOD	    EH_ENDPERIOD,
+		        H.EH_EMERGENCY	    EH_EMERGENCY,
+		        H.EH_INSERTDATE	    EH_INSERTDATE,
+		        H.EH_UPDATEDATE	    EH_UPDATEDATE,
+		        H.EH_DELETEYN	    EH_DELETEYN	
+		FROM    EWORK_HOLIDAY H 
+		WHERE   H.EA_NUM = #{ea_num, jdbcType=VARCHAR}
+		AND     H.EH_DELETEYN = 'Y' 
+	</select>
+	
+	<!-- 결재 테이블 UPDATE -->
+	<update id="updateAuth" parameterType="auvo">
+		UPDATE EWORK_AUTH
+		SET
+		        EA_PRESENTNUM = #{ea_presentnum, jdbcType=VARCHAR}, -- 부장이라고 치자
+		        EA_POSITION = #{ea_position, jdbcType=VARCHAR}, -- 직급
+		        EA_UPDATEDATE = TO_CHAR(SYSDATE, 'YYYYMMDD')
+		WHERE   
+		        EA_DELETEYN = 'Y' 
+		AND     EA_NUM = #{ea_num, jdbcType=VARCHAR}
+	</update>
+	
+	<!-- 최신 시퀀스 + 1 -->
+	<select id="plusSequence" parameterType="envo" resultType="apvo">
+		SELECT  
+		        NVL(MAX(A.EAI_SEQUENCE),0)+1    EAI_SEQUENCE
+		FROM    EWORK_AUTHPERSON  A 
+		WHERE   A.EA_NUM = #{ea_num, jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 결재라인 조회 -->
+	<select id="searchLine" parameterType="envo" resultType="lvo">
+	SELECT
+	        L.EA_NUM    EA_NUM,
+	        L.EL_LINE   EL_LINE
+	FROM    EWORK_LINE L 
+	WHERE   L.EA_NUM = #{ea_num, jdbcType=VARCHAR}
+	</select>
+	
+	<resultMap type="apvo" id="searchApprovalVO">
+		<result property="ea_num" column="ea_num"/>
+	</resultMap>
+	
+	<!-- 품의서 상세조회 -->
+	<select id="searchApproval" parameterType="sabvo" resultType="avo">
+		SELECT
+		        A.EAP_NUM	        EAP_NUM,
+		        A.EA_NUM	        EA_NUM,
+		        A.EAP_TITLE	        EAP_TITLE,
+		        A.HM_EMPNUM	        HM_EMPNUM,
+		        A.EAP_WRITER	    EAP_WRITER,
+		        A.HM_POSITION	    HM_POSITION,
+		        A.EAP_STARTDATE	    EAP_STARTDATE,
+		        A.EAP_ENDDATE	    EAP_ENDDATE,
+		        A.EAP_GROUP	        EAP_GROUP,
+		        A.EAP_FILEDIR	    EAP_FILEDIR,
+		        A.EAP_INSERTDATE	EAP_INSERTDATE,
+		        A.EAP_UPDATEDATE	EAP_UPDATEDATE,
+		        A.EAP_DELETEYN	    EAP_DELETEYN
+		FROM    EWORK_APPROVAL  A 
+		WHERE   A.EA_NUM = #{ea_num, jdbcType=VARCHAR}
+		AND     A.EAP_DELETEYN = 'Y'
+	</select>
+	
+	<!-- 결재라인히스토리 테이블 채번 -->
+	<select id="chaebunLineHistory" resultType="lhvo">
+		SELECT  /*+ INDEX_DESC(SYS_C0011926)*/
+		        LPAD(NVL(MAX(SUBSTR(A.ELH_NUM,-4)),0)+1,'4','0')    ELH_NUM
+		FROM    EWORK_LINEHISTORY  A 
+	</select>
+	
+	<resultMap type="lhvo" id="insertLineHistoryVO">
+		<result property="elh_num" column="ELH_NUM"/>
+		<result property="ea_num" column="EA_NUM"/>
+		<result property="el_line" column="EL_LINE"/>
+	</resultMap>
+	
+	<!-- 결재라인히스토리 테이블 INSERT -->
+	<insert id="insertLineHistory" parameterType="lhvo">
+		INSERT INTO EWORK_LINEHISTORY(
+		    ELH_NUM,	 --	결재라인번호
+		    EA_NUM,	 --	결재번호
+		    EL_LINE,	 --	결재라인
+		    ELH_INSERTDATE	 --	생성일
+		) VALUES(
+		    #{elh_num, jdbcType=VARCHAR},
+		    #{ea_num, jdbcType=VARCHAR},
+		    #{el_line, jdbcType=VARCHAR},
+		    TO_CHAR(SYSDATE, 'YYYYMMDD')
+		)
+	</insert>
+	
+	<resultMap type="hmvo" id="selectLowerPositionPersonVO">
+		<result property="hm_deptnum" column="HM_DEPTNUM"/>
+		<result property="hm_position" column="HM_POSITION"/>
+	</resultMap>
+	
+	<!-- 과장 정보 가져올때 쓰는 쿼리 -->
+	<select id="selectLowerPositionPerson" parameterType="hmvo" resultType="hmvo">
+		SELECT
+		        H.HM_EMPNUM		HM_EMPNUM,
+		        H.HM_NAME       HM_NAME,
+		        H.HM_DEPTNUM    HM_DEPTNUM, 
+		        H.HM_POSITION   HM_POSITION,
+		        H.HM_DUTY       HM_DUTY
+		FROM    HUMAN_MEMBER H
+		WHERE   H.HM_DEPTNUM = #{hm_deptnum, jdbcType=VARCHAR} 
+		AND     H.HM_POSITION = #{hm_position, jdbcType=VARCHAR} 
+	</select>
+	
+	<resultMap type="lvo" id="updateLineVO">
+		<result property="el_line" column="EL_LINE"/>
+		<result property="ea_num" column="EA_NUM"/>
+	</resultMap>
+	
+	<!-- 결재라인 테이블 UPDATE -->
+	<update id="updateLine" parameterType="lvo">
+		UPDATE  EWORK_LINE L
+		SET     
+		        L.EL_LINE = #{el_line, jdbcType=VARCHAR},
+		        L.EL_UPDATEDATE = TO_CHAR(SYSDATE, 'YYYYMMDD') 
+		WHERE   L.EA_NUM = #{ea_num, jdbcType=VARCHAR} 
+	</update>
+	
+	<!-- 서명 업로드 -->
+	<insert id="insertSignStamp" parameterType="esvo">
+		INSERT INTO EWORK_SIGNSTAMP(
+		ES_NUM,	 --	서명및도장번호
+		HM_EMPNUM,	 --	사원번호
+		ES_FILEDIR,	 --	파일경로
+		ES_INSERTDATE,	 --	생성일
+		ES_UPDATEDATE,	 --	수정일
+		ES_DELETEYN		 --	삭제여부
+		) VALUES(
+		    #{es_num, jdbcType=VARCHAR},
+		    #{hm_empnum, jdbcType=VARCHAR},
+		    #{es_filedir, jdbcType=VARCHAR},
+		    TO_CHAR(SYSDATE, 'YYYYMMDD'),
+		    TO_CHAR(SYSDATE, 'YYYYMMDD'),
+		    'Y'
+		)
+	</insert>
+	
+	<!-- 서명 UPDATE-->
+	<update id="updateSignStamp" parameterType="esvo">
+		UPDATE  EWORK_SIGNSTAMP
+		SET
+		        ES_FILEDIR = #{es_filedir, jdbcType=VARCHAR},
+		        ES_UPDATEDATE = TO_CHAR(SYSDATE, 'YYYYMMDD')
+		WHERE   HM_EMPNUM = #{hm_empnum, jdbcType=VARCHAR} 
+	</update>
+	
+</mapper>

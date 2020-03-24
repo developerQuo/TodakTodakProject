@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+
+.sponsorship-info {
+	style: "width:600px;height:300px;text-align:center;";
+	
+}
+
+.graph-component {
+	
+}
+.placeholder {
+/* 	style: "width:600px;height:300px;"; */
+}
+
+#dateCriteria {
+	width: 200px;
+}

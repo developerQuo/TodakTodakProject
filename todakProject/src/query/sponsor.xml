@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0// EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="java142.todak.sponsor.dao.SponsorDao">
+	<!-- 후원인 조회/검색 -->
+	<select id="selectMember" parameterType="map" resultType="smvo">
+		SELECT 
+		         ap.sm_num,
+		         ap.sm_name,
+		         ap.sm_hp,
+		         ap.sm_email,
+		         ap.sm_regularYN,
+		         a.cd_name	as sm_means,
+		         ap.sm_optionalterms,
+		         ap.sm_insertdate,
+		         ap.sm_updatedate,
+		         ap.pageNo, 
+		         ap.totalCount
+		FROM	(
+				SELECT 
+				         sm.sm_num,
+				         sm.sm_name,
+				         sm.sm_hp,
+				         sm.sm_email,
+				         sm.sm_regularYN,
+				         sm.sm_means,
+				         sm.sm_optionalterms,
+				         sm.sm_insertdate,
+				         sm.sm_updatedate,
+				         CEIL(ROW_NUMBER() OVER(ORDER BY sm.sm_num)/#{param2.pageSize}) AS pageNo, 
+				         COUNT(sm_num) OVER() AS totalCount
+				FROM    sponsor_member sm
+				WHERE	sm.sm_deleteYN = 'Y'
+				<trim prefix="AND" prefixOverrides="AND">
+					<!-- 페이징 -->
+					<if test="param1.sm_num != '' ">
+						sm.sm_num = #{param1.sm_num}
+					</if>
+					<!-- 키워드 검색 -->
+					<if test="param2.search=='sm_num'">
+						<![CDATA[sm.sm_num LIKE '%'||#{param2.keyword}||'%']]>
+					</if>
+					<if test="param2.search=='sm_name'">
+						<![CDATA[sm.sm_name LIKE '%'||#{param2.keyword}||'%']]>
+					</if>
+					<if test="param2.search=='sm_insertdate'">
+						<![CDATA[sm.sm_insertdate LIKE '%'||#{param2.keyword}||'%']]>
+					</if>
+				</trim>
+				) ap,
+				code a
+		WHERE	ap.pageNo = #{param2.curPage}
+		AND		ap.sm_means = a.cd_code
+	</select>
+	
+	<!-- 후원인 등록 -->
+	<insert id="insertMember" parameterType="smvo">
+		INSERT INTO sponsor_member sm
+		(
+		         sm.sm_num,
+		         sm.sm_name,
+		         sm.sm_hp,
+		         sm.sm_email,
+		         sm.sm_regularYN,
+		         sm.sm_means,
+		         sm.sm_optionalterms,
+		         sm.sm_deleteYN,
+		         sm.sm_insertdate,
+		         sm.sm_updatedate
+		)
+		VALUES
+		(
+		        #{sm_num},
+		        #{sm_name},
+		        #{sm_hp},
+		        #{sm_email},
+		        #{sm_regularYN},
+		        #{sm_means},
+		        #{sm_optionalterms},
+		        'Y',
+		        TO_CHAR(SYSDATE, 'YYYYMMDD'),
+		        TO_CHAR(SYSDATE, 'YYYYMMDD')
+		)
+	</insert>
+	
+	<!-- 후원인 수정 -->
+	<update id="updateMember" parameterType="smvo">
+		UPDATE sponsor_member sm
+		SET
+		        sm.sm_name              = #{sm_name},
+		        sm.sm_hp                = #{sm_hp},
+		        sm.sm_email             = #{sm_email},
+		        sm.sm_regularYN         = #{sm_regularYN},
+		        sm.sm_means             = #{sm_means},
+		        sm.sm_optionalterms     = #{sm_optionalterms},
+		        sm.sm_updatedate        = TO_char(SYSDATE, 'YYYYMMDD')
+		WHERE sm.sm_deleteYN = 'Y'
+		AND   sm.sm_num = #{sm_num}
+	</update>
+	
+	<!-- 후원인 삭제 -->
+	<update id="deleteMember" parameterType="smvo">
+		UPDATE sponsor_member sm
+		SET
+		        sm.sm_deleteYN          = 'N',
+		        sm.sm_updatedate        = TO_CHAR(SYSDATE, 'YYYYMMDD')
+		WHERE  sm.sm_deleteYN = 'Y'
+		AND   sm.sm_num = #{sm_num}
+	</update>
+	
+	<!-- 후원인 채번 -->
+	<select id="chaebunMember" parameterType="smvo" resultType="smvo">
+		SELECT 
+		         NVL(LPAD(TO_CHAR(MAX(TO_NUMBER(SUBSTR(sm.sm_num, -4))) + 1), 4, '0'), '0001') AS sm_num
+		FROM    sponsor_member sm
+	</select>
+
+<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+	<!-- 후원인카드 조회/검색 -->
+	<select id="selectMemberCard" parameterType="map" resultType="smcvo">
+		SELECT 
+		         ap.smc_num,
+		         ap.sm_num,
+		         a.cd_name	as smc_cardcorp,
+		         ap.smc_cardnum,
+		         ap.smc_cardowner,
+		         ap.smc_cardexpired,
+		         ap.smc_cardcvc,
+		         ap.smc_insertdate,
+		         ap.smc_updatedate,
+		         ap.pageNo, 
+		         ap.totalCount
+		FROM	(
+					SELECT 
+					         smc.smc_num,
+					         smc.sm_num,
+					         smc.smc_cardcorp,
+					         smc.smc_cardnum,
+					         smc.smc_cardowner,
+					         smc.smc_cardexpired,
+					         smc.smc_cardcvc,
+					         smc.smc_insertdate,
+					         smc.smc_updatedate,
+					         CEIL(ROW_NUMBER() OVER(ORDER BY smc.sm_num)/#{param2.pageSize}) AS pageNo, 
+					         COUNT(sm_num) OVER() AS totalCount
+					FROM    sponsor_membercard smc
+					WHERE	smc.smc_deleteYN = 'Y'
+					<trim prefix="AND" prefixOverrides="AND">
+						<!-- 페이징 -->
+						<if test="param1.sm_num != '' ">
+							smc.sm_num = #{param1.sm_num}
+						</if>
+						<!-- 키워드 검색 -->
+						<if test="param2.search=='sm_num'">
+							<![CDATA[sm.sm_num LIKE '%'||#{param2.keyword}||'%']]>
+						</if>
+						<if test="param2.search=='sm_name'">
+							<![CDATA[sm.sm_name LIKE '%'||#{param2.keyword}||'%']]>
+						</if>
+						<if test="param2.search=='sm_insertdate'">
+							<![CDATA[sm.sm_insertdate LIKE '%'||#{param2.keyword}||'%']]>
+						</if>
+					</trim>
+				) ap,
+				code a
+		WHERE	ap.pageNo = #{param2.curPage}
+		AND		ap.smc_cardcorp = a.cd_code
+	</select>
+	
+	<!-- 후원인카드 등록 -->
+	<insert id="insertMemberCard" parameterType="smcvo">
+		INSERT INTO sponsor_membercard smc
+		(
+		         smc.smc_num,
+		         smc.sm_num,
+		         smc.smc_cardcorp,
+		         smc.smc_cardnum,
+		         smc.smc_cardowner,
+		         smc.smc_cardexpired,
+		         smc.smc_cardcvc,
+		         smc.smc_deleteYN,
+		         smc.smc_insertdate,
+		         smc.smc_updatedate
+		)
+		VALUES
+		(
+		        #{smc_num},
+		        #{sm_num},
+		        #{smc_cardcorp},
+		        #{smc_cardnum},
+		        #{smc_cardowner},
+		        #{smc_cardexpired},
+		        #{smc_cardcvc},
+		        'Y',
+		        TO_CHAR(SYSDATE, 'YYYYMMDD'),
+		        TO_CHAR(SYSDATE, 'YYYYMMDD')
+		)
+	</insert>
+		
+	<!-- 후원인카드 수정 -->
+	<update id="updateMemberCard" parameterType="smcvo">
+		UPDATE sponsor_membercard smc
+		SET
+		        smc.smc_cardcorp         = #{smc_cardcorp},
+		        smc.smc_cardnum          = #{smc_cardnum},
+		        smc.smc_cardowner        = #{smc_cardowner},
+		        smc.smc_cardexpired      = #{smc_cardexpired},
+		        smc.smc_cardcvc          = #{smc_cardcvc},
+		        smc.smc_updatedate       = TO_char(SYSDATE, 'YYYYMMDD')
+		WHERE smc.smc_deleteYN = 'Y'
+		AND   smc.sm_num = #{sm_num}
+	</update>
+	
+	<!-- 후원인카드 삭제 -->
+	<update id="deleteMemberCard" parameterType="smvo">
+		UPDATE sponsor_membercard smc
+		SET
+		        smc.smc_deleteYN          = 'N',
+		        smc.smc_updatedate        = TO_CHAR(SYSDATE, 'YYYYMMDD')
+		WHERE  smc.smc_deleteYN = 'Y'
+		AND    smc.sm_num = #{sm_num}
+	</update>
+	
+	<!-- 후원인카드 채번 -->
+	<select id="chaebunMemberCard" parameterType="smcvo" resultType="smcvo">
+		SELECT 
+		         NVL(LPAD(TO_CHAR(MAX(TO_NUMBER(SUBSTR(smc.smc_num, -4))) + 1), 4, '0'), '0001') AS smc_num
+		FROM    sponsor_membercard smc
+	</select>
+	
+<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+	<!-- 후원인계좌 조회/검색 -->
+	<select id="selectMemberAccount" parameterType="map" resultType="smavo">
+		SELECT 
+		         ap.sma_num,
+		         ap.sm_num,
+		         a.cd_name	as sma_bank,
+		         ap.sma_accountnum,
+		         ap.sma_depositor,
+		         ap.sma_insertdate,
+		         ap.sma_updatedate,
+		         ap.pageNo, 
+		         ap.totalCount
+		FROM	(
+					SELECT 
+					         sma.sma_num,
+					         sma.sm_num,
+					         sma.sma_bank,
+					         sma.sma_accountnum,
+					         sma.sma_depositor,
+					         sma.sma_insertdate,
+					         sma.sma_updatedate,
+					         CEIL(ROW_NUMBER() OVER(ORDER BY sma.sm_num)/#{param2.pageSize}) AS pageNo, 
+					         COUNT(sm_num) OVER() AS totalCount
+					FROM    sponsor_memberaccount sma
+					WHERE	sma.sma_deleteYN = 'Y'
+					<trim prefix="AND" prefixOverrides="AND">
+						<!-- 페이징 -->
+						<if test="param1.sm_num != '' ">
+							sma.sm_num = #{param1.sm_num}
+						</if>
+						<!-- 키워드 검색 -->
+						<if test="param2.search=='sm_num'">
+							<![CDATA[sma.sm_num LIKE '%'||#{param2.keyword}||'%']]>
+						</if>
+						<if test="param2.search=='sm_name'">
+							<![CDATA[sma.sm_name LIKE '%'||#{param2.keyword}||'%']]>
+						</if>
+						<if test="param2.search=='sm_insertdate'">
+							<![CDATA[sma.sm_insertdate LIKE '%'||#{param2.keyword}||'%']]>
+						</if>
+					</trim>
+				) ap,
+				code a
+		WHERE	ap.pageNo = #{param2.curPage}
+		AND		ap.sma_bank = a.cd_code
+	</select>
+	
+	<!-- 후원인계좌 등록 -->
+	<insert id="insertMemberAccount" parameterType="smavo">
+		INSERT INTO sponsor_memberaccount sma
+		(
+		         sma.sma_num,
+		         sma.sm_num,
+		         sma.sma_bank,
+		         sma.sma_accountnum,
+		         sma.sma_depositor,
+		         sma.sma_deleteYN,
+		         sma.sma_insertdate,
+		         sma.sma_updatedate
+		)
+		VALUES
+		(
+		        #{sma_num},
+		        #{sm_num},
+		        #{sma_bank},
+		        #{sma_accountnum},
+		        #{sma_depositor},
+		        'Y',
+		        TO_CHAR(SYSDATE, 'YYYYMMDD'),
+		        TO_CHAR(SYSDATE, 'YYYYMMDD')
+		)
+	</insert>
+	
+	<!-- 후원인계좌수정 -->
+	<update id="updateMemberAccount" parameterType="smavo">
+		UPDATE sponsor_memberaccount sma
+		SET
+		        sma.sma_bank             = #{sma_bank},
+		        sma.sma_accountnum       = #{sma_accountnum},
+		        sma.sma_depositor        = #{sma_depositor},
+		        sma.sma_updatedate       = TO_char(SYSDATE, 'YYYYMMDD')
+		WHERE sma.sma_deleteYN = 'Y'
+		AND   sma.sm_num = #{sm_num}
+	</update>
+	
+	<!-- 후원인계좌 삭제 -->
+	<update id="deleteMemberAccount" parameterType="smvo">
+		UPDATE sponsor_memberaccount sma
+		SET
+		        sma.sma_deleteYN          = 'N',
+		        sma.sma_updatedate        = TO_CHAR(SYSDATE, 'YYYYMMDD')
+		WHERE  sma.sma_deleteYN = 'Y'
+		AND    sma.sm_num = #{sm_num}
+	</update>
+	
+	<!-- 후원인계좌 채번 -->
+	<select id="chaebunMemberAccount" parameterType="smavo" resultType="smavo">
+		SELECT 
+		         NVL(LPAD(TO_CHAR(MAX(TO_NUMBER(SUBSTR(sma.sma_num, -4))) + 1), 4, '0'), '0001') AS sma_num
+		FROM    sponsor_memberaccount sma
+	</select>
+	
+<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->		
+	<!-- 비영리단체 조회/검색 -->
+	<select id="selectCharity" parameterType="map" resultType="scvo">
+		SELECT 
+		         ap.sc_num,
+		         ap.sc_name,
+		         ap.sc_ceo,
+		         ap.sc_hp,
+		         ap.sc_email,
+		         ap.sc_addr,
+		         ap.sc_registration,
+		         ap.sc_registrationdate,
+		         a.cd_name	as sc_bizfield,
+		         ap.sc_bizcontents,
+		         ap.sc_targetamount,
+		         ap.sc_amountingstart,
+		         ap.sc_amountingend,
+		         b.cd_name	as sc_bank,
+		         ap.sc_accountnum,
+		         ap.sc_depositor,
+		         ap.sc_deleteYN,
+		         ap.sc_insertdate,
+		         ap.sc_updatedate,
+		         ap.pageNo, 
+		         ap.totalCount
+		FROM	(
+				SELECT 
+				         sc.sc_num,
+				         sc.sc_name,
+				         sc.sc_ceo,
+				         sc.sc_hp,
+				         sc.sc_email,
+				         sc.sc_addr,
+				         sc.sc_registration,
+				         sc.sc_registrationdate,
+				         sc.sc_bizfield,
+				         sc.sc_bizcontents,
+				         sc.sc_targetamount,
+				         sc.sc_amountingstart,
+				         sc.sc_amountingend,
+				         sc.sc_bank,
+				         sc.sc_accountnum,
+				         sc.sc_depositor,
+				         sc.sc_deleteYN,
+				         sc.sc_insertdate,
+				         sc.sc_updatedate,
+				         CEIL(ROW_NUMBER() OVER(ORDER BY sc.sc_num)/#{param2.pageSize}) AS pageNo, 
+				         COUNT(sc_num) OVER() AS totalCount
+				FROM    sponsor_charity sc
+				WHERE	sc.sc_deleteYN = 'Y'
+				<trim prefix="AND" prefixOverrides="AND">
+					<!-- 페이징 -->
+					<if test="param1.sc_num != '' ">
+						sc.sc_num = #{param1.sc_num}
+					</if>
+					<!-- 키워드 검색 -->
+					<if test="param2.search=='sc_bizfield'">
+						<![CDATA[sc.sc_bizfield LIKE '%'||#{param2.keyword}||'%']]>
+					</if>
+					<if test="param2.search=='sc_bizcontents'">
+						<![CDATA[sc.sc_bizcontents LIKE '%'||#{param2.keyword}||'%']]>
+					</if>
+					<if test="param2.search=='sc_name'">
+						<![CDATA[sc.sc_name LIKE '%'||#{param2.keyword}||'%']]>
+					</if>
+				</trim>
+				) ap,
+				code a,
+				code b
+		WHERE	ap.pageNo = #{param2.curPage}
+		AND		ap.sc_bizfield = a.cd_code
+		AND		ap.sc_bank = b.cd_code
+	</select>
+	
+	<!-- 비영리단체 등록 -->
+	<insert id="insertCharity" parameterType="scvo">
+		INSERT INTO sponsor_charity sc
+		(
+		         sc.sc_num,
+		         sc.sc_name,
+		         sc.sc_ceo,
+		         sc.sc_hp,
+		         sc.sc_email,
+		         sc.sc_addr,
+		         sc.sc_registration,
+		         sc.sc_registrationdate,
+		         sc.sc_bizfield,
+		         sc.sc_bizcontents,
+		         sc.sc_targetamount,
+		         sc.sc_amountingstart,
+		         sc.sc_amountingend,
+		         sc.sc_bank,
+		         sc.sc_accountnum,
+		         sc.sc_depositor,
+		         sc.sc_deleteYN,
+		         sc.sc_insertdate,
+		         sc.sc_updatedate
+		)
+		VALUES
+		(
+		        #{sc_num},
+		        #{sc_name},
+		        #{sc_ceo},
+		        #{sc_hp},
+		        #{sc_email},
+		        #{sc_addr},
+		        #{sc_registration},
+		        #{sc_registrationdate},
+		        #{sc_bizfield},
+		        #{sc_bizcontents},
+		        #{sc_targetamount},
+		        #{sc_amountingstart},
+		        #{sc_amountingend},
+		        #{sc_bank},
+		        #{sc_accountnum},
+		        #{sc_depositor},
+		        'Y',
+		        TO_CHAR(SYSDATE, 'YYYYMMDD'),
+		        TO_CHAR(SYSDATE, 'YYYYMMDD')
+		)
+	</insert>
+	
+	<!-- 비영리단체 채번 -->
+	<select id="chaebunCharity" parameterType="scvo" resultType="scvo">
+		SELECT 
+		         NVL(LPAD(TO_CHAR(MAX(TO_NUMBER(SUBSTR(sc.sc_num, -4))) + 1), 4, '0'), '0001') AS sc_num
+		FROM    sponsor_charity sc
+	</select>
+	
+	<!-- 비영리단체 수정 -->
+	<update id="updateCharity" parameterType="scvo">
+		UPDATE  sponsor_charity sc
+		SET
+		         sc.sc_name             = #{sc_name},
+		         sc.sc_ceo              = #{sc_ceo},
+		         sc.sc_hp               = #{sc_hp},
+		         sc.sc_email            = #{sc_email},
+		         sc.sc_addr             = #{sc_addr},
+		         sc.sc_registration     = #{sc_registration},
+		         sc.sc_registrationdate = #{sc_registrationdate},
+		         sc.sc_bizfield         = #{sc_bizfield},
+		         sc.sc_bizcontents      = #{sc_bizcontents},
+		         sc.sc_targetamount     = #{sc_targetamount},
+		         sc.sc_amountingstart   = #{sc_amountingstart},
+		         sc.sc_amountingend     = #{sc_amountingend},
+		         sc.sc_bank             = #{sc_bank},
+		         sc.sc_accountnum       = #{sc_accountnum},
+		         sc.sc_depositor        = #{sc_depositor},
+		         sc.sc_updatedate       = TO_CHAR(SYSDATE, 'YYYYMMDD')
+		WHERE   sc.sc_deleteYN = 'Y'
+		AND     sc.sc_num = #{sc_num}
+	</update>
+	
+	<!-- 비영리단체 삭제 -->
+	<update id="deleteCharity" parameterType="scvo">
+		UPDATE  sponsor_charity sc
+		SET
+		         sc.sc_deleteYN         = 'N',
+		         sc.sc_updatedate       = TO_CHAR(SYSDATE, 'YYYYMMDD')
+		WHERE   sc.sc_deleteYN = 'Y'
+		AND     sc.sc_num = #{sc_num}
+	</update>
+		
+<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+	<!-- 후원금정보 조회/검색 -->
+	<select id="selectSponsorship" parameterType="map" resultType="ssvo">
+		SELECT 
+		         ss.ss_num,
+		         ss.sm_num,
+		         ss.ss_amount,
+		         ss.ss_message,
+		         ss.sc_num,
+		         ss.ss_sponsoreddate,
+		         ss.ss_receiptYN,
+		         ss.ss_insertdate,
+		         ss.ss_updatedate,
+		         sc.sc_targetamount,
+		         sc.sc_amountingstart,
+		         sc.sc_amountingend,
+		         sc.sc_bizcontents,
+		         a.cd_name as sc_bizfield,
+		         sc.sc_name		         
+		FROM    sponsor_sponsorship ss, sponsor_charity sc, code a
+		WHERE	ss.ss_deleteYN = 'Y'
+		<if test="param1.sm_num != '' ">
+			AND ss.sm_num = #{param1.sm_num}
+		</if>
+		<if test="param2.sc_num != '' ">
+			AND ss.sc_num = #{param2.sc_num}
+			AND ss.sc_num = sc.sc_num
+			AND	sc.sc_bizfield = a.cd_code
+		</if>
+		<if test="param1.sm_num == '' and param2.sc_num == ''">
+			AND ss.sc_num = sc.sc_num
+		</if>
+	</select>
+	
+</mapper>

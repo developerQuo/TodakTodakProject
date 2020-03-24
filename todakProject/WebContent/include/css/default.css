@@ -1,0 +1,249 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+/*
+html {
+	height:900px;
+}*/
+
+body {
+	/*background-image:url("../image/abc.jpg");
+	background-repeat : no-repeat;
+	background-size : cover;
+	background-attachment : fixed;*/
+	/*margin:512px 0 0 512px;*/
+	/*width:1280px;
+	height:500px;*/
+	font-family: "Noto Sans KR", sans-serif;
+}
+
+.context-container {
+	/*width:1000px;
+	border : 1px solid red;*/
+	margin:3px;
+	margin:0 auto;
+}
+
+.button {
+	font-family: 'Noto Sans KR', sans-serif;
+	background-color: rgb(29,79,137);
+	border: none;
+	color:#fff;
+	padding: 5px 8px 5px 8px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 12px;
+	margin: 2px;
+	cursor: pointer;
+}
+
+.button:hover {
+	background-color: #f8585b;
+	<!--transition:.3s;-->
+}
+
+input[type=text] {
+	padding:2px;
+	/*text-align: center;*/
+	margin: 1px;
+}
+
+input[type=password] {
+	padding:2px;
+	/*text-align: center;*/
+	margin: 1px;
+}
+
+select {
+	padding:2px;
+	/*text-align: center;*/
+	margin:1px;
+	height:28px;
+}
+
+.button, .ui-datepicker-trigger {
+	font-family: 'Noto Sans KR', sans-serif;
+	background-color: rgb(29,79,137);
+	border: none;
+	color:#fff;
+	padding: 6px 8px 6px 8px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 12px;
+	margin: 2px;
+	cursor: pointer;
+}
+
+.table {
+	padding:0 15px 0 15px;
+	width:80%;
+	/*width:900px;*/
+	height:auto;
+	border-top:3px solid #ddd;
+	border-bottom:3px solid #ddd;
+	margin:0 auto;
+}
+
+.table_size {
+	min-height:500px;
+	width:80%;
+	margin:0 auto;
+}
+
+.table th {
+	padding:9px;
+	text-align:center;
+}
+
+.table tbody td {
+	width:900px;
+	padding:8px;
+	border-top:1px solid #ddd;
+}
+
+p {
+	margin: 0 auto;
+}
+
+.table_align {
+	padding:10px;
+	width:80%;
+	margin:0 auto;
+	/*width:940px;*/
+
+}
+
+.table_align td {
+	padding:5px;
+}
+
+.write_table td {
+	padding:3px;
+}
+
+.paging {
+	height:auto;
+}
+
+input[type=file] {
+	display:none;
+}
+
+.searchtable_size {
+	width:50%;
+	margin:0 auto;
+}
+
+.search_table {
+	width:80%;
+	border:1px solid #ddd;
+	margin:0 auto;
+}
+
+.search_table td {
+	padding:7px;
+	
+}
+
+.searchtable_align {
+	width:80%;
+	margin:0 auto;
+}
+
+.inserttable_size {
+	width:70%;
+	margin:0 auto;
+}
+
+.insert_table {
+	width:80%;
+	border:1px solid #ddd;
+	margin:0 auto;
+}
+.insert_table td {
+	padding:5px;
+	
+}
+
+.inserttable_align {
+	width:80%;
+	margin:0 auto;
+}
+
+<!-- ===================================================== -->
+.authsearch_size {
+	width:60%;
+	margin:0 auto;
+}
+
+.auth_search {
+	width:60%;
+	border-top:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+	margin:0 auto;
+}
+
+.auth_search td {
+	padding:5px;
+	
+}
+
+.auth_search tbody td {
+	width:700px;
+	padding:8px;
+	border-top:1px solid #ddd;
+}
+
+.login {
+   font-family: 'Noto Sans KR', sans-serif;
+   width : 500px;
+   height : 400px;
+   margin:10% auto;
+   border : 1px solid #eeeeee;
+   padding : 30px 0 0 0;
+   background-color : white;
+}
+.authtable_size {
+	min-height:410px;
+	width:80%;
+	margin:0 auto;
+	
+}
+
+.authdetail_div {
+	border:1px solid #eeeeee;
+	width:65%;
+}
+
+.auth_detail td {
+	padding:10px;
+	font-weight:lighter;
+}
+
+	.imageBox{ 	
+	    width:100%;
+	    height:100%;
+	    position:relative;
+	    left:10%;
+	    top:50%;
+	    margin-left:-150px;
+	    margin-top:-150px;
+	}
+
+
+
+.info_div {
+	width:80%;
+	margin:10px auto 10px auto;
+	
+}
+
+.info_table {
+	width:80%;
+	margin:0 auto;
+	border:1px solid #ddd;
+}
+
+.info_table td {
+	padding: 5px;
+}

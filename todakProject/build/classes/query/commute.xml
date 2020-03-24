@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="java142.todak.scheduler.dao.SchedulerDao">
+
+   <insert id="insertTAndA">
+     <!-- 모든 직원의 출근 정보가 들어가는 테이블 -->
+      insert into human_commute B(  B.hc_comnum
+	                              ,B.hm_empnum 
+	                              ,B.hm_name
+	                              ,B.hc_date
+	                              ,B.hm_deptnum
+	                              ,B.hc_tAndA
+      )select  ('C'||to_char(sysdate + 5 ,'YYYYMMDD')||SUBSTR(A.HM_EMPNUM ,-4,4))
+              ,A.hm_empnum
+              ,A.hm_name
+              ,to_char(sysdate + 5  ,'yyyymmdd')
+              ,A.hm_deptnum
+              ,'70'
+      from  human_member A
+      where A.hm_empnum != 'H000000000000'
+      and 	A.hm_deleteYN != 'N'
+   </insert>
+   
+   <!-- 해당날의 채번을 가져오는 쿼리 -->
+    <select id="selectCheabun" parameterType="cvo" resultType="cvo">
+      select    hc_comnum
+      from      human_commute
+      where     hm_empnum = #{hm_empnum}
+      and       hc_date = to_char(sysdate + 5  ,'YYYYMMDD')
+   
+   </select>
+   
+   <!-- 가장 최근날의 정보를 불러오는 쿼리 -->
+   <select id="selectLastHour"  parameterType="cvo" resultType="cvo" >
+      	select   NVL(hc_totalhour, 0)	   		hc_totalhour
+	      		,NVL(hc_lasthour, 0)	   		hc_lasthour
+	      		,NVL(hc_extraworking, 0)	   	hc_extraworking
+		from ( select *
+		       from  human_commute
+		       where hm_empnum = #{hm_empnum}
+		       and	 hc_date != to_char(sysdate + 5  ,'yyyymmdd')	
+		       and   hc_lasthour is not null
+		       order by hc_date desc)
+		where  rownum = 1
+   </select>
+   
+   <!-- 출근버튼 클릭 시 해당 직원의 정보가 들어가는 쿼리 -->
+   <update id="insertCommute" parameterType="cvo">
+   
+      update human_commute A
+       set    A.hc_tAndA = '71'
+             ,A.hc_workin = to_char(sysdate + 5  , 'HH24MI')	
+             ,A.hc_totalhour = #{hc_totalhour}
+             ,A.hc_lasthour = #{hc_lasthour}
+
+       where  A.hm_empnum = #{hm_empnum}
+       and    A.hc_comnum = #{hc_comnum}
+       and    A.HC_TANDA = '70'
+       and    A.hc_workin is null
+         
+   </update>
+   
+   <!-- 추가근무 시간을 입력하는 쿼리 -->
+    <update id="insertExtrawork" parameterType="cvo">
+   
+      update human_commute A
+       set    A.hc_lasthour = #{hc_lasthour}
+        <if test = "hc_extraworking != null">
+              ,A.hc_extraworking = #{hc_extraworking}
+        </if>
+        <if test = "hc_weekhour != null ">
+               ,A.hc_weekhour = #{hc_weekhour}
+        </if>
+        <if test = "hc_totalhour != null">
+               ,A.hc_totalhour = #{hc_totalhour}
+        </if>
+        <if test = "hc_dayhour != null">
+              ,A.hc_dayhour = #{hc_dayhour}
+        </if>
+       where  A.hm_empnum = #{hm_empnum}
+       and    A.hc_comnum = #{hc_comnum}
+   </update>
+   
+   
+     <!-- 지난 토탈시간을 가져오는 쿼리 -->
+     <update id="insertLastHour" parameterType="cvo">
+   
+       update human_commute A
+       set     A.hc_lasthour = #{hc_lasthour}
+              ,A.hc_totalhour = #{hc_totalhour}
+              ,A.hc_extraworking = #{hc_extraworking}
+       where  A.hm_empnum = #{hm_empnum}
+       and    A.hc_comnum = #{hc_comnum}
+   </update>
+   
+   <!-- jsp로 해당 직원의 출근 정보를 출력하는 테이블 -->
+   <select id="selectCommute" parameterType="cvo" resultType="cvo">
+      select    A.hc_comnum          hc_comnum   
+               ,A.hm_empnum          hm_empnum
+               ,A.hm_name            hm_name
+               ,A.hc_lasthour        hc_lasthour
+               ,B.cd_name            hm_deptnum
+               ,A.hc_extraworking    hc_extraworking
+               ,A.hc_totalhour       hc_totalhour
+               ,A.hc_dayhour         hc_dayhour  
+               ,A.hc_weekhour        hc_weekhour
+               ,TO_DATE(A.hc_date, 'YYYY-MM-DD')  hc_date
+               ,TO_DATE(A.hc_workIn, 'HH24:MI')   hc_workIn
+               ,TO_DATE(A.hc_workout, 'HH24:MI')  hc_workout
+      from      human_commute A, CODE B
+      where    B.CD_CODE IN (SELECT SUBSTR(A.hm_deptnum ,-2,2) FROM human_commute)
+      AND       hc_comnum = #{hc_comnum}
+   </select>
+
+   
+   <!-- 퇴근 버튼 클릭시 정보가 입력되는 테이블 -->
+   <update id="updateCommute"  parameterType="cvo">
+   
+       update human_commute A
+       set    A.hc_workout =  to_char(sysdate + 5 , 'HH24MI')
+             ,A.hc_dayhour = (select TRUNC(abs(to_date(TO_CHAR(TRUNC(sysdate + 5 , 'MI'),'HH24MI'),'HH24MI') - to_date( B.hc_workin,'HH24MI')) *24*60,2) 
+                               from human_commute B
+                               WHERE B.hc_comnum = #{hc_comnum})
+             ,A.hc_lasthour = (select C.hc_lasthour - 
+                                                  (select TRUNC(abs(to_date(TO_CHAR(TRUNC(sysdate + 5 , 'MI'),'HH24MI'),'HH24MI') - to_date( B.hc_workin,'HH24MI')) *24*60,2) 
+                                                   from human_commute B
+                                                   WHERE B.hc_comnum = #{hc_comnum})                                                
+                               from human_commute C
+                               WHERE C.hc_comnum = ('C'||to_char(sysdate + 5 ,'YYYYMMDD')||SUBSTR(A.HM_EMPNUM ,-4,4)))
+                               
+       where  A.hm_empnum = #{hm_empnum}
+       and    A.hc_comnum = #{hc_comnum}
+       and    A.HC_TANDA = '71'
+   </update>
+   
+</mapper>
