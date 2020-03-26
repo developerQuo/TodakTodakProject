@@ -12,13 +12,13 @@ public class MimeMailSender extends AbstractMailSender {
 		// TODO Auto-generated method stub
 		 MimeMessage msg = sender.createMimeMessage();
 		 
-		  // true¸¦ ¼¼ÆÃÇÔÀ¸·Î½á ¸ÞÀÏ Æ÷¸ËÀÇ ´Ù¾çÈ­¸¦ Áö¿øÇÏ°Ú´Ù´Â°ÍÀ» ¸í½ÃÀûÀ¸·Î ¼¼ÆÃÇØÁØ´Ù.
+		  // trueï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¾ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°Ú´Ù´Â°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
 		  MimeMessageHelper helper = new MimeMessageHelper(msg, true, "utf-8");
 		  
 		  helper.setTo(to);
 		  helper.setFrom(from);
 		  helper.setSubject(subject);
-		  helper.setText(text);
+		  helper.setText(text, true);
 		 
 		  sender.send(msg);
 	}
