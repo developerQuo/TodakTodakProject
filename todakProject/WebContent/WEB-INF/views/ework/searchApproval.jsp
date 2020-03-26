@@ -8,7 +8,7 @@
 <%@ include file="/WEB-INF/views/commons/bindSession.jsp" %>
 <% 
 	String user_id = sManager.getUserID(session.getId());
-	System.out.println(user_id);
+	//System.out.println(user_id);
 %>
 
 
@@ -141,29 +141,29 @@
 	<body>
 	<%
 	Object obj = request.getAttribute("list_approval");
-	System.out.println("obj >>> : " + obj);
+	//System.out.println("obj >>> : " + obj);
 	
 	Object obj2 = request.getAttribute("list_person");
-	System.out.println("obj2 >>> : " + obj2);
+	//System.out.println("obj2 >>> : " + obj2);
 	
 	Object obj3 = request.getAttribute("list_names");
-	System.out.println("obj3 >>> : " + obj3);
+	//System.out.println("obj3 >>> : " + obj3);
 	
 	//Object obj4 = request.getAttribute("list_subname");
-	//System.out.println("obj4 >>> : " + obj4);
+	////System.out.println("obj4 >>> : " + obj4);
 	
 	Object obj5 = request.getAttribute("list_presentnum");
-	System.out.println("obj5 >>> : " + obj5);
+	//System.out.println("obj5 >>> : " + obj5);
 	
 	String ea_presentnum = "";
 	
 	if(obj5!=null) {
-		System.out.println("if(obj5!=null) 진입 >>> ");
+		//System.out.println("if(obj5!=null) 진입 >>> ");
 		
 		ArrayList<String> list_presentnum = (ArrayList<String>) obj5;
-		System.out.println("list_presentnum >>> : " + list_presentnum);
+		//System.out.println("list_presentnum >>> : " + list_presentnum);
 		ea_presentnum = list_presentnum.get(0);
-		System.out.println("ea_presentnum >>> : " + ea_presentnum);
+		//System.out.println("ea_presentnum >>> : " + ea_presentnum);
 		
 	}
 	
@@ -182,137 +182,137 @@
 	String file_name = "";	
 	
 	if(obj != null && obj2!=null) {
-		System.out.println("if(obj != null && obj2!=null) 진입 >>> ");
+		//System.out.println("if(obj != null && obj2!=null) 진입 >>> ");
 		
 		List<ApprovalVO> list_approval = (List<ApprovalVO>) obj;
-		System.out.println("list_approval >>> : " + list_approval);
+		//System.out.println("list_approval >>> : " + list_approval);
 		
 		ApprovalVO avo = list_approval.get(0);
-		System.out.println("avo >>> : " + avo);	
+		//System.out.println("avo >>> : " + avo);	
 		
 		String file_dir = avo.getEap_filedir();
-		System.out.println("file_dir >>> : " + file_dir);	
+		//System.out.println("file_dir >>> : " + file_dir);	
 		int filedir_length = file_dir.length();
-		System.out.println("filedir_length >>> : " + filedir_length);	
+		//System.out.println("filedir_length >>> : " + filedir_length);	
 		
 		file_name = file_dir.substring(21, filedir_length);
-		System.out.println("file_name >>> : " + file_name);	
+		//System.out.println("file_name >>> : " + file_name);	
 		
 		
 		List<AuthPersonVO> list_person = (List<AuthPersonVO>) obj2;
-		System.out.println("list_person >>> : " + list_person);
+		//System.out.println("list_person >>> : " + list_person);
 		
 		for(int i=0; i<list_person.size(); i++) {
 			
 			AuthPersonVO apvo = list_person.get(i);
-			System.out.println("apvo >>> : " + apvo);
+			//System.out.println("apvo >>> : " + apvo);
 			
 			String eai_sequence = apvo.getEai_sequence();
 			String eai_substitutenum = apvo.getEai_substitutenum();
 			
-			System.out.println("getEai_num >>> : " + apvo.getEai_num());
-			System.out.println("getEa_num >>> : " + apvo.getEa_num());
-			System.out.println("getEai_recentnum >>> : " + apvo.getEai_recentnum());
-			System.out.println("getEai_position >>> : " + apvo.getEai_position());
-			System.out.println("getEai_auth >>> : " + apvo.getEai_auth());
-			System.out.println("getEai_filedir >>> : " + apvo.getEai_filedir());
-			System.out.println("getEai_substitutenum >>> : " + apvo.getEai_substitutenum());
-			System.out.println("getEai_substituteYN >>> : " + apvo.getEai_substituteYN());
-			System.out.println("getEai_sequence >>> : " + apvo.getEai_sequence());		
+			//System.out.println("getEai_num >>> : " + apvo.getEai_num());
+			//System.out.println("getEa_num >>> : " + apvo.getEa_num());
+			//System.out.println("getEai_recentnum >>> : " + apvo.getEai_recentnum());
+			//System.out.println("getEai_position >>> : " + apvo.getEai_position());
+			//System.out.println("getEai_auth >>> : " + apvo.getEai_auth());
+			//System.out.println("getEai_filedir >>> : " + apvo.getEai_filedir());
+			//System.out.println("getEai_substitutenum >>> : " + apvo.getEai_substitutenum());
+			//System.out.println("getEai_substituteYN >>> : " + apvo.getEai_substituteYN());
+			//System.out.println("getEai_sequence >>> : " + apvo.getEai_sequence());		
 			
 			if(eai_sequence != null && eai_sequence.indexOf("0") != -1 && eai_substitutenum == null) {
-				System.out.println("if(eai_sequence != null && eai_sequence.indexOf('0') != -1 && eai_substitutenum == null) 진입 >>> ");
+				//System.out.println("if(eai_sequence != null && eai_sequence.indexOf('0') != -1 && eai_substitutenum == null) 진입 >>> ");
 				
 				draft = apvo;
-				System.out.println("draft >>> : " + draft);
+				//System.out.println("draft >>> : " + draft);
 				//String hm_empnum = draft.getEai_recentnum();
-				//System.out.println("hm_empnum >>> : " + hm_empnum);
+				////System.out.println("hm_empnum >>> : " + hm_empnum);
 				
 			} else if(eai_sequence != null && eai_sequence.indexOf("1") != -1 && eai_substitutenum == null) {
-				System.out.println("else if(eai_sequence != null && eai_sequence.indexOf('1') != -1 && eai_substitutenum == null) 진입 >>> ");
+				//System.out.println("else if(eai_sequence != null && eai_sequence.indexOf('1') != -1 && eai_substitutenum == null) 진입 >>> ");
 				
 				first = apvo;
-				System.out.println("first >>> : " + first);
+				//System.out.println("first >>> : " + first);
 				
 			} else if(eai_sequence != null && eai_sequence.indexOf("2") != -1 && eai_substitutenum == null) {
-				System.out.println("else if(eai_sequence != null && eai_sequence.indexOf('2') != -1 && eai_substitutenum == null) 진입 >>> ");
+				//System.out.println("else if(eai_sequence != null && eai_sequence.indexOf('2') != -1 && eai_substitutenum == null) 진입 >>> ");
 				
 				second = apvo;
-				System.out.println("second >>> : " + second);
+				//System.out.println("second >>> : " + second);
 				
 			} else if(eai_substitutenum != null) {
-				System.out.println("else if(eai_substitutenum != null) 진입 >>> ");
+				//System.out.println("else if(eai_substitutenum != null) 진입 >>> ");
 				
 				substitute = apvo;
-				System.out.println("substitute >>> : " + substitute);
+				//System.out.println("substitute >>> : " + substitute);
 				
 			} else if(eai_sequence != null && eai_sequence.indexOf("3") != -1 && eai_substitutenum == null) {
-				System.out.println("else if(eai_sequence != null && eai_sequence.indexOf('3') != -1 && eai_substitutenum == null) 진입 >>> ");
+				//System.out.println("else if(eai_sequence != null && eai_sequence.indexOf('3') != -1 && eai_substitutenum == null) 진입 >>> ");
 				
 				third = apvo;
-				System.out.println("third >>> : " + third);
+				//System.out.println("third >>> : " + third);
 				
 			}
 			
 		}
 		
 		if(obj3!=null) {
-			System.out.println("if(obj3!=null) 진입 >>> ");
+			//System.out.println("if(obj3!=null) 진입 >>> ");
 			
 			List<MemberVO> list_names = (List<MemberVO>) obj3;
-			System.out.println("list_names >>> : " + list_names);
+			//System.out.println("list_names >>> : " + list_names);
 			
 			//List<MemberVO> list_subname = (List<MemberVO>) obj4;
-			//System.out.println("list_subname >>> : " + list_subname);
+			////System.out.println("list_subname >>> : " + list_subname);
 			
 			for(int i=0; i<list_names.size(); i++) {
 
 				MemberVO mvo_name = list_names.get(i);
-				System.out.println("mvo_name >>> : " + mvo_name);
-				System.out.println("mvo_name.getHm_empnum() >>> : " + mvo_name.getHm_empnum());
+				//System.out.println("mvo_name >>> : " + mvo_name);
+				//System.out.println("mvo_name.getHm_empnum() >>> : " + mvo_name.getHm_empnum());
 				
-				System.out.println("draft.getEai_recentnum() >>> : " + draft.getEai_recentnum());
+				//System.out.println("draft.getEai_recentnum() >>> : " + draft.getEai_recentnum());
 				
 				if(mvo_name!=null) {
 				
-					System.out.println("if(mvo_name!=null) 진입 >>> ");	
+					//System.out.println("if(mvo_name!=null) 진입 >>> ");	
 					
 					if(draft!=null) {
-						System.out.println("if(draft!=null) 진입 >>> ");
+						//System.out.println("if(draft!=null) 진입 >>> ");
 						if(mvo_name.getHm_empnum().indexOf(draft.getEai_recentnum()) != -1) {
 							
 							draft_name = mvo_name.getHm_name();
-							System.out.println("draft_name >>> : " + draft_name);
+							//System.out.println("draft_name >>> : " + draft_name);
 							
 						} 
 					}
 					
 					if(first!=null) {
-						System.out.println("if(first!=null) 진입 >>> ");
+						//System.out.println("if(first!=null) 진입 >>> ");
 						if(mvo_name.getHm_empnum().indexOf(first.getEai_recentnum()) != -1) {
 							
 							first_name = mvo_name.getHm_name();
-							System.out.println("first_name >>> : " + first_name);
+							//System.out.println("first_name >>> : " + first_name);
 							
 						} 
 					}
 					
 					if(second!=null) {
-						System.out.println("if(second!=null) 진입 >>> ");
+						//System.out.println("if(second!=null) 진입 >>> ");
 						if(mvo_name.getHm_empnum().indexOf(second.getEai_recentnum()) != -1) {
 							
 							second_name = mvo_name.getHm_name();
-							System.out.println("second_name >>> : " + second_name);
+							//System.out.println("second_name >>> : " + second_name);
 							
 						}
 					}
 					
 					if(third!=null) {
-						System.out.println("if(third!=null) 진입 >>> ");
+						//System.out.println("if(third!=null) 진입 >>> ");
 						if(mvo_name.getHm_empnum().indexOf(third.getEai_recentnum()) != -1) {
 							
 							third_name = mvo_name.getHm_name();
-							System.out.println("third_name >>> : " + third_name);
+							//System.out.println("third_name >>> : " + third_name);
 							
 						}
 					}
@@ -325,15 +325,15 @@
 			for(int i=0; i<list_subname.size(); i++) {
 				
 				MemberVO mvo_subname = list_subname.get(i);
-				System.out.println("mvo_subname >>> : " + mvo_subname);
-				System.out.println("mvo_subname.getHm_empnum() >>> : " + mvo_subname.getHm_empnum());
+				//System.out.println("mvo_subname >>> : " + mvo_subname);
+				//System.out.println("mvo_subname.getHm_empnum() >>> : " + mvo_subname.getHm_empnum());
 				
 				if(substitute!=null) {
-					System.out.println("if(substitute!=null) 진입 >>> ");
+					//System.out.println("if(substitute!=null) 진입 >>> ");
 					if(mvo_subname.getHm_empnum().indexOf(substitute.getEai_recentnum()) != -1) {
 						
 						substitute_name = mvo_subname.getHm_name();
-						System.out.println("substitute_name >>> : " + substitute_name);
+						//System.out.println("substitute_name >>> : " + substitute_name);
 						
 					}
 				}
@@ -453,12 +453,12 @@
 					<%
 						if(draft!=null) {
 
-							System.out.println(" if(draft!=null) 진입 >>> ");
+							//System.out.println(" if(draft!=null) 진입 >>> ");
 
 							if((draft.getEai_filedir() == null) 
 													|| (draft.getEai_filedir().indexOf("null") != -1))	{
-								System.out.println("if((draft.getEai_filedir() == null) || " + 
-														"(draft.getEai_filedir().indexOf('null') != -1)) 진입 >>> ");
+								//System.out.println("if((draft.getEai_filedir() == null) || " + 
+// 														"(draft.getEai_filedir().indexOf('null') != -1)) 진입 >>> ");
 					%>
 								<td class="slash"></td>
 					<%
@@ -477,12 +477,12 @@
 	
 						if(first!=null) {
 							
-							System.out.println("if(first!=null) 진입 >>> ");
+							//System.out.println("if(first!=null) 진입 >>> ");
 				
 							if((first.getEai_filedir() == null)
 													|| (first.getEai_filedir().indexOf("null") != -1))	{
-								System.out.println("if((first.getEai_filedir() == null)" + 
-												"|| (first.getEai_filedir().indexOf('null') != -1)) 진입 >>> ");
+								//System.out.println("if((first.getEai_filedir() == null)" + 
+// 												"|| (first.getEai_filedir().indexOf('null') != -1)) 진입 >>> ");
 					%>
 								<td class="slash"></td>
 					<%
@@ -494,7 +494,7 @@
 					<%
 							}
 						} else {
-							System.out.println(" if(first!=null)-else 진입 >>> ");
+							//System.out.println(" if(first!=null)-else 진입 >>> ");
 					%>
 							<td></td>
 					<%
@@ -502,10 +502,10 @@
 	
 							if(second!=null) {
 								
-								System.out.println("if(second!=null) 진입 >>> ");
+								//System.out.println("if(second!=null) 진입 >>> ");
 							
 								if((second.getEai_filedir() == null) || (second == null))	{
-									System.out.println("if((second.getEai_filedir() == null) || (second == null)) 진입 >>> ");
+									//System.out.println("if((second.getEai_filedir() == null) || (second == null)) 진입 >>> ");
 					%>
 									<td class="slash"></td>
 					<%
@@ -517,7 +517,7 @@
 					<%
 								}
 							} else {
-								System.out.println("if(second!=null)-else 진입 >>> ");
+								//System.out.println("if(second!=null)-else 진입 >>> ");
 	
 								if(first!=null && first.getEai_auth().equals("64")) {
 					%>
@@ -533,10 +533,10 @@
 	
 						if(third!=null) {
 
-							System.out.println("if(third!=null) 진입 >>> ");
+							//System.out.println("if(third!=null) 진입 >>> ");
 							
 							if((third.getEai_filedir() == null) || (third == null))	{
-								System.out.println("if((third.getEai_filedir() == null) || (third == null)) 진입 >>> ");
+								//System.out.println("if((third.getEai_filedir() == null) || (third == null)) 진입 >>> ");
 					%>
 								<td class="slash"></td>
 					<%
@@ -548,7 +548,7 @@
 					<%
 							}
 						} else {
-							System.out.println(" if(third!=null)-else 진입 >>> ");
+							//System.out.println(" if(third!=null)-else 진입 >>> ");
 							
 							if(first!=null && first.getEai_auth().equals("64")) {	
 					%>			
@@ -681,22 +681,22 @@
 							<td>
 					<%
 						String eap_startdate = avo.getEap_startdate();
-						System.out.println("eap_startdate >>> : " + eap_startdate);
+						//System.out.println("eap_startdate >>> : " + eap_startdate);
 						String startdate_year = eap_startdate.substring(0,4);
-						System.out.println("startdate_year >>> : " + startdate_year);
+						//System.out.println("startdate_year >>> : " + startdate_year);
 						String startdate_month = eap_startdate.substring(4,6);
-						System.out.println("startdate_month >>> : " + startdate_month);
+						//System.out.println("startdate_month >>> : " + startdate_month);
 						String startdate_day = eap_startdate.substring(6,8);
-						System.out.println("startdate_day >>> : " + startdate_day);
+						//System.out.println("startdate_day >>> : " + startdate_day);
 						
 						String eap_enddate = avo.getEap_enddate();
-						System.out.println("eap_enddate >>> : " + eap_enddate);
+						//System.out.println("eap_enddate >>> : " + eap_enddate);
 						String enddate_year = eap_enddate.substring(0,4);
-						System.out.println("enddate_year >>> : " + enddate_year);
+						//System.out.println("enddate_year >>> : " + enddate_year);
 						String enddate_month = eap_enddate.substring(4,6);
-						System.out.println("enddate_month >>> : " + enddate_month);
+						//System.out.println("enddate_month >>> : " + enddate_month);
 						String enddate_day = eap_enddate.substring(6,8);
-						System.out.println("enddate_day >>> : " + enddate_day);
+						//System.out.println("enddate_day >>> : " + enddate_day);
 					%>
 								<%=startdate_year%>.<%=startdate_month%>.<%=startdate_day%> ~
 								<%=enddate_year%>.<%=enddate_month%>.<%=enddate_day%>
@@ -730,7 +730,7 @@
 					
 				<%
 					if(ea_presentnum.equals(user_id)) {
-						System.out.println("if(ea_presentnum.equals(user_id)) 진입 >>> ");
+						//System.out.println("if(ea_presentnum.equals(user_id)) 진입 >>> ");
 				%>
 						<div class="authdetail_align" id="buttons" align="right">
 								<input type="button" id="return_button" class="button" style="width:50px;" value=" 반려 ">&nbsp;

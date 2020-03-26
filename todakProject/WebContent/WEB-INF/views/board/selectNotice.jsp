@@ -12,7 +12,7 @@
 <html>
    <head>
 <%
-      System.out.println(sManager.getUserID(session.getId()));
+      //System.out.println(sManager.getUserID(session.getId()));
       String user_ID = sManager.getUserID(session.getId());
       
       Object obj2 = request.getAttribute("i_nvo");
@@ -175,7 +175,7 @@
 
                
                   String findIndex = (String)request.getAttribute("findIndex");
-                  System.out.println("findIndex >>> : " + findIndex);
+                  //System.out.println("findIndex >>> : " + findIndex);
                   if(findIndex==null){
 %>
                      <input type="checkbox" id="selectCheck"   name="selectCheck">
@@ -256,11 +256,11 @@
             <%
                     Object obj = request.getAttribute("noticeList");
                   ArrayList<NoticeVO> sList = (ArrayList<NoticeVO>)obj;
-                  System.out.println("sList.size() >>> : " + sList.size());
+                  //System.out.println("sList.size() >>> : " + sList.size());
                   if(sList.size() == 0 ){
             %>
                               <tr>
-                                 <td colspan = "5" align = "center">
+                                 <td colspan = "6" align = "center">
                                     등록된 게시글이 존재하지 않습니다.</td>
                               </tr>
             <%
@@ -302,12 +302,12 @@
                   String hm_deptnum = mvo.getHm_deptnum();
                   String hm_name =  mvo.getHm_name();
                   
-                  System.out.println("hm_duty >>> : " + hm_duty);
-                  System.out.println("hm_deptnum >>> : " + hm_deptnum);
-                  System.out.println("hm_name >>> : " + hm_name);
+                  //System.out.println("hm_duty >>> : " + hm_duty);
+                  //System.out.println("hm_deptnum >>> : " + hm_deptnum);
+                  //System.out.println("hm_name >>> : " + hm_name);
                   
                   
-                  if(!hm_duty.equals("73")){
+                  if(!(hm_duty.equals("73")||hm_duty.equals("67"))){
    
    %>         
                      <div class="table_align" id="boardBut" align="right">

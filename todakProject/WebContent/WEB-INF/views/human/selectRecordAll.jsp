@@ -22,10 +22,10 @@
 	int curPage = pageVO.getCurPage();
 	int totalCount = pageVO.getTotalCount();
 	
-	System.out.println("pageSize"+pageSize);
-	System.out.println("groupSize"+groupSize);
-	System.out.println("curPage"+curPage);
-	System.out.println("totalCount"+totalCount);
+	//System.out.println("pageSize"+pageSize);
+	//System.out.println("groupSize"+groupSize);
+	//System.out.println("curPage"+curPage);
+	//System.out.println("totalCount"+totalCount);
 	
 	if(request.getParameter("curPage") != null)
 	{

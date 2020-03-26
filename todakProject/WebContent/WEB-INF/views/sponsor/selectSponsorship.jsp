@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <% 
 	String message = (String)request.getAttribute("message");
-	//System.out.println(" message >>> " + message);
+	////System.out.println(" message >>> " + message);
 	if (message != null){
 		%>
 		<script type="text/javascript">
@@ -75,7 +75,7 @@
 				var data = [];
 				var now_amount = 0;
 				<%
-					System.out.println(dataList);
+					//System.out.println(dataList);
 					for (int i=0; i < dataList.size(); i++){
 				%>
 							
@@ -299,7 +299,7 @@
 		<script language="javascript" type="text/javascript" src="/include/js/sponsor/source/jquery.flot.selection.js"></script>
 		<script language="javascript" type="text/javascript" src="/include/js/sponsor/source/jquery.flot.stack.js"></script>
 		
-<%-- 		<% System.out.println(sManager.getUserID(session.getId())); %> --%>
+<%-- 		<% //System.out.println(sManager.getUserID(session.getId())); %> --%>
 		<div class="context-container">
 			<h1 align="center" style="color: #ed6b5e; font-weight:bold;"><%=name%></h1>
 			<h2 align="center"> 모금액 조회</h2>

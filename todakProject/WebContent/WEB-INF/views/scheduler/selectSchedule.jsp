@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <%
-	System.out.println(sManager.getUserID(session.getId()));
+	//System.out.println(sManager.getUserID(session.getId()));
 	String hm_empnum = sManager.getUserID(session.getId());
 %>
 

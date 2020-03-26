@@ -10,31 +10,31 @@ public abstract class DateUtil {
 	static Logger logger = Logger.getLogger(DateUtil.class);
 	
 	public static String getDate() {
-		logger.info("(DateUtil)public static String getDate() ½ÃÀÛ >>> ");
+		//logger.info("(DateUtil)public static String getDate() ï¿½ï¿½ï¿½ï¿½ >>> ");
 		
 		Date date = new Date();
-		logger.info("  date : " + date);
+		//logger.info("  date : " + date);
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
-		logger.info("  sdf : " + sdf);
+		//logger.info("  sdf : " + sdf);
 		
 		sdf.format(date);
-		logger.info("  sdf.format(date) : " + sdf.format(date));
+		//logger.info("  sdf.format(date) : " + sdf.format(date));
 		
-		logger.info("(DateUtil)public static String getDate() ³¡ >>> : " + sdf.format(date));
+		//logger.info("(DateUtil)public static String getDate() ï¿½ï¿½ >>> : " + sdf.format(date));
 		return sdf.format(date);
 	}
 	
 	public static String getFormat(String date) {
-		logger.info("(DateUtil)public static String getFormat() ½ÃÀÛ >>> ");
+		//logger.info("(DateUtil)public static String getFormat() ï¿½ï¿½ï¿½ï¿½ >>> ");
 	
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
-		logger.info("  sdf : " + sdf);
+		//logger.info("  sdf : " + sdf);
 		
 		sdf.format(date);
-		logger.info("  sdf.format(date) : " + sdf.format(date));
+		//logger.info("  sdf.format(date) : " + sdf.format(date));
 		
-		logger.info("(DateUtil)public static String getFormat() ³¡ >>> : " + sdf.format(date));
+		//logger.info("(DateUtil)public static String getFormat() ï¿½ï¿½ >>> : " + sdf.format(date));
 		return sdf.format(date);
 	}
 	

@@ -18,16 +18,16 @@ public class FileReadUtil {
 			                   ,HttpServletResponse response) throws IOException
 	{
 		
-		logger.info("(log)readFile 진입");
+		//logger.info("(log)readFile 진입");
 		request.setCharacterEncoding("UTF-8");
 		String fileName = (String)request.getAttribute("fileName");
 		String filePath = (String)request.getAttribute("filePath");
 		
-		logger.info("fileName/ filePath >>> : " + fileName + " / " + filePath);
+		//logger.info("fileName/ filePath >>> : " + fileName + " / " + filePath);
 		
 		String realFilePath = filePath  + "//" + fileName;
 		
-		logger.info("newFilePath >>> : " + realFilePath);
+		//logger.info("newFilePath >>> : " + realFilePath);
 		
 		File file = new File(realFilePath);
 		if (file.isDirectory()){
@@ -35,10 +35,10 @@ public class FileReadUtil {
 		}
 		
 		long fileSize = file.length();
-		logger.info(" fileSize >>> : " + fileSize ); 
+		//logger.info(" fileSize >>> : " + fileSize ); 
 		
 		if (fileSize > Integer.MAX_VALUE){
-			System.out.println("File size is too big. >>> : ");
+			//System.out.println("File size is too big. >>> : ");
 			return;
 		}
 		
@@ -93,7 +93,7 @@ public class FileReadUtil {
 			out.write(buf, 0, n);
 		}
 		out.flush();
-		logger.info("(log)readFile 종료");
+		//logger.info("(log)readFile 종료");
 	}
 	
 

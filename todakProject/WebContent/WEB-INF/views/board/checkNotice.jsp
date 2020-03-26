@@ -54,7 +54,7 @@
 		ArrayList<MemberVO> mList = (ArrayList<MemberVO>) obj;
 		String bn_num = (String)request.getAttribute("bn_num");
         MemberVO mvo = mList.get(0);
-		System.out.println(mvo.getHm_name() + " : " + mvo.getHm_deptnum());
+		//System.out.println(mvo.getHm_name() + " : " + mvo.getHm_deptnum());
 		
 %>
 	<body>

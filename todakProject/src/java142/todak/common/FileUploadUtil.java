@@ -33,7 +33,7 @@ public class FileUploadUtil {
 			
 			
 		}catch(Exception e){
-			System.out.println("FileUploadUtil.fileUpldad() >>> : " + e);
+			//System.out.println("FileUploadUtil.fileUpldad() >>> : " + e);
 		}
 		
 		return fb;		
@@ -51,7 +51,7 @@ public class FileUploadUtil {
 		while (en.hasMoreElements())
 		{
 			String f = en.nextElement().toString();
-			logger.info("f Ȯ�ο� >>> :" + f);
+			//logger.info("f Ȯ�ο� >>> :" + f);
 			v.add(m.getFilesystemName(f));
 		}
 		

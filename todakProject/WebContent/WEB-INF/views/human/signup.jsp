@@ -59,6 +59,8 @@
 				$("#hmp_residentnum").val($("#residentnum_1").val()+$("#residentnum_2").val());
 				$("#hmp_email").val($("#email1").val()+"@"+$("#email2").val());
 				$("#hmp_bank").attr("38");
+				
+				alert("회원가입 신청이 완료되었습니다.");
 				$("#insertMember").attr("action","/etc/insertMember.td").submit();
 			}
 		

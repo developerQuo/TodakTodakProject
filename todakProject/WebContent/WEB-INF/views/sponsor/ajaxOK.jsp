@@ -51,7 +51,7 @@
 		<container>
 			<%
 				for(int i=0; i<aList.size(); i++){
-					System.out.println(i);
+					//System.out.println(i);
 			%>
 			<aList>
 				<num><%= aList.get(i).get(0) %></num>

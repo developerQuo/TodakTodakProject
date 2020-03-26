@@ -12,12 +12,12 @@
    <head>
 <%
       
-      System.out.println(sManager.getUserID(session.getId()));
+      //System.out.println(sManager.getUserID(session.getId()));
       String user_ID = sManager.getUserID(session.getId());
 
       Object obj = request.getAttribute("suggestionList");
       ArrayList<SuggestionVO> sList = (ArrayList<SuggestionVO>)obj;
-      System.out.println("sList.size() >>> : " + sList.size() );
+      //System.out.println("sList.size() >>> : " + sList.size() );
       
       Object obj2 = request.getAttribute("i_svo");
       SuggestionVO pvo =(SuggestionVO) obj2; //pvo ==> pageVO
@@ -158,7 +158,7 @@
 
                
                   String findIndex = (String)request.getAttribute("findIndex");
-                  System.out.println("findIndex >>> : " + findIndex);
+                  //System.out.println("findIndex >>> : " + findIndex);
                   if(findIndex==null){
 %>
                      <input type="checkbox" id="selectCheck"   name="selectCheck">

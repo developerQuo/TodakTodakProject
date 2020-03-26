@@ -11,7 +11,7 @@ public abstract class ChaebunUtils{
 
 	public static String cNum(String cNum, String biz_gubun){
 
-		logger.info("(log)CheabunUtils 채번 진입");
+		//logger.info("(log)CheabunUtils 채번 진입");
 		String ChaeNum=cNum;
 		
 		Date d = new Date();
@@ -19,16 +19,16 @@ public abstract class ChaebunUtils{
 		String date = sdf.format(d);
 		ChaeNum = date+ChaeNum;
 		ChaeNum = biz_gubun + ChaeNum;
-		logger.info("ChaeNum >>> : " + ChaeNum);
+		//logger.info("ChaeNum >>> : " + ChaeNum);
 		
-		logger.info("(log)CheabunUtils 채번 종료");
+		//logger.info("(log)CheabunUtils 채번 종료");
 
 		return ChaeNum;
 	}
 	
 	public static String cNum2(String cNum, String biz_gubun){
 
-		logger.info("(log)CheabunUtils 채번 진입");
+		//logger.info("(log)CheabunUtils 채번 진입");
 		String ChaeNum=cNum;
 		
 		Date d = new Date();
@@ -36,9 +36,9 @@ public abstract class ChaebunUtils{
 		String date = sdf.format(d);
 		ChaeNum = date+ChaeNum;
 		ChaeNum = biz_gubun + ChaeNum;
-		logger.info("ChaeNum >>> : " + ChaeNum);
+		//logger.info("ChaeNum >>> : " + ChaeNum);
 		
-		logger.info("(log)CheabunUtils 채번 종료");
+		//logger.info("(log)CheabunUtils 채번 종료");
 
 		return ChaeNum;
 	}

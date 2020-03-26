@@ -11,20 +11,20 @@
 	<body>
 	<%
 		Object obj = request.getAttribute("list_sign");
-		System.out.println("obj >>> : " + obj);
+		//System.out.println("obj >>> : " + obj);
 		
 		SignStampVO ssvo = null;
 		
 		
 		if(obj!=null) {
-			System.out.println("if(obj!=null) 진입 >>> ");
+			//System.out.println("if(obj!=null) 진입 >>> ");
 			
 			List<SignStampVO> list_sign = null;
 			list_sign = (List<SignStampVO>) obj;
-			System.out.println("list_sign >>> : " + list_sign);
+			//System.out.println("list_sign >>> : " + list_sign);
 			
 			ssvo = list_sign.get(0);
-			System.out.println("ssvo >>> : " + ssvo);
+			//System.out.println("ssvo >>> : " + ssvo);
 			
 		}
 	%>

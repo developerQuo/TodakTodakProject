@@ -27,8 +27,8 @@
 		String ser=pvo.getSearch();
 		
 		int Size=pvo.getPageSize();
-		System.out.println(">>>>>>>>>>>>>>>"+key);
-		System.out.println("<<<<<<<<<<<<<<<"+ser);
+		//System.out.println(">>>>>>>>>>>>>>>"+key);
+		//System.out.println("<<<<<<<<<<<<<<<"+ser);
 		
 		
 		int pageSize = pvo.getPageSize();

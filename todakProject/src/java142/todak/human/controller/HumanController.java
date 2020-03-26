@@ -37,22 +37,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 		
 	@RequestMapping(value="/selectAppr")//회원 가입 대기자 명단 조회	
 	public String  selectMemberAppr(@ModelAttribute ApprVO avo,Model model,HttpServletRequest request)	{
-		logger.info("selectApptr 진입");
+		//logger.info("selectApptr 진입");
 		int totalCnt=0;
 		////////////////////////////////////////////////////////////////////////////
 		String cPage=request.getParameter("curPage");
 		String pageCtrl=request.getParameter("pageCtrl");
 		
-		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"+cPage);
-		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"+pageCtrl);
+		//System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"+cPage);
+		//System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"+pageCtrl);
 		
 		
 		Paging.setPage(avo,cPage,pageCtrl);
 		
-		System.out.println("1"+avo.getCurPage());
-		System.out.println("2"+avo.getGroupSize());
-		System.out.println("3"+avo.getTotalCount());
-		System.out.println("4"+avo.getPageSize());
+		//System.out.println("1"+avo.getCurPage());
+		//System.out.println("2"+avo.getGroupSize());
+		//System.out.println("3"+avo.getTotalCount());
+		//System.out.println("4"+avo.getPageSize());
 		
 		
 		List<ApprVO> apprList=humanService.selectAppr(avo);
@@ -81,7 +81,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 		String team=mvo.getHm_teamnum();
 		String picture=request.getParameter("hm_picture");
 		String hmp_empnum=request.getParameter("hmp_empnum");
-		System.out.println("선택한 사원의 사번 >>>>> "+hmp_empnum);
+		//System.out.println("선택한 사원의 사번 >>>>> "+hmp_empnum);
 		ApprVO avo=new ApprVO();
 		avo.setHmp_empnum(hmp_empnum);
 		
@@ -115,14 +115,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 		int curCnt=0;
 		LoginSession sManager = LoginSession.getInstance();
 		
-		logger.info("slelct 진입");
+		//logger.info("slelct 진입");
 		String cPage=request.getParameter("curPage");
 		String pageCtrl=request.getParameter("pageCtrl");
 
-		logger.info("views->controller"+cPage);
+		//logger.info("views->controller"+cPage);
 		
-		logger.info("search = "+mvo.getSearch());
-		logger.info("keyword= "+mvo.getKeyword());
+		//logger.info("search = "+mvo.getSearch());
+		//logger.info("keyword= "+mvo.getKeyword());
 		if(mvo.getSearch()==null){
 			String key=request.getParameter("key");
 			mvo.setKeyword(key);
@@ -134,7 +134,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 		Paging.setPage(mvo,cPage,pageCtrl);
 		
 		
-		logger.info("total컬럼>>>>>"+mvo.getTotalCount());
+		//logger.info("total컬럼>>>>>"+mvo.getTotalCount());
 		
 		StatusVO svo=new StatusVO();
 		svo=humanService.selectTotal();
@@ -152,15 +152,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 	}
 	@RequestMapping(value="/apptSelect")//인사발령 사원조횝
 	public String selectPersonAppt(@ModelAttribute MemberVO mvo,Model model,HttpServletRequest request){
-		logger.info("apptSelect 진입");
+		//logger.info("apptSelect 진입");
 		//페이징처리 시작
 		String cPage=request.getParameter("curPage");
 		String pageCtrl=request.getParameter("pageCtrl");
 		int totalCnt=0;
-		logger.info("views->controller"+cPage);
+		//logger.info("views->controller"+cPage);
 		
-		logger.info("search = "+mvo.getSearch());
-		logger.info("keyword= "+mvo.getKeyword());
+		//logger.info("search = "+mvo.getSearch());
+		//logger.info("keyword= "+mvo.getKeyword());
 		if(mvo.getSearch()==null){
 			String key=request.getParameter("key");
 			mvo.setKeyword(key);
@@ -173,7 +173,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 		
 		
 		
-		logger.info("total컬럼>>>>>"+mvo.getTotalCount());
+		//logger.info("total컬럼>>>>>"+mvo.getTotalCount());
 		//
 		List<MemberVO> apptList=humanService.selectPersonAppt(mvo);
 		totalCnt=apptList.get(0).getTotalCount();
@@ -185,7 +185,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 	@RequestMapping(value="/apptRecord")
 	public String apptRecordSelect(Model model,HttpSession session,HttpServletRequest request){
 		LoginSession sManager = LoginSession.getInstance();
-		logger.info("/apptRecord 진입");
+		//logger.info("/apptRecord 진입");
 		
 		String cPage=request.getParameter("curPage");
 		String pageCtrl=request.getParameter("pageCtrl");
@@ -193,10 +193,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 		ApptVO apvo=new ApptVO();
 		
 		Paging.setPage(apvo,cPage,pageCtrl);
-		logger.info("1"+apvo.getCurPage());
-		logger.info("1"+apvo.getGroupSize());
-		logger.info("1"+apvo.getPageSize());
-		logger.info("1"+apvo.getTotalCount());
+		//logger.info("1"+apvo.getCurPage());
+		//logger.info("1"+apvo.getGroupSize());
+		//logger.info("1"+apvo.getPageSize());
+		//logger.info("1"+apvo.getTotalCount());
 		
 		String hm_empnum=sManager.getUserID(session.getId());
 		apvo.setHpa_empnum(hm_empnum);
@@ -205,10 +205,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 		int totalCnt=apptList.get(0).getTotalCount();
 		apvo.setTotalCount(totalCnt);
 		}
-		logger.info("2"+apvo.getCurPage());
-		logger.info("2"+apvo.getGroupSize());
-		logger.info("2"+apvo.getPageSize());
-		logger.info("2"+apvo.getTotalCount());
+		//logger.info("2"+apvo.getCurPage());
+		//logger.info("2"+apvo.getGroupSize());
+		//logger.info("2"+apvo.getPageSize());
+		//logger.info("2"+apvo.getTotalCount());
 	
 		model.addAttribute("apvo",apvo);
 		model.addAttribute("apptList",apptList);
@@ -219,7 +219,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 	@RequestMapping(value="/apptAllselect")
 	public String apptRecordSelectAll(@ModelAttribute ApptVO apvo, Model model,HttpSession session,HttpServletRequest request){
 		
-		logger.info("/apptAllselect 진입");
+		//logger.info("/apptAllselect 진입");
 		
 		String cPage=request.getParameter("curPage");
 		String pageCtrl=request.getParameter("pageCtrl");
@@ -233,8 +233,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 			String ser=request.getParameter("ser");
 			apvo.setSearch(ser);
 		}
-		System.out.println("dddddd"+apvo.getKeyword());
-		System.out.println("dddddd"+apvo.getSearch());
+		//System.out.println("dddddd"+apvo.getKeyword());
+		//System.out.println("dddddd"+apvo.getSearch());
 		List<ApptVO> apptList=humanService.apptRecordAll(apvo);
 		if(apptList.size()!=0){
 		int totalCnt=apptList.get(0).getTotalCount();
@@ -256,8 +256,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 	public String updateMember(@ModelAttribute ApptVO apvo,Model model,HttpSession session){
 		int totalCnt=0;
 		LoginSession sManager = LoginSession.getInstance();
-		logger.info("/updateAppt 진입");
-		logger.info("ApptVO apvo로 넘어온 사원번호"+apvo.getHpa_empnum());
+		//logger.info("/updateAppt 진입");
+		//logger.info("ApptVO apvo로 넘어온 사원번호"+apvo.getHpa_empnum());
 		String cPage=null;//이부분이 null로 되어있어서 승진 등록을 한상태에서 항상 현재페이지가 아니라 1페이로 돌아가게 되어있음 추후 수정 하자
 		String pageCtrl=null;//
 		String team=apvo.getHpa_ateam();
@@ -267,10 +267,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 		String ChaeNo=null;
 		boolean flag=false;
 		
-		logger.info("1"+team);
-		logger.info("1"+dept);
-		logger.info("1"+position);
-		logger.info("1"+duty);
+		//logger.info("1"+team);
+		//logger.info("1"+dept);
+		//logger.info("1"+position);
+		//logger.info("1"+duty);
 		
 		if(team.equals("67")){
 			team=apvo.getHpa_bteam();
@@ -290,10 +290,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 		if(duty.equals("74")){
 			duty=apvo.getHpa_bduty();
 		}
-		logger.info("2"+team);
-		logger.info("2"+dept);
-		logger.info("2"+position);
-		logger.info("2"+duty);
+		//logger.info("2"+team);
+		//logger.info("2"+dept);
+		//logger.info("2"+position);
+		//logger.info("2"+duty);
 		MemberVO mvo=new MemberVO();
 		if(!apvo.getHpa_appointment().equals("74")){
 			mvo.setHm_empnum(apvo.getHpa_empnum());
@@ -327,10 +327,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 		String hm_empnum=sManager.getUserID(session.getId());//세션 불러와서 로그인한 아이디의 사번 불러옴
 		mvo.setHm_empnum(hm_empnum);
 		Paging.setPage(mvo,cPage,pageCtrl);
-		logger.info("세션으로 불러온 ID의 사번>>>>>>"+hm_empnum);
+		//logger.info("세션으로 불러온 ID의 사번>>>>>>"+hm_empnum);
 		
 		
-		logger.info("total컬럼>>>>>"+mvo.getTotalCount());
+		//logger.info("total컬럼>>>>>"+mvo.getTotalCount());
 		//
 		List<MemberVO> apptList=humanService.selectPersonAppt(mvo);
 		totalCnt=apptList.get(0).getTotalCount();
@@ -341,13 +341,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 	}
 	@RequestMapping(value="/reference")//인사 정보조회
 	public String referenceMember(@ModelAttribute MemberVO mvo,Model model,HttpServletRequest request,HttpSession session){
-		logger.info("/reference 진입");
+		//logger.info("/reference 진입");
 		LoginSession sManager = LoginSession.getInstance();
 		
 		
 		if(mvo.getHm_empnum()==null){
 		String hm_empnum=sManager.getUserID(session.getId());//세션 불러와서 로그인한 아이디의 사번 불러옴
-		logger.info("세션으로 불러온 ID의 사번>>>>>>"+hm_empnum);
+		//logger.info("세션으로 불러온 ID의 사번>>>>>>"+hm_empnum);
 		mvo.setHm_empnum(hm_empnum);
 		}
 		mvo=humanService.memberInfo(mvo);
@@ -358,12 +358,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 	@ResponseBody
 	@RequestMapping(value="/deptAuthority")//부서 조회 권한 확인
 	public boolean authorityCheck(@ModelAttribute MemberVO mvo,HttpSession session){
-		logger.info("/deptAuthority 진입");
+		//logger.info("/deptAuthority 진입");
 		boolean result=false;
 	
 		LoginSession sManager = LoginSession.getInstance();
 		String hm_empnum=sManager.getUserID(session.getId());//세션 불러와서 로그인한 아이디의 사번 불러옴
-		logger.info("세션으로 불러온 ID의 사번>>>>>>"+hm_empnum);
+		//logger.info("세션으로 불러온 ID의 사번>>>>>>"+hm_empnum);
 		mvo.setHm_empnum(hm_empnum);	
 		mvo=humanService.selectPosition(mvo);
 		if(mvo.getHm_duty()==null){
@@ -372,8 +372,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 		if(mvo.getHm_duty().equals("19")||mvo.getHm_duty().equals("98")){
 			result=true;
 		}
-		System.out.println("duty"+mvo.getHm_duty());
-		logger.info("result>>>>>>>"+result);
+		//System.out.println("duty"+mvo.getHm_duty());
+		//logger.info("result>>>>>>>"+result);
 		return result;
 	}
 	@ResponseBody
@@ -381,7 +381,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 	public boolean idCheck(@ModelAttribute MemberVO mvo,HttpServletRequest request){
 		boolean result=false;
 		String hmp_id=request.getParameter("id");
-			System.out.println("아이디 확인"+hmp_id);
+			//System.out.println("아이디 확인"+hmp_id);
 			mvo.setHm_id(hmp_id);
 		result=humanService.idCheck(mvo);	
 		return result;
@@ -389,23 +389,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 	@ResponseBody
 	@RequestMapping(value="/Authority")//회원가입 승인,인사발령  권한 조회
 	public boolean ApprMemAuthority(@ModelAttribute MemberVO mvo,HttpSession session){
-		logger.info("/Authority 진입");
+		//logger.info("/Authority 진입");
 		boolean result=false;
 		LoginSession sManager = LoginSession.getInstance();
 		String hm_empnum=sManager.getUserID(session.getId());//세션 불러와서 로그인한 아이디의 사번 불러옴
-		logger.info("세션으로 불러온 ID의 사번>>>>>>"+hm_empnum);
+		//logger.info("세션으로 불러온 ID의 사번>>>>>>"+hm_empnum);
 		mvo.setHm_empnum(hm_empnum);	
 		mvo=humanService.selectPosition(mvo);
 		if(mvo.getHm_deptnum().equals("0004")){
 			result=true;
 		}
-		System.out.println("결과값"+result);
+		//System.out.println("결과값"+result);
 		return result;
 	}
 	///////////////////////////////////////////////////////////////////////////////////////
 	@RequestMapping(value="/deptReference")//부서 인사정보 조회
 	public String deptReference(@ModelAttribute MemberVO mvo,Model model,HttpServletRequest request,HttpSession session){
-		logger.info("/deptReference 진입");
+		//logger.info("/deptReference 진입");
 		
 		int totalCnt=0;
 		String keyW=mvo.getKeyword();
@@ -413,7 +413,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 		
 		LoginSession sManager = LoginSession.getInstance();
 		String hm_empnum=sManager.getUserID(session.getId());//세션 불러와서 로그인한 아이디의 사번 불러옴
-		logger.info("세션으로 불러온 ID의 사번>>>>>>"+hm_empnum);
+		//logger.info("세션으로 불러온 ID의 사번>>>>>>"+hm_empnum);
 		List<MemberVO> memberList=null;
 		mvo.setHm_empnum(hm_empnum);
 		mvo=humanService.selectPosition(mvo);//VO에 부서번호 담음.
@@ -423,8 +423,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 		String pageCtrl=request.getParameter("pageCtrl");
 		
 		
-		logger.info("search = "+mvo.getSearch());
-		logger.info("keyword= "+mvo.getKeyword());
+		//logger.info("search = "+mvo.getSearch());
+		//logger.info("keyword= "+mvo.getKeyword());
 		if(mvo.getSearch()==null){
 			String key=request.getParameter("key");
 			mvo.setKeyword(key);
@@ -434,9 +434,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 			mvo.setSearch(ser);
 		}
 		Paging.setPage(mvo,cPage,pageCtrl);
-		System.out.println(mvo.getCurPage()+"++++++++++++++++++++++++++++++++");
+		//System.out.println(mvo.getCurPage()+"++++++++++++++++++++++++++++++++");
 		
-		logger.info("total컬럼>>>>>"+mvo.getTotalCount());
+		//logger.info("total컬럼>>>>>"+mvo.getTotalCount());
 
 
 
@@ -460,16 +460,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 	
 	@RequestMapping(value="/commuteRecord")//개인 출퇴근 시간 기록 조회
 	public String selectCommute(@ModelAttribute CommVO cvo,Model model,HttpSession session,HttpServletRequest request){
-		logger.info("/commuteRecord 진입");
+		//logger.info("/commuteRecord 진입");
 		
 		String cPage=request.getParameter("curPage");
 		String pageCtrl=request.getParameter("pageCtrl");
-		logger.info("curPage"+cPage);
-		logger.info("pageCtrl"+pageCtrl);
+		//logger.info("curPage"+cPage);
+		//logger.info("pageCtrl"+pageCtrl);
 		
 		LoginSession sManager = LoginSession.getInstance();
 		String hm_empnum=sManager.getUserID(session.getId());//세션 불러와서 로그인한 아이디의 사번 불러옴
-		logger.info("세션으로 불러온 ID의 사번>>>>>>"+hm_empnum);
+		//logger.info("세션으로 불러온 ID의 사번>>>>>>"+hm_empnum);
 		
 	
 		String startDate=request.getParameter("startday");
@@ -482,8 +482,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 		}
 		
 		
-		logger.info("조회 시작일 >>>>"+startDate);
-		logger.info("조회 종료일>>>"+endDate);
+		//logger.info("조회 시작일 >>>>"+startDate);
+		//logger.info("조회 종료일>>>"+endDate);
 
 	
 		
@@ -504,14 +504,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 		
 		int totalCnt=0;
 		
-		logger.info("selectAllcommRecord 진입");
+		//logger.info("selectAllcommRecord 진입");
 		String cPage=request.getParameter("curPage");
 		String pageCtrl=request.getParameter("pageCtrl");
 		
-		logger.info("views->controller"+cPage);
+		//logger.info("views->controller"+cPage);
 		
-		logger.info("search = "+mvo.getSearch());
-		logger.info("keyword= "+mvo.getKeyword());
+		//logger.info("search = "+mvo.getSearch());
+		//logger.info("keyword= "+mvo.getKeyword());
 		if(mvo.getSearch()==null){
 			String key=request.getParameter("key");
 			mvo.setKeyword(key);
@@ -523,7 +523,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 		Paging.setPage(mvo,cPage,pageCtrl);
 		
 		
-		logger.info("total컬럼>>>>>"+mvo.getTotalCount());
+		//logger.info("total컬럼>>>>>"+mvo.getTotalCount());
 		
 	
 		
@@ -544,8 +544,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 		
 		
 	
-		logger.info("curPage"+cPage);
-		logger.info("pageCtrl"+pageCtrl);
+		//logger.info("curPage"+cPage);
+		//logger.info("pageCtrl"+pageCtrl);
 		
 		String startDate=request.getParameter("startday");
 		String endDate=request.getParameter("endday");
@@ -556,8 +556,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 		}
 		
 		
-		logger.info("조회 시작일 >>>>"+startDate);
-		logger.info("조회 종료일>>>"+endDate);
+		//logger.info("조회 시작일 >>>>"+startDate);
+		//logger.info("조회 종료일>>>"+endDate);
 
 	
 		
@@ -572,7 +572,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 		
 		List<CommVO> comList=humanService.selectCommute(cvo);
 		
-		System.out.println("값확인"+comList.get(0).getHc_comnum());
+		//System.out.println("값확인"+comList.get(0).getHc_comnum());
 		
 		if(comList.size()!=0){
 			cvo.setTotalCount(comList.get(0).getTotalCount());
@@ -584,7 +584,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 	}
 	@RequestMapping(value="/changeComm")
 	public String changeCommute(@ModelAttribute CommVO cvo,Model model,HttpSession session,HttpServletRequest request){
-		logger.info("넘겨밭은 getHc_comnum 값 확인"+cvo.getHc_comnum());
+		//logger.info("넘겨밭은 getHc_comnum 값 확인"+cvo.getHc_comnum());
 		String hm_empnum = request.getParameter("hm_empnum");
 		
 		model.addAttribute("hm_empnum",hm_empnum);
@@ -594,9 +594,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 	
 	@RequestMapping(value="/changeCommUpdate")
 	public String changeCommuteUpdate(@ModelAttribute CommVO cvo,Model model,HttpSession session,HttpServletRequest request){
-		logger.info("/changeCommUpdate 진입 ");
-		logger.info("cvo.getHc_comnum() >>>> "+cvo.getHc_comnum());
-		logger.info("cvo.getHc_tanda("+cvo.getHc_tanda());
+		//logger.info("/changeCommUpdate 진입 ");
+		//logger.info("cvo.getHc_comnum() >>>> "+cvo.getHc_comnum());
+		//logger.info("cvo.getHc_tanda("+cvo.getHc_tanda());
 		String hm_empnum = request.getParameter("hm_empnum");
 		cvo.setHm_empnum(hm_empnum);
 		
@@ -624,20 +624,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 	
 		if(cvo.getHc_tanda().equals("72")){ //휴가
 			useVacation = iLasthour - 480;
-			logger.info(">>>>>>>>>>>>>>>>" + iLasthour + " : " + iExtraworking + " : " + useVacation );
+			//logger.info(">>>>>>>>>>>>>>>>" + iLasthour + " : " + iExtraworking + " : " + useVacation );
 			if(iLasthour > 0 ){
-				logger.info("111111111111111111111111111");
+				//logger.info("111111111111111111111111111");
 				if(useVacation >= 0){ 
-					logger.info("2222222222222222222222222222222");
+					//logger.info("2222222222222222222222222222222");
 					iLasthour = useVacation;
 					iExtraworking = 0;
 				}else if(useVacation < 0){ 
-					logger.info("3333333333333333333333333333333");
+					//logger.info("3333333333333333333333333333333");
 					iLasthour = 0;
 					iExtraworking = (useVacation * (-1)) + iExtraworking;
 				}
 			}else if(iLasthour <= 0){
-				logger.info("4444444444444444444444444444");
+				//logger.info("4444444444444444444444444444");
 				iExtraworking =(useVacation * (-1)) + iExtraworking;
 				iLasthour = 0;
 			}
@@ -649,27 +649,27 @@ import org.springframework.web.bind.annotation.ResponseBody;
 			
 			useVacation = iLasthour - 240;
 			
-			logger.info(">>>>>>>>>>>>>>>>" + iLasthour + " : " + iExtraworking + " : " + useVacation );
+			//logger.info(">>>>>>>>>>>>>>>>" + iLasthour + " : " + iExtraworking + " : " + useVacation );
 			if(iLasthour > 0 ){
-				logger.info("111111111111111111111111111");
+				//logger.info("111111111111111111111111111");
 				if(useVacation >= 0){ 
-					logger.info("2222222222222222222222222222222");
+					//logger.info("2222222222222222222222222222222");
 					iLasthour = useVacation;
 					iExtraworking = 0;
 				}
 				else if(useVacation < 0){ 
-					logger.info("3333333333333333333333333333333");
+					//logger.info("3333333333333333333333333333333");
 					iLasthour = 0;
 					iExtraworking = useVacation * (-1);
 				}
 			}else if(iLasthour <= 0){
-				logger.info("4444444444444444444444444444");
+				//logger.info("4444444444444444444444444444");
 				iExtraworking = (useVacation * (-1)) + iExtraworking;
 				iLasthour = 0;
 			}
 		}
 			
-		logger.info("결과?!?!?>>>>>>>>>>>>>>>>" + iLasthour + " : " + iExtraworking + " : " + useVacation );
+		//logger.info("결과?!?!?>>>>>>>>>>>>>>>>" + iLasthour + " : " + iExtraworking + " : " + useVacation );
 		
 		if(iExtraworking >= 720) iExtraworking = 720;
 		
@@ -686,15 +686,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 	//로그인 후 첫 화면에서 쓰임
 	@RequestMapping("/selectUserInfo")
 	public String selectUserInfo(@ModelAttribute MemberVO mvo, Model model) {
-		logger.info("/selectUserInfo 진입 ");
-		logger.info("mvo.getHm_empnum() >>>> "+mvo.getHm_empnum());
+		//logger.info("/selectUserInfo 진입 ");
+		//logger.info("mvo.getHm_empnum() >>>> "+mvo.getHm_empnum());
 		
 		List<MemberVO> selectUserInfo = humanService.selectUserInfo(mvo);
 		
 		String picture = selectUserInfo.get(0).getHm_picture();
 		String name = selectUserInfo.get(0).getHm_name();
-		logger.info("picture >>>>" + picture);
-		logger.info("name >>>> " + name);
+		//logger.info("picture >>>>" + picture);
+		//logger.info("name >>>> " + name);
 		
 		model.addAttribute("selectUserInfo", selectUserInfo);
 		

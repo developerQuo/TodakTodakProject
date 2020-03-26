@@ -73,7 +73,7 @@ public class EworkFormController {
 	
 	@RequestMapping("/moveInsertProposal") 
 	public String moveInsertProposal(Model model) {
-		logger.info("(EworkFormController)public String moveInsertProposal(Model model) 시작 >>> ");
+		//logger.info("(EworkFormController)public String moveInsertProposal(Model model) 시작 >>> ");
 		
 		String ep_num = "";
 		List<ProposalVO> list = null;
@@ -82,9 +82,9 @@ public class EworkFormController {
 		list = eworkFormService.chaebunProposal();
 		pvo_Ep_num = list.get(0);
 		ep_num = pvo_Ep_num.getEp_num();
-		logger.info("  ep_num : " + ep_num);
+		//logger.info("  ep_num : " + ep_num);
 		ep_num = ChaebunUtils.cNum(ep_num, PROPOSAL_GUNBUN);
-		logger.info("  ep_num : " + ep_num);
+		//logger.info("  ep_num : " + ep_num);
 		
 		ProposalVO pvo = new ProposalVO();
 		pvo.setEp_num(ep_num);
@@ -95,45 +95,45 @@ public class EworkFormController {
 		
 		List<AuthVO> list_auth = null;
 		list_auth = eworkFormService.chaebunAuth();
-		logger.info("  list_auth : " + list_auth);
+		//logger.info("  list_auth : " + list_auth);
 		
 		AuthVO auvo_Ea_num = null;
 		auvo_Ea_num = list_auth.get(0);
-		logger.info("  auvo_Ea_num : " + auvo_Ea_num);
+		//logger.info("  auvo_Ea_num : " + auvo_Ea_num);
 		
 		String ea_num = "";
 		ea_num = auvo_Ea_num.getEa_num();
-		logger.info("  ea_num : " + ea_num);
+		//logger.info("  ea_num : " + ea_num);
 		
 		ea_num = ChaebunUtils.cNum(ea_num, AUTH_GUNBUN);
-		logger.info("  ea_num : " + ea_num);
+		//logger.info("  ea_num : " + ea_num);
 		
 		AuthVO auvo = new AuthVO();
-		logger.info("  auvo : " + auvo);
+		//logger.info("  auvo : " + auvo);
 		auvo.setEa_num(ea_num);
 		
 		model.addAttribute("auvo", auvo);
 		
-		logger.info("(EworkFormController)public String moveInsertProposal(Model model) 끝 >>> : " + model);
+		//logger.info("(EworkFormController)public String moveInsertProposal(Model model) 끝 >>> : " + model);
 		return "ework/insertProposal";
 	}
 	
 	@RequestMapping("/moveInsertApproval")
 	public String moveInsertApproval(Model model) {
-		logger.info("(EworkFormController)public String moveInsertApproval(Model model) 시작 >>> ");
+		//logger.info("(EworkFormController)public String moveInsertApproval(Model model) 시작 >>> ");
 		
 		List<ApprovalVO> list_approval = null;
 		String eap_num = "";
 		
 		list_approval = eworkFormService.chaebunApproval();
-		logger.info("  list_approval : " + list_approval);
+		//logger.info("  list_approval : " + list_approval);
 		
 		ApprovalVO avo_Eap_num = null;
 		avo_Eap_num = list_approval.get(0);
-		logger.info("  avo : " + avo_Eap_num);
+		//logger.info("  avo : " + avo_Eap_num);
 		
 		eap_num = avo_Eap_num.getEap_num();
-		logger.info("  eap_num : " + eap_num);
+		//logger.info("  eap_num : " + eap_num);
 		
 		eap_num = ChaebunUtils.cNum(eap_num, APPROVAL_GUNBUN);
 		
@@ -146,32 +146,32 @@ public class EworkFormController {
 		
 		List<AuthVO> list_auth = null;
 		list_auth = eworkFormService.chaebunAuth();
-		logger.info("  list_auth : " + list_auth);
+		//logger.info("  list_auth : " + list_auth);
 		
 		AuthVO auvo_Ea_num = null;
 		auvo_Ea_num = list_auth.get(0);
-		logger.info("  auvo_Ea_num : " + auvo_Ea_num);
+		//logger.info("  auvo_Ea_num : " + auvo_Ea_num);
 		
 		String ea_num = "";
 		ea_num = auvo_Ea_num.getEa_num();
-		logger.info("  ea_num : " + ea_num);
+		//logger.info("  ea_num : " + ea_num);
 		
 		ea_num = ChaebunUtils.cNum(ea_num, AUTH_GUNBUN);
-		logger.info("  ea_num : " + ea_num);
+		//logger.info("  ea_num : " + ea_num);
 		
 		AuthVO auvo = new AuthVO();
-		logger.info("  auvo : " + auvo);
+		//logger.info("  auvo : " + auvo);
 		auvo.setEa_num(ea_num);
 		
 		model.addAttribute("auvo", auvo);
 		
-		logger.info("(EworkFormController)public String moveInsertApproval(Model model) 끝 >>> : " + model);
+		//logger.info("(EworkFormController)public String moveInsertApproval(Model model) 끝 >>> : " + model);
 		return "ework/insertApproval";
 	}
 	
 	@RequestMapping("/saveApproval")
 	public String saveApproval(HttpServletRequest request) {
-		logger.info("(EworkFormController)public String saveApproval(HttpServletRequest request) 시작 >>> ");
+		//logger.info("(EworkFormController)public String saveApproval(HttpServletRequest request) 시작 >>> ");
 		
 		boolean result = false;
 		List<ApprovalVO> list_Eap_num = null;
@@ -185,55 +185,55 @@ public class EworkFormController {
 		ts = ptm.getTransaction(dtd);
 		
 		list_Eap_num = eworkFormService.chaebunApproval();
-		logger.info("  list_Eap_num : " + list_Eap_num);
+		//logger.info("  list_Eap_num : " + list_Eap_num);
 		ApprovalVO avo_Eap_num = list_Eap_num.get(0);
-		logger.info("  avo_Eap_num : " + avo_Eap_num);
+		//logger.info("  avo_Eap_num : " + avo_Eap_num);
 		eap_num = avo_Eap_num.getEap_num();
-		logger.info("  eap_num : " + eap_num);
+		//logger.info("  eap_num : " + eap_num);
 		eap_num = ChaebunUtils.cNum(eap_num, APPROVAL_GUNBUN);
-		logger.info("  eap_num : " + eap_num);
+		//logger.info("  eap_num : " + eap_num);
 		
 		//avo.setEap_num(eap_num);
 		
 		FileUploadUtil fuu = new FileUploadUtil();
-		logger.info("  fuu : " + fuu);
+		//logger.info("  fuu : " + fuu);
 		
 		bFlag = fuu.fileUpload(request, UPLOAD_ABSTRACT_PATH);
-		logger.info("  bFlag : " + bFlag);
+		//logger.info("  bFlag : " + bFlag);
 		
 		if(bFlag) {
-			logger.info("  if(bFlag) 진입 >>> " );
+			//logger.info("  if(bFlag) 진입 >>> " );
 			
 			//String eap_num = fuu.getParameter("eap_num");
 			String ef_num = fuu.getParameter("ef_num");
-			logger.info("  ef_num : " + ef_num);
+			//logger.info("  ef_num : " + ef_num);
 			String ea_num = fuu.getParameter("ea_num");
-			logger.info("  ea_num : " + ea_num);
+			//logger.info("  ea_num : " + ea_num);
 			String eap_title = fuu.getParameter("eap_title");
-			logger.info("  eap_title : " + eap_title);
+			//logger.info("  eap_title : " + eap_title);
 			String hm_empnum = fuu.getParameter("hm_empnum");
-			logger.info("  hm_empnum : " + hm_empnum);
+			//logger.info("  hm_empnum : " + hm_empnum);
 			String eap_writer = fuu.getParameter("eap_writer");
-			logger.info("  eap_writer : " + eap_writer);
+			//logger.info("  eap_writer : " + eap_writer);
 			String hm_position = fuu.getParameter("hm_position");
-			logger.info("  hm_position : " + hm_position);
+			//logger.info("  hm_position : " + hm_position);
 			String eap_startdate = fuu.getParameter("eap_startdate");
-			logger.info("  eap_startdate : " + eap_startdate);
+			//logger.info("  eap_startdate : " + eap_startdate);
 			String eap_enddate = fuu.getParameter("eap_enddate");
-			logger.info("  eap_enddate : " + eap_enddate);
+			//logger.info("  eap_enddate : " + eap_enddate);
 			String eap_group = fuu.getParameter("eap_group");
-			logger.info("  eap_group : " + eap_group);
+			//logger.info("  eap_group : " + eap_group);
 			
 			Enumeration<String> files = fuu.getFileNames();
-			logger.info("  files : " + files);
+			//logger.info("  files : " + files);
 			String file = files.nextElement();
-			logger.info("  file : " + file);
+			//logger.info("  file : " + file);
 			
 			String fileDirectory = UPLOAD_RELATIVE_PATH + "//" + file;
-			logger.info("  fileDirectory : " + fileDirectory);
+			//logger.info("  fileDirectory : " + fileDirectory);
 			
 			_avo = new ApprovalVO();
-			logger.info("  _avo : " + _avo);
+			//logger.info("  _avo : " + _avo);
 			_avo.setEap_num(eap_num);
 			_avo.setEf_num(ef_num);
 			_avo.setEa_num(ea_num);
@@ -253,11 +253,11 @@ public class EworkFormController {
 			try {
 				
 				result = eworkFormService.insertApproval(_avo);
-				logger.info("  result : " + result);
+				//logger.info("  result : " + result);
 				
 				if(!result) {
-					logger.info("  if(!result)  진입 >>> ");
-					logger.info("  실패");
+					//logger.info("  if(!result)  진입 >>> ");
+					//logger.info("  실패");
 				}
 				ptm.commit(ts);
 				
@@ -266,30 +266,30 @@ public class EworkFormController {
 				}
 				
 			} catch(Exception e) {
-				logger.info("에러 : " + e);
+				//logger.info("에러 : " + e);
 				ptm.rollback(ts);
 			}
 		
-		logger.info("(EworkFormController)public String saveApproval(@ModelAttribute ApprovalVO avo) 끝 >>> ");
+		//logger.info("(EworkFormController)public String saveApproval(@ModelAttribute ApprovalVO avo) 끝 >>> ");
 		return "#";
 	}
 	
 	@RequestMapping("/moveInsertHoliday") 
 	public String moveInsertHoliday(Model model) {
-		logger.info("(EworkFormController)public String moveInsertHoliday() 시작 >>> ");
+		//logger.info("(EworkFormController)public String moveInsertHoliday() 시작 >>> ");
 		
 		List<HolidayVO> list_Eh_num = null;
 		list_Eh_num = eworkFormService.chaebunHoliday();
-		logger.info("  list_Eh_num : " + list_Eh_num);
+		//logger.info("  list_Eh_num : " + list_Eh_num);
 		HolidayVO hvo_Eh_num = list_Eh_num.get(0);
-		logger.info("  hvo_Eh_num : " + hvo_Eh_num);
+		//logger.info("  hvo_Eh_num : " + hvo_Eh_num);
 		String eh_num = hvo_Eh_num.getEh_num();
-		logger.info("  eh_num : " + eh_num);
+		//logger.info("  eh_num : " + eh_num);
 		eh_num = ChaebunUtils.cNum(eh_num, HOLIDAY_GUNBUN);
-		logger.info("  eh_num : " + eh_num);
+		//logger.info("  eh_num : " + eh_num);
 		
 		HolidayVO hvo = new HolidayVO();
-		logger.info("  hvo : " + hvo);
+		//logger.info("  hvo : " + hvo);
 		hvo.setEh_num(eh_num);
 		
 		model.addAttribute("hvo", hvo);
@@ -298,47 +298,47 @@ public class EworkFormController {
 		
 		List<AuthVO> list_auth = null;
 		list_auth = eworkFormService.chaebunAuth();
-		logger.info("  list_auth : " + list_auth);
+		//logger.info("  list_auth : " + list_auth);
 		
 		AuthVO auvo_Ea_num = null;
 		auvo_Ea_num = list_auth.get(0);
-		logger.info("  auvo_Ea_num : " + auvo_Ea_num);
+		//logger.info("  auvo_Ea_num : " + auvo_Ea_num);
 		
 		String ea_num = "";
 		ea_num = auvo_Ea_num.getEa_num();
-		logger.info("  ea_num : " + ea_num);
+		//logger.info("  ea_num : " + ea_num);
 		
 		ea_num = ChaebunUtils.cNum(ea_num, AUTH_GUNBUN);
-		logger.info("  ea_num : " + ea_num);
+		//logger.info("  ea_num : " + ea_num);
 		
 		AuthVO auvo = new AuthVO();
-		logger.info("  auvo : " + auvo);
+		//logger.info("  auvo : " + auvo);
 		auvo.setEa_num(ea_num);
 		
 		model.addAttribute("auvo", auvo);
 		
-		logger.info("(EworkFormController)public String moveInsertHoliday() 끝 >>> ");
+		//logger.info("(EworkFormController)public String moveInsertHoliday() 끝 >>> ");
 		return "ework/insertHoliday";
 	}
 	
 	@RequestMapping("/moveDraftResult") 
 	public String moveDraftResult() {
-		logger.info("(EworkFormController)public String moveSelectAuthorization() 시작 >>> ");
-		logger.info("(EworkFormController)public String moveSelectAuthorization() 끝 >>> ");
+		//logger.info("(EworkFormController)public String moveSelectAuthorization() 시작 >>> ");
+		//logger.info("(EworkFormController)public String moveSelectAuthorization() 끝 >>> ");
 		return "ework/draftResult";
 	}
 	
 	@RequestMapping("/moveDownloadApprovalForm")
 	public String moveDownloadApprovalForm() {
-		logger.info("(EworkFormController)public String moveDownloadApprovalForm() 시작 >>> ");
-		logger.info("(EworkFormController)public String moveDownloadApprovalForm() 끝 >>> ");
+		//logger.info("(EworkFormController)public String moveDownloadApprovalForm() 시작 >>> ");
+		//logger.info("(EworkFormController)public String moveDownloadApprovalForm() 끝 >>> ");
 		return "ework/downloadApprovalForm";
 	} //end of moveDownloadApprovalForm method
 	
 	@RequestMapping("/saveProposal")
 	public String saveProposal(@ModelAttribute ProposalVO pvo) {
-		logger.info("(EworkFormController)public String saveProposal(@ModelAttribute ProposalVO pvo) 시작 >>> ");
-		logger.info("  매개변수 pvo : " + pvo);
+		//logger.info("(EworkFormController)public String saveProposal(@ModelAttribute ProposalVO pvo) 시작 >>> ");
+		//logger.info("  매개변수 pvo : " + pvo);
 		VOPrintUtil.printVO(pvo);
 		
 		//트랜잭션 세팅
@@ -351,11 +351,11 @@ public class EworkFormController {
 		
 		try {
 		result = eworkFormService.insertProposal(pvo);
-		logger.info("  result : " + result);
+		//logger.info("  result : " + result);
 		
 		if(!result) {
-			logger.info("  if(!result) 진입 >>> ");
-			logger.info("실패");		
+			//logger.info("  if(!result) 진입 >>> ");
+			//logger.info("실패");		
 		}
 		ptm.commit(ts);
 		
@@ -363,34 +363,34 @@ public class EworkFormController {
 			return "redirect:/ework/moveSelectProposal.td";
 		}
 		} catch(Exception e) {
-			logger.info("에러 : " + e);
+			//logger.info("에러 : " + e);
 			ptm.rollback(ts);
 		}
 		
 		
-		logger.info("(EworkFormController)public String saveProposal(@ModelAttribute ProposalVO pvo) 끝 >>> ");
+		//logger.info("(EworkFormController)public String saveProposal(@ModelAttribute ProposalVO pvo) 끝 >>> ");
 		return "#";
 	} 
 	
 	@RequestMapping("/downloadDocument")
 	public String downloadDocument(@ModelAttribute FileVO fvo, Model model) throws Exception{
-		logger.info("(EworkFormController)public String downloadDocument(@ModelAttribute FileVO fvo, Model model) 시작 >>> ");
-		logger.info("  매개변수 fvo : " + fvo);
-		logger.info("  getFile() : " + fvo.getFile());
+		//logger.info("(EworkFormController)public String downloadDocument(@ModelAttribute FileVO fvo, Model model) 시작 >>> ");
+		//logger.info("  매개변수 fvo : " + fvo);
+		//logger.info("  getFile() : " + fvo.getFile());
 		
 		String file = fvo.getFile();
-		logger.info("  file : " + file);
+		//logger.info("  file : " + file);
 		
 		model.addAttribute("fileName", file);
 		model.addAttribute("FilePath", UPLOAD_ABSTRACT_PATH);
 		
-		logger.info("(EworkFormController)public String downloadDocument(@ModelAttribute FileVO fvo, Model model) 끝 >>> ");
+		//logger.info("(EworkFormController)public String downloadDocument(@ModelAttribute FileVO fvo, Model model) 끝 >>> ");
 		return "ework/downloadForm";
 	}
 	
 	@RequestMapping(value="/insertApproval", method=RequestMethod.POST)
 	public String insertApproval(HttpServletRequest request, Model model) {
-		logger.info("(EworkFormController)public String insertApproval(@ModelAttribute ApprovalVO avo) 시작 >>> ");
+		//logger.info("(EworkFormController)public String insertApproval(@ModelAttribute ApprovalVO avo) 시작 >>> ");
 		
 		List<ApprovalVO> list_Eap_num = null;
 		String eap_num = "";
@@ -417,68 +417,68 @@ public class EworkFormController {
 			ts = ptm.getTransaction(dtd);
 			
 			list_Eap_num = eworkFormService.chaebunApproval();
-			logger.info("  list_Eap_num : " + list_Eap_num);
+			//logger.info("  list_Eap_num : " + list_Eap_num);
 			ApprovalVO avo_Eap_num = list_Eap_num.get(0);
-			logger.info("  avo_Eap_num : " + avo_Eap_num);
+			//logger.info("  avo_Eap_num : " + avo_Eap_num);
 			eap_num = avo_Eap_num.getEap_num();
-			logger.info("  eap_num : " + eap_num);
+			//logger.info("  eap_num : " + eap_num);
 			eap_num = ChaebunUtils.cNum(eap_num, APPROVAL_GUNBUN);
-			logger.info("  eap_num : " + eap_num);
+			//logger.info("  eap_num : " + eap_num);
 			
 			//avo.setEap_num(eap_num);
 			
 			FileUploadUtil fuu = new FileUploadUtil();
-			logger.info("  fuu : " + fuu);
+			//logger.info("  fuu : " + fuu);
 			
 			file_flag = fuu.fileUpload(request, UPLOAD_ABSTRACT_PATH);
-			logger.info("  file_flag : " + file_flag);
+			//logger.info("  file_flag : " + file_flag);
 			
 			if(file_flag) {
-				logger.info("  if(file_flag) 진입 >>> " );
+				//logger.info("  if(file_flag) 진입 >>> " );
 				
 				//String eap_num = fuu.getParameter("eap_num");
 				ef_num = fuu.getParameter("ef_num");
-				logger.info("  ef_num : " + ef_num);
+				//logger.info("  ef_num : " + ef_num);
 				ea_num = fuu.getParameter("ea_num");
-				logger.info("  ea_num : " + ea_num);
+				//logger.info("  ea_num : " + ea_num);
 				eap_title = fuu.getParameter("eap_title");
-				logger.info("  eap_title : " + eap_title);
+				//logger.info("  eap_title : " + eap_title);
 				hm_empnum = fuu.getParameter("hm_empnum");
-				logger.info("  hm_empnum : " + hm_empnum);
+				//logger.info("  hm_empnum : " + hm_empnum);
 				eap_writer = fuu.getParameter("eap_writer");
-				logger.info("  eap_writer : " + eap_writer);
+				//logger.info("  eap_writer : " + eap_writer);
 				hm_position = fuu.getParameter("hm_position");
-				logger.info("  hm_position : " + hm_position);
+				//logger.info("  hm_position : " + hm_position);
 				eap_startdate = fuu.getParameter("eap_startdate");
-				logger.info("  eap_startdate : " + eap_startdate);
+				//logger.info("  eap_startdate : " + eap_startdate);
 				eap_enddate = fuu.getParameter("eap_enddate");
-				logger.info("  eap_enddate : " + eap_enddate);
+				//logger.info("  eap_enddate : " + eap_enddate);
 				eap_group = fuu.getParameter("eap_group");
-				logger.info("  eap_group : " + eap_group);
+				//logger.info("  eap_group : " + eap_group);
 				
 				Enumeration<String> files = fuu.getFileNames();
-				logger.info("  files : " + files);
+				//logger.info("  files : " + files);
 				String file = files.nextElement();
-				logger.info("  file : " + file);
+				//logger.info("  file : " + file);
 				
 				fileDirectory = UPLOAD_RELATIVE_PATH + "//"+ file;
-				logger.info("  fileDirectory : " + fileDirectory);
+				//logger.info("  fileDirectory : " + fileDirectory);
 			}
 			
 				// 1)
 				MemberVO _mvo = null;
 				_mvo = new MemberVO();
-				logger.info("  _mvo : " + _mvo);
+				//logger.info("  _mvo : " + _mvo);
 				_mvo.setHm_empnum(first_applicant);
 				List<MemberVO> list_person = null;
 				list_person = eworkFormService.selectPerson(_mvo);
 				
 				MemberVO mvo_person = list_person.get(0);
-				logger.info("  mvo_person : " + mvo_person);
+				//logger.info("  mvo_person : " + mvo_person);
 				
 				AuthVO _auvo = null;
 				_auvo = new AuthVO();
-				logger.info("  _auvo : " + _auvo);
+				//logger.info("  _auvo : " + _auvo);
 				
 				_auvo.setEa_num(ea_num);
 				_auvo.setHm_empnum(hm_empnum);
@@ -486,16 +486,16 @@ public class EworkFormController {
 				_auvo.setEa_presentnum(first_applicant);
 				
 				bFlag = eworkFormService.insertAuth(_auvo);
-				logger.info("  (insertAuth)bFlag : " + bFlag);
+				//logger.info("  (insertAuth)bFlag : " + bFlag);
 				
 				if(!bFlag) {
-					logger.info("  if(!bFlag) 진입 >>> ");
-					logger.info("  실패");
+					//logger.info("  if(!bFlag) 진입 >>> ");
+					//logger.info("  실패");
 				}
 				
 				// 2)
 				_avo = new ApprovalVO();
-				logger.info("  _avo : " + _avo);
+				//logger.info("  _avo : " + _avo);
 				_avo.setEap_num(eap_num);
 				_avo.setEf_num(ef_num);
 				_avo.setEa_num(ea_num);
@@ -512,55 +512,55 @@ public class EworkFormController {
 				//url = "/ework/insertApproval"; //실패
 				
 				bFlag = eworkFormService.insertApproval(_avo);
-				logger.info("  (insertApproval)bFlag : " + bFlag);
+				//logger.info("  (insertApproval)bFlag : " + bFlag);
 				
 				if(!bFlag) {
-					logger.info("  if(!result)  진입 >>> ");
-					logger.info("  실패");
+					//logger.info("  if(!result)  진입 >>> ");
+					//logger.info("  실패");
 				}
 				
 				// 3)
 				LineVO _lvo = null;
 				_lvo = new LineVO();
-				logger.info("  _lvo : " + _lvo);
+				//logger.info("  _lvo : " + _lvo);
 				_lvo.setEa_num(ea_num);
 				_lvo.setEl_num(el_num);
 				
 				bFlag = eworkFormService.updateLine(_lvo);
-				logger.info("  (updateLine)bFlag : " + bFlag);
+				//logger.info("  (updateLine)bFlag : " + bFlag);
 				
 				if(!bFlag) {
-					logger.info("  if(!bFlag) 진입 >>> ");
-					logger.info("  실패");
+					//logger.info("  if(!bFlag) 진입 >>> ");
+					//logger.info("  실패");
 				}
 				
 				// 4)
 				//채번
 				List<AuthPersonVO> list_authperson = eworkFormService.chaebunAuthPerson();
-				logger.info("  list_authperson : " + list_authperson);
+				//logger.info("  list_authperson : " + list_authperson);
 				AuthPersonVO apvo_Eai_num = list_authperson.get(0);
-				logger.info("  apvo_Eai_num : " + apvo_Eai_num);
+				//logger.info("  apvo_Eai_num : " + apvo_Eai_num);
 				String eai_num = apvo_Eai_num.getEai_num();
-				logger.info("  eai_num : " + eai_num);
+				//logger.info("  eai_num : " + eai_num);
 				eai_num = ChaebunUtils.cNum(eai_num, AUTHPERSON_GUNBUN);
-				logger.info("  eai_num : " + eai_num);
+				//logger.info("  eai_num : " + eai_num);
 						
 				//싸인스탬프 이미지 갖고오기
 				SignStampVO _ssvo = null;
 				_ssvo = new SignStampVO();
-				logger.info("  _ssvo : " + _ssvo);
+				//logger.info("  _ssvo : " + _ssvo);
 				_ssvo.setHm_empnum(hm_empnum);
 				
 				List<SignStampVO> list_signstamp = eworkFormService.selectSignStamp(_ssvo);
-				logger.info("  list_signstamp : " + list_signstamp);
+				//logger.info("  list_signstamp : " + list_signstamp);
 				
 				SignStampVO ssvo = list_signstamp.get(0);
-				logger.info("  ssvo : " + ssvo);
+				//logger.info("  ssvo : " + ssvo);
 				String es_filedir = ssvo.getEs_filedir();
 				
 				//
 				AuthPersonVO _apvo = new AuthPersonVO();
-				logger.info("  _apvo : " + _apvo);
+				//logger.info("  _apvo : " + _apvo);
 				_apvo.setEai_num(eai_num); // 채번
 				_apvo.setEa_num(ea_num);
 				_apvo.setEai_recentnum(hm_empnum);
@@ -572,26 +572,26 @@ public class EworkFormController {
 				_apvo.setEai_sequence("0"); //기안자니까 첫번쨰
 				
 				bFlag = eworkFormService.insertAuthPerson(_apvo);
-				logger.info("  (insertAuthPerson)bFlag : " + bFlag);
+				//logger.info("  (insertAuthPerson)bFlag : " + bFlag);
 				
 				if(!bFlag) {
-					logger.info("  if(!bFlag) 진입 >>> ");
-					logger.info("  실패");
+					//logger.info("  if(!bFlag) 진입 >>> ");
+					//logger.info("  실패");
 				}
 				
 				// 5)AuthBox
 				//채번
 				List<AuthBoxVO> list_authbox = eworkFormService.chaebunAuthBox();
-				logger.info("  list_authbox : " + list_authbox);
+				//logger.info("  list_authbox : " + list_authbox);
 				AuthBoxVO abvo_Eab_num = list_authbox.get(0);
-				logger.info("  abvo_Eab_num : " + abvo_Eab_num);
+				//logger.info("  abvo_Eab_num : " + abvo_Eab_num);
 				String eab_num = abvo_Eab_num.getEab_num();
-				logger.info("  eab_num : " + eab_num);
+				//logger.info("  eab_num : " + eab_num);
 				eab_num = ChaebunUtils.cNum(eab_num, AUTHBOX_GUNBUN);
-				logger.info("  eab_num : " + eab_num);
+				//logger.info("  eab_num : " + eab_num);
 				
 				AuthBoxVO _abvo = new AuthBoxVO();
-				logger.info("  _abvo : " + _abvo);
+				//logger.info("  _abvo : " + _abvo);
 				_abvo.setEab_num(eab_num);
 				_abvo.setEa_num(ea_num);
 				_abvo.setEab_writer(eap_writer);
@@ -602,28 +602,28 @@ public class EworkFormController {
 				
 				//쿼리
 				bFlag = eworkFormService.insertAuthBox(_abvo);
-				logger.info("  (insertAuthBox)bFlag : " + bFlag);
+				//logger.info("  (insertAuthBox)bFlag : " + bFlag);
 				
 				if(!bFlag) {
-					logger.info("  if(!bFlag) 진입 >>> ");
-					logger.info("  실패");
+					//logger.info("  if(!bFlag) 진입 >>> ");
+					//logger.info("  실패");
 				}
 				
 				ptm.commit(ts);
 				
 				if(bFlag) {
-					logger.info("  if(bFlag) 진입 >>> ");
+					//logger.info("  if(bFlag) 진입 >>> ");
 					
 					model.addAttribute("bFlag", bFlag);
 					return "ework/draftResult";
 				}
 				
 			} catch(Exception e) {
-				logger.info("에러 : " + e);
+				//logger.info("에러 : " + e);
 				ptm.rollback(ts);
 			}
 		
-		logger.info("(EworkFormController)public String insertApproval(@ModelAttribute ApprovalVO avo) 끝 >>> ");
+		//logger.info("(EworkFormController)public String insertApproval(@ModelAttribute ApprovalVO avo) 끝 >>> ");
 		return "#";
 	}
 	
@@ -649,26 +649,26 @@ public class EworkFormController {
 	
 	@RequestMapping("/selectTeamMember")
 	public String selectTeamMember(@ModelAttribute MemberVO mvo, Model model) {
-		logger.info("(EworkFormController)public String selectTeamMember(@ModelAttribute MemberVO mvo, Model model) 시작 >>> ");
-		logger.info("  매개변수 mvo : " + mvo);
-		logger.info("  mvo.getHm_deptnum() : " + mvo.getHm_deptnum());
+		//logger.info("(EworkFormController)public String selectTeamMember(@ModelAttribute MemberVO mvo, Model model) 시작 >>> ");
+		//logger.info("  매개변수 mvo : " + mvo);
+		//logger.info("  mvo.getHm_deptnum() : " + mvo.getHm_deptnum());
 		
 		List<MemberVO> list = null;
 		
 		list = eworkFormService.selectTeamMember(mvo);
-		logger.info("  list : " + list);
+		//logger.info("  list : " + list);
 		
 		model.addAttribute("list", list);
-		logger.info("  model : " + model);
+		//logger.info("  model : " + model);
 		
-		logger.info("(EworkFormController)public String selectTeamMember(@ModelAttribute MemberVO mvo, Model model) 끝 >>> ");
+		//logger.info("(EworkFormController)public String selectTeamMember(@ModelAttribute MemberVO mvo, Model model) 끝 >>> ");
 		return "ework/selectTeamMember";
 	}
 	
 	@RequestMapping(value="/insertLine", method=RequestMethod.POST)
 	public String insertLine(@ModelAttribute LineVO lvo, Model model) {
-		logger.info("(EworkFormController)public String insertLine(@ModelAttribute LineVO lvo) 시작 >>> ");
-		logger.info("  매개변수 lvo : " + lvo);
+		//logger.info("(EworkFormController)public String insertLine(@ModelAttribute LineVO lvo) 시작 >>> ");
+		//logger.info("  매개변수 lvo : " + lvo);
 		
 		String result = "";
 		
@@ -679,39 +679,39 @@ public class EworkFormController {
 		
 		List<LineVO> list_chaebun = null;
 		list_chaebun = eworkFormService.chaebunLine();
-		logger.info("  list_chaebun : " + list_chaebun);
+		//logger.info("  list_chaebun : " + list_chaebun);
 		
 		LineVO lvo_chaebun = null;
 		lvo_chaebun = list_chaebun.get(0);
-		logger.info("  lvo_chaebun : " + lvo_chaebun);
+		//logger.info("  lvo_chaebun : " + lvo_chaebun);
 		
 		el_num = lvo_chaebun.getEl_num();
-		logger.info("  lvo_chaebun : " + lvo_chaebun);
+		//logger.info("  lvo_chaebun : " + lvo_chaebun);
 		el_num = ChaebunUtils.cNum(el_num, LINE_GUNBUN);
-		logger.info("  el_num : " + el_num);
+		//logger.info("  el_num : " + el_num);
 		
 		lvo.setEl_num(el_num);
 		
 		line = lvo.getEl_line();
-		logger.info("  line : " + line);
+		//logger.info("  line : " + line);
 		String[] array_line = null;
 		array_line = line.split("-");
 		
 		if(array_line.length == 2) {
-			logger.info("  if(array_line.length == 2) 진입 >>> ");
+			//logger.info("  if(array_line.length == 2) 진입 >>> ");
 			
 			first_applicant = array_line[1];
-			logger.info("  first_applicant : " + first_applicant);
+			//logger.info("  first_applicant : " + first_applicant);
 			
 		} else if(array_line.length == 4) {
-			logger.info("  else if(array_line.length == 4) 진입 >>> ");
+			//logger.info("  else if(array_line.length == 4) 진입 >>> ");
 			
 			first_applicant = array_line[1];
 			second_applicant = array_line[2];
 			third_applicant = array_line[3];
-			logger.info("  first_applicant : " + first_applicant);
-			logger.info("  second_applicant : " + second_applicant);
-			logger.info("  third_applicant : " + third_applicant);
+			//logger.info("  first_applicant : " + first_applicant);
+			//logger.info("  second_applicant : " + second_applicant);
+			//logger.info("  third_applicant : " + third_applicant);
 		}
 		
 		//url = "/ework/setLineResult.td";
@@ -719,15 +719,15 @@ public class EworkFormController {
 		try{
 			boolean bFlag = false;
 			bFlag = eworkFormService.insertLine(lvo);
-			logger.info("  bFlag : " + bFlag);
+			//logger.info("  bFlag : " + bFlag);
 			
 			if(!bFlag) {
-				logger.info("  if(!bFlag) 진입 >>> ");
+				//logger.info("  if(!bFlag) 진입 >>> ");
 				
 				result = "등록에 문제가 있어 완료하지 못하였습니다.";
 				
 			} else {
-				logger.info("  if(!bFlag)-else 진입 >>> ");
+				//logger.info("  if(!bFlag)-else 진입 >>> ");
 				
 				result = "등록이 완료되었습니다.";
 				model.addAttribute("list_chaebun", list_chaebun);	
@@ -735,49 +735,49 @@ public class EworkFormController {
 			ptm.commit(ts);
 			
 			model.addAttribute("result", result);
-			logger.info("  model : " + model);
+			//logger.info("  model : " + model);
 			
 			if(bFlag) {
-				logger.info("  if(bFlag) 진입 >>> ");
+				//logger.info("  if(bFlag) 진입 >>> ");
 				
 				model.addAttribute("bFlag", bFlag);
 				return "ework/setLineResult";
 			}
 		} catch(Exception e) {
-			logger.info("  에러 : " + e);
+			//logger.info("  에러 : " + e);
 			ptm.rollback(ts);
 		}
 		
-		logger.info("(EworkFormController)public String insertLine(@ModelAttribute LineVO lvo) 끝 >>> ");
+		//logger.info("(EworkFormController)public String insertLine(@ModelAttribute LineVO lvo) 끝 >>> ");
 		return "#";
 	}
 	
 	@RequestMapping("/selectPerson")
 	public String selectPerson(@ModelAttribute MemberVO mvo, Model model) {
-		logger.info("(EworkFormController)public String selectPerson(@ModelAttribute MemberVO mvo, Model model) 시작 >>> ");
-		logger.info("  매개변수 mvo : " + mvo);
-		logger.info("  mvo.getHm_empnum() : " + mvo.getHm_empnum());
+		//logger.info("(EworkFormController)public String selectPerson(@ModelAttribute MemberVO mvo, Model model) 시작 >>> ");
+		//logger.info("  매개변수 mvo : " + mvo);
+		//logger.info("  mvo.getHm_empnum() : " + mvo.getHm_empnum());
 		
 		List<MemberVO> list = null;
 		list = eworkFormService.selectPerson(mvo);
-		logger.info("  list : " + list);
+		//logger.info("  list : " + list);
 		
 		if(list!=null) {
-			logger.info("  if(list!=null) 진입 >>> ");
+			//logger.info("  if(list!=null) 진입 >>> ");
 			
 			model.addAttribute("list", list);
-			logger.info("  model : " + model);
+			//logger.info("  model : " + model);
 			
 		}
 		
-		logger.info("(EworkFormController)public String selectPerson(@ModelAttribute MemberVO mvo, Model model) 끝 >>> ");
+		//logger.info("(EworkFormController)public String selectPerson(@ModelAttribute MemberVO mvo, Model model) 끝 >>> ");
 		return "ework/selectUserInfo";
 	}
 	
 	@RequestMapping(value="/insertProposal", method=RequestMethod.POST)
 	public String insertProposal(@ModelAttribute ProposalVO pvo, Model model) {
-		logger.info("(EworkFormController)public String insertProposal(@ModelAttribute ProposalVO pvo) 시작 >>> ");
-		logger.info("  매개변수 pvo : " + pvo);
+		//logger.info("(EworkFormController)public String insertProposal(@ModelAttribute ProposalVO pvo) 시작 >>> ");
+		//logger.info("  매개변수 pvo : " + pvo);
 		VOPrintUtil.printVO(pvo);
 		
 		//리턴 플래그
@@ -793,17 +793,17 @@ public class EworkFormController {
 			// 1) 
 			MemberVO _mvo = null;
 			_mvo = new MemberVO();
-			logger.info("  _mvo : " + _mvo);
+			//logger.info("  _mvo : " + _mvo);
 			_mvo.setHm_empnum(first_applicant);
 			List<MemberVO> list_person = null;
 			list_person = eworkFormService.selectPerson(_mvo);
 			
 			MemberVO mvo_person = list_person.get(0);
-			logger.info("  mvo_person : " + mvo_person);
+			//logger.info("  mvo_person : " + mvo_person);
 			
 			AuthVO _auvo = null;
 			_auvo = new AuthVO();
-			logger.info("  _auvo : " + _auvo);
+			//logger.info("  _auvo : " + _auvo);
 			
 			_auvo.setEa_num(pvo.getEa_num());
 			_auvo.setHm_empnum(pvo.getHm_empnum());
@@ -811,64 +811,64 @@ public class EworkFormController {
 			_auvo.setEa_presentnum(first_applicant);
 			
 			bFlag = eworkFormService.insertAuth(_auvo);
-			logger.info("  (insertAuth)bFlag : " + bFlag);
+			//logger.info("  (insertAuth)bFlag : " + bFlag);
 			
 			if(!bFlag) {
-				logger.info("  if(!bFlag) 진입 >>> ");
-				logger.info("  실패");
+				//logger.info("  if(!bFlag) 진입 >>> ");
+				//logger.info("  실패");
 			}
 			
 			// 2)
 			bFlag = eworkFormService.insertProposal(pvo);
-			logger.info("  (insertProposal)bFlag : " + bFlag);
+			//logger.info("  (insertProposal)bFlag : " + bFlag);
 			
 			if(!bFlag) {
-				logger.info("  if(!bFlag) 진입 >>> ");
-				logger.info("  실패");
+				//logger.info("  if(!bFlag) 진입 >>> ");
+				//logger.info("  실패");
 			}
 			
 			// 3)
 			LineVO _lvo = null;
 			_lvo = new LineVO();
-			logger.info("  _lvo : " + _lvo);
+			//logger.info("  _lvo : " + _lvo);
 			_lvo.setEa_num(pvo.getEa_num());
 			_lvo.setEl_num(el_num);
 			
 			bFlag = eworkFormService.updateLine(_lvo);
-			logger.info("  (updateLine)bFlag : " + bFlag);
+			//logger.info("  (updateLine)bFlag : " + bFlag);
 			
 			if(!bFlag) {
-				logger.info("  if(!bFlag) 진입 >>> ");
-				logger.info("  실패");
+				//logger.info("  if(!bFlag) 진입 >>> ");
+				//logger.info("  실패");
 			}
 			
 			// 4)
 			//채번
 			List<AuthPersonVO> list_authperson = eworkFormService.chaebunAuthPerson();
-			logger.info("  list_authperson : " + list_authperson);
+			//logger.info("  list_authperson : " + list_authperson);
 			AuthPersonVO apvo_Eai_num = list_authperson.get(0);
-			logger.info("  apvo_Eai_num : " + apvo_Eai_num);
+			//logger.info("  apvo_Eai_num : " + apvo_Eai_num);
 			String eai_num = apvo_Eai_num.getEai_num();
-			logger.info("  eai_num : " + eai_num);
+			//logger.info("  eai_num : " + eai_num);
 			eai_num = ChaebunUtils.cNum(eai_num, AUTHPERSON_GUNBUN);
-			logger.info("  eai_num : " + eai_num);
+			//logger.info("  eai_num : " + eai_num);
 					
 			//싸인스탬프 이미지 갖고오기
 			SignStampVO _ssvo = null;
 			_ssvo = new SignStampVO();
-			logger.info("  _ssvo : " + _ssvo);
+			//logger.info("  _ssvo : " + _ssvo);
 			_ssvo.setHm_empnum(pvo.getHm_empnum());
 			
 			List<SignStampVO> list_signstamp = eworkFormService.selectSignStamp(_ssvo);
-			logger.info("  list_signstamp : " + list_signstamp);
+			//logger.info("  list_signstamp : " + list_signstamp);
 			
 			SignStampVO ssvo = list_signstamp.get(0);
-			logger.info("  ssvo : " + ssvo);
+			//logger.info("  ssvo : " + ssvo);
 			String es_filedir = ssvo.getEs_filedir();
 			
 			//
 			AuthPersonVO _apvo = new AuthPersonVO();
-			logger.info("  _apvo : " + _apvo);
+			//logger.info("  _apvo : " + _apvo);
 			_apvo.setEai_num(eai_num); // 채번
 			_apvo.setEa_num(pvo.getEa_num());
 			_apvo.setEai_recentnum(pvo.getHm_empnum());
@@ -880,26 +880,26 @@ public class EworkFormController {
 			_apvo.setEai_sequence("0"); //기안자니까 첫번쨰
 			
 			bFlag = eworkFormService.insertAuthPerson(_apvo);
-			logger.info("  (insertAuthPerson)bFlag : " + bFlag);
+			//logger.info("  (insertAuthPerson)bFlag : " + bFlag);
 			
 			if(!bFlag) {
-				logger.info("  if(!bFlag) 진입 >>> ");
-				logger.info("  실패");
+				//logger.info("  if(!bFlag) 진입 >>> ");
+				//logger.info("  실패");
 			}
 		
 			// 5)AuthBox
 			//채번
 			List<AuthBoxVO> list_authbox = eworkFormService.chaebunAuthBox();
-			logger.info("  list_authbox : " + list_authbox);
+			//logger.info("  list_authbox : " + list_authbox);
 			AuthBoxVO abvo_Eab_num = list_authbox.get(0);
-			logger.info("  abvo_Eab_num : " + abvo_Eab_num);
+			//logger.info("  abvo_Eab_num : " + abvo_Eab_num);
 			String eab_num = abvo_Eab_num.getEab_num();
-			logger.info("  eab_num : " + eab_num);
+			//logger.info("  eab_num : " + eab_num);
 			eab_num = ChaebunUtils.cNum(eab_num, AUTHBOX_GUNBUN);
-			logger.info("  eab_num : " + eab_num);
+			//logger.info("  eab_num : " + eab_num);
 			
 			AuthBoxVO _abvo = new AuthBoxVO();
-			logger.info("  _abvo : " + _abvo);
+			//logger.info("  _abvo : " + _abvo);
 			_abvo.setEab_num(eab_num);
 			_abvo.setEa_num(pvo.getEa_num());
 			_abvo.setEab_writer(pvo.getEp_writer());
@@ -910,36 +910,36 @@ public class EworkFormController {
 			
 			//쿼리
 			bFlag = eworkFormService.insertAuthBox(_abvo);
-			logger.info("  (insertAuthBox)bFlag : " + bFlag);
+			//logger.info("  (insertAuthBox)bFlag : " + bFlag);
 			
 			if(!bFlag) {
-				logger.info("  if(!bFlag) 진입 >>> ");
-				logger.info("  실패");
+				//logger.info("  if(!bFlag) 진입 >>> ");
+				//logger.info("  실패");
 			}
 		
 			ptm.commit(ts);
 			
 			if(bFlag) {
-				logger.info("  if(bFlag) 진입 >>> ");
+				//logger.info("  if(bFlag) 진입 >>> ");
 				
 				model.addAttribute("bFlag", bFlag);
 				return "ework/draftResult";
 			}
 			
 		} catch(Exception e) {
-			logger.info("  에러 : " + e);
+			//logger.info("  에러 : " + e);
 			ptm.rollback(ts);
 		}
 		
-		logger.info("(EworkFormController)public String insertProposal(@ModelAttribute ProposalVO pvo) 끝 >>> ");
+		//logger.info("(EworkFormController)public String insertProposal(@ModelAttribute ProposalVO pvo) 끝 >>> ");
 		return "#";
 	}
 	
 	@RequestMapping(value="/insertHoliday", method=RequestMethod.POST)
 	public String insertHoliday(@ModelAttribute HolidayVO hvo, Model model) {
-		logger.info("(EworkFormController)public String insertHoliday(@ModelAttribute HolidayVO hvo) 시작 >>> ");
-		logger.info("  매개변수 hvo : " + hvo);
-		logger.info("  " + hvo.getEa_num());
+		//logger.info("(EworkFormController)public String insertHoliday(@ModelAttribute HolidayVO hvo) 시작 >>> ");
+		//logger.info("  매개변수 hvo : " + hvo);
+		//logger.info("  " + hvo.getEa_num());
 		
 		//리턴 플래그
 		boolean bFlag = false;
@@ -955,17 +955,17 @@ public class EworkFormController {
 			//채번
 			MemberVO _mvo = null;
 			_mvo = new MemberVO();
-			logger.info("  _mvo : " + _mvo);
+			//logger.info("  _mvo : " + _mvo);
 			_mvo.setHm_empnum(first_applicant);
 			List<MemberVO> list_person = null;
 			list_person = eworkFormService.selectPerson(_mvo); //다음 결재자의 정보를 가져옴
 			
 			MemberVO mvo_person = list_person.get(0);
-			logger.info("  mvo_person : " + mvo_person);
+			//logger.info("  mvo_person : " + mvo_person);
 			
 			AuthVO _auvo = null;
 			_auvo = new AuthVO();
-			logger.info("  _auvo : " + _auvo);
+			//logger.info("  _auvo : " + _auvo);
 			
 			_auvo.setEa_num(hvo.getEa_num());
 			_auvo.setHm_empnum(hvo.getHm_empnum());
@@ -973,64 +973,64 @@ public class EworkFormController {
 			_auvo.setEa_presentnum(first_applicant);
 			
 			bFlag = eworkFormService.insertAuth(_auvo);
-			logger.info("  (insertAuth)bFlag : " + bFlag);
+			//logger.info("  (insertAuth)bFlag : " + bFlag);
 			
 			if(!bFlag) {
-				logger.info("  if(!bFlag) 진입 >>> ");
-				logger.info("  실패");
+				//logger.info("  if(!bFlag) 진입 >>> ");
+				//logger.info("  실패");
 			}
 			
 			// 2) 폼에서 입력한 내용 INSERT
 			bFlag = eworkFormService.insertHoliday(hvo);
-			logger.info("  (insertHoliday)bFlag : " + bFlag);
+			//logger.info("  (insertHoliday)bFlag : " + bFlag);
 			
 			if(!bFlag) {
-				logger.info("  if(!bFlag) 진입 >>> ");
-				logger.info("  실패");
+				//logger.info("  if(!bFlag) 진입 >>> ");
+				//logger.info("  실패");
 			}
 			
 			// 3) 라인 테이블 업데이트
 			LineVO _lvo = null;
 			_lvo = new LineVO();
-			logger.info("  _lvo : " + _lvo);
+			//logger.info("  _lvo : " + _lvo);
 			_lvo.setEa_num(hvo.getEa_num());
 			_lvo.setEl_num(el_num);
 			
 			bFlag = eworkFormService.updateLine(_lvo);
-			logger.info("  (updateLine)bFlag : " + bFlag);
+			//logger.info("  (updateLine)bFlag : " + bFlag);
 			
 			if(!bFlag) {
-				logger.info("  if(!bFlag) 진입 >>> ");
-				logger.info("  실패");
+				//logger.info("  if(!bFlag) 진입 >>> ");
+				//logger.info("  실패");
 			}
 			
 			// 4) 결재자정보 테이블 INSERT
 			//결재자정보 테이블 채번
 			List<AuthPersonVO> list_authperson = eworkFormService.chaebunAuthPerson();
-			logger.info("  list_authperson : " + list_authperson);
+			//logger.info("  list_authperson : " + list_authperson);
 			AuthPersonVO apvo_Eai_num = list_authperson.get(0);
-			logger.info("  apvo_Eai_num : " + apvo_Eai_num);
+			//logger.info("  apvo_Eai_num : " + apvo_Eai_num);
 			String eai_num = apvo_Eai_num.getEai_num();
-			logger.info("  eai_num : " + eai_num);
+			//logger.info("  eai_num : " + eai_num);
 			eai_num = ChaebunUtils.cNum(eai_num, AUTHPERSON_GUNBUN);
-			logger.info("  eai_num : " + eai_num);
+			//logger.info("  eai_num : " + eai_num);
 					
 			//싸인스탬프 이미지 갖고오기
 			SignStampVO _ssvo = null;
 			_ssvo = new SignStampVO();
-			logger.info("  _ssvo : " + _ssvo);
+			//logger.info("  _ssvo : " + _ssvo);
 			_ssvo.setHm_empnum(hvo.getHm_empnum());
 			
 			List<SignStampVO> list_signstamp = eworkFormService.selectSignStamp(_ssvo);
-			logger.info("  list_signstamp : " + list_signstamp);
+			//logger.info("  list_signstamp : " + list_signstamp);
 			
 			SignStampVO ssvo = list_signstamp.get(0);
-			logger.info("  ssvo : " + ssvo);
+			//logger.info("  ssvo : " + ssvo);
 			String es_filedir = ssvo.getEs_filedir();
 			
 			//결재자정보 테이블 insert
 			AuthPersonVO _apvo = new AuthPersonVO();
-			logger.info("  _apvo : " + _apvo);
+			//logger.info("  _apvo : " + _apvo);
 			_apvo.setEai_num(eai_num); // 채번
 			_apvo.setEa_num(hvo.getEa_num());
 			_apvo.setEai_recentnum(hvo.getHm_empnum());
@@ -1042,26 +1042,26 @@ public class EworkFormController {
 			_apvo.setEai_sequence("0"); //기안자니까 첫번쨰
 			
 			bFlag = eworkFormService.insertAuthPerson(_apvo);
-			logger.info("  (insertAuthPerson)bFlag : " + bFlag);
+			//logger.info("  (insertAuthPerson)bFlag : " + bFlag);
 			
 			if(!bFlag) {
-				logger.info("  if(!bFlag) 진입 >>> ");
-				logger.info("  실패");
+				//logger.info("  if(!bFlag) 진입 >>> ");
+				//logger.info("  실패");
 			}
 			
 			// 5)결재함 테이블 INSERT
 			//채번
 			List<AuthBoxVO> list_authbox = eworkFormService.chaebunAuthBox();
-			logger.info("  list_authbox : " + list_authbox);
+			//logger.info("  list_authbox : " + list_authbox);
 			AuthBoxVO abvo_Eab_num = list_authbox.get(0);
-			logger.info("  abvo_Eab_num : " + abvo_Eab_num);
+			//logger.info("  abvo_Eab_num : " + abvo_Eab_num);
 			String eab_num = abvo_Eab_num.getEab_num();
-			logger.info("  eab_num : " + eab_num);
+			//logger.info("  eab_num : " + eab_num);
 			eab_num = ChaebunUtils.cNum(eab_num, AUTHBOX_GUNBUN);
-			logger.info("  eab_num : " + eab_num);
+			//logger.info("  eab_num : " + eab_num);
 			
 			AuthBoxVO _abvo = new AuthBoxVO();
-			logger.info("  _abvo : " + _abvo);
+			//logger.info("  _abvo : " + _abvo);
 			_abvo.setEab_num(eab_num);
 			_abvo.setEa_num(hvo.getEa_num());
 			_abvo.setEab_writer(hvo.getEh_writer());
@@ -1072,17 +1072,17 @@ public class EworkFormController {
 						
 			//쿼리
 			bFlag = eworkFormService.insertAuthBox(_abvo);
-			logger.info("  (insertAuthBox)bFlag : " + bFlag);
+			//logger.info("  (insertAuthBox)bFlag : " + bFlag);
 			
 			if(!bFlag) {
-				logger.info("  if(!bFlag) 진입 >>> ");
-				logger.info("  실패");
+				//logger.info("  if(!bFlag) 진입 >>> ");
+				//logger.info("  실패");
 			}
 					
 			ptm.commit(ts);
 			
 			if(bFlag) {
-				logger.info("  if(bFlag) 진입 >>> ");
+				//logger.info("  if(bFlag) 진입 >>> ");
 				
 				model.addAttribute("bFlag", bFlag);
 				return "ework/draftResult";
@@ -1090,18 +1090,18 @@ public class EworkFormController {
 			
 			
 		} catch(Exception e) {
-			logger.info("  에러 : " + e);
+			//logger.info("  에러 : " + e);
 			ptm.rollback(ts);
 		}
 		
-		logger.info("(EworkFormController)public String insertHoliday(@ModelAttribute HolidayVO hvo) 끝 >>> ");
+		//logger.info("(EworkFormController)public String insertHoliday(@ModelAttribute HolidayVO hvo) 끝 >>> ");
 		return "#";
 	}
 	
 	@RequestMapping(value="/selectSignStamp", method=RequestMethod.POST)
 	public String selectSignStamp(AuthorizationVO authvo, Model model) {
-		logger.info("public String selectSignStamp(AuthorizationVO authvo) 시작 >>> ");
-		logger.info("  매개변수 authvo : " + authvo.getHm_empnum());
+		//logger.info("public String selectSignStamp(AuthorizationVO authvo) 시작 >>> ");
+		//logger.info("  매개변수 authvo : " + authvo.getHm_empnum());
 		
 		SignStampVO _ssvo = null;
 		_ssvo = new SignStampVO();
@@ -1109,11 +1109,11 @@ public class EworkFormController {
 		
 		List<SignStampVO> list_sign = null;
 		list_sign = eworkFormService.selectSignStamp(_ssvo);
-		logger.info("  list_sign : " + list_sign);
+		//logger.info("  list_sign : " + list_sign);
 		
 		model.addAttribute("list_sign", list_sign);
 		
-		logger.info("public String selectSignStamp(AuthorizationVO authvo) 끝 >>> ");
+		//logger.info("public String selectSignStamp(AuthorizationVO authvo) 끝 >>> ");
 		return "ework/selectSignStamp";
 	} //end of selectSignStamp method
 	

@@ -132,7 +132,7 @@
 		ArrayList<NoticeVO> sList = (ArrayList<NoticeVO>)obj;
 		
 		nvo = sList.get(0);
-		System.out.println(nvo.getBn_num());
+		//System.out.println(nvo.getBn_num());
 		
 
 %>
@@ -150,7 +150,7 @@
 	         
 	<%
 	
-			System.out.println(sManager.getUserID(session.getId()));
+			//System.out.println(sManager.getUserID(session.getId()));
 			String hm_empnum = sManager.getUserID(session.getId());
 		
 			

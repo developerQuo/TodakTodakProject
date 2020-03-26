@@ -255,7 +255,7 @@
 			SuggestionVO svo = sList.get(0);
 			String i_hm_empnum = svo.getHm_empnum();
 	
-			System.out.println(n_hm_empnum + " : " + i_hm_empnum);
+			//System.out.println(n_hm_empnum + " : " + i_hm_empnum);
 			
 			String bsl_likeYN = (String)request.getAttribute("bsl_likeYN");
 			String bsl_dislikeYN = (String)request.getAttribute("bsl_dislikeYN");

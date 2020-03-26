@@ -7,7 +7,7 @@
 <%@ include file="/WEB-INF/views/commons/bindSession.jsp" %>
 <% 
 	String user_id = sManager.getUserID(session.getId());
-	System.out.println(user_id);
+	//System.out.println(user_id);
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -333,23 +333,23 @@
 			String ea_num = "";
 			
 			Object ob = request.getAttribute("pvo");
-			System.out.println("ob >>> : " + ob);
+			//System.out.println("ob >>> : " + ob);
 			
 			Object ob2 = null;
 			ob2 = request.getAttribute("auvo");
-			System.out.println("ob2 >>> : " + ob2);
+			//System.out.println("ob2 >>> : " + ob2);
 			
 			if(ob!=null && ob2!=null) {
 			
 				ProposalVO pvo = (ProposalVO) ob;
-				System.out.println("pvo >>> : " + pvo);
+				//System.out.println("pvo >>> : " + pvo);
 				ep_num = pvo.getEp_num();
-				System.out.println("ep_num >>> : " + ep_num);
+				//System.out.println("ep_num >>> : " + ep_num);
 				
 				AuthVO auvo = (AuthVO) ob2;
-				System.out.println("auvo >>> : " + auvo);
+				//System.out.println("auvo >>> : " + auvo);
 				ea_num = auvo.getEa_num();
-				System.out.println("ea_num >>> : " + ea_num);
+				//System.out.println("ea_num >>> : " + ea_num);
 				
 			}
 			

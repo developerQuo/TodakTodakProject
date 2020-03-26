@@ -151,7 +151,7 @@
 			     String hm_name = mvo.get(0).getHm_name();
 				 
 				 String hm_empnum = sManager.getUserID(session.getId());
-				 System.out.println( hm_duty + hm_empnum + hm_deptnum + hm_name);
+				 //System.out.println( hm_duty + hm_empnum + hm_deptnum + hm_name);
 	
 	%>
 			<div id="boardTit" align = "center"><h3>글쓰기</h3></div>

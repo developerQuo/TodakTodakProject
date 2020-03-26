@@ -44,19 +44,19 @@ public class EtcController {
 	public String login(@ModelAttribute MemberVO hmvo,
 						HttpServletRequest request,
 						Model model){
-		logger.info("(log) login entered");
-		logger.info(" id >>> " + hmvo.getHm_id());
-		logger.info(" pass >>> " + hmvo.getHm_pw());
+		//logger.info("(log) login entered");
+		//logger.info(" id >>> " + hmvo.getHm_id());
+		//logger.info(" pass >>> " + hmvo.getHm_pw());
 		
 		// 암호화
 //		BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
-//		logger.info(" encoded pass >>> " + bcpe.encode(hmvo.getHm_pw()));
+//		//logger.info(" encoded pass >>> " + bcpe.encode(hmvo.getHm_pw()));
 //		String encodedPass = bcpe.encode(hmvo.getHm_pw());
 //		hmvo.setHm_pw(encodedPass);
 		
 		List<MemberVO> aList = etcService.login(hmvo);
 		int nCnt = aList.size();
-		logger.info(" nCnt >>> " + nCnt);
+		//logger.info(" nCnt >>> " + nCnt);
 		
 		String message = "";
 		String url = "../../index";
@@ -79,21 +79,21 @@ public class EtcController {
 		}
 
 		model.addAttribute("message", message);
-		logger.info("(log) login left");
+		//logger.info("(log) login left");
 		return url;
 	}
 	
 	@RequestMapping(value="logout")
 	public String logout(HttpServletRequest request,
 						 Model model){
-		logger.info("(log) logout entered");
+		//logger.info("(log) logout entered");
 		
 		request.getSession().invalidate();
 		String message = "로그아웃 했습니다.";
 		model.addAttribute("message", message);
 		String url = "../../index";
 		
-		logger.info("(log) logout left");
+		//logger.info("(log) logout left");
 		return url;
 	}
 	
@@ -104,7 +104,7 @@ public class EtcController {
 
 	@RequestMapping(value="setMainSession")
 	public void setMainSession(HttpServletRequest request, @RequestParam("main") String main){
-//		System.out.println(" main IN ETC CONTROLLER >>> " + main);
+//		//System.out.println(" main IN ETC CONTROLLER >>> " + main);
 		LoginSession sManager = (LoginSession)request.getSession().getAttribute("login");
 		
 		sManager.setMain(main, request.getSession().getId());
@@ -121,12 +121,12 @@ public class EtcController {
 	}
 	@RequestMapping(value="/insertMember", method = RequestMethod.POST)
 	public String registerMember(@ModelAttribute ApprVO param, HttpServletRequest request){
-		logger.info("/c 컨트롤러 >>>>>>>>>>");
+		//logger.info("/c 컨트롤러 >>>>>>>>>>");
 		String filePath=request.getSession().getServletContext().getRealPath("/upload/human");
 	
 		boolean flag=false;
 		param=humanService.chaebunMemberAppr();
-		System.out.println("+++++++"+param.getHmp_empnum());
+		//System.out.println("+++++++"+param.getHmp_empnum());
 		String cnum=param.getHmp_empnum();
 		cnum=ChaebunUtils.cNum(cnum, "H");
 		
@@ -134,14 +134,14 @@ public class EtcController {
 			FileUploadUtil fuu = new FileUploadUtil();
 			boolean bFlag = false;
 			bFlag = fuu.fileUpload(request, filePath);
-			logger.info("bFlag 사진 인서트 :  >>> : " + bFlag );
+			//logger.info("bFlag 사진 인서트 :  >>> : " + bFlag );
 			
 				Enumeration<String> en = fuu.getFileNames();
 //				dbFileName="../"+"upload"+"/"+fileName;
 				String hmp_picture =  en.nextElement();
-				logger.info("picture >>> : " + hmp_picture);
+				//logger.info("picture >>> : " + hmp_picture);
 				String test=fuu.getParameter("hmp_picture");
-				System.out.println("test>>>>>>>>>>>"+test);
+				//System.out.println("test>>>>>>>>>>>"+test);
 				
 				
 				String hmp_name=fuu.getParameter("hmp_name");
@@ -162,7 +162,7 @@ public class EtcController {
 				String hmp_pw=fuu.getParameter("hmp_pw");
 
 				BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
-				logger.info(" encoded pass >>> " + bcpe.encode(hmp_pw));
+				logger.info(" encoded pw >>> " + bcpe.encode(hmp_pw));
 				String encodedPass = bcpe.encode(hmp_pw);
 				
 				
@@ -186,35 +186,35 @@ public class EtcController {
 				param.setHmp_pw(encodedPass);
 				
 			
-				System.out.println("Hmp_empnum()"+param.getHmp_name());
-				System.out.println("Hmp_empnum()"+param.getHmp_birth());
-				System.out.println("Hmp_empnum()"+param.getHmp_residentnum());
-				System.out.println("Hmp_empnum()"+param.getHmp_hpnum());
-				System.out.println("Hmp_empnum()"+param.getHmp_email());
-				System.out.println("Hmp_empnum()"+param.getHmp_addr());
-				System.out.println("Hmp_empnum()"+param.getHmp_postcode());
-				System.out.println("Hmp_empnum()"+param.getHmp_picture());
-				System.out.println("Hmp_empnum()"+param.getHmp_bank());
-				System.out.println("Hmp_empnum()"+param.getHmp_depositors());
-				System.out.println("Hmp_empnum()"+param.getHmp_accountnum());
-				System.out.println("Hmp_empnum()"+param.getHmp_education());
-				System.out.println("Hmp_empnum()"+param.getHmp_educontents());
-				System.out.println("Hmp_empnum()"+param.getHmp_workexperience());
-				System.out.println("Hmp_empnum()"+param.getHmp_workcontents());
+				//System.out.println("Hmp_empnum()"+param.getHmp_name());
+				//System.out.println("Hmp_empnum()"+param.getHmp_birth());
+				//System.out.println("Hmp_empnum()"+param.getHmp_residentnum());
+				//System.out.println("Hmp_empnum()"+param.getHmp_hpnum());
+				//System.out.println("Hmp_empnum()"+param.getHmp_email());
+				//System.out.println("Hmp_empnum()"+param.getHmp_addr());
+				//System.out.println("Hmp_empnum()"+param.getHmp_postcode());
+				//System.out.println("Hmp_empnum()"+param.getHmp_picture());
+				//System.out.println("Hmp_empnum()"+param.getHmp_bank());
+				//System.out.println("Hmp_empnum()"+param.getHmp_depositors());
+				//System.out.println("Hmp_empnum()"+param.getHmp_accountnum());
+				//System.out.println("Hmp_empnum()"+param.getHmp_education());
+				//System.out.println("Hmp_empnum()"+param.getHmp_educontents());
+				//System.out.println("Hmp_empnum()"+param.getHmp_workexperience());
+				//System.out.println("Hmp_empnum()"+param.getHmp_workcontents());
 				
 				
 				
 				
 				flag=humanService.insertMemberAppr(param);
 			}catch(Exception e){
-			System.out.println("에러발생!"+e);
+			//System.out.println("에러발생!"+e);
 		}
 		return "/human/result";
 	}
 	
 	@RequestMapping(value = "/moveSignup", method = RequestMethod.GET)
 	public String movePage(){
-		logger.info("moveSignup 페이지 이동>>>>>>>>>>");
+		//logger.info("moveSignup 페이지 이동>>>>>>>>>>");
 		
 		return "/human/signup";
 	}
@@ -223,9 +223,9 @@ public class EtcController {
 	public String emailAuth(@RequestParam("selectFunc") String selectFunc,
 							@ModelAttribute MemberVO hmvo,
 							Model model){
-		logger.info("(log) emailAuth entered");
+		//logger.info("(log) emailAuth entered");
 		
-		logger.info(" selectFunc >>> " + selectFunc);
+		//logger.info(" selectFunc >>> " + selectFunc);
 		boolean emailConfirm = false;
 		String url = "etc/popupOK";
 
@@ -240,8 +240,8 @@ public class EtcController {
 		
 		// 회원가입
 		if(selectFunc.equals("0")){
-			logger.info("이름: "+hmvo.getHm_name());
-			logger.info("이메일 주소:"+hmvo.getHm_email());
+			//logger.info("이름: "+hmvo.getHm_name());
+			//logger.info("이메일 주소:"+hmvo.getHm_email());
 			  StringBuffer temp =new StringBuffer();
               Random rnd = new Random();
               for(int i=0;i<10;i++)
@@ -276,10 +276,10 @@ public class EtcController {
 		}
 		// 아이디
 		if(selectFunc.equals("1")){
-			logger.info(" id 진입 ");
+			//logger.info(" id 진입 ");
 			
 			List<MemberVO> hList = etcService.idEmailAuth(hmvo);
-			logger.info(" 길이>>>>>>>>>>" + hList.size());
+			//logger.info(" 길이>>>>>>>>>>" + hList.size());
 			if (hList.size() > 0){
 				MemberVO hmvo2 = hList.get(0);
 				
@@ -298,7 +298,7 @@ public class EtcController {
 		if(selectFunc.equals("2")){
 			
 			List<MemberVO> hList = etcService.pwEmailAuth(hmvo);
-			logger.info(" 길이>>>>>>>>>>" + hList.size());
+			//logger.info(" 길이>>>>>>>>>>" + hList.size());
 			if (hList.size() > 0){
 				MemberVO hmvo2 = hList.get(0);
 				
@@ -325,12 +325,12 @@ public class EtcController {
                 }
                 String AuthenticationKey = temp.toString();
                 hmvo2.setHm_pw(AuthenticationKey);
-//                logger.info(" 새 비번 >>> " + hmvo2.getHm_pw());
-//                logger.info(" 사번>>> " + hmvo2.getHm_empnum());
+//                //logger.info(" 새 비번 >>> " + hmvo2.getHm_pw());
+//                //logger.info(" 사번>>> " + hmvo2.getHm_empnum());
                 //새로운 비밀번호 저장
                 boolean bool = etcService.setNewPw(hmvo2);
 
-        		logger.info(" bool >>> " + bool);
+        		//logger.info(" bool >>> " + bool);
                 if(bool){
     				toEmail = hmvo.getHm_email();
     				titleEmail = "비밀번호 찾기 결과" + titleEmail;
@@ -348,7 +348,7 @@ public class EtcController {
 			
 		}
 
-		logger.info(" emailConfirm >>> " + emailConfirm);
+		//logger.info(" emailConfirm >>> " + emailConfirm);
 		// 메일 보내기
 		if (emailConfirm){
 			try {
@@ -362,7 +362,7 @@ public class EtcController {
 		model.addAttribute("message", message);
 		model.addAttribute("checker", checker);
 		
-		logger.info("(log) emailAuth left");
+		//logger.info("(log) emailAuth left");
 		return url;
 	}
 }

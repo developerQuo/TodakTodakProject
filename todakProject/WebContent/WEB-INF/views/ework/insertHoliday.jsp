@@ -5,7 +5,7 @@
 <%@ include file="/WEB-INF/views/commons/bindSession.jsp" %>
 <% 
 	String user_id = sManager.getUserID(session.getId());
-	System.out.println(user_id);
+	//System.out.println(user_id);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -433,28 +433,28 @@
 		
 			Object obj = null;
 			obj = request.getAttribute("hvo");
-			System.out.println("obj >>> : " + obj);
+			//System.out.println("obj >>> : " + obj);
 			
 			Object obj2 = null;
 			obj2 = request.getAttribute("auvo");
 			
 			if(obj!=null) {
-				System.out.println("if(obj!=null) 진입 >>> ");
+				//System.out.println("if(obj!=null) 진입 >>> ");
 				
 				HolidayVO hvo = (HolidayVO) obj;
-				System.out.println("hvo >>> : " + hvo);
+				//System.out.println("hvo >>> : " + hvo);
 				eh_num = hvo.getEh_num();
-				System.out.println("eh_num >>> : " + eh_num);
+				//System.out.println("eh_num >>> : " + eh_num);
 				
 			}
 			
 			if(obj2!=null) {
-				System.out.println("if(obj2!=null) 진입 >>> ");
+				//System.out.println("if(obj2!=null) 진입 >>> ");
 				
 				AuthVO auvo = (AuthVO) obj2;
-				System.out.println("auvo >>> : " + auvo);
+				//System.out.println("auvo >>> : " + auvo);
 				ea_num = auvo.getEa_num();
-				System.out.println("ea_num >>> : " + ea_num);
+				//System.out.println("ea_num >>> : " + ea_num);
 				
 			}
 		%>

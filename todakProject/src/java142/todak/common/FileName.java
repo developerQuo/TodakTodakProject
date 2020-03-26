@@ -9,7 +9,7 @@ public class FileName implements FileRenamePolicy {
 	
 	public File rename(File sf){
 		String f = sf.getName();
-		System.out.println("fileName >>> : " + f);
+		//System.out.println("fileName >>> : " + f);
 		
 		try {
 			String t = f;
@@ -24,7 +24,7 @@ public class FileName implements FileRenamePolicy {
 			}
 			
 		}catch(Exception e){
-			System.out.println(" BabyFileName.rename() ===> : " + e);
+			//System.out.println(" BabyFileName.rename() ===> : " + e);
 		}
 		
 		return sf;

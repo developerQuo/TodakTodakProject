@@ -6,9 +6,9 @@
 <%
 	LoginSession sManager = LoginSession.getInstance();
 // 	System.out.println(" session.getId >>> " + session.getId());
-// 	System.out.println(" sManager.getUserID(session.getId()) >>> " + session.getId());
+// 	//System.out.println(" sManager.getUserID(session.getId()) >>> " + session.getId());
 	String num = sManager.getUserID(session.getId());
-// 	System.out.println(" main IN bindSession >>> " + sManager.getMain(session.getId()));
+	System.out.println(" userNum in session >>> " + num);
 	if (sManager.isLogin(session.getId())){}
 	else
 	{

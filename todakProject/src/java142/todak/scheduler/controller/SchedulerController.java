@@ -58,7 +58,7 @@ public class SchedulerController {
 	   //출근등록
 	   @RequestMapping(value="/goWork")
 	   public String goWork(@ModelAttribute CommuteVO cvo , Model model){
-	      logger.info("<<<<<<<<<<<<<<<<<<<<goWork 출근기록 함수 시작 >>>>>>>>>>>>>>>>>>>");
+	      //logger.info("<<<<<<<<<<<<<<<<<<<<goWork 출근기록 함수 시작 >>>>>>>>>>>>>>>>>>>");
 	      
 	   
 	      String message = "";
@@ -74,7 +74,7 @@ public class SchedulerController {
 	      
 	      Calendar cd = Calendar.getInstance();
 	      int today = cd.get(Calendar.DAY_OF_WEEK);
-	      logger.info("today >>> " + today); 
+	      //logger.info("today >>> " + today); 
 	      
 	      
 	      boolean insertTAndAResult = false;
@@ -91,7 +91,7 @@ public class SchedulerController {
 	         cheabunList = schedulerService.selectCheabun(cvo);
 	         if(cheabunList.size() == 0){
 	            //default값 넣을거야
-	            logger.info("전체데이터넣는중");
+	            //logger.info("전체데이터넣는중");
 	            cvo.setToday(today);
 	            cvo.setHc_lasthour(hc_lasthour);
 	            cvo.setHc_totalhour(hc_totalhour);
@@ -103,7 +103,7 @@ public class SchedulerController {
 	         cvo.setHc_comnum(hc_comnum);
 	   
 	         if(today != 2){
-	            logger.info("월요일이 아닌경우, 이전 남은시간 가져오기");
+	            //logger.info("월요일이 아닌경우, 이전 남은시간 가져오기");
 	            List<CommuteVO> beforeHourList = null;
 	            beforeHourList = schedulerService.selectLastHour(cvo);
 	               if(beforeHourList.get(0) != null ){
@@ -111,7 +111,7 @@ public class SchedulerController {
 	                  hc_lasthour = beforeHourList.get(0).getHc_lasthour();
 	                  hc_totalhour = beforeHourList.get(0).getHc_totalhour();
 	                  hc_extraworking = beforeHourList.get(0).getHc_extraworking();
-	                  logger.info(hc_lasthour +hc_totalhour +hc_extraworking);
+	                  //logger.info(hc_lasthour +hc_totalhour +hc_extraworking);
 	                  
 	                  
 	                  cvo.setHc_lasthour(hc_lasthour);
@@ -127,7 +127,7 @@ public class SchedulerController {
 	               }
 	               
 	            }else{
-	            	logger.info("월요일인 경우 값 넣어주기");
+	            	//logger.info("월요일인 경우 값 넣어주기");
 	               cvo.setHc_lasthour(hc_lasthour);
 	               cvo.setHc_totalhour(hc_totalhour);
 	               cvo.setHc_extraworking("0");
@@ -155,7 +155,7 @@ public class SchedulerController {
 	      
 	      model.addAttribute("message", message);
 	      
-	      logger.info("<<<<<<<<<<<<<<<<<<<<goWork 출근기록 함수 종료 >>>>>>>>>>>>>>>>>>>");
+	      //logger.info("<<<<<<<<<<<<<<<<<<<<goWork 출근기록 함수 종료 >>>>>>>>>>>>>>>>>>>");
 	      return "scheduler/goWork";
 	   }
 
@@ -163,13 +163,13 @@ public class SchedulerController {
 	//퇴근등록
 	@RequestMapping(value="/goHome")
 	public String goHome(@ModelAttribute CommuteVO cvo , Model model){
-		logger.info("<<<<<<<<<<<<<<<<<<<<goHome 퇴근기록 함수 시작 >>>>>>>>>>>>>>>>>>>");
+		//logger.info("<<<<<<<<<<<<<<<<<<<<goHome 퇴근기록 함수 시작 >>>>>>>>>>>>>>>>>>>");
 		String message = "";
 		String lastHourMessage = "";
 		
 		Calendar cd = Calendar.getInstance();
 		int today = cd.get(Calendar.DAY_OF_WEEK);
-		logger.info("오늘 요일은 : today >>> " + today); 
+		//logger.info("오늘 요일은 : today >>> " + today); 
 		
 		List<CommuteVO> cheabunList = null;
 		cheabunList = schedulerService.selectCheabun(cvo);			
@@ -198,7 +198,7 @@ public class SchedulerController {
 					int totalHour = (int)Double.parseDouble(selectCommute.get(0).getHc_totalhour());
 					int todayWorkHour  = (int)Double.parseDouble(selectCommute.get(0).getHc_dayhour());
 					cvo.setHc_dayhour(Integer.toString(todayWorkHour));
-					logger.info("오늘 근무한 시간 확인하기~~~ >> todayWorkHour" + todayWorkHour);
+					//logger.info("오늘 근무한 시간 확인하기~~~ >> todayWorkHour" + todayWorkHour);
 		
 					//월요일이 아닌경우에만~!
 					if(today != 2){
@@ -210,22 +210,22 @@ public class SchedulerController {
 						String result = beforeHourList.get(0).getHc_extraworking();
 						if(result != null){
 							beforeExtraworking = Integer.parseInt(beforeHourList.get(0).getHc_extraworking());
-							logger.info("이전까지 초과근무 시간 " + beforeExtraworking);
+							//logger.info("이전까지 초과근무 시간 " + beforeExtraworking);
 						}
 						
 						String beforeHc_lasthour = beforeHourList.get(0).getHc_lasthour();
-						logger.info("hc_lasthour >>> : " + beforeHc_lasthour);
+						//logger.info("hc_lasthour >>> : " + beforeHc_lasthour);
 						int beforeLastHour = (int)Double.parseDouble(beforeHc_lasthour);
 						int todayLastHour = (int)Double.parseDouble(selectCommute.get(0).getHc_lasthour()); //오늘자 기준 남은 근무시간
-						logger.info("lastHour >>> : " + beforeLastHour);
+						//logger.info("lastHour >>> : " + beforeLastHour);
 						
 						
 						//근무시간 전부 소진 전에~~~
 						if(beforeLastHour > 0 ){
 							int weekHour = totalHour - beforeLastHour + todayWorkHour;
-							logger.info(weekHour);
+							//logger.info(weekHour);
 							hc_weekhour = Integer.toString(weekHour);
-							logger.info("hc_weekhour >>> : " + hc_weekhour);
+							//logger.info("hc_weekhour >>> : " + hc_weekhour);
 							cvo.setHc_weekhour(hc_weekhour);
 							todayLastHour = totalHour - weekHour;
 							cvo.setHc_lasthour(Integer.toString(todayLastHour));
@@ -233,16 +233,16 @@ public class SchedulerController {
 							selectCommute = schedulerService.selectCommute(cvo);
 						}
 			
-						   logger.info("초과근무 확인하기 ~~~~ >>> beforeLastHour : " + beforeLastHour + ", todatLastHour : " + todayLastHour + ", beforeExtraworking : " +beforeExtraworking);
+						   //logger.info("초과근무 확인하기 ~~~~ >>> beforeLastHour : " + beforeLastHour + ", todatLastHour : " + todayLastHour + ", beforeExtraworking : " +beforeExtraworking);
 						   //근무시간 소진 시 초과근무로 돌리기~~~
 							if((beforeLastHour == 0 || todayLastHour == 0 )&& beforeExtraworking == 0){
-								logger.info("기본 근무 시간을 달성한 경우 >>>");
+								//logger.info("기본 근무 시간을 달성한 경우 >>>");
 								lastHourMessage = "기본 근무 시간을 달성하셨습니다.";
 								cvo.setHc_weekhour(Integer.toString(totalHour));
 								model.addAttribute("lastHourMessage", lastHourMessage);
 							
 							}else if(beforeLastHour <= -720 || todayLastHour <= -720 || beforeExtraworking >= 720){
-								logger.info("최대 근무 시간을 초과한 경우 >>>");
+								//logger.info("최대 근무 시간을 초과한 경우 >>>");
 								cvo.setHc_extraworking("720");
 								cvo.setHc_lasthour("0000");
 								VOPrintUtil.commuteVOPrint(cvo);
@@ -258,15 +258,15 @@ public class SchedulerController {
 								}
 								
 							}else if(beforeLastHour < 0 || todayLastHour < 0){
-								logger.info("기본 근무 시간을 초과한 경우 >>>");
+								//logger.info("기본 근무 시간을 초과한 경우 >>>");
 								int hc_extraworking = 0;
 								
 								cvo.setHc_lasthour("0000");
 								hc_extraworking = todayWorkHour;
 								
-								logger.info("todayWorkHour  : " + todayWorkHour);
+								//logger.info("todayWorkHour  : " + todayWorkHour);
 								
-								logger.info("총 초과근무 시간  : " + hc_extraworking);
+								//logger.info("총 초과근무 시간  : " + hc_extraworking);
 								hc_extraworking = hc_extraworking + beforeExtraworking;
 								cvo.setHc_extraworking(Integer.toString(hc_extraworking));
 								
@@ -309,7 +309,7 @@ public class SchedulerController {
 			message = "출근 기록이 존재하지않습니다";
 		}
 		model.addAttribute("message", message);
-		logger.info("<<<<<<<<<<<<<<<<<<<<goHome 퇴근기록 함수 종료 >>>>>>>>>>>>>>>>>>>");
+		//logger.info("<<<<<<<<<<<<<<<<<<<<goHome 퇴근기록 함수 종료 >>>>>>>>>>>>>>>>>>>");
 		return "scheduler/goWork";
 	}
 	
@@ -319,7 +319,7 @@ public class SchedulerController {
 	@ResponseBody
 	@RequestMapping(value="/selectSchedule",method=RequestMethod.POST )
 	public JSONArray selectSchedule(HttpSession session, HttpServletRequest req, SchedulerVO svo ,String util, Model model){
-		logger.info("selectSchedule 진입 성공. <<<<<<<<< ");
+		//logger.info("selectSchedule 진입 성공. <<<<<<<<< ");
 		LoginSession selectSession = (LoginSession)req.getSession().getAttribute("login");
 		String result = selectSession.getUserID(session.getId());
 		svo.setHm_empnum(result);
@@ -338,11 +338,11 @@ public class SchedulerController {
 				jsonArray = JsonUtil.jsonSelectSchedule(list,result);
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(" [Controller] select Error >>>> : " + e.getMessage());
+			//System.out.println(" [Controller] select Error >>>> : " + e.getMessage());
 			
 		}
-		System.out.println(" [Controller] jsonArray  >>>> : " + jsonArray);		
-		logger.info("selectSchedule 탈출 성공. >>>>>>>>> ");
+		System.out.println(" jsonArray  >>>> : " + jsonArray);		
+		//logger.info("selectSchedule 탈출 성공. >>>>>>>>> ");
 
 		return jsonArray;
 		
@@ -357,7 +357,7 @@ public class SchedulerController {
 	@ResponseBody
 	@RequestMapping(value="/insertSchedule",method=RequestMethod.POST)
 	public JSONArray insertSchedule(HttpSession session, HttpServletRequest req,HumanHdateVO hvo,@ModelAttribute SchedulerVO svo){
-		logger.info("insertSchedule진입 성공. <<<<<<<<< ");
+		//logger.info("insertSchedule진입 성공. <<<<<<<<< ");
 	
 		LoginSession insertSession = (LoginSession)req.getSession().getAttribute("login");
 		String insertResult = insertSession.getUserID(session.getId());
@@ -373,12 +373,12 @@ public class SchedulerController {
 			
 		// 채번하기  ----------------------------
 		list = schedulerService.chaebunSchedulerWorkSchedule();
-		System.out.println("[CONTROLLER] list >>>>>>> : " + list);
+		//System.out.println("[CONTROLLER] list >>>>>>> : " + list);
 		svo.setSw_num(ChaebunUtils.cNum(list.get(0).getSw_num(),GUBUN_SCHEDULER));
 		// ----------------------------------  
 		String test = svo.getSw_num();
 		String hmemp = svo.getHm_empnum();
-		System.out.println("svo.getSw_num >>>>>>>>> : " + test);
+		//System.out.println("svo.getSw_num >>>>>>>>> : " + test);
 		int result = schedulerService.insertSchedulerWorkSchedule(svo);
 		
 		//---------------------HUMAN_HDATE TABLE ------------------------------
@@ -407,14 +407,14 @@ public class SchedulerController {
 		// 휴가 관련 insert 종료  		
 		//---------------------HUMAN_HDATE TABLE ------------------------------
 		
-		logger.info("insertSchedule탈출 성공. >>>>>>>>> "); 
+		//logger.info("insertSchedule탈출 성공. >>>>>>>>> "); 
 		return jsonArray;
 	}// end of insertScheduler()
 	
 	@ResponseBody
 	@RequestMapping(value="/updateSchedule",method=RequestMethod.POST)
 	public JSONArray updateSchedule(HttpSession session, HttpServletRequest req,@ModelAttribute SchedulerVO svo){
-		logger.info("updateSchedule진입 성공. <<<<<<<<< ");
+		//logger.info("updateSchedule진입 성공. <<<<<<<<< ");
 		
 		LoginSession updateSession = (LoginSession)req.getSession().getAttribute("login");
 		String updateResult = updateSession.getUserID(session.getId());
@@ -424,19 +424,19 @@ public class SchedulerController {
 		result =schedulerService.updateSchedulerWorkSchedule(svo);
 		
 		if(result ==0){
-			System.out.println("[CONTROLLER] update 실패!!!");		
+			//System.out.println("[CONTROLLER] update 실패!!!");		
 		}else{
-			System.out.println("[CONTROLLER] update 성공!!!");
+			//System.out.println("[CONTROLLER] update 성공!!!");
 		}
 		
-		logger.info("updateSchedule탈출 성공. >>>>>>>>> ");
+		//logger.info("updateSchedule탈출 성공. >>>>>>>>> ");
 		return null;
 	}// end of updateScheduler()
 	
 	@ResponseBody
 	@RequestMapping(value="/deleteSchedule",method=RequestMethod.POST)
 	public JSONArray deleteSchedule(HttpSession session, HttpServletRequest req,@ModelAttribute SchedulerVO svo){
-		logger.info("deleteSchedule진입 성공. <<<<<<<<< ");
+		//logger.info("deleteSchedule진입 성공. <<<<<<<<< ");
 		
 		LoginSession deleteSession = (LoginSession)req.getSession().getAttribute("login");
 		String deleteResult = deleteSession.getUserID(session.getId());
@@ -446,12 +446,12 @@ public class SchedulerController {
 		result = schedulerService.deleteSchedulerWorkSchedule(svo);
 		
 		if(result ==0){
-			System.out.println("[CONTROLLER] delete 실패 !!!");
+			//System.out.println("[CONTROLLER] delete 실패 !!!");
 			
 		}else{
-			System.out.println("[CONTROLLER] delete 성공 !!! ");
+			//System.out.println("[CONTROLLER] delete 성공 !!! ");
 		}
-		logger.info("deleteSchedule탈출 성공. >>>>>>>>> ");
+		//logger.info("deleteSchedule탈출 성공. >>>>>>>>> ");
 		return null;
 	}// end of deleteScheduler() 
 	

@@ -40,132 +40,132 @@ public class HumanServiceImpl implements HumanService {
 	@Override
 	public boolean insertMemberAppr(ApprVO avo){
 		boolean flag=false;
-		logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
+		//logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
 		
 		
 		int cnt=humanDao.insertMemberAppr(avo);
 		if(cnt!=0){
 			flag=true;
 		}
-		logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
+		//logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
 		return flag;
 	}
 	
 	@Override
 	public boolean insertMember(MemberVO mvo){
 		boolean flag=false;
-		logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
+		//logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
 		
 		
 		int cnt=humanDao.insertMember(mvo);
 		if(cnt!=0){
 			flag=true;
 		}
-		logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
+		//logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
 		return flag;
 	}
 	@Override
 	public boolean refusedMemberAppr(ApprVO avo){
 		boolean flag=false;
-		logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
+		//logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
 		
 		
 		int cnt=humanDao.refusedMemberAppr(avo);
 		if(cnt!=0){
 			flag=true;
 		}
-		logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
+		//logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
 		return flag;
 	}
 	@Override
 	public boolean acceptedMemberAppr(ApprVO avo){
 		boolean flag=false;
-		logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
+		//logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
 		
 		
 		int cnt=humanDao.refusedMemberAppr(avo);
 		if(cnt!=0){
 			flag=true;
 		}
-		logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
+		//logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
 		return flag;
 	}
 	@Override
 	public boolean updateMember(MemberVO mvo){
 		boolean flag=false;
-		logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
+		//logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
 		
 		
 		int cnt=humanDao.updateMember(mvo);
 		if(cnt!=0){
 			flag=true;
 		}
-		logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
+		//logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
 		return flag;
 	}
 	@Override
 	public boolean updateResignation(MemberVO mvo){
 		boolean flag=false;
-		logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
+		//logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
 		
 		
 		int cnt=humanDao.updateResignation(mvo);
 		if(cnt!=0){
 			flag=true;
 		}
-		logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
+		//logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
 		return flag;
 	}
 	@Override
 	public boolean changeCommuteUpdate(CommVO cvo){
 		boolean flag=false;
-		logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
+		//logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
 		
 		
 		int cnt=humanDao.changeCommuteUpdate(cvo);
 		if(cnt!=0){
 			flag=true;
 		}
-		logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
+		//logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
 		return flag;
 	}
 	@Override
 	public boolean vacationUpdate(CommVO cvo){
 		boolean flag=false;
-		logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
+		//logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
 		
 		
 		int cnt=humanDao.vacationUpdate(cvo);
 		if(cnt!=0){
 			flag=true;
 		}
-		logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
+		//logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
 		return flag;
 	}
 	@Override
 	public boolean halfUpdate(CommVO cvo){
 		boolean flag=false;
-		logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
+		//logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
 		
 		
 		int cnt=humanDao.halfUpdate(cvo);
 		if(cnt!=0){
 			flag=true;
 		}
-		logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
+		//logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
 		return flag;
 	}
 	@Override
 	public boolean insertApptRecord(ApptVO apvo){
 		boolean flag=false;
-		logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
+		//logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
 		
 		
 		int cnt=humanDao.insertApptRecord(apvo);
 		if(cnt!=0){
 			flag=true;
 		}
-		logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
+		//logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
 		return flag;
 	}
 	@Override
@@ -227,15 +227,15 @@ public class HumanServiceImpl implements HumanService {
 	@Override
 	public List<ApprVO> selectAppr(ApprVO avo){
 		List<ApprVO> apprList=null;
-		System.out.println("a"+avo.getCurPage());
-		System.out.println("a"+avo.getGroupSize());
-		System.out.println("a"+avo.getTotalCount());
-		System.out.println("a"+avo.getPageSize());
+		//System.out.println("a"+avo.getCurPage());
+		//System.out.println("a"+avo.getGroupSize());
+		//System.out.println("a"+avo.getTotalCount());
+		//System.out.println("a"+avo.getPageSize());
 		apprList=humanDao.selectAppr(avo);
-		System.out.println("b"+avo.getCurPage());
-		System.out.println("b"+avo.getGroupSize());
-		System.out.println("b"+avo.getTotalCount());
-		System.out.println("b"+avo.getPageSize());
+		//System.out.println("b"+avo.getCurPage());
+		//System.out.println("b"+avo.getGroupSize());
+		//System.out.println("b"+avo.getTotalCount());
+		//System.out.println("b"+avo.getPageSize());
 		return apprList;
 	}
 	@Override
@@ -245,26 +245,26 @@ public class HumanServiceImpl implements HumanService {
 	}
 	@Override
 	public List<CommVO> selectLastHour(CommVO cvo) {
-		logger.info("HumanServiceImpl.selectLastHour ���� >>>>");
+		//logger.info("HumanServiceImpl.selectLastHour ���� >>>>");
 		List<CommVO> sList = null;
 		sList = humanDao.selectLastHour(cvo);
-		logger.info("HumanServiceImpl.selectLastHour ���� >>>>");
+		//logger.info("HumanServiceImpl.selectLastHour ���� >>>>");
 		return sList;
 	}
 	
 	@Override
 	public boolean insertExtrawork(CommVO cvo){
-		logger.info("HumanServiceImpl.insertExtrawork ���� >>>>");
+		//logger.info("HumanServiceImpl.insertExtrawork ���� >>>>");
 		boolean bFlag = false;
 		int iFlag = humanDao.insertExtrawork(cvo);
 		if(iFlag == 1) bFlag = true;
-		logger.info("HumanServiceImpl.insertExtrawork ���� >>>>");
+		//logger.info("HumanServiceImpl.insertExtrawork ���� >>>>");
 		return bFlag;
 	}
 	@Override
 	public boolean idCheck(MemberVO mvo){
 		boolean flag=false;
-		logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
+		//logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
 		String id=null;
 		
 		id=humanDao.idCheck(mvo);
@@ -272,7 +272,7 @@ public class HumanServiceImpl implements HumanService {
 		if(Integer.parseInt(id)<=0){
 			flag=true;
 		}
-		logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
+		//logger.info("�μ�Ʈ �÷��� >>>>>"+flag);
 		return flag;
 	}
 	
@@ -283,7 +283,7 @@ public class HumanServiceImpl implements HumanService {
 		
 		List<MemberVO> list = null;
 		list = humanDao.selectUserInfo(mvo);
-		logger.info("list >>>>>" + list);
+		//logger.info("list >>>>>" + list);
 		
 		return list;
 	}

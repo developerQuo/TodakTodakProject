@@ -38,13 +38,13 @@
 			boolean bFlag = false;	
 		
 			Object obj = request.getAttribute("bFlag");
-			System.out.println("obj >>> : " + obj);
+			//System.out.println("obj >>> : " + obj);
 			
 			if(obj!=null) {
-				System.out.println("if(obj!=null) 진입 >>> ");
+				//System.out.println("if(obj!=null) 진입 >>> ");
 				
 				bFlag = (boolean) obj;
-				System.out.println("bFlag >>> : " + bFlag);
+				//System.out.println("bFlag >>> : " + bFlag);
 				
 			}
 			

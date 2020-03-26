@@ -222,6 +222,7 @@
 					<div class="lastbox">
 							<input type="hidden" name="hm_workexperience" id="hm_workexperience" value="<%=workexperience %>">
 							<input type="hidden" name="hm_education" id="hm_education" value="<%=education %>">
+							<input type="hidden" name="hm_pw" id="hm_pw" value="<%=avo.getHmp_pw() %>">
 							<input type="hidden" name="hm_bank" id="hm_bank" value="38">
 							<input type="hidden" name="hm_picture" id="hm_picture" value="<%=avo.getHmp_picture() %>">
 							<input type="hidden" name="hmp_empnum" id="hmp_empnum" value="<%=avo.getHmp_empnum() %>">

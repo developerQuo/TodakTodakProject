@@ -59,12 +59,12 @@ public class BoardController {
    @RequestMapping(value="/countSuLike", method = RequestMethod.POST, produces = "application/json")
    @ResponseBody
    public ResponseEntity<String> countSuLike(@RequestBody SuLikeVO slvo){
-      logger.info("(log)BoardController.countSuLike 진입"); 
+      //logger.info("(log)BoardController.countSuLike 진입"); 
       
       ResponseEntity<String> entity = null;
       String result = null;
       String bs_num = slvo.getBs_num();
-      logger.info("글번호 bs_num >>> " + bs_num);
+      //logger.info("글번호 bs_num >>> " + bs_num);
       
       try{
          List<SuLikeVO> countSuLike = boardService.countSuLike(slvo);
@@ -76,7 +76,7 @@ public class BoardController {
          e.printStackTrace();
          entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
       }
-      logger.info("(log)BoardController.countSuLike 종료"); 
+      //logger.info("(log)BoardController.countSuLike 종료"); 
       
       return entity;
    }//end of selectSuReply
@@ -85,7 +85,7 @@ public class BoardController {
      @ResponseBody
      @RequestMapping(value="/checkLike", method = RequestMethod.POST, produces = "application/json")
       public ResponseEntity<String> checkLike(@RequestBody SuLikeVO slvo){
-         logger.info("(log)BoardController.checkLike 진입"); 
+         //logger.info("(log)BoardController.checkLike 진입"); 
 
          List<SuLikeVO> list = boardService.chaebunSuLike();
          
@@ -96,8 +96,8 @@ public class BoardController {
          
          String bs_num = slvo.getBs_num();
          
-         logger.info("좋아요 >>> " + slvo.getBsl_num());
-         logger.info("글번호 bs_num >>> " + bs_num);
+         //logger.info("좋아요 >>> " + slvo.getBsl_num());
+         //logger.info("글번호 bs_num >>> " + bs_num);
          
          ResponseEntity<String> entity = null;
         
@@ -116,7 +116,7 @@ public class BoardController {
             e.printStackTrace();
             entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
          }
-         logger.info("(log)BoardController.checkLike 종룐"); 
+         //logger.info("(log)BoardController.checkLike 종룐"); 
          return entity;
       }
 
@@ -124,12 +124,12 @@ public class BoardController {
       @RequestMapping(value="/countSuDislike", method = RequestMethod.POST, produces = "application/json")
       @ResponseBody
    public ResponseEntity<String> countSuDislike(@RequestBody SuLikeVO slvo){
-      logger.info("(log)BoardController.countSuDislike 진입"); 
+      //logger.info("(log)BoardController.countSuDislike 진입"); 
       
       ResponseEntity<String> entity = null;
       String result = null;
       String bs_num = slvo.getBs_num();
-      logger.info("글번호 bs_num >>> " + bs_num);
+      //logger.info("글번호 bs_num >>> " + bs_num);
       
       try{
          List<SuLikeVO> countSuDislike = boardService.countSuDislike(slvo);
@@ -141,7 +141,7 @@ public class BoardController {
          e.printStackTrace();
          entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
       }
-      logger.info("(log)BoardController.countSuDislike 종료"); 
+      //logger.info("(log)BoardController.countSuDislike 종료"); 
       
       return entity;
    }//end of selectSuReply
@@ -150,7 +150,7 @@ public class BoardController {
      @ResponseBody
      @RequestMapping(value="/checkSuDislike", method = RequestMethod.POST, produces = "application/json")
       public ResponseEntity<String> checkSuDislike(@RequestBody SuLikeVO slvo){
-         logger.info("(log)BoardController.checkSuDislike 진입"); 
+         //logger.info("(log)BoardController.checkSuDislike 진입"); 
 
          List<SuLikeVO> list = boardService.chaebunSuLike();
          
@@ -161,8 +161,8 @@ public class BoardController {
          
          String bs_num = slvo.getBs_num();
          
-         logger.info("좋아요 >>> " + slvo.getBsl_num());
-         logger.info("글번호 bs_num >>> " + bs_num);
+         //logger.info("좋아요 >>> " + slvo.getBsl_num());
+         //logger.info("글번호 bs_num >>> " + bs_num);
          
          ResponseEntity<String> entity = null;
         
@@ -181,7 +181,7 @@ public class BoardController {
             e.printStackTrace();
             entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
          }
-         logger.info("(log)BoardController.checkSuDislike 종룐"); 
+         //logger.info("(log)BoardController.checkSuDislike 종룐"); 
          return entity;
       }
 
@@ -191,13 +191,13 @@ public class BoardController {
    @RequestMapping(value="/all/{bs_num}.td")
    @ResponseBody
    public ResponseEntity<List<SuReplyVO>> selectSuReply(@PathVariable("bs_num") String  bs_num, SuReplyVO srvo){
-      logger.info("(log)ReplyController.selectSuReply 진입"); 
+      //logger.info("(log)ReplyController.selectSuReply 진입"); 
       
       ResponseEntity<List<SuReplyVO>> entity = null;
       
       srvo.setBs_num(bs_num);
       
-      logger.info("bs_num >>> " + srvo.getBs_num());
+      //logger.info("bs_num >>> " + srvo.getBs_num());
       try{
          
          entity = new ResponseEntity<>(boardService.selectSuReply(srvo), HttpStatus.OK);
@@ -206,7 +206,7 @@ public class BoardController {
          e.printStackTrace();
          entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
       }
-      logger.info("(log)ReplyController.selectSuReply 종료"); 
+      //logger.info("(log)ReplyController.selectSuReply 종료"); 
       
       return entity;
    }//end of selectSuReply 
@@ -215,7 +215,7 @@ public class BoardController {
    //댓글작성하기
      @RequestMapping(value="/replyInsert")
       public ResponseEntity<String> insertSuReply(@RequestBody SuReplyVO srvo){
-         logger.info("(log)ReplyController.insertSuReply 진입"); 
+         //logger.info("(log)ReplyController.insertSuReply 진입"); 
 
          List<SuReplyVO> list = boardService.chaebunSuReply();
          if(list.size() == 1){
@@ -225,8 +225,8 @@ public class BoardController {
          
          String bs_num = srvo.getBs_num();
          
-         logger.info("댓글번호 >>> " + srvo.getBsr_num());
-         logger.info("글번호 bs_num >>> " + bs_num);
+         //logger.info("댓글번호 >>> " + srvo.getBsr_num());
+         //logger.info("글번호 bs_num >>> " + bs_num);
          
          ResponseEntity<String> entity = null;
          int result;
@@ -242,7 +242,7 @@ public class BoardController {
             e.printStackTrace();
             entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
          }
-         logger.info("(log)ReplyController.insertSuReply 종룐"); 
+         //logger.info("(log)ReplyController.insertSuReply 종룐"); 
          return entity;
       }
 
@@ -250,7 +250,7 @@ public class BoardController {
       @RequestMapping(value="/update/{bsr_num}.td", method = {RequestMethod.PUT, RequestMethod.PATCH})
       @ResponseBody
       public ResponseEntity<String> updateSuReply(@PathVariable("bsr_num") String bsr_num, @RequestBody SuReplyVO srvo){
-         logger.info("(log)ReplyController.replyUpdate 진입"); 
+         //logger.info("(log)ReplyController.replyUpdate 진입"); 
          ResponseEntity<String> entity = null;
          
          try{
@@ -267,7 +267,7 @@ public class BoardController {
             entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
       
          }
-         logger.info("(log)ReplyController.replyUpdate 종료"); 
+         //logger.info("(log)ReplyController.replyUpdate 종료"); 
          return entity;
       }
       
@@ -275,7 +275,7 @@ public class BoardController {
       @RequestMapping(value="/delete/{bsr_num}.td", method = {RequestMethod.PUT, RequestMethod.PATCH})
       @ResponseBody
       public ResponseEntity<String> deleteSuReply(@PathVariable("bsr_num") String bsr_num, @RequestBody SuReplyVO srvo){
-         logger.info("(log)ReplyController.replyDelete 진입"); 
+         //logger.info("(log)ReplyController.replyDelete 진입"); 
          ResponseEntity<String> entity = null;
          
          try{
@@ -292,7 +292,7 @@ public class BoardController {
             entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
       
          }
-         logger.info("(log)ReplyController.replyDelete 종료"); 
+         //logger.info("(log)ReplyController.replyDelete 종료"); 
          return entity;
       }
     /*--------------------------------------------*/
@@ -311,19 +311,19 @@ public class BoardController {
    @RequestMapping("/selectSuggestion")
    public String selectSuggestion(@ModelAttribute SuggestionVO svo, MemberVO mvo, Model model,HttpServletRequest request){
       
-      logger.info("(log)BoardController.selectSuggestion 시작 >>> ");
+      //logger.info("(log)BoardController.selectSuggestion 시작 >>> ");
       
       LoginSession sManager = LoginSession.getInstance();
       String sessionId = request.getSession().getId();
       String hm_empnum = sManager.getUserID(sessionId);
-      logger.info("hm_empnum >>>> : " + hm_empnum); 
+      //logger.info("hm_empnum >>>> : " + hm_empnum); 
       
       
       int totalCnt = 0;
       String cPage = request.getParameter("curPage");
       String pageCtrl=request.getParameter("pageCtrl");
       
-      logger.info("cPage >>>> " + cPage);
+      //logger.info("cPage >>>> " + cPage);
       
       if(svo.getFindIndex() == null){
          String key = request.getParameter("key");//검색에 관련된 내용을 쿼리스트링으로 받는 내용입니다.
@@ -334,15 +334,15 @@ public class BoardController {
       
       
       String findIndex = svo.getFindIndex();
-      logger.info("FindIndex == " + findIndex);
+      //logger.info("FindIndex == " + findIndex);
       if(findIndex != null && findIndex.equals("hm_empnum")) {
          svo.setKeyword(hm_empnum);
          String e = "hm_empnum";
          model.addAttribute("findIndex",e);
       }
 
-      logger.info("FindIndex == " + svo.getFindIndex());
-      logger.info("keyword == " + svo.getKeyword());
+      //logger.info("FindIndex == " + svo.getFindIndex());
+      //logger.info("keyword == " + svo.getKeyword());
       
       Paging.setPage(svo,cPage,pageCtrl);//페이징할 정보를 Paging클래스에 보내줍니다
       
@@ -362,7 +362,7 @@ public class BoardController {
       
       String url = "board/selectSuggestion";
       
-      logger.info("(log)BoardController.selectSuggestion 종료>>> ");
+      //logger.info("(log)BoardController.selectSuggestion 종료>>> ");
       
       return url;
       
@@ -372,14 +372,14 @@ public class BoardController {
    @RequestMapping("/searchSuggestion")
    public String searchSuggestion(@ModelAttribute SuggestionVO svo, Model model, SuLikeVO slvo, @RequestParam("hm_empnum") String hm_empnum){
       
-      logger.info("(log)BoardController.searchSuggestion 시작 >>> ");
+      //logger.info("(log)BoardController.searchSuggestion 시작 >>> ");
 
       List<SuggestionVO> suggestionDetail = null;
       suggestionDetail = boardService.searchSuggestion(svo);
       int iFlag = 0;
       iFlag = boardService.updateSuggestionHit(svo);
       
-      logger.info("(log)BoardController.searchSuggestion 조회수 증가 >>> " + iFlag);
+      //logger.info("(log)BoardController.searchSuggestion 조회수 증가 >>> " + iFlag);
 
       model.addAttribute("suggestionDetail",suggestionDetail);
       
@@ -387,7 +387,7 @@ public class BoardController {
       //좋아요유무 확인해서 출력하기
       String bs_num = svo.getBs_num();
       
-      logger.info("hm_empnum >>>> : " + hm_empnum );
+      //logger.info("hm_empnum >>>> : " + hm_empnum );
       
       slvo.setBs_num(bs_num);
       slvo.setHm_empnum(hm_empnum);
@@ -411,7 +411,7 @@ public class BoardController {
       
       String url = "board/searchSuggestion";
       
-      logger.info("(log)BoardController.searchSuggestion 시작 >>> ");
+      //logger.info("(log)BoardController.searchSuggestion 시작 >>> ");
       
       return url;
       
@@ -428,9 +428,9 @@ public class BoardController {
       result = boardService.deleteSuggestion(svo);
       
       if(result == 1){
-         logger.info("삭제성공");
+         //logger.info("삭제성공");
       }else{
-         logger.info("삭제실패");
+         //logger.info("삭제실패");
       }
       
       model.addAttribute("hm_empnum",hm_empnum);
@@ -441,12 +441,12 @@ public class BoardController {
    //건의사항 게시글 수정페이지로 이동
    @RequestMapping(value="/moveUpdateSuggestion")
    public String moveUpdateSuggestion(@ModelAttribute SuggestionVO svo, Model model){
-      logger.info("(log)BoardController.moveUpdateSuggestion 시작 >>> ");
+      //logger.info("(log)BoardController.moveUpdateSuggestion 시작 >>> ");
       
       List<SuggestionVO> updateList = null;
       String url = null;
       String bs_num = svo.getBs_num();
-      logger.info("bs_num >>> : " + bs_num);
+      //logger.info("bs_num >>> : " + bs_num);
       updateList = boardService.searchSuggestion(svo);
       
       model.addAttribute("updateList",updateList);
@@ -459,7 +459,7 @@ public class BoardController {
          url = "redirect:" + "/board/selectSuggestion.td";
       }
       
-      logger.info("(log)BoardController.updateSearchSuggestion 종료 >>> ");
+      //logger.info("(log)BoardController.updateSearchSuggestion 종료 >>> ");
       return  url;
    }
    
@@ -467,7 +467,7 @@ public class BoardController {
    //건의사항 게시글 수정하기
    @RequestMapping(value="/updateSuggestion", method=RequestMethod.POST)
    public String updateSuggestion(@ModelAttribute SuggestionVO svo, Model model, HttpServletRequest request){
-      logger.info("(log)BoardController.updateSuggestion 시작 >>> ");
+      //logger.info("(log)BoardController.updateSuggestion 시작 >>> ");
       int result = 0;
       String hm_empnum = null;
       
@@ -475,7 +475,7 @@ public class BoardController {
       boolean bFlag = false;
       bFlag = fuu.fileUpload(request, FILEPATH2);
       
-      logger.info("bFlag >>> : " + bFlag );
+      //logger.info("bFlag >>> : " + bFlag );
          
       if(bFlag){
          
@@ -497,7 +497,7 @@ public class BoardController {
          
          String bs_image = svo.getBs_image();
    
-         logger.info("이미지이름 >>>> " + bs_image);
+         //logger.info("이미지이름 >>>> " + bs_image);
          
          String bs_title = fuu.getParameter("bs_title");
          String bs_content = fuu.getParameter("bs_content");
@@ -506,7 +506,7 @@ public class BoardController {
          
          
          
-         logger.info(bs_num + "" + bs_title + "" +bs_content + "" + hm_empnum);
+         //logger.info(bs_num + "" + bs_title + "" +bs_content + "" + hm_empnum);
          
          svo.setBs_num(bs_num);
          svo.setBs_title(bs_title);
@@ -518,15 +518,15 @@ public class BoardController {
          VOPrintUtil.suggestionVOPrint(svo);
       
       }else{
-         logger.info("multipart 수정 실패");
+         //logger.info("multipart 수정 실패");
       }
    
       result = boardService.updateSuggestion(svo);
       
       if(result == 1){
-         logger.info("수정성공");
+         //logger.info("수정성공");
       }else{
-         logger.info("수정실패");
+         //logger.info("수정실패");
       }
       
       String bs_num = svo.getBs_num();
@@ -539,25 +539,25 @@ public class BoardController {
    //건의사항 파일다운로드 함수
    @RequestMapping(value="/downloadSuggestion")
    public String downloadSuggestion(@ModelAttribute SuggestionVO svo, Model model){
-      logger.info("(log)BoardController.downloadSuggestion 시작 >>> ");
+      //logger.info("(log)BoardController.downloadSuggestion 시작 >>> ");
 
       String bs_image = svo.getBs_image();
       
       bs_image = bs_image.replace(DOWNLOADPATH2, "");
       
-      logger.info("bs_image >>> " + bs_image);
+      //logger.info("bs_image >>> " + bs_image);
       
       model.addAttribute("fileName" ,bs_image);
       model.addAttribute("FilePath", FILEPATH2 );
       
-      logger.info("(log)BoardController.downloadSuggestion 종료 >>> ");
+      //logger.info("(log)BoardController.downloadSuggestion 종료 >>> ");
       return "board/fileDownload";
    }
 
    //건의사항 작성으로 이동하기
    @RequestMapping("/moveWriteSuggestion")
    public String moveWriteSuggestion(){
-      logger.info("(log)BoardController.moveWriteSuggestion 진입 >>> ");
+      //logger.info("(log)BoardController.moveWriteSuggestion 진입 >>> ");
 
       return "board/insertSuggestion";
    }
@@ -565,8 +565,8 @@ public class BoardController {
    //건의사항 작성
    @RequestMapping("/insertSuggestion")
    public String insertSuggestion(@ModelAttribute SuggestionVO svo, Model model,HttpServletRequest request){
-      logger.info("(log)BoardController.insetSuggestion 시작 >>> ");
-      logger.info("(log)BoardController.cheabunSuggestion 시작 >>> ");
+      //logger.info("(log)BoardController.insetSuggestion 시작 >>> ");
+      //logger.info("(log)BoardController.cheabunSuggestion 시작 >>> ");
       
       String bs_num = "";
       List<SuggestionVO> list = null;
@@ -574,7 +574,7 @@ public class BoardController {
       bs_num = list.get(0).getBs_num();
       
       svo.setBs_num(ChaebunUtils.cNum2(bs_num, SUGGESTION_GUBUN));
-      logger.info("(log)BoardController.cheabunSuggestion 종료  : bs_num >>> " + ChaebunUtils.cNum2(bs_num, SUGGESTION_GUBUN));
+      //logger.info("(log)BoardController.cheabunSuggestion 종료  : bs_num >>> " + ChaebunUtils.cNum2(bs_num, SUGGESTION_GUBUN));
 
       
       String url =  null;
@@ -583,7 +583,7 @@ public class BoardController {
       FileUploadUtil fuu = new FileUploadUtil();
       boolean bFlag = false;
       bFlag = fuu.fileUpload(request, FILEPATH2);
-      logger.info("bFlag >>> : " + bFlag );
+      //logger.info("bFlag >>> : " + bFlag );
       
       if(bFlag){
          
@@ -611,21 +611,21 @@ public class BoardController {
          
          if(result == 1){
             
-            logger.info("작성 성공!");
+            //logger.info("작성 성공!");
             url = "redirect:/board/selectSuggestion.td";
             model.addAttribute("hm_empnum",hm_empnum);
          }else{
-            logger.info("작성 실패!");
+            //logger.info("작성 실패!");
             url = "redirect:/board/writeSuggestion.td";
          }
 
       }else{
-         logger.info("파일업로드실패");
+         //logger.info("파일업로드실패");
          url = "redirect:/board/writeSuggestion.td";
       }
       
       
-      logger.info("(log)BoardController.insetSuggestion 종료 >>> ");
+      //logger.info("(log)BoardController.insetSuggestion 종료 >>> ");
       return url;
    }
    
@@ -633,11 +633,11 @@ public class BoardController {
    @RequestMapping("/selectNotice") 
    public String selectBoardNotice(@ModelAttribute NoticeVO nvo, MemberVO mvo, Model model, HttpServletRequest request ) {
       
-      logger.info("(log)BoardController.selectNotice 시작 >>> ");
+      //logger.info("(log)BoardController.selectNotice 시작 >>> ");
       LoginSession sManager = LoginSession.getInstance();
       String sessionId = request.getSession().getId();
       String hm_empnum = sManager.getUserID(sessionId);
-      logger.info(hm_empnum);
+      //logger.info(hm_empnum);
       int totalCnt = 0;
       String cPage = request.getParameter("curPage");
       String pageCtrl=request.getParameter("pageCtrl");
@@ -651,15 +651,15 @@ public class BoardController {
       
       
       String findIndex = nvo.getFindIndex();
-      logger.info("FindIndex == " + findIndex);
+      //logger.info("FindIndex == " + findIndex);
       if(findIndex != null && findIndex.equals("hm_empnum")) {
          nvo.setKeyword(hm_empnum);
          String e = "hm_empnum";
          model.addAttribute("findIndex",e);
       }
 
-      logger.info("FindIndex == " + nvo.getFindIndex());
-      logger.info("keyword == " + nvo.getKeyword());
+      //logger.info("FindIndex == " + nvo.getFindIndex());
+      //logger.info("keyword == " + nvo.getKeyword());
       
       MemberVO i_mvo = new MemberVO();
       
@@ -681,15 +681,15 @@ public class BoardController {
       nvo.setCheck_empnum(check_empnum);
       
       String c_hm_deptnum = _mvo.getHm_deptnum();
-      logger.info("부서번호 받아오기" + c_hm_deptnum);
+      //logger.info("부서번호 받아오기" + c_hm_deptnum);
       String check_divnum = c_hm_deptnum.substring(0, 2);
       String check_deptnum = "";
       
       if(c_hm_deptnum.length() > 2) check_deptnum = c_hm_deptnum.substring(2, 4);
       else check_deptnum = "98";
       
-      logger.info("check_divnum >>> : " + check_divnum);
-      logger.info("check_deptnum >>> : " + check_deptnum);
+      //logger.info("check_divnum >>> : " + check_divnum);
+      //logger.info("check_deptnum >>> : " + check_deptnum);
    
       //얘는 왜 넣었던걸까?ㅎ
       if(findIndex == null) nvo =  new NoticeVO();
@@ -697,20 +697,20 @@ public class BoardController {
       //admin계정에 무조건 권한주기
       if(hm_empnum.equals("H000000000000")) {
          nvo.setFindIndex("admin");
-         logger.info("FindIndex == " + nvo.getFindIndex());
+         //logger.info("FindIndex == " + nvo.getFindIndex());
       }else{
          nvo.setCheck_divnum(check_divnum);
          nvo.setCheck_deptnum(check_deptnum);
          
       }
       
-      logger.info("로그인한 사람의 부서 정보 가져오기  >>> : " + nvo.getCheck_divnum() +  " " + nvo.getCheck_deptnum());
+      //logger.info("로그인한 사람의 부서 정보 가져오기  >>> : " + nvo.getCheck_divnum() +  " " + nvo.getCheck_deptnum());
       
-       logger.info("cPage >>>> " + cPage);
+       //logger.info("cPage >>>> " + cPage);
          
        Paging.setPage(nvo,cPage,pageCtrl);//페이징할 정보를 Paging클래스에 보내줍니다
        
-      System.out.println("null...>>> : " + nvo.getCurPage() + " : " + nvo.getPageSize());
+      //System.out.println("null...>>> : " + nvo.getCurPage() + " : " + nvo.getPageSize());
       
       List<NoticeVO> noticeSelectList = null;
       noticeSelectList = boardService.selectNotice(nvo);
@@ -726,7 +726,7 @@ public class BoardController {
       model.addAttribute("writerQualified", writerQualified);
        model.addAttribute("i_nvo",nvo);
       
-      logger.info("(log)BoardController.listNotice 종료");
+      //logger.info("(log)BoardController.listNotice 종료");
       return "board/selectNotice";
    }
    
@@ -735,9 +735,9 @@ public class BoardController {
    @RequestMapping("/insertNotice")
    public String insertNotice(@ModelAttribute NoticeVO nvo, MemberVO mvo, 
                                        Model model, HttpServletRequest request){
-      logger.info("(log)BoardController.insertNotice 시작 >>> ");
-      logger.info("request.getContentType() >>> : " + request.getContentType());
-      logger.info("(log)BoardController.chaebunNotice 시작 >>> ");
+      //logger.info("(log)BoardController.insertNotice 시작 >>> ");
+      //logger.info("request.getContentType() >>> : " + request.getContentType());
+      //logger.info("(log)BoardController.chaebunNotice 시작 >>> ");
 
       String bn_num = "";
       List<NoticeVO> list = null;
@@ -747,14 +747,14 @@ public class BoardController {
       nvo_Bn_num = list.get(0);
       bn_num = nvo_Bn_num.getBn_num();
       bn_num = ChaebunUtils.cNum2(bn_num, NOTICE_GUBUN);
-      logger.info(" bn_num : " + bn_num);
+      //logger.info(" bn_num : " + bn_num);
 
       String url = "";
       
       FileUploadUtil fuu = new FileUploadUtil();
       boolean bFlag = false;
       bFlag = fuu.fileUpload(request, FILEPATH1);
-      logger.info("bFlag >>> : " + bFlag );
+      //logger.info("bFlag >>> : " + bFlag );
       if(bFlag){
          
          Enumeration<String> en = fuu.getFileNames();
@@ -762,41 +762,41 @@ public class BoardController {
          String firstFile =  en.nextElement();
          String secondFile =  en.nextElement();
          
-         logger.info("firstFile >>> : " + firstFile);
-         logger.info("secondFile >>> : " + secondFile);
+         //logger.info("firstFile >>> : " + firstFile);
+         //logger.info("secondFile >>> : " + secondFile);
 
          
          if(secondFile == null && firstFile != null){
             
             nvo.setBn_image(DOWNLOADPATH2 + firstFile);
             nvo.setBn_file("");
-            logger.info("1.파일명 >>> : " +  nvo.getBn_file());
-            logger.info("1.이미지명 >>> : " +  nvo.getBn_image());
+            //logger.info("1.파일명 >>> : " +  nvo.getBn_file());
+            //logger.info("1.이미지명 >>> : " +  nvo.getBn_image());
       
          }else if(firstFile == null && secondFile != null){
             nvo.setBn_file(secondFile);
             nvo.setBn_image("");
-            logger.info("2.파일명 >>> : " +  nvo.getBn_file());
-            logger.info("2.이미지명 >>> : " +  nvo.getBn_image());
+            //logger.info("2.파일명 >>> : " +  nvo.getBn_file());
+            //logger.info("2.이미지명 >>> : " +  nvo.getBn_image());
       
          }else if(firstFile == null && secondFile == null){
             nvo.setBn_file("");
             nvo.setBn_image("");
-            logger.info("3.파일명 >>> : " +  nvo.getBn_file());
-            logger.info("3.이미지명 >>> : " +  nvo.getBn_image());
+            //logger.info("3.파일명 >>> : " +  nvo.getBn_file());
+            //logger.info("3.이미지명 >>> : " +  nvo.getBn_image());
          
          }else{
             nvo.setBn_file(secondFile);
             nvo.setBn_image(DOWNLOADPATH2 + firstFile);
-            logger.info("4.파일명 >>> : " +  nvo.getBn_file());
-            logger.info("4.이미지명 >>> : " +  nvo.getBn_image());
+            //logger.info("4.파일명 >>> : " +  nvo.getBn_file());
+            //logger.info("4.이미지명 >>> : " +  nvo.getBn_image());
          }
 
          String bn_file = nvo.getBn_file();
          String bn_image = nvo.getBn_image();
    
-         logger.info("파일이름 >>>> " + bn_file);
-         logger.info("이미지이름 >>>> " + bn_image);
+         //logger.info("파일이름 >>>> " + bn_file);
+         //logger.info("이미지이름 >>>> " + bn_image);
          
          String bn_title = fuu.getParameter("bn_title");
          String hm_name = fuu.getParameter("hm_name");
@@ -808,7 +808,7 @@ public class BoardController {
          String bn_divnum   = fuu.getParameter("bn_divnum");
          String bn_deptnum = fuu.getParameter("bn_deptnum");
          
-         logger.info(hm_empnum + "" + bn_num + "" + bn_title + "" + hm_name + "" +bn_content + "" + bn_deptnum +"" + hm_duty);
+         //logger.info(hm_empnum + "" + bn_num + "" + bn_title + "" + hm_name + "" +bn_content + "" + bn_deptnum +"" + hm_duty);
          
          nvo.setHm_empnum(hm_empnum);
          nvo.setBn_num(bn_num);
@@ -829,31 +829,31 @@ public class BoardController {
          VOPrintUtil.noticeVOPrint(nvo);
       
       }else{
-         logger.info("multipart 전송 실패");
+         //logger.info("multipart 전송 실패");
          url = "/board/writeNotice.td";
          return "redirect:" + url;
       }
       
       int result = boardService.insertNotice(nvo);
    
-      System.out.println("iFlag >>> " + result );
+      //System.out.println("iFlag >>> " + result );
       if(result > 0){
-         logger.info("글 작성 성공!");
+         //logger.info("글 작성 성공!");
          
          url = "/board/selectNotice.td";
       }else{ 
-         logger.info("글 작성 오류 발생 !"); 
+         //logger.info("글 작성 오류 발생 !"); 
       }
 
 
-      logger.info("(log)BoardController.insertNotice 종료 ");
+      //logger.info("(log)BoardController.insertNotice 종료 ");
       return "redirect:" + url;
    }
    
    //공지사항 글쓰기 폼으로 이동하기
    @RequestMapping(value="/moveWriteNotice")
    public String moveWriteNotice(@ModelAttribute MemberVO mvo, Model model){
-      logger.info("(log)BoardController.moveWriteNotice 시작 >>> ");
+      //logger.info("(log)BoardController.moveWriteNotice 시작 >>> ");
       List<MemberVO> mList = null;
       mList = boardService.selectWrite(mvo);
 
@@ -866,15 +866,15 @@ public class BoardController {
    //공지사항 게시글 상세보기
    @RequestMapping(value="/searchNotice")
    public String searchNotice(@ModelAttribute NoticeVO nvo, Model model){
-      logger.info("(log)BoardController.searchNotice 시작 >>> ");
+      //logger.info("(log)BoardController.searchNotice 시작 >>> ");
       
       List<NoticeVO> noticeSearchList = null;
       String url = null;
       String bn_num = nvo.getBn_num();
-      logger.info("bn_num >>> : " + bn_num);
+      //logger.info("bn_num >>> : " + bn_num);
       noticeSearchList =    boardService.searchNotice(nvo);
       int iFlag = boardService.updateNoticeHit(nvo);
-      logger.info("(log)BoardController.searchNotice 조회수 증가>>> " + iFlag);
+      //logger.info("(log)BoardController.searchNotice 조회수 증가>>> " + iFlag);
       
       VOPrintUtil.noticeVOPrint(nvo);
       
@@ -892,28 +892,28 @@ public class BoardController {
    //파일다운로드 함수
    @RequestMapping(value="/downloadNotice")
    public String downloadNotice(@ModelAttribute NoticeVO nvo, Model model){
-      logger.info("(log)BoardController.downloadNotice 시작 >>> ");
+      //logger.info("(log)BoardController.downloadNotice 시작 >>> ");
 
       String bn_file = nvo.getBn_file();
       
-      logger.info("bn_file >>> " + bn_file);
+      //logger.info("bn_file >>> " + bn_file);
       
       model.addAttribute("fileName" ,bn_file);
       model.addAttribute("FilePath", FILEPATH1 );
       
-      logger.info("(log)BoardController.downloadNotice 종료 >>> ");
+      //logger.info("(log)BoardController.downloadNotice 종료 >>> ");
       return "board/fileDownload";
    }
 
    //공지사항 게시글 수정페이지로 이동
    @RequestMapping(value="/moveUpdateNotice")
    public String moveUpdateNotice(@ModelAttribute NoticeVO nvo, Model model){
-      logger.info("(log)BoardController.updateSearchNotice 시작 >>> ");
+      //logger.info("(log)BoardController.updateSearchNotice 시작 >>> ");
       
       List<NoticeVO> updateList = null;
       String url = null;
       String bn_num = nvo.getBn_num();
-      logger.info("bn_num >>> : " + bn_num);
+      //logger.info("bn_num >>> : " + bn_num);
       updateList = boardService.searchNotice(nvo);
       
       model.addAttribute("updateList",updateList);
@@ -925,21 +925,21 @@ public class BoardController {
          url = "redirect:" + "/board/selectNotice.td";
       }
       
-      logger.info("(log)BoardController.updateSearchNotice 종료 >>> ");
+      //logger.info("(log)BoardController.updateSearchNotice 종료 >>> ");
       return  url;
    }
    
    //공지사항 게시글 수정하기
       @RequestMapping(value="/updateNotice", method=RequestMethod.POST)
       public String updateNotice(@ModelAttribute NoticeVO nvo, Model model, HttpServletRequest request){
-         logger.info("(log)BoardController.updateNotice 시작 >>> ");
+         //logger.info("(log)BoardController.updateNotice 시작 >>> ");
          int result = 0;
          
          FileUploadUtil fuu = new FileUploadUtil();
          boolean bFlag = false;
          bFlag = fuu.fileUpload(request, FILEPATH1);
          
-         logger.info("bFlag >>> : " + bFlag );
+         //logger.info("bFlag >>> : " + bFlag );
          
          if(bFlag){
             
@@ -948,8 +948,8 @@ public class BoardController {
             String firstFile =  en.nextElement();
             String secondFile =  en.nextElement();
             
-            logger.info("firstFile >>> : " + firstFile);
-            logger.info("secondFile >>> : " + secondFile);
+            //logger.info("firstFile >>> : " + firstFile);
+            //logger.info("secondFile >>> : " + secondFile);
             
             if(firstFile != null){
                firstFile = firstFile.replaceAll(DOWNLOADPATH1, "");
@@ -960,39 +960,39 @@ public class BoardController {
                
                nvo.setBn_image(DOWNLOADPATH1 + firstFile);
                nvo.setBn_file("");
-               logger.info("1.파일명 >>> : " +  nvo.getBn_file());
-               logger.info("1.이미지명 >>> : " +  nvo.getBn_image());
+               //logger.info("1.파일명 >>> : " +  nvo.getBn_file());
+               //logger.info("1.이미지명 >>> : " +  nvo.getBn_image());
          
             }else if(firstFile == null && secondFile != null){
                nvo.setBn_file(secondFile);
                nvo.setBn_image("");
-               logger.info("2.파일명 >>> : " +  nvo.getBn_file());
-               logger.info("2.이미지명 >>> : " +  nvo.getBn_image());
+               //logger.info("2.파일명 >>> : " +  nvo.getBn_file());
+               //logger.info("2.이미지명 >>> : " +  nvo.getBn_image());
          
             }else if(firstFile == null && secondFile == null){
                nvo.setBn_file("");
                nvo.setBn_image("");
-               logger.info("3.파일명 >>> : " +  nvo.getBn_file());
-               logger.info("3.이미지명 >>> : " +  nvo.getBn_image());
+               //logger.info("3.파일명 >>> : " +  nvo.getBn_file());
+               //logger.info("3.이미지명 >>> : " +  nvo.getBn_image());
             
             }else{
                nvo.setBn_file(secondFile);
                nvo.setBn_image(DOWNLOADPATH1 + firstFile);
-               logger.info("4.파일명 >>> : " +  nvo.getBn_file());
-               logger.info("4.이미지명 >>> : " +  nvo.getBn_image());
+               //logger.info("4.파일명 >>> : " +  nvo.getBn_file());
+               //logger.info("4.이미지명 >>> : " +  nvo.getBn_image());
             }
 
             String bn_file = nvo.getBn_file();
             String bn_image = nvo.getBn_image();
       
-            logger.info("파일이름 >>>> " + bn_file);
-            logger.info("이미지이름 >>>> " + bn_image);
+            //logger.info("파일이름 >>>> " + bn_file);
+            //logger.info("이미지이름 >>>> " + bn_image);
             
             String bn_title = fuu.getParameter("bn_title");
             String bn_content = fuu.getParameter("bn_content");
             String bn_num = fuu.getParameter("bn_num");
             
-            logger.info(bn_num + "" + bn_title + "" +bn_content + "");
+            //logger.info(bn_num + "" + bn_title + "" +bn_content + "");
             
             nvo.setBn_num(bn_num);
             nvo.setBn_title(bn_title);
@@ -1004,15 +1004,15 @@ public class BoardController {
             VOPrintUtil.noticeVOPrint(nvo);
          
          }else{
-            logger.info("multipart 수정 실패");
+            //logger.info("multipart 수정 실패");
          }
       
          result = boardService.updateNotice(nvo);
          
          if(result == 1){
-            logger.info("수정성공");
+            //logger.info("수정성공");
          }else{
-            logger.info("수정실패");
+            //logger.info("수정실패");
          }
          
          String bn_num = nvo.getBn_num();
@@ -1032,9 +1032,9 @@ public class BoardController {
       result = boardService.deleteNotice(nvo);
       
       if(result == 1){
-         logger.info("삭제성공");
+         //logger.info("삭제성공");
       }else{
-         logger.info("삭제실패");
+         //logger.info("삭제실패");
       }
       
       model.addAttribute("hm_empnum",hm_empnum);
@@ -1046,13 +1046,13 @@ public class BoardController {
    //공지사항 확인 폼으로 이동하기
    @RequestMapping(value="/moveCheckNotice")
    public String moveCheckNotice(@ModelAttribute MemberVO mvo, NoticeVO nvo, Model model){
-      logger.info("(log)BoardController.moveWriteNotice 시작 >>> ");
+      //logger.info("(log)BoardController.moveWriteNotice 시작 >>> ");
       List<MemberVO> mList = null;
       mList = boardService.selectWrite(mvo);
       
       List<NoticeVO> checkList = null;
       String bn_num = nvo.getBn_num();
-      logger.info("bn_num >>> : " + bn_num);
+      //logger.info("bn_num >>> : " + bn_num);
       
       model.addAttribute("mList", mList);
       model.addAttribute("bn_num",bn_num);
@@ -1066,8 +1066,8 @@ public class BoardController {
    //공지사항 게시글 확인
    @RequestMapping("/checkNotice")
    public String checkNotice(@ModelAttribute NoCheckVO ncvo, Model model){
-      logger.info("(log)BoardController.checkNotice 시작 >>> ");
-      logger.info("(log)BoardController.chaebunNoCheck 시작 >>> ");
+      //logger.info("(log)BoardController.checkNotice 시작 >>> ");
+      //logger.info("(log)BoardController.chaebunNoCheck 시작 >>> ");
 
       
       
@@ -1080,7 +1080,7 @@ public class BoardController {
       NoCheckVO _ncvo = list.get(0);
       bn_checknum = _ncvo.getBn_checknum();
       bn_checknum = ChaebunUtils.cNum(bn_checknum, CHECK_GUBUN);
-      logger.info(" bn_checknum >>> : " + bn_checknum);
+      //logger.info(" bn_checknum >>> : " + bn_checknum);
 
       String bn_num   = ncvo.getBn_num();
       String hm_empnum = ncvo.getHm_empnum();
@@ -1108,9 +1108,9 @@ public class BoardController {
       }
    
       model.addAttribute("message",message);
-      System.out.println("iFlag >>> " + iFlag );
+      //System.out.println("iFlag >>> " + iFlag );
 
-      logger.info("(log)BoardController.insertNotice 종료 ");
+      //logger.info("(log)BoardController.insertNotice 종료 ");
       
       return "board/checkNotice";
    }
@@ -1118,16 +1118,16 @@ public class BoardController {
    //공지사항 확인자 리스트 출력하기
    @RequestMapping(value="/checkList")
    public String checkList(@ModelAttribute NoCheckVO ncvo, Model model){
-      logger.info("(log)BoardController.moveCheckList 시작  >>>");
+      //logger.info("(log)BoardController.moveCheckList 시작  >>>");
       
-      System.out.println(ncvo.getBn_num());
+      //System.out.println(ncvo.getBn_num());
       
       List<NoCheckVO> cList = null;
       cList = boardService.checkList(ncvo);
       
       model.addAttribute("cList", cList);
       
-      logger.info("(log)BoardController.moveCheckList 종료  >>>");
+      //logger.info("(log)BoardController.moveCheckList 종료  >>>");
       return "board/checkListNotice";
    }
    

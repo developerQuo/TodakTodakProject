@@ -10,7 +10,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <% 
 	String message = (String)request.getAttribute("message");
-	//System.out.println(" message >>> " + message);
+	////System.out.println(" message >>> " + message);
 	if (message != null){
 		%>
 		<script type="text/javascript">
@@ -102,7 +102,7 @@
 	            <%@ include file="/WEB-INF/views/commons/sidebar.jsp" %>
 	         </aside>
 	
-			<% System.out.println(sManager.getUserID(session.getId())); %>
+			<% //System.out.println(sManager.getUserID(session.getId())); %>
 			<div class="context-container">
 				
 				<div id="boardTit"><h3><b>후원인</b></h3></div>

@@ -35,16 +35,16 @@
 	
 	<%
 		Object obj = request.getAttribute("bFlag");
-		System.out.println("obj >>> : " + obj);
+		//System.out.println("obj >>> : " + obj);
 		
 		if(obj!=null) {
-			System.out.println("if(obj!=null) 진입 >>> ");
+			//System.out.println("if(obj!=null) 진입 >>> ");
 			
 			boolean bFlag = (boolean) obj;
-			System.out.println("bFlag >>> : " + bFlag);
+			//System.out.println("bFlag >>> : " + bFlag);
 			
 			if(bFlag) {
-				System.out.println("if(bFlag) 진입 >>> ");
+				//System.out.println("if(bFlag) 진입 >>> ");
 				
 	%>
 			<br><br><br>
@@ -56,7 +56,7 @@
 	<%
 				
 			} else {
-				System.out.println("if(bFlag)-else 진입 >>> ");
+				//System.out.println("if(bFlag)-else 진입 >>> ");
 				
 	%>
 			<br><br><br>

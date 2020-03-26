@@ -21,15 +21,15 @@
 			String listSize = "";
 			
 			ob = request.getAttribute("list");
-			System.out.println("ob >>> : " + ob);
+			//System.out.println("ob >>> : " + ob);
 			
 			if(ob!= null) {
-				System.out.println("if(ob!= null) 진입 >>> ");
+				//System.out.println("if(ob!= null) 진입 >>> ");
 				
 				list = (List<MemberVO>) ob;
-				System.out.println("list >>> : " + list);
+				//System.out.println("list >>> : " + list);
 				listSize = String.valueOf(list.size());
-				System.out.println("listSize >>> : " + listSize);
+				//System.out.println("listSize >>> : " + listSize);
 				
 			%>
 			<size>
@@ -39,17 +39,17 @@
 				
 				for(int i=0; i<list.size(); i++) {
 					MemberVO mvo = list.get(i);
-					System.out.println("mvo >>> : " + mvo);
+					//System.out.println("mvo >>> : " + mvo);
 					
 					hm_empnum = mvo.getHm_empnum();
 					hm_name = mvo.getHm_name();
 					hm_position = mvo.getHm_position();
 					hm_duty = mvo.getHm_duty();
 					
-					System.out.println("hm_empnum >>> : " + hm_empnum);
-					System.out.println("hm_name >>> : " + hm_name);
-					System.out.println("hm_position >>> : " + hm_position);
-					System.out.println("hm_duty >>> : " + hm_duty);
+					//System.out.println("hm_empnum >>> : " + hm_empnum);
+					//System.out.println("hm_name >>> : " + hm_name);
+					//System.out.println("hm_position >>> : " + hm_position);
+					//System.out.println("hm_duty >>> : " + hm_duty);
 					
 			%>
 				<list>

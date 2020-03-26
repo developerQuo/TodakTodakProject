@@ -86,7 +86,7 @@ public class SponsorController {
 							   @ModelAttribute PagingVO pvo,
 							   @ModelAttribute QueryStringVO qsvo,
 							   Model model){
-		logger.info("(log) SponsorController.selectMember entered");
+		//logger.info("(log) SponsorController.selectMember entered");
 		String url = "sponsor/selectMember";
 		String sm_num = smvo.getSm_num();
 		smcvo.setSm_num(sm_num);
@@ -103,22 +103,22 @@ public class SponsorController {
 //		model.addAttribute("sponsorshipList", sponsorshipList);
 		model.addAttribute("pvo", pvo);
 		model.addAttribute("message", qsvo.getMessage());
-		logger.info("memberList >>> " + memberList.size());
-		logger.info("cardList >>> " + cardList.size());
-		logger.info("accountList >>> " + accountList.size());
-//		logger.info("sponsorshipList >>> " + sponsorshipList.size());
+		//logger.info("memberList >>> " + memberList.size());
+		//logger.info("cardList >>> " + cardList.size());
+		//logger.info("accountList >>> " + accountList.size());
+//		//logger.info("sponsorshipList >>> " + sponsorshipList.size());
 		
 		if(!smvo.getSm_num().equals("")){
-			logger.info(" search!!!!!!!");
+			//logger.info(" search!!!!!!!");
 			url = "sponsor/searchMember";
 		}
 		
 		if("ajax".equals(qsvo.getSelectFunc())){
-			logger.info("ajax entered");
+			//logger.info("ajax entered");
 			model.addAttribute("selectFunc", "member");
 			return "sponsor/ajaxOK";
 		}
-		logger.info("(log) SponsorController.selectMember left");
+		//logger.info("(log) SponsorController.selectMember left");
 		return url;
 	}
 
@@ -127,7 +127,7 @@ public class SponsorController {
 						   	   @ModelAttribute MemberCardVO smcvo,
 							   @ModelAttribute MemberAccountVO smavo,
 						 	   Model model){
-		logger.info("(log) SponsorController.insertMember entered");
+		//logger.info("(log) SponsorController.insertMember entered");
 		String url = "redirect:/sponsor/selectMember.td";
 		String message = "��Ͽ� �����߽��ϴ�.";
 		
@@ -140,17 +140,17 @@ public class SponsorController {
 		smavo.setSm_num(sm_num);
 		smcvo.setSmc_num(ChaebunUtils.cNum(cardList.get(0).getSmc_num(), GUBUN_MEMBERCARD));
 		smavo.setSma_num(ChaebunUtils.cNum(accountList.get(0).getSma_num(), GUBUN_MEMBERACCOUNT));
-		logger.info("smvo.getSm_num() >>> " + smvo.getSm_num());
-		logger.info("smcvo.getSmc_num() >>> " + smcvo.getSmc_num());
-		logger.info("smcvo.getSm_num() >>> " + smcvo.getSm_num());
-		logger.info("smavo.getSma_num() >>> " + smavo.getSma_num());
-		logger.info("smavo.getSm_num() >>> " + smavo.getSm_num());
+		//logger.info("smvo.getSm_num() >>> " + smvo.getSm_num());
+		//logger.info("smcvo.getSmc_num() >>> " + smcvo.getSmc_num());
+		//logger.info("smcvo.getSm_num() >>> " + smcvo.getSm_num());
+		//logger.info("smavo.getSma_num() >>> " + smavo.getSma_num());
+		//logger.info("smavo.getSm_num() >>> " + smavo.getSm_num());
 		int memberCnt = sponsorService.insertMember(smvo, smcvo, smavo);
 //		int cardCnt = sponsorService.insertMemberCard(smcvo);
 //		int accountCnt = sponsorService.insertMemberAccount(smavo);
-		logger.info(" memberCnt >>> " + memberCnt);
-//		logger.info(" cardCnt >>> " + cardCnt);
-//		logger.info(" accountCnt >>> " + accountCnt);
+		//logger.info(" memberCnt >>> " + memberCnt);
+//		//logger.info(" cardCnt >>> " + cardCnt);
+//		//logger.info(" accountCnt >>> " + accountCnt);
 		
 
 		if (memberCnt == 1 ){
@@ -158,7 +158,7 @@ public class SponsorController {
 		}
 		model.addAttribute("message", message);
 		model.addAttribute("selectFunc", "");
-		logger.info("(log) SponsorController.insertMember left");
+		//logger.info("(log) SponsorController.insertMember left");
 		return url;
 	}
 
@@ -167,12 +167,12 @@ public class SponsorController {
 						   	   @ModelAttribute MemberCardVO smcvo,
 							   @ModelAttribute MemberAccountVO smavo,
 						 	   Model model){
-		logger.info("(log) SponsorController.updateMember entered");
+		//logger.info("(log) SponsorController.updateMember entered");
 		String url = "redirect:/sponsor/selectMember.td";
 		String message = "������ �����߽��ϴ�.";
 		
 		int memberCnt = sponsorService.updateMember(smvo, smcvo, smavo);
-		logger.info(" memberCnt >>> " + memberCnt);
+		//logger.info(" memberCnt >>> " + memberCnt);
 		
 		// Ʈ����� ó�� �ʿ�
 		if (memberCnt == 1){
@@ -180,19 +180,19 @@ public class SponsorController {
 		}
 		model.addAttribute("message", message);
 		model.addAttribute("selectFunc", "");
-		logger.info("(log) SponsorController.updateMember left");
+		//logger.info("(log) SponsorController.updateMember left");
 		return url;
 	}
 	
 	@RequestMapping(value="deleteMember")
 	public String deleteMember(@ModelAttribute MemberVO smvo,
 						 	   Model model){
-		logger.info("(log) SponsorController.deleteMember entered");
+		//logger.info("(log) SponsorController.deleteMember entered");
 		String url = "redirect:/sponsor/selectMember.td";
 		String message = "������ �����߽��ϴ�.";
 		
 		int memberCnt = sponsorService.deleteMember(smvo);
-		logger.info(" memberCnt >>> " + memberCnt);
+		//logger.info(" memberCnt >>> " + memberCnt);
 		
 		// Ʈ����� ó�� �ʿ�
 		if (memberCnt == 1){
@@ -200,7 +200,7 @@ public class SponsorController {
 		}
 		model.addAttribute("message", message);
 		model.addAttribute("selectFunc", "");
-		logger.info("(log) SponsorController.deleteMember left");
+		//logger.info("(log) SponsorController.deleteMember left");
 		return url;
 	}
 //--------------------------------------------------------------------------------------------------------------------------------------------------	
@@ -209,87 +209,87 @@ public class SponsorController {
 							    @ModelAttribute PagingVO pvo,
 							    @ModelAttribute QueryStringVO qsvo,
 	 							Model model){
-		logger.info("(log) SponsorController.selectCharity entered");
+		//logger.info("(log) SponsorController.selectCharity entered");
 		String url = "sponsor/selectCharity";
-		logger.info(" message >>> " + qsvo.getMessage());
-		logger.info(" sc_num >>> " + scvo.getSc_num());
+		//logger.info(" message >>> " + qsvo.getMessage());
+		//logger.info(" sc_num >>> " + scvo.getSc_num());
 		List<CharityVO> charityList = sponsorService.selectCharity(scvo, pvo);
 		model.addAttribute("charityList", charityList);
 		model.addAttribute("message", qsvo.getMessage());
 		model.addAttribute("pvo", pvo);
-		logger.info("charityList >>> " + charityList.size());
+		//logger.info("charityList >>> " + charityList.size());
 		
 		if(!scvo.getSc_num().equals("")){
-			logger.info(" search!!!!!!!");
+			//logger.info(" search!!!!!!!");
 			url = "sponsor/searchCharity";
 		}
 
 		if("ajax".equals(qsvo.getSelectFunc())){
-			logger.info("ajax entered");
+			//logger.info("ajax entered");
 			model.addAttribute("selectFunc", "charity");
 			return "sponsor/ajaxOK";
 		}
-		logger.info("(log) SponsorController.selectCharity left");
+		//logger.info("(log) SponsorController.selectCharity left");
 		return url;
 	}
 	
 	@RequestMapping(value="insertCharity")
 	public String insertCharity(@ModelAttribute CharityVO scvo,
 						 		Model model){
-		logger.info("(log) SponsorController.insertCharity entered");
+		//logger.info("(log) SponsorController.insertCharity entered");
 		String url = "redirect:/sponsor/selectCharity.td";
 		String message = "��Ͽ� �����߽��ϴ�.";
 		
 		List<CharityVO> charityList = sponsorService.chaebunCharity();
 		scvo.setSc_num(ChaebunUtils.cNum(charityList.get(0).getSc_num(), GUBUN_CHARITY));
 		int nCnt = sponsorService.insertCharity(scvo);
-		logger.info(" nCnt >>> " + nCnt);
+		//logger.info(" nCnt >>> " + nCnt);
 		
 		if (nCnt == 1){
 			message = "��ϵǾ���ϴ�.";
 		}
 		model.addAttribute("message", message);
 		model.addAttribute("selectFunc", "");
-		logger.info("(log) SponsorController.insertCharity left");
+		//logger.info("(log) SponsorController.insertCharity left");
 		return url;
 	}
 	
 	@RequestMapping(value="updateCharity")
 	public String updateCharity(@ModelAttribute CharityVO scvo,
 								Model model){
-		logger.info("(log) SponsorController.updateCharity entered");
+		//logger.info("(log) SponsorController.updateCharity entered");
 		String url = "redirect:/sponsor/selectCharity.td";
 		String message = "������ �����߽��ϴ�.";
 		
-		logger.info(" sc_num >>> " + scvo.getSc_num());
+		//logger.info(" sc_num >>> " + scvo.getSc_num());
 		int nCnt = sponsorService.updateCharity(scvo);
-		logger.info(" nCnt >>> " + nCnt);
+		//logger.info(" nCnt >>> " + nCnt);
 
 		if (nCnt == 1){
 			message = "�����Ǿ���ϴ�.";
 		}
 		model.addAttribute("message", message);
 		model.addAttribute("selectFunc", "");
-		logger.info("(log) SponsorController.updateCharity left");
+		//logger.info("(log) SponsorController.updateCharity left");
 		return url;
 	}
 	
 	@RequestMapping(value="deleteCharity")
 	public String deleteCharity(@ModelAttribute CharityVO scvo,
 								Model model){
-		logger.info("(log) SponsorController.deleteCharity entered");
+		//logger.info("(log) SponsorController.deleteCharity entered");
 		String url = "redirect:/sponsor/selectCharity.td";
 		String message = "������ �����߽��ϴ�.";
 		
 		int nCnt = sponsorService.deleteCharity(scvo);
-		logger.info(" nCnt >>> " + nCnt);
+		//logger.info(" nCnt >>> " + nCnt);
 
 		if (nCnt == 1){
 			message = "�����Ǿ���ϴ�.";
 		}
 		model.addAttribute("message", message);
 		model.addAttribute("selectFunc", "");
-		logger.info("(log) SponsorController.deleteCharity left");
+		//logger.info("(log) SponsorController.deleteCharity left");
 		return url;
 	}
 	
@@ -298,41 +298,41 @@ public class SponsorController {
 									@ModelAttribute CharityVO scvo,
 									Model model,
 								   @ModelAttribute QueryStringVO qsvo){
-		logger.info("(log) SponsorController.selectSponsorship entered");
+		//logger.info("(log) SponsorController.selectSponsorship entered");
 		String url = "sponsor/selectSponsorship";
 		String name = "전체";
-		logger.info(" message >>> " + qsvo.getMessage());
-		logger.info(" sm_num >>> " + smvo.getSm_num());
-		logger.info(" sc_num >>> " + scvo.getSc_num());
+		//logger.info(" message >>> " + qsvo.getMessage());
+		//logger.info(" sm_num >>> " + smvo.getSm_num());
+		//logger.info(" sc_num >>> " + scvo.getSc_num());
 		
 		List<SponsorshipVO> sponsorshipList = sponsorService.selectSponsorship(smvo, scvo);
 		model.addAttribute("sponsorshipList", sponsorshipList);
 		model.addAttribute("message", qsvo.getMessage());
-		logger.info("sponsorshipList >>> " + sponsorshipList.size());
+		//logger.info("sponsorshipList >>> " + sponsorshipList.size());
 		for (int i=0; i<sponsorshipList.size(); i++){
 			SponsorshipVO ssvo = sponsorshipList.get(i);
-			logger.info(" >>> " + ssvo.getSs_num());
-			logger.info(" >>> " + ssvo.getSc_num());
-			logger.info(" >>> " + ssvo.getSm_num());
-			logger.info(" >>> " + ssvo.getSs_amount());
-			logger.info(" >>> " + ssvo.getSs_message());
-			logger.info(" >>> " + ssvo.getSs_receiptYN());
-			logger.info(" >>> " + ssvo.getSs_sponsoreddate());
+			//logger.info(" >>> " + ssvo.getSs_num());
+			//logger.info(" >>> " + ssvo.getSc_num());
+			//logger.info(" >>> " + ssvo.getSm_num());
+			//logger.info(" >>> " + ssvo.getSs_amount());
+			//logger.info(" >>> " + ssvo.getSs_message());
+			//logger.info(" >>> " + ssvo.getSs_receiptYN());
+			//logger.info(" >>> " + ssvo.getSs_sponsoreddate());
 		}
 		
 		if (smvo.getSm_num() != ""){
 			// 후원인 조회
-			logger.info("후원인 선택");
+			//logger.info("후원인 선택");
 			name = smvo.getSm_name() + "님";
 		}
 		if(scvo.getSc_num() != ""){
 			// 비영리단체 조회
-			logger.info("비영리단체 선택");
+			//logger.info("비영리단체 선택");
 			name = scvo.getSc_name();
 		}
-		logger.info(" name >>> " + name);
+		//logger.info(" name >>> " + name);
 		model.addAttribute("name", name);
-		logger.info("(log) SponsorController.selectSponsorship left");
+		//logger.info("(log) SponsorController.selectSponsorship left");
 		return url;
 	}
 }

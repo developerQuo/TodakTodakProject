@@ -6,15 +6,15 @@
 
 <% 
 	String user_id = sManager.getUserID(session.getId());
-	System.out.println(user_id); 
+	//System.out.println(user_id); 
 				int list_size = 0;
 				Object obj = request.getAttribute("list");
 			
 				if(obj!=null) {
-					System.out.println("if(obj!=null) 진입 >>> ");
+					//System.out.println("if(obj!=null) 진입 >>> ");
 					
 					List<SelectAuthBoxVO> list = (List<SelectAuthBoxVO>) obj;
-					System.out.println("list >>> : " + list);
+					//System.out.println("list >>> : " + list);
 					list_size = list.size();
 					
 %>
@@ -508,62 +508,62 @@
 			<%
 					
 					if(list!=null && list.size() > 0) {
-						System.out.println("if(list!=null && list.size() > 0) 진입 >>> ");
+						//System.out.println("if(list!=null && list.size() > 0) 진입 >>> ");
 						
 						for(int i=0; i<list.size(); i++) {
 							SelectAuthBoxVO sabvo = list.get(i);
-							System.out.println("sabvo >>> : " + sabvo);
+							//System.out.println("sabvo >>> : " + sabvo);
 							
 							String eab_num = sabvo.getEab_num();
-							System.out.println("eab_num >>> : " + eab_num);
+							//System.out.println("eab_num >>> : " + eab_num);
 							String ea_num = sabvo.getEa_num();
-							System.out.println("ea_num >>> : " + ea_num);
+							//System.out.println("ea_num >>> : " + ea_num);
 							String eab_writer = sabvo.getEab_writer();
-							System.out.println("eab_writer >>> : " + eab_writer);
+							//System.out.println("eab_writer >>> : " + eab_writer);
 							String eab_title = sabvo.getEab_title();
-							System.out.println("eab_title >>> : " + eab_title);
+							//System.out.println("eab_title >>> : " + eab_title);
 							
 							String eab_startdate = sabvo.getEab_startdate();
-							System.out.println("eab_startdate >>> : " + eab_startdate);
+							//System.out.println("eab_startdate >>> : " + eab_startdate);
 							String startdate_year = eab_startdate.substring(0,4);
-							System.out.println("startdate_year >>> : " + startdate_year);
+							//System.out.println("startdate_year >>> : " + startdate_year);
 							String startdate_month = eab_startdate.substring(4,6);
-							System.out.println("startdate_month >>> : " + startdate_month);
+							//System.out.println("startdate_month >>> : " + startdate_month);
 							String startdate_day = eab_startdate.substring(6,8);
-							System.out.println("startdate_day >>> : " + startdate_day);
+							//System.out.println("startdate_day >>> : " + startdate_day);
 							
 							String eab_enddate = sabvo.getEab_enddate();
-							System.out.println("eab_enddate >>> : " + eab_enddate);
+							//System.out.println("eab_enddate >>> : " + eab_enddate);
 							String enddate_year = eab_enddate.substring(0,4);
-							System.out.println("enddate_year >>> : " + enddate_year);
+							//System.out.println("enddate_year >>> : " + enddate_year);
 							String enddate_month = eab_enddate.substring(4,6);
-							System.out.println("enddate_month >>> : " + enddate_month);
+							//System.out.println("enddate_month >>> : " + enddate_month);
 							String enddate_day = eab_enddate.substring(6,8);
-							System.out.println("enddate_day >>> : " + enddate_day);
+							//System.out.println("enddate_day >>> : " + enddate_day);
 							
 							String el_line = sabvo.getEl_line();
-							System.out.println("el_line >>> : " + el_line);
+							//System.out.println("el_line >>> : " + el_line);
 							String ea_presentnum = sabvo.getEa_presentnum();
 							if(ea_presentnum == null) ea_presentnum = "#";
-							System.out.println("ea_presentnum >>> : " + ea_presentnum);
+							//System.out.println("ea_presentnum >>> : " + ea_presentnum);
 							String eai_substitutenum = sabvo.getEai_substitutenum();
-							System.out.println("eai_substitutenum >>> : " + eai_substitutenum);
+							//System.out.println("eai_substitutenum >>> : " + eai_substitutenum);
 							String eab_group = sabvo.getEab_group();
-							System.out.println("eab_group >>> : " + eab_group);
+							//System.out.println("eab_group >>> : " + eab_group);
 							String eab_insertdate = sabvo.getEab_insertdate();
-							System.out.println("eab_insertdate >>> : " + eab_insertdate);
+							//System.out.println("eab_insertdate >>> : " + eab_insertdate);
 							String eab_updatedate = sabvo.getEab_updatedate();
-							System.out.println("eab_updatedate >>> : " + eab_updatedate);
+							//System.out.println("eab_updatedate >>> : " + eab_updatedate);
 							String eab_deleteYN = sabvo.getEab_deleteYN();
-							System.out.println("eab_deleteYN >>> : " + eab_deleteYN);
+							//System.out.println("eab_deleteYN >>> : " + eab_deleteYN);
 							
 							if(el_line.indexOf(user_id) != -1) {
 								if((el_line.lastIndexOf(ea_presentnum) >= el_line.lastIndexOf(user_id)) || ea_presentnum.equals("#") || ea_presentnum.equals("return")) {
 									
-									System.out.println("-----------------------------------------");
-									System.out.println("el_line.lastIndexOf(ea_presentnum) >>> : " + el_line.indexOf(ea_presentnum));
-									System.out.println("el_line.lastIndexOf(user_id) >>> : " + el_line.indexOf(user_id));
-									System.out.println("-----------------------------------------");
+									//System.out.println("-----------------------------------------");
+									//System.out.println("el_line.lastIndexOf(ea_presentnum) >>> : " + el_line.indexOf(ea_presentnum));
+									//System.out.println("el_line.lastIndexOf(user_id) >>> : " + el_line.indexOf(user_id));
+									//System.out.println("-----------------------------------------");
 			%>
 									<tr id="no<%=i %>" data-num1="<%=ea_num%>" data-num2="<%=eab_group%>" data-num3="<%=ea_presentnum%>">
 										<td id="number<%=i%>" align="center"></td>

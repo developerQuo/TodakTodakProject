@@ -21,19 +21,19 @@ public class SchedulerServiceImpl implements SchedulerService {
 	/*근태 코드 시작 */
 	@Override
 	public boolean insertExtrawork(CommuteVO cvo) throws Exception {
-		logger.info("SchedulerServiceImpl.insertExtrawork 진입");
+		//logger.info("SchedulerServiceImpl.insertExtrawork 진입");
 		boolean result = false;
 		result = schedulerDao.insertExtrawork(cvo);
-		logger.info("SchedulerServiceImpl.insertExtrawork 종료");
+		//logger.info("SchedulerServiceImpl.insertExtrawork 종료");
 		return result;
 	}
 
 	@Override
 	public boolean insertTAndA(CommuteVO cvo) throws Exception{
-		logger.info("SchedulerServiceImpl.insertTAndA 진입");
+		//logger.info("SchedulerServiceImpl.insertTAndA 진입");
 		boolean result = false;
 		result = schedulerDao.insertTAndA(cvo);
-		logger.info("SchedulerServiceImpl.insertTAndA 종료");
+		//logger.info("SchedulerServiceImpl.insertTAndA 종료");
 		return result;
 	}
 	
@@ -41,37 +41,37 @@ public class SchedulerServiceImpl implements SchedulerService {
 	
 	@Override
 	public boolean insertLastHour(CommuteVO cvo) throws Exception {
-		logger.info("SchedulerServiceImpl.insertTAndA 진입");
+		//logger.info("SchedulerServiceImpl.insertTAndA 진입");
 		boolean result = false;
 		result = schedulerDao.insertLastHour(cvo);
-		logger.info("SchedulerServiceImpl.insertTAndA 종료");
+		//logger.info("SchedulerServiceImpl.insertTAndA 종료");
 		return result;
 	}
 
 	@Override
 	public boolean insertCommute(CommuteVO cvo) throws Exception{
-		logger.info("SchedulerServiceImpl.insertCommute 진입");
+		//logger.info("SchedulerServiceImpl.insertCommute 진입");
 		boolean result = false;
 		result = schedulerDao.insertCommute(cvo);
-		logger.info("SchedulerServiceImpl.insertCommute 종료");
+		//logger.info("SchedulerServiceImpl.insertCommute 종료");
 		return result;
 	}
 
 	@Override
 	public boolean updateCommute(CommuteVO cvo) throws Exception{
-		logger.info("SchedulerServiceImpl.updateCommute 진입");
+		//logger.info("SchedulerServiceImpl.updateCommute 진입");
 		boolean result = false;
 		result = schedulerDao.updateCommute(cvo);
-		logger.info("SchedulerServiceImpl.updateCommute 종료");
+		//logger.info("SchedulerServiceImpl.updateCommute 종료");
 		return result;
 	}
 
 	@Override
 	public List<CommuteVO> selectCheabun(CommuteVO cvo) {
-		logger.info("SchedulerServiceImpl.selectCheabun 진입");
+		//logger.info("SchedulerServiceImpl.selectCheabun 진입");
 		List<CommuteVO> cList = null;
 		cList = schedulerDao.selectCheabun(cvo);
-		logger.info("SchedulerServiceImpl.selectCheabun 종료");
+		//logger.info("SchedulerServiceImpl.selectCheabun 종료");
 		return cList;
 	}
 	
@@ -79,10 +79,10 @@ public class SchedulerServiceImpl implements SchedulerService {
 
 	@Override
 	public List<CommuteVO> selectCommute(CommuteVO cvo) {
-		logger.info("SchedulerServiceImpl.selectCommute 진입");
+		//logger.info("SchedulerServiceImpl.selectCommute 진입");
 		List<CommuteVO> cList = null;
 		cList = schedulerDao.selectCommute(cvo);
-		logger.info("SchedulerServiceImpl.selectCommute 종료");
+		//logger.info("SchedulerServiceImpl.selectCommute 종료");
 		return cList;
 	}
 	
@@ -90,10 +90,10 @@ public class SchedulerServiceImpl implements SchedulerService {
 
 	@Override
 	public List<CommuteVO> selectLastHour(CommuteVO cvo) {
-		logger.info("SchedulerServiceImpl.selectLastHour 진입");
+		//logger.info("SchedulerServiceImpl.selectLastHour 진입");
 		List<CommuteVO> cList = null;
 		cList = schedulerDao.selectLastHour(cvo);
-		logger.info("SchedulerServiceImpl.selectLastHour 종료");
+		//logger.info("SchedulerServiceImpl.selectLastHour 종료");
 		return cList;
 	}
 

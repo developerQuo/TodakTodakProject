@@ -126,7 +126,7 @@
          NoticeVO nvo = sList.get(0);
          String i_hm_empnum = nvo.getHm_empnum();
    
-         System.out.println(n_hm_empnum + " : " + i_hm_empnum);
+         //System.out.println(n_hm_empnum + " : " + i_hm_empnum);
    %>
          
          

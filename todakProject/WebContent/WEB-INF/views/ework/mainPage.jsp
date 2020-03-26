@@ -25,7 +25,7 @@
 	        	<hr>
 				<%
 					//String path = request.getSession().getServletContext().getRealPath("/upload/doc") + "\\formDownload.hwp";
-					//System.out.println("path >>> : "+ path);
+					////System.out.println("path >>> : "+ path);
 				%>
 				<!-- 
 						JDK : 1.7			java : luna

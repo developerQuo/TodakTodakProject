@@ -86,13 +86,13 @@ public class LoginSession implements HttpSessionBindingListener{
 	//   ==> 세션을 통해 Hashtable에 접근할 수 있게함.
 	public void setSession(HttpSession hSession, String userNum)
 	{
-//		System.out.println("hSession.getId() >>> " + hSession.getId());
-//		System.out.println("userNum >>> " + userNum);
-//		System.out.println("this.getInstance() >>> " + this.getInstance());
+//		//System.out.println("hSession.getId() >>> " + hSession.getId());
+		System.out.println(" set session userNum >>> " + userNum);
+		//System.out.println("this.getInstance() >>> " + this.getInstance());
 		List<String> container = new ArrayList<String>();
 		container.add(0, "");
 		container.add(1, "");
-		System.out.println(" size >>> " + container.size());
+		//System.out.println(" size >>> " + container.size());
 		container.set(0, userNum);
 		hashManager.put(hSession.getId(), container);
 		hSession.setAttribute("login", this.getInstance());
@@ -131,7 +131,7 @@ public class LoginSession implements HttpSessionBindingListener{
 		container.set(1, main);
 
 //		List<String> container2 = (List<String>)hashManager.get(sessionID);
-//		System.out.println(" main IN setMain >>> " + container2.get(1));
+//		//System.out.println(" main IN setMain >>> " + container2.get(1));
 	}
 
 	// get main menu

@@ -61,7 +61,7 @@
 							String bn_checknum = ncvo.getBn_checknum();
 							bn_checknum = bn_checknum.substring(bn_checknum.length() - 4, bn_checknum.length());
 							String bn_checkdate = ncvo.getBn_checkdate();
-							System.out.println("bn_checkdate >>> : " +  bn_checkdate);	
+							//System.out.println("bn_checkdate >>> : " +  bn_checkdate);	
 							bn_checkdate = bn_checkdate.substring(0,10);
 							
 					

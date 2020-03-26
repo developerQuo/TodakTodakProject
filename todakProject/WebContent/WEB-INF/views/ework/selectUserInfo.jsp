@@ -18,29 +18,29 @@
 		
 		
 			Object ob = request.getAttribute("list");
-			System.out.println("ob >>> : " + ob);
+			//System.out.println("ob >>> : " + ob);
 			
 			if(ob!=null) {
-				System.out.println("if(ob!=null) 진입 >>> ");
+				//System.out.println("if(ob!=null) 진입 >>> ");
 				
 				List<MemberVO> list = (List<MemberVO>)ob;
-				System.out.println("list >>> : " + list);
+				//System.out.println("list >>> : " + list);
 				
 				MemberVO mvo = list.get(0);
-				System.out.println("mvo >>> : " + mvo);
+				//System.out.println("mvo >>> : " + mvo);
 				
 				hm_name = mvo.getHm_name();
 				hm_deptnum = mvo.getHm_deptnum();
 				hm_position = mvo.getHm_position();
 				hm_duty = mvo.getHm_duty();
 				
-				System.out.println("hm_name >>> : " + hm_name);
-				System.out.println("hm_deptnum >>> : " + hm_deptnum);
-				System.out.println("hm_position >>> : " + hm_position);
-				System.out.println("hm_duty >>> : " + hm_duty);
+				//System.out.println("hm_name >>> : " + hm_name);
+				//System.out.println("hm_deptnum >>> : " + hm_deptnum);
+				//System.out.println("hm_position >>> : " + hm_position);
+				//System.out.println("hm_duty >>> : " + hm_duty);
 				
 			} else {
-				System.out.println("if(ob!=null)-else 진입 >>> ");
+				//System.out.println("if(ob!=null)-else 진입 >>> ");
 				
 			}
 		%>

@@ -7,13 +7,13 @@
 	String result = "";
 	
 	Object obj = request.getAttribute("result");
-	System.out.println("obj >>> : " + obj);	
+	//System.out.println("obj >>> : " + obj);	
 
 	if(obj!= null) {
 		result = (String) obj;
-		System.out.println("result >>> : " + result);
+		//System.out.println("result >>> : " + result);
 	} else {
-		System.out.println("obj가 없음");
+		//System.out.println("obj가 없음");
 	}
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

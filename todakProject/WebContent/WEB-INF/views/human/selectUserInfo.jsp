@@ -9,29 +9,29 @@
 	String fulladdr = "";
 			
 	Object obj = request.getAttribute("selectUserInfo");
-	System.out.println("obj >>> : " + obj);
+	//System.out.println("obj >>> : " + obj);
 	
 	if(obj!=null) {
-		System.out.println("if(obj!=null) 진입 >>> ");
+		//System.out.println("if(obj!=null) 진입 >>> ");
 		
 		List<MemberVO> selectUserInfo = (List<MemberVO>) obj;
-		System.out.println("selectUserInfo >>> : " + selectUserInfo);
+		//System.out.println("selectUserInfo >>> : " + selectUserInfo);
 		MemberVO mvo = selectUserInfo.get(0);
-		System.out.println("mvo >>> : " + mvo);
+		//System.out.println("mvo >>> : " + mvo);
 		
 		picture = mvo.getHm_picture();
-		System.out.println("picture >>> : " + picture);
+		//System.out.println("picture >>> : " + picture);
 		
 		//fulladdr = "../../human/upload/";
 		fulladdr = "../../upload/human/"; // *** test 하기 위해서 경로를 바꿨음 ***
 		fulladdr = fulladdr + picture;
-		System.out.println("fulladdr >>> : " + fulladdr);
+		//System.out.println("fulladdr >>> : " + fulladdr);
 		
 		name = mvo.getHm_name();
-		System.out.println("name >>> : " + name);
+		//System.out.println("name >>> : " + name);
 		
 	} else {
-		System.out.println("데이터 없음");
+		//System.out.println("데이터 없음");
 	}
 %>
 
