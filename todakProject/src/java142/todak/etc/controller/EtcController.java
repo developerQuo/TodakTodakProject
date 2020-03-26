@@ -267,7 +267,7 @@ public class EtcController {
   			toEmail=hmvo.getHm_email();
   			titleEmail ="토닥토닥 회원가입 인증 메일 입니다.";
   			contentEmail="안녕하세요. 반갑습니다.<br> "+hmvo.getHm_name()+"사원님의 메일 인증 코드는 <br><p><font size='14' color='#ED6B5E'>'<strong>"+AuthenticationKey+"</strong>'</font></p>입니다.<br><br>감사합니다. 행복한 하루 되세요!";
-  			
+  			//test
   			String result=AuthenticationKey;
   			model.addAttribute("result",result);
   			
