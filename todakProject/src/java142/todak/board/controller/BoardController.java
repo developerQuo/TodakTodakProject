@@ -38,8 +38,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class BoardController {
    
    
-   final static String FILEPATH1 =  "C://Users//BEE//Desktop//TodakProject//todakProject//WebContent//upload//board//notice";
-   final static String FILEPATH2 =  "C://Users//BEE//Desktop//TodakProject//todakProject//WebContent//upload//board//suggestion";
+   final static String FILEPATH1 =  "C://Users//bitcamp//Desktop//tdtdl//todakProject//WebContent//upload//board//notice";
+   final static String FILEPATH2 =  "C://Users//bitcamp//Desktop//tdtdl//todakProject//WebContent//upload//board//suggestion";
    final static String DOWNLOADPATH1 = "upload/board/notice/";
    final static String DOWNLOADPATH2 = "upload/board/suggestion/";
    final static String NOTICE_GUBUN = "N";
@@ -376,7 +376,11 @@ public class BoardController {
 
       List<SuggestionVO> suggestionDetail = null;
       suggestionDetail = boardService.searchSuggestion(svo);
+      int iFlag = 0;
+      iFlag = boardService.updateSuggestionHit(svo);
       
+      logger.info("(log)BoardController.searchSuggestion 조회수 증가 >>> " + iFlag);
+
       model.addAttribute("suggestionDetail",suggestionDetail);
       
       
@@ -869,6 +873,8 @@ public class BoardController {
       String bn_num = nvo.getBn_num();
       logger.info("bn_num >>> : " + bn_num);
       noticeSearchList =    boardService.searchNotice(nvo);
+      int iFlag = boardService.updateNoticeHit(nvo);
+      logger.info("(log)BoardController.searchNotice 조회수 증가>>> " + iFlag);
       
       VOPrintUtil.noticeVOPrint(nvo);
       

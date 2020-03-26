@@ -17,6 +17,7 @@
 						FROM (   select DISTINCT 	A.bs_num				bs_num,
 													A.hm_empnum				hm_empnum,
 													A.bs_title				bs_title,
+													A.bs_hitnum				bs_hitnum,
 													TO_DATE(A.bs_insertdate, 'YYYY-MM-DD') AS  bs_insertdate,
 										 nvl((select count(B.bsr_num)  
 					                   			 from 		BOARD_SUREPLY B 
@@ -59,11 +60,19 @@
 				A.bs_title			bs_title,
 				A.bs_content		bs_content,
 				A.bs_image			bs_image,
+				A.bs_hitnum			bs_hitnum,
 				TO_DATE(A.bs_insertdate, 'YYYY-MM-DD')  bs_insertdate
 		from	BOARD_SUGGESTION A
 		where	A.bs_deleteYN = 'Y'
 		and 	A.bs_num = #{bs_num}
 	</select>
+	
+		<!--  조회수 증가  -->
+	<update id="updateSuggestionHit" parameterType="String">
+        UPDATE 	BOARD_SUGGESTION
+        SET 	bs_hitnum = bs_hitnum + 1
+        WHERE 	bs_num = #{bs_num} 
+	</update>
 	
 	
    <select id="chaebunSuggestion" resultType="svo">
@@ -125,7 +134,7 @@
 		from	BOARD_SUREPLY A
 		where	bs_num = #{bs_num}
 		and		bsr_deleteyn = 'Y'
-		order by bsr_num DESC
+		order by bsr_num 
 	</select>
 
 
@@ -171,13 +180,12 @@
 	</update>
 	
 	<!-- 건의사항 댓글 삭제하기 -->
-	<update id="deleteSuReply" parameterType="srvo">
-		update 	BOARD_SUREPLY
-		set 	bsr_deleteyn = 'N'
+	<delete id="deleteSuReply" parameterType="srvo">
+		delete 	BOARD_SUREPLY
 		where	bsr_deleteyn = 'Y'
 		and		bsr_num = #{bsr_num}
 		and		(hm_empnum = #{hm_empnum} or  'H000000000000' =  #{hm_empnum})
-	</update>
+	</delete>
 	
 	<!-- ========================건의사항 좋아요=========================== -->
 	<!-- 건의사항 좋아요 수 구하기 -->

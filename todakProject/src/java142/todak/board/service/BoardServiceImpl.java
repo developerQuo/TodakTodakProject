@@ -26,66 +26,75 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<NoticeVO> selectNotice(NoticeVO nvo) {
-		logger.info("(log)BoardServiceImpl.selectNotice ÁøÀÔ");
+		logger.info("(log)BoardServiceImpl.selectNotice ï¿½ï¿½ï¿½ï¿½");
 		List<NoticeVO> sList = null;
 		sList = boardDao.listNotice(nvo);
-		logger.info("(log)BoardServiceImpl.selectNotice Á¾·á");
+		logger.info("(log)BoardServiceImpl.selectNotice ï¿½ï¿½ï¿½ï¿½");
 		return sList;
 	}
 	
 	@Override
 	public List<NoticeVO> searchNotice(NoticeVO nvo){
-		logger.info("(log)BoardServiceImpl.searchNotice ÁøÀÔ");
+		logger.info("(log)BoardServiceImpl.searchNotice ï¿½ï¿½ï¿½ï¿½");
 		List<NoticeVO> sList = null;
 		sList = boardDao.searchNotice(nvo);
-		logger.info("(log)BoardServiceImpl.searchNotice Á¾·á");
+		logger.info("(log)BoardServiceImpl.searchNotice ï¿½ï¿½ï¿½ï¿½");
 		return sList;
 	}
 
 	@Override
 	public int insertNotice(NoticeVO nvo) {
-		logger.info("(log)BoardServiceImpl.insertNotice ÁøÀÔ");
+		logger.info("(log)BoardServiceImpl.insertNotice ï¿½ï¿½ï¿½ï¿½");
 		int iFlag = 0;
 		iFlag = boardDao.insertNotice(nvo);
-		logger.info("(log)BoardServiceImpl.insertNotice Á¾·á");
+		logger.info("(log)BoardServiceImpl.insertNotice ï¿½ï¿½ï¿½ï¿½");
 		return iFlag;
 	}
 
 	@Override
 	public List<NoticeVO> chaebunNotice() {
-		logger.info("(log)BoardServiceImpl.cheabunNotice ÁøÀÔ");
+		logger.info("(log)BoardServiceImpl.cheabunNotice ï¿½ï¿½ï¿½ï¿½");
 		List<NoticeVO> aList =  null;
 		aList = boardDao.chaebunNotice();
 		logger.info("aList >>>> : " + aList.get(0).getBn_num());
-		logger.info("(log)BoardServiceImpl.cheabunNotice Á¾·á");
+		logger.info("(log)BoardServiceImpl.cheabunNotice ï¿½ï¿½ï¿½ï¿½");
 		return aList;
 	}
 
 	@Override
 	public int updateNotice(NoticeVO nvo) {
-		logger.info("(log)BoardServiceImpl.updateNotice ÁøÀÔ");
+		logger.info("(log)BoardServiceImpl.updateNotice ï¿½ï¿½ï¿½ï¿½");
 		int iFlag = 0;
 		iFlag =  boardDao.updateNotice(nvo);
-		logger.info("(log)BoardServiceImpl.updateNotice Á¾·á");
+		logger.info("(log)BoardServiceImpl.updateNotice ï¿½ï¿½ï¿½ï¿½");
 		return iFlag;
 	}
-
+	
+	@Override
+	public int updateNoticeHit(NoticeVO nvo){
+		logger.info("(log)BoardServiceImpl.updateNoticeHit ï¿½ï¿½ï¿½ï¿½");
+		int iFlag = 0;
+		iFlag =  boardDao.updateNoticeHit(nvo);
+		logger.info("(log)BoardServiceImpl.updateNoticeHit ï¿½ï¿½ï¿½ï¿½");
+		return iFlag;
+		
+	}
 	@Override
 	public int deleteNotice(NoticeVO nvo) {
-		logger.info("(log)BoardServiceImpl.deleteNotice ÁøÀÔ");
+		logger.info("(log)BoardServiceImpl.deleteNotice ï¿½ï¿½ï¿½ï¿½");
 		int iFlag = 0;
 		iFlag = boardDao.deleteNotice(nvo);
-		logger.info("(log)BoardServiceImpl.deleteNotice Á¾·á");
+		logger.info("(log)BoardServiceImpl.deleteNotice ï¿½ï¿½ï¿½ï¿½");
 		return iFlag;
 	}
 
-	//±Û¾²±â ±ÇÇÑº¸±â
+	//ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ñºï¿½ï¿½ï¿½
 	@Override
 	public List<MemberVO> selectWrite(MemberVO mvo) {
-		logger.info("(log)BoardServiceImpl.selectWrite ÁøÀÔ");
+		logger.info("(log)BoardServiceImpl.selectWrite ï¿½ï¿½ï¿½ï¿½");
 		List<MemberVO> sList = null;
 		sList = boardDao.selectWrite(mvo);
-		logger.info("(log)BoardServiceImpl.selectWrite Á¾·á");
+		logger.info("(log)BoardServiceImpl.selectWrite ï¿½ï¿½ï¿½ï¿½");
 		
 		return sList;
 	}
@@ -93,182 +102,191 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public int checkNotice(NoCheckVO ncvo) {
-		logger.info("(log)BoardServiceImpl.checkNotice ÁøÀÔ");
+		logger.info("(log)BoardServiceImpl.checkNotice ï¿½ï¿½ï¿½ï¿½");
 		int iFlag = 0;
 		iFlag = boardDao.checkNotice(ncvo);
-		logger.info("(log)BoardServiceImpl.checkNotice Á¾·á");
+		logger.info("(log)BoardServiceImpl.checkNotice ï¿½ï¿½ï¿½ï¿½");
 		return iFlag;
 	}
 
 	@Override
 	public List<NoCheckVO> chaebunNoCheck() {
-		logger.info("(log)BoardServiceImpl.chaebunNoCheck ÁøÀÔ");
+		logger.info("(log)BoardServiceImpl.chaebunNoCheck ï¿½ï¿½ï¿½ï¿½");
 		List<NoCheckVO> cList = null;
 		cList = boardDao.chaebunNoCheck();
-		logger.info("(log)BoardServiceImpl.chaebunNoCheck Á¾·á");
+		logger.info("(log)BoardServiceImpl.chaebunNoCheck ï¿½ï¿½ï¿½ï¿½");
 		return cList;
 	}
 
 	
 	@Override
 	public List<NoCheckVO> checkList(NoCheckVO ncvo) {
-		logger.info("(log)BoardServiceImpl.checkList ÁøÀÔ");
+		logger.info("(log)BoardServiceImpl.checkList ï¿½ï¿½ï¿½ï¿½");
 		List<NoCheckVO>  cList = null;
 		cList = boardDao.checkList(ncvo);
-		logger.info("(log)BoardServiceImpl.checkList Á¾·á");
+		logger.info("(log)BoardServiceImpl.checkList ï¿½ï¿½ï¿½ï¿½");
 		return cList;
 	}
 
 
 	 
 	
-	//---------------------------°ÇÀÇ»çÇ×°Ô½ÃÆÇ------------------------------
+	//---------------------------ï¿½ï¿½ï¿½Ç»ï¿½ï¿½×°Ô½ï¿½ï¿½ï¿½------------------------------
 	
 	@Override
 	public List<SuggestionVO> selectSuggestion(SuggestionVO svo) {
-		logger.info("(log)BoardServiceImpl.selectSuggestion ÁøÀÔ");
+		logger.info("(log)BoardServiceImpl.selectSuggestion ï¿½ï¿½ï¿½ï¿½");
 		List<SuggestionVO> sList = null;
 		sList = boardDao.selectSuggestion(svo);
-		logger.info("(log)BoardServiceImpl.selectSuggestion Á¾·á");
+		logger.info("(log)BoardServiceImpl.selectSuggestion ï¿½ï¿½ï¿½ï¿½");
 		return sList;
 	}
 
 	@Override
 	public List<SuggestionVO> cheabunSuggestion() {
-		logger.info("(log)BoardServiceImpl.cheabunSuggestion ÁøÀÔ");
+		logger.info("(log)BoardServiceImpl.cheabunSuggestion ï¿½ï¿½ï¿½ï¿½");
 		List<SuggestionVO> aList = null;
 		aList = boardDao.chaebunSuggestion();
-		logger.info("(log)BoardServiceImpl.cheabunSuggestion Á¾·á");
+		logger.info("(log)BoardServiceImpl.cheabunSuggestion ï¿½ï¿½ï¿½ï¿½");
 		return aList;
 	}
 
 	@Override
 	public int insertSuggestion(SuggestionVO svo) {
-		logger.info("(log)BoardServiceImpl.insertSuggestion ÁøÀÔ");
+		logger.info("(log)BoardServiceImpl.insertSuggestion ï¿½ï¿½ï¿½ï¿½");
 		int iFlag = 0;
 		iFlag = boardDao.insertSuggestion(svo);
-		logger.info("(log)BoardServiceImpl.insertSuggestion Á¾·á");
+		logger.info("(log)BoardServiceImpl.insertSuggestion ï¿½ï¿½ï¿½ï¿½");
 		return iFlag;
 	}
 
 	@Override
 	public List<SuggestionVO> searchSuggestion(SuggestionVO svo) {
-		logger.info("(log)BoardServiceImpl.searchSuggestion ÁøÀÔ");
+		logger.info("(log)BoardServiceImpl.searchSuggestion ï¿½ï¿½ï¿½ï¿½");
 		List<SuggestionVO> sList = null;
 		sList = boardDao.searchSuggestion(svo);
-		logger.info("(log)BoardServiceImpl.searchSuggestion Á¾·á");
+		logger.info("(log)BoardServiceImpl.searchSuggestion ï¿½ï¿½ï¿½ï¿½");
 		return sList;
+	}
+	
+	@Override
+	public int updateSuggestionHit(SuggestionVO svo){
+		logger.info("(log)BoardServiceImpl.updateSuggestion ï¿½ï¿½ï¿½ï¿½");
+		int iFlag = 0;
+		iFlag = boardDao.updateSuggestionHit(svo);
+		logger.info("(log)BoardServiceImpl.updateSuggestion ï¿½ï¿½ï¿½ï¿½");
+		return iFlag;
 	}
 
 	@Override
 	public int updateSuggestion(SuggestionVO svo) {
-		logger.info("(log)BoardServiceImpl.updateSuggestion ÁøÀÔ");
+		logger.info("(log)BoardServiceImpl.updateSuggestion ï¿½ï¿½ï¿½ï¿½");
 		int iFlag = 0;
 		iFlag = boardDao.updateSuggestion(svo);
-		logger.info("(log)BoardServiceImpl.updateSuggestion Á¾·á");
+		logger.info("(log)BoardServiceImpl.updateSuggestion ï¿½ï¿½ï¿½ï¿½");
 		return iFlag;
 	}
 
 	@Override
 	public int deleteSuggestion(SuggestionVO svo) {
-		logger.info("(log)BoardServiceImpl.deleteSuggestion ÁøÀÔ");
+		logger.info("(log)BoardServiceImpl.deleteSuggestion ï¿½ï¿½ï¿½ï¿½");
 		int iFlag = 0;
 		iFlag = boardDao.deleteSuggestion(svo);
-		logger.info("(log)BoardServiceImpl.deleteSuggestion Á¾·á");
+		logger.info("(log)BoardServiceImpl.deleteSuggestion ï¿½ï¿½ï¿½ï¿½");
 		return iFlag;
 	}
 
 	@Override
 	public List<SuReplyVO> selectSuReply(SuReplyVO srvo) {
-		logger.info("(log)BoardServiceImpl.selectSuReply ÁøÀÔ");
+		logger.info("(log)BoardServiceImpl.selectSuReply ï¿½ï¿½ï¿½ï¿½");
 		List<SuReplyVO> sList = null;
 		sList = boardDao.selectSuReply(srvo);
-		logger.info("(log)BoardServiceImpl.selectSuReply Á¾·á");
+		logger.info("(log)BoardServiceImpl.selectSuReply ï¿½ï¿½ï¿½ï¿½");
 		return sList;
 	}
 
 	@Override
 	public List<SuReplyVO> chaebunSuReply() {
-		logger.info("(log)BoardServiceImpl.chaebunSuReply ÁøÀÔ");
+		logger.info("(log)BoardServiceImpl.chaebunSuReply ï¿½ï¿½ï¿½ï¿½");
 		List<SuReplyVO> aList = null;
 		aList = boardDao.chaebunSuReply();
-		logger.info("(log)BoardServiceImpl.chaebunSuReply Á¾·á");
+		logger.info("(log)BoardServiceImpl.chaebunSuReply ï¿½ï¿½ï¿½ï¿½");
 		return aList;
 	}
 
 	@Override
 	public int insertSuReply(SuReplyVO srvo) {
-		logger.info("(log)BoardServiceImpl.insertSuReply ÁøÀÔ");
+		logger.info("(log)BoardServiceImpl.insertSuReply ï¿½ï¿½ï¿½ï¿½");
 		int iFlag = 0;
 		iFlag = boardDao.insertSuReply(srvo);
-		logger.info("(log)BoardServiceImpl.insertSuReply Á¾·á");
+		logger.info("(log)BoardServiceImpl.insertSuReply ï¿½ï¿½ï¿½ï¿½");
 		return iFlag;
 	}
 
 	@Override
 	public int updateSuReply(SuReplyVO srvo) {
-		logger.info("(log)BoardServiceImpl.updateSuReply ÁøÀÔ");
+		logger.info("(log)BoardServiceImpl.updateSuReply ï¿½ï¿½ï¿½ï¿½");
 		int iFlag = 0;
 		iFlag = boardDao.updateSuReply(srvo);
-		logger.info("(log)BoardServiceImpl.updateSuReply Á¾·á");
+		logger.info("(log)BoardServiceImpl.updateSuReply ï¿½ï¿½ï¿½ï¿½");
 		return iFlag;
 	}
 
 	@Override
 	public int deleteSuReply(SuReplyVO srvo) {
-		logger.info("(log)BoardServiceImpl.deleteSuReply ÁøÀÔ");
+		logger.info("(log)BoardServiceImpl.deleteSuReply ï¿½ï¿½ï¿½ï¿½");
 		int iFlag = 0;
 		iFlag = boardDao.deleteSuReply(srvo);
-		logger.info("(log)BoardServiceImpl.deleteSuReply Á¾·á");
+		logger.info("(log)BoardServiceImpl.deleteSuReply ï¿½ï¿½ï¿½ï¿½");
 		return iFlag;
 	}
 	
-	//------------------------°ÇÀÇ»çÇ× ÁÁ¾Æ¿ä------------------------
+	//------------------------ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ¿ï¿½------------------------
 	
 	@Override
 	public List<SuLikeVO> chaebunSuLike() {
-		logger.info("(log)BoardServiceImpl.chaebunSuReply ÁøÀÔ");
+		logger.info("(log)BoardServiceImpl.chaebunSuReply ï¿½ï¿½ï¿½ï¿½");
 		List<SuLikeVO> aList = null;
 		aList = boardDao.chaebunSuLike();
-		logger.info("(log)BoardServiceImpl.chaebunSuReply Á¾·á");
+		logger.info("(log)BoardServiceImpl.chaebunSuReply ï¿½ï¿½ï¿½ï¿½");
 		return aList;
 	}
 	
 	
 	@Override
 	public List<SuLikeVO> countSuLike(SuLikeVO slvo) {
-		logger.info("(log)BoardServiceImpl.countSuLike ÁøÀÔ");
+		logger.info("(log)BoardServiceImpl.countSuLike ï¿½ï¿½ï¿½ï¿½");
 		List<SuLikeVO> sList = null;
 		sList = boardDao.countSuLike(slvo);
-		logger.info("(log)BoardServiceImpl.countSuLike Á¾·á");
+		logger.info("(log)BoardServiceImpl.countSuLike ï¿½ï¿½ï¿½ï¿½");
 		return sList;
 	}
 	
 	
 	@Override
 	public List<SuLikeVO> beforeSuLike(SuLikeVO slvo) {
-		logger.info("(log)BoardServiceImpl.beforeSuLike ÁøÀÔ");
+		logger.info("(log)BoardServiceImpl.beforeSuLike ï¿½ï¿½ï¿½ï¿½");
 		List<SuLikeVO> sList = null;
 		sList = boardDao.beforeSuLike(slvo);
-		logger.info("(log)BoardServiceImpl.beforeSuLike Á¾·á");
+		logger.info("(log)BoardServiceImpl.beforeSuLike ï¿½ï¿½ï¿½ï¿½");
 		return sList;
 	}
 
 	@Override
 	public int checkSuLike(SuLikeVO slvo) {
-		logger.info("(log)BoardServiceImpl.checkSuLike ÁøÀÔ");
+		logger.info("(log)BoardServiceImpl.checkSuLike ï¿½ï¿½ï¿½ï¿½");
 		int iFlag = 0;
 		iFlag = boardDao.checkSuLike(slvo);
-		logger.info("(log)BoardServiceImpl.checkSuLike Á¾·á");
+		logger.info("(log)BoardServiceImpl.checkSuLike ï¿½ï¿½ï¿½ï¿½");
 		return iFlag;
 	}
 
 	@Override
 	public int unCheckSuLike(SuLikeVO slvo) {
-		logger.info("(log)BoardServiceImpl.unCheckSuLike ÁøÀÔ");
+		logger.info("(log)BoardServiceImpl.unCheckSuLike ï¿½ï¿½ï¿½ï¿½");
 		int iFlag = 0;
 		iFlag = boardDao.unCheckSuLike(slvo);
-		logger.info("(log)BoardServiceImpl.unCheckSuLike Á¾·á");
+		logger.info("(log)BoardServiceImpl.unCheckSuLike ï¿½ï¿½ï¿½ï¿½");
 		return iFlag;
 	}
 	
@@ -276,38 +294,38 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<SuLikeVO> countSuDislike(SuLikeVO slvo) {
-		logger.info("(log)BoardServiceImpl.countSuDislike ÁøÀÔ");
+		logger.info("(log)BoardServiceImpl.countSuDislike ï¿½ï¿½ï¿½ï¿½");
 		List<SuLikeVO> sList = null;
 		sList = boardDao.countSuDislike(slvo);
-		logger.info("(log)BoardServiceImpl.countSuDislike Á¾·á");
+		logger.info("(log)BoardServiceImpl.countSuDislike ï¿½ï¿½ï¿½ï¿½");
 		return sList;
 	}
 	
 	
 	@Override
 	public List<SuLikeVO> beforeSuDislike(SuLikeVO slvo) {
-		logger.info("(log)BoardServiceImpl.beforeSuDislike ÁøÀÔ");
+		logger.info("(log)BoardServiceImpl.beforeSuDislike ï¿½ï¿½ï¿½ï¿½");
 		List<SuLikeVO> sList = null;
 		sList = boardDao.beforeSuDislike(slvo);
-		logger.info("(log)BoardServiceImpl.beforeSuDislike Á¾·á");
+		logger.info("(log)BoardServiceImpl.beforeSuDislike ï¿½ï¿½ï¿½ï¿½");
 		return sList;
 	}
 
 	@Override
 	public int checkSuDislike(SuLikeVO slvo) {
-		logger.info("(log)BoardServiceImpl.checkSuDislike ÁøÀÔ");
+		logger.info("(log)BoardServiceImpl.checkSuDislike ï¿½ï¿½ï¿½ï¿½");
 		int iFlag = 0;
 		iFlag = boardDao.checkSuDislike(slvo);
-		logger.info("(log)BoardServiceImpl.checkSuDislike Á¾·á");
+		logger.info("(log)BoardServiceImpl.checkSuDislike ï¿½ï¿½ï¿½ï¿½");
 		return iFlag;
 	}
 
 	@Override
 	public int unCheckSuDislike(SuLikeVO slvo) {
-		logger.info("(log)BoardServiceImpl.unCheckSuDislike ÁøÀÔ");
+		logger.info("(log)BoardServiceImpl.unCheckSuDislike ï¿½ï¿½ï¿½ï¿½");
 		int iFlag = 0;
 		iFlag = boardDao.unCheckSuDislike(slvo);
-		logger.info("(log)BoardServiceImpl.unCheckSuDislike Á¾·á");
+		logger.info("(log)BoardServiceImpl.unCheckSuDislike ï¿½ï¿½ï¿½ï¿½");
 		return iFlag;
 	}
 	

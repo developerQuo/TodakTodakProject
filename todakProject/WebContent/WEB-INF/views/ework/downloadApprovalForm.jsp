@@ -42,7 +42,7 @@
 
 			<br><br><br>
 			
-			<form id="download_form" name="download_form">
+			<form id="download_form" name="download_form"align>
 				<a id="download_href" href="#">품의서 양식 다운로드</a><p>
 				<input type="hidden" id="file" name="file" value="formDownload.hwp"> <!-- value엔 파일이름.형식 -->
 				

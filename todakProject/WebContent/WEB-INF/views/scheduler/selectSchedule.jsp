@@ -49,6 +49,7 @@
 	            	var name = "";
 	            	
 	            	$(document).ready(function() {
+	            	
 	            		console.log("제이쿼리");
 	            		
 	            		// *** commue.jsp의 input 태그 id *** 꼭 있어야됨!!
@@ -148,7 +149,7 @@
 	
 	        <div id="wrapper">
 	            <div id="loading"></div>
-	            <div id="calendar"></div>
+	            <div id="calendar" style="float:center;widht:50%;"></div>
 	        </div>
 	
 	

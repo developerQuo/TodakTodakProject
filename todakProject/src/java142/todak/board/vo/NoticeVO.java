@@ -17,13 +17,20 @@ public class NoticeVO extends CodeVO {
 	private String bn_deleteYN;
 	private String bn_insertdate;
 	private String bn_updatedate;
+	private String bn_hitnum; 
 	
-	//°Ë»ö¿ëÀ¸·Î Ãß°¡ÇÑ mvo¿¡¼­ ºÒ·¯¿Â vo
+	//ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ mvoï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ vo
 	private String check_deptnum;
 	private String check_divnum;
 	private String check_empnum;
+	private String rownum;
 	
-	
+	public String getRownum() {
+		return rownum;
+	}
+	public void setRownum(String rownum) {
+		this.rownum = rownum;
+	}
 	public String getCheck_empnum() {
 		return check_empnum;
 	}
@@ -124,6 +131,11 @@ public class NoticeVO extends CodeVO {
 		this.bn_updatedate = bn_updatedate;
 	}
 	
-	
+	public String getBn_hitnum() {
+		return bn_hitnum;
+	}
+	public void setBn_hitnum(String bn_hitnum) {
+		this.bn_hitnum = bn_hitnum;
+	}
 
 }

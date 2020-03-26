@@ -45,7 +45,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>사원 현황</title>
 	
-	<link href="/include/css/default.css" rel="stylesheet">
+	<link rel="stylesheet" href="/include/css/commons/humanTable.css">
 	
 	<script type="text/javascript"
 				src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -137,7 +137,7 @@
      <h3><b>사원 현황</b></h3>
      <hr>
         
-     <div class="total" style="width:300px;">
+     <div class="total">
     	 <table>
     	 	<colgroup>
             	<col width=10%></col>
@@ -176,7 +176,7 @@
 					<tr>
 						<td id="std1">
 							<label>검색조건</label>
-							<select id="search" name="search">
+							<select id="search" name="search" >
 								<option value="all">전체</option>
 								<option value="hm_name">성명</option>
 								<option value="hm_deptnum">부서명</option>
@@ -201,23 +201,10 @@
 				</table>
 			</form>
 		</div>
-       
-	<div class="table_size" id="memberList">
+       <div class="table_size" id="memberList">
+
 		<table class="table" align="center" summary="사원 현황 조회">
-			<colgroup>
-            	<col width=8%></col>
-                <col width=11%></col>
-                <col width=19%></col>
-                <col width=19%></col>
-                <col width=7%></col>
-                <col width=9%></col>
-                <col width=17%></col>
-                <col width=40%></col>
-                <col width=15%></col>
-                <col width=10%></col>
-                <col width=5%></col>
-                <col width=5%></col>
-            </colgroup>
+			
 			<thead>	
 				<tr>
 					<th>사원번호</th>

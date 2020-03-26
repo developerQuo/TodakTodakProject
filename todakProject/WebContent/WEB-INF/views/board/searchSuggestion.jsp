@@ -272,22 +272,25 @@
 					<div align="center" id="searchNotice">
 						<table class="suggestion_search">
 							<colgroup>
-								<col width="15%"/>
-								<col width="70%"/>
-								<col width="15%"/>
+								<col width="28%"/>
+								<col width="28%"/>
+								<col width="28%"/>
+								<col width="16%"/>
 							</colgroup>
 								<tbody>
 								<tr>
 									<td class="ac" style="border-right:2px solid #eeeeee;" align="center"><b>작성일</b></td>
-									<td colspan="3"><%=svo.getBs_insertdate().substring(0,10) %></td>
+									<td style="border-right:2px solid #eeeeee;"><%=svo.getBs_insertdate().substring(0,10) %></td>
+									<td class="ac" style="border-right:2px solid #eeeeee;" align="center"><b>조회수</b></td>
+									<td class="ac" ><%=svo.getBs_hitnum() %></td>
 								</tr>
 								<tr>
 									<td class="ac" class="ac" style="border-right:2px solid #eeeeee;" align="center"><b>제목</b></td>
-									<td colspan="3"><%=svo.getBs_title() %></td>
+									<td colspan="4"><%=svo.getBs_title() %></td>
 								</tr>
 								<tr class="ctr">
 									<td class="ac" class="ac" style="border-right:2px solid #eeeeee;" align="center"><b>내용</b></td>
-									<td colspan="3">
+									<td colspan="4">
 										<div style="min-height:300px;">
 											<%=svo.getBs_content() %>
 										</div>

@@ -5,7 +5,7 @@
 	String message = (String)request.getAttribute("message");
 	//System.out.println(" message >>> " + message);
 	if (message != null){
-		%>
+		%>.
 		<script type="text/javascript">
 			alert('<%= message %>');
 		</script>
@@ -36,11 +36,17 @@
 				document.loginForm.submit();
 			}			
 			function registAction(){
-			
+				var windowW = 840;  // 창의 가로 길이
+		        var windowH = 850;  // 창의 세로 길이
+		        var left = Math.ceil((window.screen.width - windowW)/2);
+		        var top = Math.ceil((window.screen.height - windowH)/2);
+
+
+		
 				document.loginForm.method="GET";
 				var url= "/etc/moveSignup.td";   
-	            window.open(url,"","width=900, height=590, left=600");	
-				}			
+				window.open(url,"","l top="+top+", left="+left+", height="+windowH+", width="+windowW);	
+					}			
 			function idPwAction(selector){
 				var winWidth = 700;
 			    var winHeight = 600;

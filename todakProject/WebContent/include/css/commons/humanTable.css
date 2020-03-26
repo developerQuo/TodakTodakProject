@@ -1,0 +1,131 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+body {
+	font-family: "Noto Sans KR", sans-serif;
+}
+
+.context-container {
+	/*width:1000px;
+	border : 1px solid red;*/
+	margin:3px;
+	margin:0 auto;
+	
+}
+.total{
+	border-top:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+	float:right; 
+	margin: 2% 5%; 
+	width:300px;
+	text-align:center;
+}
+
+.button {
+	font-family: 'Noto Sans KR', sans-serif;
+	background-color: rgb(29,79,137);
+	border: none;
+	color:#fff;
+	padding: 5px 8px 5px 8px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 10px;
+	margin: 2px;
+	cursor: pointer;
+}
+
+.button:hover {
+	background-color: #f8585b;
+	<!--transition:.3s;-->
+}
+
+input[type=text] {
+	padding:2px;
+	/*text-align: center;*/
+	margin: 1px;
+}
+
+select {
+	padding:2px;
+	/*text-align: center;*/
+	margin:1px;
+	height:28px;
+}
+
+.button, .ui-datepicker-trigger {
+	font-family: 'Noto Sans KR', sans-serif;
+	background-color: rgb(29,79,137);
+	border: none;
+	color:#fff;
+	padding: 6px 8px 6px 8px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 10px;
+	margin: 2px;
+	cursor: pointer;
+}
+
+.table {
+	padding:0 15px 0 15px;
+	width:80%;
+	/*width:900px;*/
+	float:left;
+	height:auto;
+	border-top:3px solid #ddd;
+	border-bottom:3px solid #ddd;
+	margin:0 auto;
+	text-align:center;
+}
+
+.table_size {
+	min-height:500px;
+	width:90%;
+	margin:0 auto;
+}
+
+.table th {
+	padding:9px;
+	text-align:center;
+}
+
+.table tbody td {
+	width:800px;
+	padding:8px;
+	border-top:1px solid #ddd;
+}
+
+p {
+	margin: 0 auto;
+}
+
+.table_align {
+	padding:5px;
+	width:100%;
+	margin:0 auto;
+	zoom: 0.8; 
+	/*width:940px;*/
+	
+}
+
+.table_align td {
+	padding:25px;
+}
+
+.write_table td {
+	padding:3px;
+}
+
+.paging {
+	height:auto;
+}
+
+input[type=file] {
+	display:none;
+}
+
+.authtable_size {
+	height: 410px;
+	width:80%;
+	
+}

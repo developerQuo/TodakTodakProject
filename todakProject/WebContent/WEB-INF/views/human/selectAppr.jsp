@@ -41,7 +41,13 @@
 			$(".goDetail").click(function(){
 				var empnum=$(this).parents("tr").attr("data");
 				$("#hmp_empnum").val(empnum);
-				window.open("","pop","width=980, height=600");
+				
+				var windowW = 980;  // 창의 가로 길이
+		        var windowH = 870;  // 창의 세로 길이
+		        var left = Math.ceil((window.screen.width - windowW)/2);
+		        var top = Math.ceil((window.screen.height - windowH)/2);
+		        
+				window.open("","pop","l top="+top+", left="+left+", height="+windowH+", width="+windowW);
 				$("#detailForm").attr({
 					"method":"POST",
 					"target":"pop",
@@ -84,7 +90,7 @@
 				
 					<table summary="검색">
 					<tr>
-						<td id="std1">
+						<td id="std1"><b>한페이지에</b>
 							<select id="pageCtrl" name="pageCtrl">
 								<option value="5">5줄</option>
 								<option value="1">10줄</option>

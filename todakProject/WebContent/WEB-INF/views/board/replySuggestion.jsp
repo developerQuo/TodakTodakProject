@@ -88,7 +88,7 @@
          });
          
          /*초기화 버튼*/
-         $(document).on("click","reset_btn",function(){
+         $(document).on("click",".reset_btn",function(){
             var conText = $(this).parents("li").find("textarea").html();
             $(this).parents("li").find("input[type='button']").show();
             var conArea = $(this).parents("li").children().eq(1);

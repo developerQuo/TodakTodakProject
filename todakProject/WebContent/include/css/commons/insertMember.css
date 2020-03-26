@@ -7,54 +7,64 @@ fieldset {
 		   position:relative; 
 		 }
 .toptitle {
-	width:100%; 
-	font-size:30px; 
-	font-weight:bold; 
-	box-sizing:border-box; 
-	color:#4d5b75; padding:15px; 
-	text-align:center; 
-	border-bottom:5px solid #4d5b75; 
-	letter-spacing:20px; 
+		width:100%; 
+		font-size:20px; 
+		font-weight:bold; 
+		box-sizing:border-box; 
+		color:#4d5b75; 
+		padding:10px; 
+		text-align:center; 
+		border-bottom:5px solid #4d5b75; 
+		letter-spacing:20px; 
 	}
+	
 div {
-	  width:100%; 
-	  padding:20px 0; 
-	  box-sizing:border-box; 
-	  border-bottom:1px solid rgba(0,0,0,0.3);
+		  width:100%; 
+		  padding:3px 0; 
+		  box-sizing:border-box; 
+		  border-bottom:1px solid rgba(0,0,0,0.3);
 	 }
-.firstbox { 
-	margin-top:25px;
-	}
+.firstbox { margin-top:1px;}
 .lastbox {
-	border-bottom:none; 
-	bottom-padding:100px; 
+		padding:15px;
+		border-bottom:none; 
+		bottom-padding:100px; 
 	}
 strong { 
-	width:16vw; 
-	height:28px; 
-	line-height:28px; 
-	text-align:center; 
-	float:left; }
-input[type="text"] { min-width:150px; max-width:300px; height:28px; }
-input[type="password"] { min-width:150px; max-width:300px; height:28px; }
-input[type="button"] { margin-left:10px; height:28px; }
-input[id="signUP"] { position:absolute; bottom:8px; left:50%; transform:translateX(-50%); height:28px; }
+		width:16vw; 
+		height:25px; 
+		line-height:28px; 
+		text-align:center; 
+		float:left; 
+	}
+input[type="text"] { 
+		min-width:150px; 
+		max-width:500px; 
+		height:24px; 
+	}
+input[type="password"] { 
+		min-width:150px; 
+		max-width:300px; 
+		height:24px; 
+	}
+input[type="button"] { 
+		margin-left:10px; 
+		height:24px; 
+	}
+input[id="signUP"] { 
+		position:absolute; 
+		bottom:8px; 
+		left:50%; 
+		transform:translateX(-50%); 
+		height:28px; 
+	}
 
-.select_css { min-width:174px; max-width:300px; height:28px; }
-/*.preview { width:250px; height:250px; background-color:rgba(0,0,0,0.6); }*/
-
-
-
-
-
-
-
-.button:hover {
-	background-color: #f8585b;
-	<!--transition:.3s;-->
-}
-
-.button, .ui-datepicker-trigger {
+.select_css { 
+		min-width:174px; 
+		max-width:300px; 
+		height:30px; 
+	}
+.button, .ui-datepicker-trigger, .update_btn, .reset_btn {
 	font-family: 'Noto Sans KR', sans-serif;
 	background-color: rgb(29,79,137);
 	border: none;
@@ -66,4 +76,6 @@ input[id="signUP"] { position:absolute; bottom:8px; left:50%; transform:translat
 	font-size: 12px;
 	margin: 2px;
 	cursor: pointer;
-}
+}	
+/*.preview { width:250px; height:250px; background-color:rgba(0,0,0,0.6); }*/
+

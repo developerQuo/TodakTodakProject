@@ -186,7 +186,7 @@ body {
 
 .fc .fc-axis {
   vertical-align: middle;
-  padding: 0 4px;
+  /* padding: 0 4px; */
   white-space: nowrap;
   font-size: 10px;
   color: #505362;
@@ -201,6 +201,10 @@ body {
   font-family: 'Roboto', sans-serif;
   margin-left: -1px;
   height: 100%;
+}
+
+.fc-content {
+	font-size : 12px;
 }
 
 .fc-event {

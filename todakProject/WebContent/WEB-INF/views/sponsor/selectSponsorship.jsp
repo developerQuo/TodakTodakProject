@@ -356,13 +356,17 @@
 				}else{
 			%>
 				<div class="sponsorship-info-wrap" align="center";>
-					<table id="sponsorship-info">
+					<table id="sponsorship-info" class="sponsorship-business">
+						<colgroup>
+							<col width="50%"/>
+							<col width="50%"/>
+						</colgroup>
 						<tr>
-							<td>누적 후원건수</td>
-							<td><%= countSponsorship %> 건</td>
+							<td style="text-align:center; font-weight: bold; border-bottom : 1px solid #dddddd;" >누적 후원건수</td>
+							<td style="border-bottom : 1px solid #dddddd ;"><%= countSponsorship %> 건</td>
 						</tr>
 						<tr>
-							<td>누적 후원금액</td>
+							<td style="text-align:center; font-weight: bold; border-bottom : 1px solid #dddddd;">누적 후원금액</td>
 							<td id="now_amount">0 원</td>
 						</tr>
 					</table>

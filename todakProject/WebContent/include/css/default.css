@@ -1,18 +1,8 @@
-@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+/* @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css); */
 /*
 html {
 	height:900px;
 }*/
-
-.login {
-	font-family: 'Noto Sans KR', sans-serif;
-	width : 500px;
-	height : 400px;
-	margin:10% auto;
-	border : 1px solid #003A70;
-	padding : 30px 0 0 0;
-	background-color : white;
-}
 
 body {
 	/*background-image:url("../image/abc.jpg");
@@ -82,7 +72,7 @@ select {
 
 .table_size {
 	min-height:500px;
-	width:80%;
+	width:90%;
 	margin:0 auto;
 }
 
@@ -102,8 +92,8 @@ p {
 }
 
 .table_align {
-	padding:10px;
-	width:80%;
+	padding:5px;
+	width:90%;
 	margin:0 auto;
 	/*width:940px;*/
 
@@ -364,3 +354,57 @@ input[type=file] {
 	border-bottom:3px solid #ddd;
 	margin:0 auto;
 }
+
+
+
+
+
+
+
+
+
+
+.login {
+   font-family: 'Noto Sans KR', sans-serif;
+   width : 500px;
+   height : 400px;
+   margin:10% auto;
+   border : 1px solid #dddddd;
+   padding : 30px 0 0 0;
+   background-color : white;
+}
+
+.sponsorship-info-wrap {
+   padding:5px;
+   
+}
+.sponsorship-business{
+   width:50%;
+   margin:0 auto;
+   border-top : 2px solid #dddddd;
+   border-bottom : 2px solid #dddddd;
+
+}
+
+.sponsorship-business td{
+   padding:5px;
+   
+}   
+.sponsorship-info {
+   width:50%;
+   margin:0 auto;
+   border-top : 2px solid #dddddd;
+   border-bottom : 2px solid #dddddd;
+
+}
+
+.sponsorship-info td {
+   padding:5px;
+   text-align:center;
+   border-top : none;
+   border-bottom :  none;
+   
+}
+
+.dateCriteriaForm {
+   size : 20px;

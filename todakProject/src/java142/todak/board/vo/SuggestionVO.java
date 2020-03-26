@@ -12,7 +12,9 @@ public class SuggestionVO extends CodeVO {
 	private	String	bs_insertdate;
 	private	String	bs_updatedate;
 	private	String	bs_deleteyn;
-	
+
+	private	String	bs_hitnum;
+	private	String	rownum;
 	
 	private	String	bsr_num;
 	private String	bsl_likeYN;
@@ -88,4 +90,18 @@ public class SuggestionVO extends CodeVO {
 		this.bsl_dislikeYN = bsl_dislikeYN;
 	}
 
+	
+	public String getBs_hitnum() {
+		return bs_hitnum;
+	}
+	public void setBs_hitnum(String bs_hitnum) {
+		this.bs_hitnum = bs_hitnum;
+	}
+	public String getRownum() {
+		return rownum;
+	}
+	public void setRownum(String rownum) {
+		this.rownum = rownum;
+	}
+	
 }

@@ -146,9 +146,13 @@
 				
 				$('#lineB').click(function() {
 					console.log("휴가신청서 결재라인 정하기");
+					var windowW = 600;  // 창의 가로 길이
+			        var windowH = 600;  // 창의 세로 길이
+			        var left = Math.ceil((window.screen.width - windowW)/2);
+			        var top = Math.ceil((window.screen.height - windowH)/2);
 					
-					setLine = window.open('/eworkForm/moveSetProposalLine.td', 
-							  '결재라인', 'width=600, height=600, resizable=no, scrollbars=no');
+					setLine = window.open('/eworkForm/moveSetPropos	alLine.td', 
+							  '결재라인', "l top="+top+", left="+left+", height="+windowH+", width="+windowW);
 					console.log("setLine >>> : " + setLine);
 					
 				});
@@ -353,8 +357,8 @@
 	        <h3><b>기안서 작성</b></h3>
 	        <hr>
 	        <br>	
-			<form id="writeForm" name="writeForm" method="POST">
-			<div class="write_table">
+			<form id="writeForm" name="writeForm" method="POST" >
+			<div class="write_table" align="center" >
 				<table id="writeProposal">
 					<tr>
 						<td>결재라인</td>
@@ -424,7 +428,7 @@
 						<td>
 							<!-- <textarea name="ep_content" id="ep_content" rows="20" cols="150"></textarea> -->
 							<textarea name="ep_content" id="ep_content" title="내용"
-							style="width: 100%; height: 300px; padding: 0; margin: 0;"></textarea>
+							style="width: 100%; height: 200px; padding: 0; margin: 0;"></textarea>
 						</td>
 					</tr>
 					<tr>

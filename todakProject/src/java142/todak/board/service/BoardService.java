@@ -15,27 +15,29 @@ public interface BoardService {
 	public int insertNotice(NoticeVO nvo);
 	public int updateNotice(NoticeVO nvo);
 	public int deleteNotice(NoticeVO nvo);
+	public int updateNoticeHit(NoticeVO nvo);
 	
-	//±Û¾²±â ±ÇÇÑº¸±â
+	//ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ñºï¿½ï¿½ï¿½
 	public List<MemberVO> selectWrite(MemberVO mvo);
 	
-	//°øÁö»çÇ× ÀÛ¼º±Û Ã¤¹ø
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ï¿½ï¿½ Ã¤ï¿½ï¿½
 	public List<NoticeVO> chaebunNotice();
 	
-	//---------------------------È®ÀÎ¹öÆ°------------------------------
+	//---------------------------È®ï¿½Î¹ï¿½Æ°------------------------------
 	public int checkNotice(NoCheckVO ncvo);
 	public List<NoCheckVO> checkList(NoCheckVO ncvo);
 	public List<NoCheckVO> chaebunNoCheck(); 
 	
-	//---------------------------°ÇÀÇ»çÇ×°Ô½ÃÆÇ------------------------------
+	//---------------------------ï¿½ï¿½ï¿½Ç»ï¿½ï¿½×°Ô½ï¿½ï¿½ï¿½------------------------------
 	public List<SuggestionVO> selectSuggestion(SuggestionVO svo);
 	public List<SuggestionVO> searchSuggestion(SuggestionVO svo);
 	public List<SuggestionVO> cheabunSuggestion();
+	public int updateSuggestionHit(SuggestionVO svo);
 	public int insertSuggestion(SuggestionVO svo);
 	public int updateSuggestion(SuggestionVO svo);
 	public int deleteSuggestion(SuggestionVO svo);
 	
-	/*°ÇÀÇ»çÇ× ´ñ±Û*/
+	/*ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½*/
 	
 	public List<SuReplyVO> selectSuReply(SuReplyVO srvo);
 	public List<SuReplyVO> chaebunSuReply();
@@ -43,7 +45,7 @@ public interface BoardService {
 	public int updateSuReply(SuReplyVO srvo);
 	public int deleteSuReply(SuReplyVO srvo);
 	
-	/*°ÇÀÇ»çÇ× ÁÁ¾Æ¿ä*/
+	/*ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ¿ï¿½*/
 	
 	public List<SuLikeVO> chaebunSuLike();
 	

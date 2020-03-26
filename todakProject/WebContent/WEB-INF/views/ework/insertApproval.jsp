@@ -91,9 +91,15 @@
 					
 				$('#lineB').click(function() {
 					console.log("휴가신청서 결재라인 정하기");
+					var windowW = 600;  // 창의 가로 길이
+			        var windowH = 600;  // 창의 세로 길이
+			        var left = Math.ceil((window.screen.width - windowW)/2);
+			        var top = Math.ceil((window.screen.height - windowH)/2);
+
+					
 					
 					setLine = window.open('/eworkForm/moveSetApprovalLine.td', 
-							  '결재라인', 'width=600, height=600, resizable=no, scrollbars=no');
+							  '결재라인', "l top="+top+", left="+left+", height="+windowH+", width="+windowW);
 					console.log("setLine >>> : " + setLine);
 					
 				});	
@@ -330,7 +336,7 @@
 				<input type="hidden" id="file" name="file" value="formDownload.hwp"> <!-- value엔 파일이름.형식 -->
 			</form>
 			<form id="writeForm" name="writeForm" enctype="multipart/form-data">
-			<div class="write_table">
+			<div class="write_table" align = "center">
 				<table id="writeApproval">
 					<tr>
 						<td>결재라인</td>

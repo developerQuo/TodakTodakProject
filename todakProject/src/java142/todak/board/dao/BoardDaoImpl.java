@@ -30,6 +30,13 @@ public class BoardDaoImpl implements BoardDao {
 	public List<NoticeVO> searchNotice(NoticeVO nvo){
 		return  session.selectList("searchNotice");
 	}
+	
+	@Override
+	public int updateNoticeHit(NoticeVO nvo){
+		
+		return (int)session.insert("updateNoticeHit");
+		
+	}
 	@Override
 	public int insertNotice(NoticeVO nvo) {
 		// TODO Auto-generated method stub
@@ -77,7 +84,7 @@ public class BoardDaoImpl implements BoardDao {
 		return session.selectList("checkList", ncvo);
 	}
 
-	/******************¿©±â¼­ºÎÅÍ °ÇÀÇ»çÇ×ÇÑ´Ù³×**************************/
+	/******************ï¿½ï¿½ï¿½â¼­ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ï¿½Ñ´Ù³ï¿½**************************/
 	
 	@Override
 	public List<SuggestionVO> selectSuggestion(SuggestionVO svo) {
@@ -89,6 +96,10 @@ public class BoardDaoImpl implements BoardDao {
 	public List<SuggestionVO> searchSuggestion(SuggestionVO svo) {
 		// TODO Auto-generated method stub
 		return session.selectList("searchSuggestion");
+	}
+	@Override
+	public int updateSuggestionHit(SuggestionVO svo){
+		return (int)session.update("updateSuggestionHit");
 	}
 	
 	@Override
@@ -116,7 +127,7 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	
-	/******************¿©±â¼­ºÎÅÍ °ÇÀÇ»çÇ×´ñ±Û**************************/
+	/******************ï¿½ï¿½ï¿½â¼­ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç»ï¿½ï¿½×´ï¿½ï¿½**************************/
 	
 	@Override
 	public List<SuReplyVO> selectSuReply(SuReplyVO srvo) {
@@ -145,11 +156,11 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public int deleteSuReply(SuReplyVO srvo) {
 		// TODO Auto-generated method stub
-		return (int)session.update("deleteSuReply", srvo);
+		return (int)session.delete("deleteSuReply", srvo);
 	}
 
 	
-	/******************¿©±â¼­ºÎÅÍ °ÇÀÇ»çÇ× ÁÁ¾Æ¿ä**************************/
+	/******************ï¿½ï¿½ï¿½â¼­ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ¿ï¿½**************************/
 	
 	@Override
 	public List<SuLikeVO> chaebunSuLike() {

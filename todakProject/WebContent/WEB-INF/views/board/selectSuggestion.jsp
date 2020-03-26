@@ -217,10 +217,11 @@
                   <table class="table" summary ="게시판리스트">
                      <colgroup> 
                         <col width="10%" />
-                        <col width="53%"/>
+                        <col width="49%"/>
                         <col width="7%"/>
                         <col width="7%"/>
-                        <col width="10%"/>
+                        <col width="7%"/>
+                        <col width="7%"/>
                         <col width="13%"/>
                      </colgroup>
                      <thead>
@@ -230,6 +231,7 @@
                            <th>댓글</th>
                            <th>추천</th>
                            <th>비추천</th>
+                           <th>조회수</th>
                            <th>작성일</th>
                         </tr>
                      </thead>
@@ -238,7 +240,7 @@
          if(sList.size() == 0 ){
          %>
                            <tr>
-                              <td colspan="6" align="center">
+                              <td colspan="7" align="center">
                                 	등록된 게시글이 존재하지 않습니다.
                               </td>
                            </tr>
@@ -254,6 +256,7 @@
                                     <td align = "center"><%= svo.getBsr_num() %> </td>
                                     <td align = "center"><%= svo.getBsl_likeYN() %> </td>
                                     <td align = "center"><%= svo.getBsl_dislikeYN() %> </td>
+                                    <td align = "center"><%= svo.getBs_hitnum() %> </td>
                                     <td align = "center"><%= svo.getBs_insertdate().substring(0,10) %></td>
                                  </tr>
          <%

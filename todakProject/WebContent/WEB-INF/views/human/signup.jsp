@@ -9,7 +9,6 @@
 <title>사원등록</title>
 <script type="text/javascript"
 				src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-				
 	<link rel="stylesheet" href="/include/css/commons/insertMember.css">
 				
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -144,24 +143,6 @@
 	        ,dayNamesMin: ['일','월','화','수','목','금','토']
 	        ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일']
 	    });
-		
-		 $('#hmp_picture').change(function() {
-				console.log("파일이름 textbox에 넣어주기");
-				
-				var file_dir = $('#hmp_picture').val();
-				console.log("file_dir >>> : " + file_dir);
-				
-				var start = file_dir.lastIndexOf("\\")+1;
-				console.log("start >>> : " + start);
-				var end = file_dir.length;
-				console.log("end >>> : " + end);
-				var file_name = file_dir.substring(start, end);
-				console.log("file_name >>> : " + file_name);
-				
-				$('#file_name').attr("value",file_name);
-				
-			}); 
-		 
 	});
 	function sample4_execDaumPostcode() {
 	    new daum.Postcode({
@@ -244,6 +225,11 @@
 	}	
 	
 </script>
+<style>
+.ui-datepicker{ font-size: 14px; width: 250px; }
+.ui-datepicker select.ui-datepicker-month{ width:30%; font-size: 11px; }
+.ui-datepicker select.ui-datepicker-year{ width:30%; font-size: 11px; }
+</style>
 
 </head>
 
@@ -297,7 +283,7 @@
 								<option value="hanmail.com">hanmail.com</option> 
 								<option value="1">직접입력</option> 
 							</select>
-								<input type="button" class="button" name="emailCk" id="emailCk" value="email확인">
+								<input type="button" class="button" name="emailCk" id="emailCk" value="emai확인">
 			</div>
 			<div id = "authentication">
 				<strong>이메일 인증 코드</strong>
@@ -306,9 +292,7 @@
 			<div class="picbox">
 				<strong>사진</strong>
 				<!-- <div class="preview">사진 미리보기</div> -->
-				<input type="text" id="file_name" class="file_textbox" readonly>
-				<input type="button" value="찾아보기" class="button" onclick="document.all.hmp_picture.click();">
-				<input type="file" name="hmp_picture" id="hmp_picture" style="display:none;">
+				<input type="file" name="hmp_picture" id="hmp_picture">
 			</div>
 			<div>
 				<strong>우편번호</strong>
@@ -322,7 +306,7 @@
 			</div>
 			<div>
 				<strong>상세주소</strong>
-				<input type="text" name="cadress" id="cadress">
+				<input type="text" name="cadress" id="cadress" style="width:100%;">
 			</div>
 			<div>
 				<strong>은행</strong>
@@ -365,6 +349,7 @@
 				<strong>경력내용</strong>
 				<input type="text" name="hmp_workcontents" id="hmp_workcontents" class="select_css">
 			</div>
+			
 			<div class="lastbox">
 				
 			</div>
@@ -373,7 +358,8 @@
 				<input type="hidden" name="emailCode" id="emailCode">
 				<input type="hidden" value="N" name="checkID" id="checkID">
 				<input type="hidden" value="N" name="checkPW" id="checkPW">
-				<input type="button" class="button" value="입력" name="signUP" id="signUP" style="width:80px;">
+				
+				<input type="button" class="button" value="입력" name="signUP" id="signUP">
 		</fieldset>
 	 </form>
 	</body>

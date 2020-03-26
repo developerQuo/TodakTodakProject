@@ -43,7 +43,6 @@
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		
 		<link rel="stylesheet" href="/include/css/commons/apprSignup.css">
-		<link rel="stylesheet" type="text/css" href="/include/css/default.css"/>
 
 		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
@@ -82,149 +81,156 @@
 <body>
 	<form name="approvalMember"
 		  id="approvalMember"
-		  method="POST">
+		  method="POST"
+		  autocomplete="off">
 		      <fieldset>
 			<div class="toptitle">
 				사원정보
 			</div>
 			<div class="picbox" >
-				<img src="<%=fulladdr %>" width="50%" height="245px" align = "center" alt="사진">
+				<img src="<%=fulladdr %>" width="100%" height="100%" align = "center" alt="사진">
 			</div>
 			<div class="contbox">
-				<div class="topbox1">
-					<strong>성명</strong>
-					<input type="text" name="hm_name" id="hm_name" value='<%=avo.getHmp_name() %>' readonly>
+					<div class="topbox1">
+						<strong>성명</strong>
+						<input type="text" name="hm_name" id="hm_name" value='<%=avo.getHmp_name() %>' readonly>
+					</div>
+					<div class="topbox2">
+						<strong>아이디</strong>
+						<input type="text" name="hm_id" id="hm_id" value='<%=avo.getHmp_id() %>' readonly>
+					</div>
+					<div class="topbox3">
+						<strong>핸드폰번호</strong>
+						<input type="text" name="hm_hp" id="hm_hp" value='<%=avo.getHmp_hpnum() %>' readonly>
+					</div>
+					<div class="topbox4">
+						<strong>생년월일</strong>
+						<input type="text" name="hm_birth" id="hm_birth" value='<%=avo.getHmp_birth() %>' readonly>
+					</div>
+					<div class="topbox5">
+						<strong>주민등록번호</strong>
+						<input type="text" name="hm_residentnum" id="hm_residentnum" value='<%=avo.getHmp_residentnum() %>' readonly>
+					</div>
+					
 				</div>
-				<div class="topbox2">
-					<strong>아이디</strong>
-					<input type="text" name="hm_id" id="hm_id" value='<%=avo.getHmp_id() %>' readonly>
-				</div>
-				<div class="topbox3">
-					<strong>비밀번호</strong>
-					<input type="password" name="hm_pw" id="hm_pw" value='<%=avo.getHmp_pw() %>' readonly>
-				</div>
-				<div class="topbox4">
-					<strong>생년월일</strong>
-					<input type="text" name="hm_birth" id="hm_birth" value='<%=avo.getHmp_birth() %>' readonly>
-				</div>
-				<div class="topbox5">
-					<strong>주민등록번호</strong>
-					<input type="text" name="hm_residentnum" id="hm_residentnum" value='<%=avo.getHmp_residentnum() %>' readonly>
-				</div>
-			</div>
-			<div class="botcontbox">
-				<div class="contbox1">
-					<strong>핸드폰번호</strong>
-					<input type="text" name="hm_hp" id="hm_hp" value='<%=avo.getHmp_hpnum() %>' readonly>
-				</div>
-				<div class="contbox2">
-					<strong>이메일</strong>
-					<input type="text" name="hm_email" id="hm_email" value='<%=avo.getHmp_email() %>' readonly>
-				</div>
-				<div class="contbox3">
-					<strong>우편번호</strong>
-					<input type="text" name="hm_postcode" id="hm_postcode" value='<%=avo.getHmp_postcode() %>' readonly>
-				</div>
-				<div class="contbox4">
-					<strong>도로명주소</strong>
-					<input type="text" name="hm_addr" id="hm_addr" value='<%=avo.getHmp_addr() %>' readonly>
-				</div>
-				<div class="contbox5">
-					<strong>은행</strong>
-					<input type="text" name="bank" id="bank" value='<%=avo.getHmp_bank() %>' readonly>
-				</div>
-				<div class="contbox6">
-					<strong>예금주명</strong>
-					<td>&nbsp;<input type="text" name="hm_depositors" id="hm_depositors" value='<%=avo.getHmp_depositors() %>' readonly>
-				</div>
-				<div class="contbox7">
-					<strong>계좌번호</strong>
-					<input type="text" name="hm_accountnum" id="hm_accountnum" value='<%=avo.getHmp_accountnum() %>' readonly>
-				</div>
-				<div class="contbox8">
-					<strong>최종학력</strong>
-					<input type="text" name="education" id="education" value='<%=avo.getHmp_education() %>' readonly>
-				</div>
-				<div class="contbox9">
-					<strong>학력내용</strong>
-					<input type="text" name="hm_educontents" id="hm_educontents" value='<%=avo.getHmp_educontents() %>' readonly>
-				</div>
-				<div class="contbox10">
-					<strong>경력</strong>
-					<input type="text" name="hmp_workexperience" id="hmp_workexperience" value='<%=avo.getHmp_workexperience() %>' readonly>
-				</div>
-				<div class="contbox11">
-					<strong>경력내용</strong>
-					<input type="text" name="hm_workcontents" id="hm_workcontents" value='<%=avo.getHmp_workcontents() %>' readonly>
-				</div>
-				<div class="contbox12">
-					<strong>부서</strong>
-						<SELECT NAME = "hm_deptnum">
-							<OPTION VALUE="00">경영지원본부</OPTION>
-							<OPTION VALUE="01">전략기획본부</OPTION>
-							<OPTION VALUE="02">마케팅본부</OPTION>
-							<OPTION VALUE="03">나눔사업본부</OPTION>
-						</SELECT>
-				</div>
-				<div class="contbox13">
-					<strong>팀</strong>
-						<SELECT NAME = "hm_teamnum">
-							<OPTION VALUE="04">인재경영팀</OPTION>
-							<OPTION VALUE="05">재무팀</OPTION>
-							<OPTION VALUE="06">관리팀</OPTION>
-							<OPTION VALUE="07">기획팀</OPTION>
-							<OPTION VALUE="08">소통협력팀</OPTION>
-							<OPTION VALUE="09">IT팀</OPTION>
-							<OPTION VALUE="10">홍보팀</OPTION>
-							<OPTION VALUE="11">배분팀</OPTION>
-							<OPTION VALUE="12">혁신사업팀</OPTION>
-							<OPTION VALUE="67">없음</OPTION>
-						</SELECT>
-				</div>
-				<div class="contbox14">
-					<strong>직위</strong>
-							<SELECT NAME = "hm_position">
-								<OPTION VALUE="13">임원</OPTION>
-								<OPTION VALUE="14">부장</OPTION>
-								<OPTION VALUE="15">과장</OPTION>
-								<OPTION VALUE="16">대리</OPTION>
-								<OPTION VALUE="17">사원</OPTION>
-							</SELECT>
-				</div>
-				<div class="contbox15">
-					<strong>직책</strong>
-						<SELECT NAME = "hm_duty">
-							<OPTION VALUE="18">팀장</OPTION>
-							<OPTION VALUE="19">본부장</OPTION>
-							<OPTION VALUE="20">대표이사</OPTION>
-							<OPTION VALUE="67">없음</OPTION>
-						</SELECT>
-				</div>
-				<div class="contbox16">
-					<strong>내선번호</strong>
-					<input type="text" name="hm_extensionnum" id="hm_extensionnum">
-				</div>
-				<div class="contbox17">
-					<strong>고용일</strong>
-					<input type="text" name="hm_hiredate" id="hm_hiredate">
-				</div>
-				<div class="contbox18">
-					<strong>고용형태</strong>
-					<SELECT NAME = "hm_employmenttype">
+				<div class="botcontbox">
+					<div class="contbox_center">
+							<strong>도로명주소</strong>
+							<input type="text" name="hm_addr" id="hm_addr" value='<%=avo.getHmp_addr() %>'  style="width:100%;" readonly>
+					</div>
+					<div id="left">		
+						<div class="contbox1">
+							<strong>이메일</strong>
+							<input type="text" name="hm_email" id="hm_email" value='<%=avo.getHmp_email() %>' readonly>
+						</div>
+						<div class="contbox4">
+							<strong>은행</strong>
+							<input type="text" name="bank" id="bank" value='<%=avo.getHmp_bank() %>' readonly>
+						</div>
+						<div class="contbox6">
+							<strong>계좌번호</strong>
+							<input type="text" name="hm_accountnum" id="hm_accountnum" value='<%=avo.getHmp_accountnum() %>' readonly>
+						</div>
+						<div class="contbox8">
+							<strong>학력내용</strong>
+							<input type="text" name="hm_educontents" id="hm_educontents" value='<%=avo.getHmp_educontents() %>' readonly>
+						</div>
+						<div class="contbox10">
+							<strong>경력내용</strong>
+							<input type="text" name="hm_workcontents" id="hm_workcontents" value='<%=avo.getHmp_workcontents() %>' readonly>
+						</div>
+						<div class="contbox12">
+							<strong>팀<b>*</b></strong>
+								<SELECT NAME = "hm_teamnum">
+									<OPTION VALUE="04">인재경영팀</OPTION>
+									<OPTION VALUE="05">재무팀</OPTION>
+									<OPTION VALUE="06">관리팀</OPTION>
+									<OPTION VALUE="07">기획팀</OPTION>
+									<OPTION VALUE="08">소통협력팀</OPTION>
+									<OPTION VALUE="09">IT팀</OPTION>
+									<OPTION VALUE="10">홍보팀</OPTION>
+									<OPTION VALUE="11">배분팀</OPTION>
+									<OPTION VALUE="12">혁신사업팀</OPTION>
+									<OPTION VALUE="67">없음</OPTION>
+								</SELECT>
+						</div>
+						<div class="contbox14">
+							<strong>직책<b>*</b></strong>
+								<SELECT NAME = "hm_duty">
+									<OPTION VALUE="18">팀장</OPTION>
+									<OPTION VALUE="19">본부장</OPTION>
+									<OPTION VALUE="20">대표이사</OPTION>
+									<OPTION VALUE="67">없음</OPTION>
+								</SELECT>
+						</div>
+						<div class="contbox16">
+							<strong>고용일<b>*</b></strong>
+							<input type="text" name="hm_hiredate" id="hm_hiredate">
+						</div>
+						<div class="bottitle"></div>
+					</div>	
+					<div id="right">	
+						<div class="contbox2">
+							<strong>우편번호</strong>
+							<input type="text" name="hm_postcode" id="hm_postcode" value='<%=avo.getHmp_postcode() %>' readonly>
+						</div>
+							<div class="contbox5">
+							<strong>예금주명</strong>
+							<input type="text" name="hm_depositors" id="hm_depositors" value='<%=avo.getHmp_depositors() %>' readonly>
+						</div>
+						<div class="contbox7">
+							<strong>최종학력</strong>
+							<input type="text" name="education" id="education" value='<%=avo.getHmp_education() %>' readonly>
+						</div>
+						<div class="contbox9">
+							<strong>경력</strong>
+							<input type="text" name="hmp_workexperience" id="hmp_workexperience" value='<%=avo.getHmp_workexperience() %>' readonly>
+						</div>
+						<div class="contbox11">
+							<strong>부서<b>*</b></strong>
+								<SELECT NAME = "hm_deptnum">
+									<OPTION VALUE="00">경영지원본부</OPTION>
+									<OPTION VALUE="01">전략기획본부</OPTION>
+									<OPTION VALUE="02">마케팅본부</OPTION>
+									<OPTION VALUE="03">나눔사업본부</OPTION>
+								</SELECT>
+						</div>
+						<div class="contbox13">
+							<strong>직위<b>*</b></strong>
+									<SELECT NAME = "hm_position">
+										<OPTION VALUE="13">임원</OPTION>
+										<OPTION VALUE="14">부장</OPTION>
+										<OPTION VALUE="15">과장</OPTION>
+										<OPTION VALUE="16">대리</OPTION>
+										<OPTION VALUE="17">사원</OPTION>
+									</SELECT>
+						</div>
+						<div class="contbox15">
+							<strong>내선번호<b>*</b></strong>
+							<input type="text" name="hm_extensionnum" id="hm_extensionnum">
+						</div>
+						<div class="contbox17">
+							<strong>고용형태<b>*</b></strong>
+								<SELECT NAME = "hm_employmenttype">
 									<OPTION VALUE="24">정규직</OPTION>
 									<OPTION VALUE="25">계약직</OPTION>
-					</SELECT>
+								</SELECT>
+						</div>
+						<div class="bottitle"></div>
+					</div>	
+					
+					<div class="lastbox">
+							<input type="hidden" name="hm_workexperience" id="hm_workexperience" value="<%=workexperience %>">
+							<input type="hidden" name="hm_education" id="hm_education" value="<%=education %>">
+							<input type="hidden" name="hm_bank" id="hm_bank" value="38">
+							<input type="hidden" name="hm_picture" id="hm_picture" value="<%=avo.getHmp_picture() %>">
+							<input type="hidden" name="hmp_empnum" id="hmp_empnum" value="<%=avo.getHmp_empnum() %>">
+							<input type="hidden" name="flag" id="flag">
+							<input type="button" class="button" value="수락" name="accept" id="accept">
+							<input type="button" class="button" value="거부" name="negative" id="negative">	
+					</div>	
 				</div>
-			</div>
-					<input type="hidden" name="hm_workexperience" id="hm_workexperience" value="<%=workexperience %>">
-					<input type="hidden" name="hm_education" id="hm_education" value="<%=education %>">
-					<input type="hidden" name="hm_bank" id="hm_bank" value="38">
-					<input type="hidden" name="hm_picture" id="hm_picture" value="<%=avo.getHmp_picture() %>">
-					<input type="hidden" name="hmp_empnum" id="hmp_empnum" value="<%=avo.getHmp_empnum() %>">
-					<input type="hidden" name="flag" id="flag">
-					<input type="button" value="수락" class="button" name="accept" id="accept" style="width:70px;">
-					<input type="button" value="거부" class="button" name="negative" id="negative" style="width:70px;">
-		</fieldset>
-		 </form>
+			</fieldset>
+		</form>
 	</body>
 </html>
